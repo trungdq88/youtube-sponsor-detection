@@ -52,7 +52,7 @@ async function analyze(body) {
     statusEl.hidden = true;
 
     if (!response.ok) {
-      show(banner, 'error', data.error ?? 'That did not work.');
+      show(banner, 'error', data.detail ? `${data.error ?? 'That did not work.'} (${data.detail})` : data.error ?? 'That did not work.');
       if (data.canPaste) {
         pasteBox.hidden = false;
         pasteBox.open = true;

@@ -41,6 +41,12 @@ let innertube;
 
 /**
  * Fetch a video's transcript from YouTube.
+ *
+ * Two routes, tried in order, because neither is reliable on its own:
+ *  1. the caption tracks in the player response, fetched as json3 (the same
+ *     files the player uses for subtitles);
+ *  2. the transcript panel behind YouTube's own "Show transcript" button.
+ *
  * @param {string} videoId
  * @returns {Promise<{ title: string, cues: Cue[] }>}
  */
@@ -49,31 +55,76 @@ export async function fetchTranscript(videoId) {
 
   const info = await innertube.getInfo(videoId);
   const title = info.basic_info?.title ?? videoId;
+  const failures = [];
 
-  let transcript;
+  for (const client of ['WEB', 'ANDROID']) {
+    try {
+      const source = client === 'WEB' ? info : await innertube.getBasicInfo(videoId, { client });
+      const track = pickCaptionTrack(source.captions?.caption_tracks ?? []);
+      if (!track) throw new Error(`no caption tracks in the ${client} player response`);
+      const cues = await fetchCaptionTrack(track.base_url);
+      if (cues.length) return { title, cues };
+      throw new Error(`caption track "${track.language_code}" came back empty`);
+    } catch (error) {
+      failures.push(`captions via ${client}: ${error.message}`);
+    }
+  }
+
   try {
-    transcript = await info.getTranscript();
+    const transcript = await info.getTranscript();
+    const segments = transcript?.transcript?.content?.body?.initial_segments ?? [];
+    const cues = segments
+      .filter((s) => s.start_ms !== undefined && s.snippet)
+      .map((s) => ({
+        text: s.snippet.text ?? '',
+        startMs: Number(s.start_ms),
+        endMs: Number(s.end_ms ?? s.start_ms)
+      }))
+      .filter((c) => c.text.trim() && Number.isFinite(c.startMs));
+    if (cues.length) return { title, cues };
+    failures.push('transcript panel: no segments');
   } catch (error) {
-    throw new TranscriptUnavailable(
-      'YouTube returned no transcript for this video. It may have captions turned off.',
-      { cause: error }
-    );
+    failures.push(`transcript panel: ${error.message}`);
   }
 
-  const segments = transcript?.transcript?.content?.body?.initial_segments ?? [];
-  const cues = segments
-    .filter((s) => s.start_ms !== undefined && s.snippet)
-    .map((s) => ({
-      text: s.snippet.text ?? '',
-      startMs: Number(s.start_ms),
-      endMs: Number(s.end_ms ?? s.start_ms)
-    }))
-    .filter((c) => c.text.trim() && Number.isFinite(c.startMs));
+  throw new TranscriptUnavailable(
+    'YouTube returned no transcript for this video. It may have captions turned off.',
+    { cause: failures.join(' | ') }
+  );
+}
 
-  if (!cues.length) {
-    throw new TranscriptUnavailable('This video has no caption track to read.');
+/** Prefer a human-made English track, then auto-generated English, then whatever is first. */
+export function pickCaptionTrack(tracks) {
+  if (!tracks.length) return null;
+  const english = tracks.filter((t) => /^en\b/i.test(t.language_code ?? ''));
+  return english.find((t) => t.kind !== 'asr') ?? english[0] ?? tracks[0];
+}
+
+async function fetchCaptionTrack(baseUrl) {
+  const url = new URL(baseUrl);
+  url.searchParams.set('fmt', 'json3');
+  const response = await fetch(url, { headers: { 'user-agent': 'Mozilla/5.0' } });
+  if (!response.ok) throw new Error(`timedtext responded ${response.status}`);
+  const body = await response.text();
+  if (!body.trim()) throw new Error('timedtext responded with an empty body');
+  return parseJson3(JSON.parse(body));
+}
+
+/**
+ * Parse YouTube's json3 caption format into cues.
+ * @param {{ events?: { tStartMs?: number, dDurationMs?: number, segs?: { utf8?: string }[] }[] }} data
+ * @returns {Cue[]}
+ */
+export function parseJson3(data) {
+  const cues = [];
+  for (const event of data?.events ?? []) {
+    if (!event.segs) continue;
+    const text = event.segs.map((s) => s.utf8 ?? '').join('').replace(/\s+/g, ' ').trim();
+    if (!text) continue;
+    const startMs = Number(event.tStartMs ?? 0);
+    cues.push({ text, startMs, endMs: startMs + Number(event.dDurationMs ?? 0) });
   }
-  return { title, cues };
+  return cues;
 }
 
 export class TranscriptUnavailable extends Error {

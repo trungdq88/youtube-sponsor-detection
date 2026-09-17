@@ -110,3 +110,29 @@ test('no sponsor read means no timestamp', async () => {
 test('token estimate tracks length', () => {
   assert.equal(estimateTokens('a'.repeat(400)), 100);
 });
+
+test('json3 caption events become cues and English human tracks win', async () => {
+  const { parseJson3, pickCaptionTrack } = await import('../src/youtube.js');
+  const cues = parseJson3({
+    events: [
+      { tStartMs: 0, dDurationMs: 2000, segs: [{ utf8: 'hey ' }, { utf8: 'there' }] },
+      { tStartMs: 2000, dDurationMs: 1000 },
+      { tStartMs: 3000, dDurationMs: 1500, segs: [{ utf8: '\n' }] },
+      { tStartMs: 4500, dDurationMs: 1500, segs: [{ utf8: 'welcome back' }] }
+    ]
+  });
+  assert.deepEqual(cues, [
+    { text: 'hey there', startMs: 0, endMs: 2000 },
+    { text: 'welcome back', startMs: 4500, endMs: 6000 }
+  ]);
+
+  const tracks = [
+    { language_code: 'de', kind: undefined, base_url: 'de' },
+    { language_code: 'en', kind: 'asr', base_url: 'en-auto' },
+    { language_code: 'en-GB', kind: undefined, base_url: 'en-gb' }
+  ];
+  assert.equal(pickCaptionTrack(tracks).base_url, 'en-gb');
+  assert.equal(pickCaptionTrack(tracks.slice(0, 2)).base_url, 'en-auto');
+  assert.equal(pickCaptionTrack(tracks.slice(0, 1)).base_url, 'de');
+  assert.equal(pickCaptionTrack([]), null);
+});

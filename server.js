@@ -49,7 +49,8 @@ app.post('/api/analyze', async (req, res) => {
     });
   } catch (error) {
     if (error instanceof TranscriptUnavailable) {
-      return res.status(422).json({ error: error.message, canPaste: true });
+      if (error.cause) console.warn(`transcript unavailable: ${error.cause}`);
+      return res.status(422).json({ error: error.message, detail: error.cause ?? null, canPaste: true });
     }
     if (error?.status === 401) {
       return res.status(502).json({ error: 'TypeSafe rejected the API key.' });
