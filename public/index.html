@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sponsor Skip</title>
+<link rel="stylesheet" href="/styles.css" />
+<link rel="icon" href="data:," />
+</head>
+<body>
+<main>
+  <header>
+    <h1>Sponsor Skip</h1>
+    <p class="sub">Paste a YouTube link. The transcript gets read by <strong>Jev</strong>, which picks the line where the sponsor read starts.</p>
+  </header>
+
+  <form id="form">
+    <input id="url" type="text" placeholder="https://www.youtube.com/watch?v=…" autocomplete="off" spellcheck="false" />
+    <button id="go" type="submit">Find the sponsor</button>
+  </form>
+
+  <div class="row">
+    <button type="button" class="link" id="demo">Try it on the demo transcript</button>
+    <button type="button" class="link" id="toggle-paste">Paste a transcript instead</button>
+  </div>
+
+  <details id="paste-box">
+    <summary>Transcript</summary>
+    <p class="hint">Open the video on YouTube, choose “Show transcript”, and paste it here. Timestamps are kept if they are included.</p>
+    <textarea id="transcript" rows="8" placeholder="0:00 hey everyone welcome back…"></textarea>
+  </details>
+
+  <div id="banner" class="banner" hidden></div>
+  <div id="status" class="status" hidden></div>
+  <section id="result" hidden></section>
+</main>
+<script src="/app.js" type="module"></script>
+</body>
+</html>

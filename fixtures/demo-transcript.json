@@ -1,0 +1,262 @@
+{
+ "title": "I used four mid-range laptops for a week (demo transcript)",
+ "note": "Synthetic transcript used for offline testing. The sponsor read starts at the 'this video is sponsored by Kestrel' line.",
+ "durationSeconds": 341.9,
+ "cues": [
+  {
+   "text": "hey everyone welcome back to the channel",
+   "startMs": 0,
+   "endMs": 2592
+  },
+  {
+   "text": "today we are finally doing the thing that about four hundred of you have asked for in the comments",
+   "startMs": 2592,
+   "endMs": 9629
+  },
+  {
+   "text": "we are taking the new mid range laptops and putting them through a full week of real work",
+   "startMs": 9629,
+   "endMs": 16296
+  },
+  {
+   "text": "not a benchmark run not a synthetic score an actual week of my actual job",
+   "startMs": 16296,
+   "endMs": 21851
+  },
+  {
+   "text": "so that means video editing in the morning a lot of browser tabs in the afternoon and some light gaming at night",
+   "startMs": 21851,
+   "endMs": 30000
+  },
+  {
+   "text": "and I want to say up front that the results genuinely surprised me on two of these machines",
+   "startMs": 30000,
+   "endMs": 36666
+  },
+  {
+   "text": "we have got four laptops on the desk today all of them between eight hundred and twelve hundred dollars",
+   "startMs": 36666,
+   "endMs": 43703
+  },
+  {
+   "text": "and the plan is simple same workload same settings same week",
+   "startMs": 43703,
+   "endMs": 47777
+  },
+  {
+   "text": "I have been running these since the start of the month so this is not a first impressions video",
+   "startMs": 47777,
+   "endMs": 54814
+  },
+  {
+   "text": "before we get into the numbers though let me set up how I tested because I think the method matters here",
+   "startMs": 54814,
+   "endMs": 62592
+  },
+  {
+   "text": "every machine got a clean install nothing carried over no bloat removed either",
+   "startMs": 62592,
+   "endMs": 67407
+  },
+  {
+   "text": "whatever the manufacturer ships is what you get because that is what you would actually experience",
+   "startMs": 67407,
+   "endMs": 73333
+  },
+  {
+   "text": "battery tests were done at two hundred nits with the same playlist running and the same background apps",
+   "startMs": 73333,
+   "endMs": 80000
+  },
+  {
+   "text": "and the thermal numbers were taken in the same room at the same ambient temperature which was about twenty two degrees",
+   "startMs": 80000,
+   "endMs": 87777
+  },
+  {
+   "text": "okay so with that out of the way let me quickly talk about who is making today's video possible",
+   "startMs": 87777,
+   "endMs": 94814
+  },
+  {
+   "text": "this video is sponsored by Kestrel which is a tool I have actually been using since well before they reached out",
+   "startMs": 94814,
+   "endMs": 102592
+  },
+  {
+   "text": "Kestrel is a password manager and a passkey manager that works across every device you own",
+   "startMs": 102592,
+   "endMs": 108518
+  },
+  {
+   "text": "and the reason I switched to it is honestly the sharing model",
+   "startMs": 108518,
+   "endMs": 112962
+  },
+  {
+   "text": "if you have ever tried to share a wifi password or a streaming login with your family you know how bad this usually is",
+   "startMs": 112962,
+   "endMs": 121851
+  },
+  {
+   "text": "with Kestrel you make a shared vault you drop the credential in and everyone who needs it has it instantly",
+   "startMs": 121851,
+   "endMs": 129259
+  },
+  {
+   "text": "and if someone leaves you pull their access in one click and the credential rotates automatically",
+   "startMs": 129259,
+   "endMs": 135185
+  },
+  {
+   "text": "they also do not have access to your vault contents at all everything is encrypted before it leaves your device",
+   "startMs": 135185,
+   "endMs": 142592
+  },
+  {
+   "text": "they have been independently audited twice now and the reports are public on their site which I appreciate",
+   "startMs": 142592,
+   "endMs": 149259
+  },
+  {
+   "text": "setup took me about ten minutes including importing everything out of my browser which was frankly a mess",
+   "startMs": 149259,
+   "endMs": 155925
+  },
+  {
+   "text": "if you want to try it head to kestrel dot com slash channel or use the link in the description",
+   "startMs": 155925,
+   "endMs": 163333
+  },
+  {
+   "text": "that link gets you three months free on the family plan and it does help the channel out quite a lot",
+   "startMs": 163333,
+   "endMs": 171111
+  },
+  {
+   "text": "alright thank you Kestrel now let us get back to the laptops",
+   "startMs": 171111,
+   "endMs": 175555
+  },
+  {
+   "text": "so the first machine is the one I expected the least from and it ended up being my favorite of the group",
+   "startMs": 175555,
+   "endMs": 183703
+  },
+  {
+   "text": "it is the one with the smaller battery and the slower on paper processor",
+   "startMs": 183703,
+   "endMs": 188888
+  },
+  {
+   "text": "but the chassis stays cool it never once throttled during an export and the keyboard is genuinely excellent",
+   "startMs": 188888,
+   "endMs": 195555
+  },
+  {
+   "text": "the display is the weak point it is a sixty hertz panel and the color coverage is not great for editing",
+   "startMs": 195555,
+   "endMs": 203333
+  },
+  {
+   "text": "but for writing code or writing documents it is completely fine and honestly quite pleasant",
+   "startMs": 203333,
+   "endMs": 208888
+  },
+  {
+   "text": "the second machine is the opposite story very fast in short bursts and very loud after about ten minutes",
+   "startMs": 208888,
+   "endMs": 215925
+  },
+  {
+   "text": "if your work is spiky that machine is great if your work is sustained you will hate the fans",
+   "startMs": 215925,
+   "endMs": 222962
+  },
+  {
+   "text": "I ran the same four minute export on each of them five times across the week and took the average",
+   "startMs": 222962,
+   "endMs": 230370
+  },
+  {
+   "text": "the fast one won the first run by a wide margin and then lost every subsequent run as it heated up",
+   "startMs": 230370,
+   "endMs": 238148
+  },
+  {
+   "text": "that is the kind of thing a benchmark chart will never show you which is really the point of this whole video",
+   "startMs": 238148,
+   "endMs": 246296
+  },
+  {
+   "text": "the third laptop is the one most of you are probably considering because it is the one that gets recommended everywhere",
+   "startMs": 246296,
+   "endMs": 254074
+  },
+  {
+   "text": "and it is fine it is completely fine it does nothing badly and nothing especially well",
+   "startMs": 254074,
+   "endMs": 260000
+  },
+  {
+   "text": "the battery lasted about seven and a half hours in my mixed workload which is respectable but not class leading",
+   "startMs": 260000,
+   "endMs": 267407
+  },
+  {
+   "text": "the fourth one I want to talk about separately because it has a repairability story that is genuinely different",
+   "startMs": 267407,
+   "endMs": 274444
+  },
+  {
+   "text": "the bottom panel comes off with four captive screws and the battery the storage and the wireless card are all user replaceable",
+   "startMs": 274444,
+   "endMs": 282592
+  },
+  {
+   "text": "that matters more than a few percent of performance if you plan on keeping the machine for five years",
+   "startMs": 282592,
+   "endMs": 289629
+  },
+  {
+   "text": "so where does that leave us if you are buying today",
+   "startMs": 289629,
+   "endMs": 293703
+  },
+  {
+   "text": "if you edit video buy the third one the color accuracy is the thing you cannot fix later",
+   "startMs": 293703,
+   "endMs": 300370
+  },
+  {
+   "text": "if you write code or write for a living buy the first one the keyboard and the thermals will make you happier every day",
+   "startMs": 300370,
+   "endMs": 309259
+  },
+  {
+   "text": "if you want to keep it forever buy the fourth one",
+   "startMs": 309259,
+   "endMs": 313333
+  },
+  {
+   "text": "and if you want the highest peak numbers on a chart buy the second one and accept the noise",
+   "startMs": 313333,
+   "endMs": 320370
+  },
+  {
+   "text": "let me know down in the comments which of these you would pick and why because I do read all of them",
+   "startMs": 320370,
+   "endMs": 328518
+  },
+  {
+   "text": "and if there is a machine you want me to add to the next round tell me and I will try to get one in",
+   "startMs": 328518,
+   "endMs": 337777
+  },
+  {
+   "text": "thanks for watching I will see you in the next one",
+   "startMs": 337777,
+   "endMs": 341851
+  }
+ ]
+}
