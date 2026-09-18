@@ -1,0 +1,13 @@
+{
+  "note": "Hand-picked videos with SponsorBlock labels (sponsor category). GIAQF2KtQJw is the Joe Scott video whose Boot.dev read opens with a long anecdote; labels fetched from sponsor.ajay.app on 2026-09-18.",
+  "videos": [
+    {
+      "videoID": "GIAQF2KtQJw",
+      "duration": 1620.9,
+      "segments": [
+        { "start": 0, "end": 2.973, "votes": 2, "locked": false },
+        { "start": 1385.616, "end": 1599.966, "votes": 0, "locked": true }
+      ]
+    }
+  ]
+}

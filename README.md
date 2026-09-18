@@ -116,6 +116,29 @@ around them (`--verbose` adds every scan window, `--json` dumps everything).
 Confidence bands follow the cookbook (0.7 = found, 0.35 = maybe); tune them on
 real videos. The UI shows every window's probability under *What Jev returned*.
 
+## Measuring accuracy against SponsorBlock
+
+[SponsorBlock](https://sponsor.ajay.app) has community-labelled sponsor
+segments for millions of videos. Two scripts use them as ground truth:
+
+```sh
+npm run sample     # picks ~20 labelled videos from a database mirror -> eval/videos.json
+npm run eval       # transcript + Jev for each, scored against the labels
+```
+
+`sample` never downloads the export (sponsorTimes.csv is about 7 GB): it
+reads a few random 8 MB byte ranges from `https://sb.ltn.fi/database/`, keeps
+sponsor segments that are locked or have at least two votes, merges overlapping
+submissions, and prefers videos of 4–45 minutes with the best-agreed labels.
+`--count`, `--slices`, `--slice-mb` and `--mirror` adjust it.
+
+`eval` prints, per video, the labelled and predicted segments side by side,
+then recall (labelled segments found, i.e. start within 15 s or IoU ≥ 0.5),
+precision, median start and end error in seconds, and the token cost. Jev
+results are cached in `eval/cache/`; pass `--fresh` after changing the
+questions, `--limit N` to score a few, `--tolerance S` to change the window.
+`eval/videos.seed.json` holds hand-picked videos and is always included.
+
 ## Layout
 
 ```
@@ -127,6 +150,10 @@ src/jev.js           the questions and the two-stage pipeline
 public/              the page
 fixtures/            synthetic transcripts: a plain read at 1:27, and an outro with a long lead-in
 scripts/analyze.js   run the pipeline on a real video and print the boundaries
+scripts/sponsorblock-sample.js   sample labelled videos from a SponsorBlock mirror
+scripts/eval.js      score the pipeline against those labels
+src/sponsorblock.js  CSV parsing and label filtering for the above
+eval/                sampled videos, seed videos, cached runs and results
 test/                node --test suite, a stub client, and the mock API server
 ```
 
