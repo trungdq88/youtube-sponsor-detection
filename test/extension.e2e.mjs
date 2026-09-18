@@ -164,9 +164,9 @@ await popup.evaluate(async () => {
   await chrome.storage.local.set({ settings: { ...settings, mode: 'live', deepgramKey: 'dg_test' } });
 });
 await page.goto(`https://www.youtube.com/watch?v=${VIDEO_ID}`);
-await page.waitForSelector('#sponsor-skip-panel .ss-start .ss-button', { timeout: 15000 });
+await page.waitForSelector('#sponsor-skip-panel .ss-body', { timeout: 15000 });
+// Listening starts on its own once the video plays.
 await page.evaluate(async () => { const v = document.querySelector('video'); v.muted = true; await v.play().catch(() => {}); });
-await page.click('#sponsor-skip-panel .ss-start .ss-button');
 await page.waitForFunction(() => /Capturing the video element/.test(document.querySelector('#sponsor-skip-panel .ss-log-list')?.textContent ?? ''), null, { timeout: 15000 })
   .catch(async (e) => { console.log('live log:', await page.textContent('#sponsor-skip-panel .ss-body')); throw e; });
 await page.waitForFunction(() => document.querySelector('#sponsor-skip-panel .ss-controls')?.textContent.includes('Stop listening'), null, { timeout: 5000 });
@@ -179,8 +179,12 @@ const heardSeconds = await popup.evaluate(async () => {
 });
 console.log('audio relayed to the worker (s):', heardSeconds);
 assert.ok(heardSeconds > 5, `expected ~10 s of audio to reach the offscreen document, got ${heardSeconds}`);
+// Stop is an opt-out for this video: the button comes back and play does not restart it.
 await page.click('#sponsor-skip-panel .ss-controls .ss-button');
 await page.waitForSelector('#sponsor-skip-panel .ss-start .ss-button', { timeout: 5000 });
+await page.evaluate(async () => { const v = document.querySelector('video'); v.pause(); await v.play().catch(() => {}); });
+await new Promise((r) => setTimeout(r, 1500));
+assert.match(await page.textContent('#sponsor-skip-panel .ss-status'), /Listening is off for this video/);
 await popup.evaluate(async () => {
   const { settings } = await chrome.storage.local.get('settings');
   await chrome.storage.local.set({ settings: { ...settings, mode: 'transcript' } });

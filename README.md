@@ -85,12 +85,12 @@ read starts. The trade is that the first seconds of every read are heard, and
 the last jump can overshoot into content by up to one step. Nothing in the
 transcript mode changes; the two are separate settings.
 
-To use it: paste a Deepgram key in the popup and pick **Live audio**. The
-panel on the video page then shows a **Start listening** button (the popup
-has the same button). The panel shows what is being heard, Jev's last
-verdict, the jumps, the speech and Jev cost, and a log of every utterance,
-check and jump (also in the page console under `[sponsor-skip live]`);
-**Stop listening** ends the capture. Capturing needs the video unmuted, and it
+To use it: paste a Deepgram key in the popup and pick **Live audio**.
+Listening starts by itself when a video plays and stops shortly after it
+pauses. The panel shows what is being heard, Jev's last verdict, the jumps,
+the speech and Jev cost, and a log of every utterance, check and jump (also
+in the page console under `[sponsor-skip live]`); **Stop listening** turns
+it off for the current video. Capturing needs the video unmuted, and it
 listens to one tab at a time.
 
 The pieces: the content script captures the element's audio and resamples it

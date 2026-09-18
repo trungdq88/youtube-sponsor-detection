@@ -39,6 +39,8 @@ const state = {
 };
 let liveController = null;
 let liveCapture = null; // { video, context, node, port, source }
+let liveOptOut = false; // the user pressed Stop on this video: no auto-start until the next one
+let livePauseTimer = null; // stops the capture a little after the video pauses
 
 // ---- lifecycle ------------------------------------------------------------
 
@@ -50,6 +52,9 @@ setInterval(() => {
 onNavigate();
 
 document.addEventListener('timeupdate', onTimeUpdate, true);
+document.addEventListener('play', onPlay, true);
+document.addEventListener('pause', onPause, true);
+document.addEventListener('click', onPageClick, true);
 
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area !== 'local' || !changes.settings) return;
@@ -90,6 +95,7 @@ function currentVideoId() {
 async function onNavigate() {
   const videoId = currentVideoId();
   if (videoId === state.videoId) return;
+  liveOptOut = false;
 
   state.videoId = videoId;
   state.analysis = null;
@@ -110,6 +116,7 @@ async function onNavigate() {
     await refreshLiveState();
     if (liveCapture && liveCapture.video !== findVideo()) reattachCapture();
     render();
+    autoListen();
     return;
   }
   render();
@@ -121,6 +128,7 @@ async function onModeChange(mode) {
     liveController?.reset();
     await refreshLiveState();
     render();
+    autoListen();
   } else {
     stopCapture();
     if (state.videoId && !state.analysis && !state.busy) analyze(false);
@@ -520,6 +528,55 @@ function liveLog(kind, text) {
   fn(`[sponsor-skip live] ${text}`);
 }
 
+// ---- auto start / stop ----------------------------------------------------
+//
+// Listening follows playback: it starts when the video plays and stops a
+// little after it pauses (so a short pause does not cost a reconnect), unless
+// the user pressed Stop on this video.
+
+const PAUSE_GRACE_MS = 20000;
+
+function autoListen() {
+  const video = findVideo();
+  if (!isLive() || liveOptOut || liveCapture || !video || video.paused || !state.videoId) return;
+  startListening().catch((error) => {
+    state.live.status = 'error';
+    state.live.error = error.message;
+    render();
+  });
+}
+
+function onPlay(event) {
+  if (!(event.target instanceof HTMLVideoElement) || !isLive()) return;
+  clearTimeout(livePauseTimer);
+  livePauseTimer = null;
+  if (liveCapture) {
+    if (liveCapture.context.state === 'suspended') liveCapture.context.resume().catch(() => {});
+    return;
+  }
+  autoListen();
+}
+
+function onPause(event) {
+  if (!(event.target instanceof HTMLVideoElement) || !liveCapture) return;
+  clearTimeout(livePauseTimer);
+  livePauseTimer = setTimeout(() => {
+    livePauseTimer = null;
+    const video = findVideo();
+    if (liveCapture && video?.paused) {
+      liveLog('status', 'Video paused, stopped listening (starts again on play)');
+      stopCapture(true);
+      state.live.status = 'stopped';
+      render();
+    }
+  }, PAUSE_GRACE_MS);
+}
+
+/** The browser may hold the audio graph until the page has been clicked. */
+function onPageClick() {
+  if (liveCapture?.context.state === 'suspended') liveCapture.context.resume().catch(() => {});
+}
+
 // ---- audio capture --------------------------------------------------------
 //
 // The audio comes from the <video> element itself (captureStream), not from
@@ -575,7 +632,8 @@ async function attachCapture(video) {
   const sink = context.createGain();
   sink.gain.value = 0;
   node.connect(sink).connect(context.destination);
-  if (context.state === 'suspended') await context.resume();
+  if (context.state === 'suspended') await context.resume().catch(() => {});
+  if (context.state === 'suspended') liveLog('status', 'The browser is holding the audio until the page is clicked once');
 
   const port = chrome.runtime.connect({ name: 'sponsor-skip-live' });
   port.onDisconnect.addListener(() => {
@@ -624,7 +682,9 @@ function stopCapture(tellWorker = true) {
 }
 
 async function stopListening() {
-  liveLog('status', 'Stopped listening');
+  liveLog('status', 'Stopped listening on this video');
+  liveOptOut = true;
+  clearTimeout(livePauseTimer);
   stopCapture(true);
   state.live.status = 'stopped';
   render();
@@ -795,9 +855,10 @@ function liveBody(b) {
   if (!live.thisTab) {
     b.append(el('div', 'ss-status', live.status === 'error' && live.error
       ? `Not listening: ${live.error}`
-      : 'Live mode: the video is heard as it plays and sponsor reads are skipped in steps.'));
+      : liveOptOut ? 'Listening is off for this video.' : 'Listening starts when the video plays.'));
     const start = button('Start listening', async () => {
       start.disabled = true;
+      liveOptOut = false;
       try {
         await startListening();
       } catch (error) {

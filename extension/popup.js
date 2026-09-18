@@ -91,7 +91,7 @@ async function showLiveState(note) {
   } else if (live.state === 'error' && live.error) {
     out.textContent = `Stopped: ${live.error}`;
   } else {
-    out.textContent = 'Not listening. Press Start here or in the panel on the video page.';
+    out.textContent = 'Not listening. It starts by itself when a YouTube video plays; this button starts it now.';
   }
 }
 
