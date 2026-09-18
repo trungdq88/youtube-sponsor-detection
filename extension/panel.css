@@ -31,6 +31,7 @@
 #sponsor-skip-panel .ss-body { padding: 10px 12px 12px; }
 #sponsor-skip-panel .ss-status { color: #9aa3b2; margin-bottom: 6px; }
 #sponsor-skip-panel .ss-error { color: #f3c2c2; }
+#sponsor-skip-panel .ss-error-detail { color: #9a9a9a; font-size: 11px; line-height: 1.4; margin-top: 4px; user-select: text; word-break: break-word; }
 
 #sponsor-skip-panel .ss-segment {
   display: flex;
