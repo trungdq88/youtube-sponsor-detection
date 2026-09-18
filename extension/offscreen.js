@@ -49,6 +49,7 @@ async function start({ tabId, streamId, provider, key, model, language }) {
   analysis.createMediaStreamSource(stream).connect(worklet);
 
   const status = (state, extra = {}) => report({ type: 'live-status', tabId, state, ...extra });
+  const log = (text) => report({ type: 'live-log', tabId, text });
   const session = PROVIDERS[provider ?? 'deepgram'];
   if (!session) throw new Error(`unknown speech provider ${provider}`);
 
@@ -60,6 +61,7 @@ async function start({ tabId, streamId, provider, key, model, language }) {
     model,
     language,
     onOpen: () => status('listening'),
+    onLog: log,
     onTranscript: ({ text, isFinal, start, duration }) => {
       if (!base) return;
       report({
@@ -94,6 +96,7 @@ async function start({ tabId, streamId, provider, key, model, language }) {
 
   capture = { tabId, stream, contexts: [playback, analysis], socket, timers: [progress], track };
   status('connecting');
+  log(`Capturing tab audio (${stream.getAudioTracks()[0]?.label || 'tab'}), connecting to ${provider ?? 'deepgram'} ${model || ''}`.trim());
   return { tabId };
 }
 
@@ -116,7 +119,7 @@ async function stop() {
 
 const PROVIDERS = {
   deepgram: {
-    open({ key, model, language, onOpen, onTranscript, onError }) {
+    open({ key, model, language, onOpen, onTranscript, onError, onLog }) {
       if (!key) throw new Error('No Deepgram API key. Add one in the extension popup.');
       const url = new URL('wss://api.deepgram.com/v1/listen');
       url.searchParams.set('model', model || 'nova-3');
@@ -138,6 +141,7 @@ const PROVIDERS = {
         ws = new WebSocket(url, ['token', key]);
         ws.binaryType = 'arraybuffer';
         ws.onopen = () => {
+          onLog?.('Deepgram socket open, streaming 16 kHz audio');
           attempts = 0;
           while (queue.length) ws.send(queue.shift());
           keepAlive = setInterval(() => ws?.readyState === 1 && ws.send(JSON.stringify({ type: 'KeepAlive' })), 5000);
@@ -154,6 +158,7 @@ const PROVIDERS = {
         ws.onclose = (event) => {
           clearInterval(keepAlive);
           if (closed) return;
+          onLog?.(`Deepgram socket closed (code ${event.code}${event.reason ? `, ${event.reason}` : ''})`);
           if (event.code === 1008 || event.code === 4001 || /401|403/.test(event.reason ?? '')) {
             onError('Deepgram rejected the API key.');
             closed = true;
@@ -165,6 +170,7 @@ const PROVIDERS = {
             return;
           }
           attempts += 1;
+          onLog?.(`Reconnecting to Deepgram, attempt ${attempts}`);
           setTimeout(connect, 500 * 2 ** attempts);
         };
         ws.onerror = () => {};

@@ -85,11 +85,12 @@ read starts. The trade is that the first seconds of every read are heard, and
 the last jump can overshoot into content by up to one step. Nothing in the
 transcript mode changes; the two are separate settings.
 
-To use it: paste a Deepgram key in the popup, open the YouTube video, then
-pick **Live audio** in the popup while that tab is active (Chrome only lets an
-extension capture a tab from a click on the extension). The panel shows what
-is being heard, Jev's last verdict, the jumps, and the speech and Jev cost;
-**Stop listening** ends the capture. Capturing needs the video unmuted, and it
+To use it: paste a Deepgram key in the popup, open the YouTube video, pick
+**Live audio** in the popup and press **Start listening in this tab** (Chrome
+only lets an extension capture a tab from a click on the extension). The panel
+shows what is being heard, Jev's last verdict, the jumps, the speech and Jev
+cost, and a log of every utterance, check and jump (also in the page console
+under `[sponsor-skip live]`); **Stop listening** ends the capture. Capturing needs the video unmuted, and it
 listens to one tab at a time.
 
 The pieces: `offscreen.js` holds the audio stream and the speech socket (a

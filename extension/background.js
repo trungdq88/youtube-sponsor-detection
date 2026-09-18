@@ -82,6 +82,8 @@ async function handle(message, sender) {
       return liveStop();
     case 'live-state':
       return liveState(sender?.tab?.id);
+    case 'live-failed':
+      return liveFailed(message.error);
     // Live mode: content script
     case 'live-check':
       return liveCheck(message.request);
@@ -94,6 +96,8 @@ async function handle(message, sender) {
       return liveStatus(message);
     case 'live-audio-progress':
       return recordAudio(message.seconds);
+    case 'live-log':
+      return relay(message);
     default:
       throw new Error(`unknown message ${message?.type}`);
   }
@@ -217,6 +221,14 @@ async function liveStop() {
 }
 
 /** Current capture; `thisTab` tells a content script whether it is the tab being heard. */
+/** The popup could not get a capture going; remember why so the panel can say. */
+async function liveFailed(error) {
+  const { live } = await chrome.storage.local.get('live');
+  const next = { ...(live ?? {}), active: false, state: 'error', error: error ?? 'Could not start listening.' };
+  await chrome.storage.local.set({ live: next });
+  return liveState();
+}
+
 async function liveState(askingTabId) {
   const { live } = await chrome.storage.local.get('live');
   const current = live ?? { active: false, tabId: null, state: 'idle' };

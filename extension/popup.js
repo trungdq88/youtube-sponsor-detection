@@ -23,7 +23,7 @@ async function load() {
     : 'No Deepgram key yet. Get one at console.deepgram.com.';
   $('liveSkipSeconds').value = settings.liveSkipSeconds ?? 10;
   $('sttPrice').value = settings.sttPricePerMinute ?? 0;
-  await showLiveState();
+  if (!/^Could not start/.test($('liveState').textContent)) await showLiveState();
 
   const rows = [
     ['Videos analysed', stats.videosAnalyzed],
@@ -73,21 +73,25 @@ $('clearCache').addEventListener('click', () => send({ type: 'clear-cache' }).th
 
 // ---- live mode ------------------------------------------------------------
 
-async function showLiveState() {
+async function showLiveState(note) {
   const r = await send({ type: 'live-state' });
   const live = r?.live ?? { active: false };
   const out = $('liveState');
+  const toggle = $('liveToggle');
   if ($('mode').value !== 'live') {
     out.textContent = '';
     return;
   }
-  if (live.active) {
+  toggle.textContent = live.active ? 'Stop listening' : 'Start listening in this tab';
+  if (note) {
+    out.textContent = note;
+  } else if (live.active) {
     const where = live.title ? ` "${live.title}"` : '';
     out.textContent = live.state === 'listening' ? `Listening to the tab${where}.` : `Starting to listen${where}…`;
-  } else if (live.state === 'error') {
+  } else if (live.state === 'error' && live.error) {
     out.textContent = `Stopped: ${live.error}`;
   } else {
-    out.textContent = 'Not listening. Open the YouTube tab, then pick Live audio again to start.';
+    out.textContent = 'Not listening. Open the YouTube video in this tab, then press Start.';
   }
 }
 
@@ -98,7 +102,8 @@ async function showLiveState() {
 async function startLiveOnActiveTab() {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab) throw new Error('No active tab.');
-  if (!/^https:\/\/www\.youtube\.com\//.test(tab.url ?? '')) {
+  // tab.url is only visible with activeTab; when it is, insist on YouTube.
+  if (tab.url && !/^https:\/\/www\.youtube\.com\//.test(tab.url)) {
     throw new Error('Open a YouTube video in this tab first.');
   }
   const streamId = await new Promise((resolve, reject) => {
@@ -114,21 +119,37 @@ async function startLiveOnActiveTab() {
 $('mode').addEventListener('change', async (e) => {
   const mode = e.target.value;
   $('liveSettings').hidden = mode !== 'live';
+  await send({ type: 'set-settings', settings: { mode } });
   if (mode === 'live') {
-    try {
-      await startLiveOnActiveTab();
-    } catch (error) {
-      await send({ type: 'set-settings', settings: { mode: 'live' } });
-      $('liveState').textContent = `Could not start listening: ${error.message}`;
-      load();
-      return;
-    }
+    await startOrExplain();
   } else {
     await send({ type: 'live-stop' });
-    await send({ type: 'set-settings', settings: { mode: 'transcript' } });
   }
   load();
 });
+
+$('liveToggle').addEventListener('click', async () => {
+  const r = await send({ type: 'live-state' });
+  if (r?.live?.active) {
+    await send({ type: 'live-stop' });
+    load();
+  } else {
+    await startOrExplain();
+    load();
+  }
+});
+
+/** Start on the active tab; when that fails, keep the reason on screen. */
+async function startOrExplain() {
+  try {
+    await startLiveOnActiveTab();
+  } catch (error) {
+    await send({ type: 'live-failed', error: error.message });
+    await showLiveState(`Could not start listening: ${error.message}`);
+    return false;
+  }
+  return true;
+}
 $('saveDeepgramKey').addEventListener('click', async () => {
   const deepgramKey = $('deepgramKey').value.trim();
   if (!deepgramKey) return;

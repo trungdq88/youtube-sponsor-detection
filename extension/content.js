@@ -31,7 +31,9 @@ const state = {
     jumps: 0,
     secondsSkipped: 0,
     cost: 0,
-    last: null // last decision from the controller log
+    last: null, // last decision from the controller log
+    log: [], // { at, kind, text } newest last; kind: status | heard | check | jump | error
+    showLog: true
   }
 };
 let liveController = null;
@@ -60,6 +62,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 chrome.runtime.onMessage.addListener((message) => {
   if (message?.type === 'live-transcript') onLiveTranscript(message);
   else if (message?.type === 'live-status') onLiveStatus(message);
+  else if (message?.type === 'live-log') liveLog('status', message.text);
 });
 
 setInterval(() => {
@@ -497,6 +500,15 @@ function skipTo(video, seg, index, automatic) {
 
 // ---- live mode ------------------------------------------------------------
 
+/** One line for the panel's log and the page console. */
+function liveLog(kind, text) {
+  const entry = { at: Date.now(), kind, text };
+  state.live.log.push(entry);
+  if (state.live.log.length > 200) state.live.log.shift();
+  const fn = kind === 'error' ? console.warn : console.info;
+  fn(`[sponsor-skip live] ${text}`);
+}
+
 async function refreshLiveState() {
   const r = await send({ type: 'live-state' });
   if (!r?.ok) return;
@@ -529,6 +541,7 @@ function renderSoon() {
 }
 
 function onLiveStatus({ state: status, error }) {
+  liveLog(error ? 'error' : 'status', error ? `${status}: ${error}` : `Listening ${status}`);
   state.live.status = status;
   state.live.error = error ?? null;
   state.live.thisTab = status === 'connecting' || status === 'listening';
@@ -550,6 +563,7 @@ async function onLiveTranscript({ text, isFinal, heardAt, heardUntil }) {
   }
   state.live.hearing = '';
   state.live.lastHeard = text;
+  liveLog('heard', text);
   const ctl = await liveControl();
   ctl.hear({ text, heardAt, heardUntil });
   render();
@@ -564,7 +578,13 @@ async function driveLive() {
   if (!request) return;
 
   state.live.checking = true;
+  const kind = ctl.phase === 'verifying' ? 'verify' : 'listen';
+  const lines = Object.values(request.state).join('\n').split('\n').length;
+  liveLog('check', kind === 'verify'
+    ? `Asking Jev whether the read continues after the jump (${lines} lines)`
+    : `Asking Jev whether this is a sponsor read (${lines} lines)`);
   render();
+  const started = Date.now();
   let action = null;
   try {
     const r = await send({ type: 'live-check', request });
@@ -573,16 +593,23 @@ async function driveLive() {
     state.live.cost += r.cost ?? 0;
     state.live.error = null;
     action = ctl.answer(r.result, Date.now());
+    const last = ctl.log.at(-1);
+    const usage = r.result?.usage?.input_tokens;
+    liveLog('check', `Jev: ${last?.sponsor ? 'sponsor read' : 'not a sponsor read'} (${Math.round((last?.confidence ?? 0) * 100)}%, ${Date.now() - started}ms${usage ? `, ${usage} tokens` : ''})`);
   } catch (error) {
     ctl.answer(null, Date.now());
     state.live.error = error.message;
+    liveLog('error', `Jev check failed: ${error.message}`);
   } finally {
     state.live.checking = false;
     state.live.last = ctl.log.at(-1) ?? null;
   }
 
   if (action && state.settings?.autoSkip && !state.paused) liveJump(ctl, action.skipSeconds);
-  else if (action) ctl.reset(); // heard a sponsor but the user paused skipping on this video
+  else if (action) {
+    liveLog('status', 'Sponsor read heard, but auto-skip is off on this video');
+    ctl.reset();
+  }
   render();
 }
 
@@ -593,6 +620,7 @@ function liveJump(ctl, seconds) {
   const to = Number.isFinite(video.duration) ? Math.min(video.duration, from + seconds) : from + seconds;
   video.currentTime = to;
   ctl.skipped(Date.now());
+  liveLog('jump', `Jumped ${stamp(from)} → ${stamp(to)} (${ctl.consecutiveSkips} in a row)`);
   state.live.jumps += 1;
   state.live.secondsSkipped += to - from;
   send({ type: 'live-skipped', seconds: to - from }).then((r) => {
@@ -606,17 +634,51 @@ function liveJump(ctl, seconds) {
     video.currentTime = from;
     state.paused = true;
     ctl.reset();
+    liveLog('status', `Undo: back to ${stamp(from)}, auto-skip paused on this video`);
     render();
   });
+}
+
+function liveLogView() {
+  const wrap = el('div', 'ss-log');
+  const head = el('div', 'ss-log-head');
+  head.append(el('span', 'ss-log-title', `Log (${state.live.log.length})`));
+  head.append(button(state.live.showLog ? 'Hide' : 'Show', () => {
+    state.live.showLog = !state.live.showLog;
+    render();
+  }, 'ss-small ss-quiet'));
+  if (state.live.log.length) {
+    head.append(button('Copy', () => {
+      const text = state.live.log.map((e) => `${new Date(e.at).toISOString()} [${e.kind}] ${e.text}`).join('\n');
+      navigator.clipboard?.writeText(text);
+    }, 'ss-small ss-quiet'));
+  }
+  wrap.append(head);
+  if (!state.live.showLog) return wrap;
+  const list = el('div', 'ss-log-list');
+  if (!state.live.log.length) list.append(el('div', 'ss-log-line status', 'Nothing yet.'));
+  for (const e of state.live.log.slice(-40)) {
+    const line = el('div', `ss-log-line ${e.kind}`);
+    line.append(el('span', 'ss-log-time', clock(e.at)), el('span', 'ss-log-text', e.text));
+    list.append(line);
+  }
+  wrap.append(list);
+  requestAnimationFrame(() => { list.scrollTop = list.scrollHeight; });
+  return wrap;
+}
+
+function clock(ms) {
+  const d = new Date(ms);
+  return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}`;
 }
 
 function liveBody(b) {
   const live = state.live;
   if (!live.thisTab) {
     b.append(el('div', 'ss-status', live.status === 'error' && live.error
-      ? `Listening stopped: ${live.error}`
-      : 'Live mode is on, but this tab is not being listened to.'));
-    b.append(el('div', 'ss-hint', 'Click the extension icon and choose "Live audio" while this tab is open to start listening here.'));
+      ? `Not listening: ${live.error}`
+      : 'Live mode is on, but this tab is not being listened to yet.'));
+    b.append(el('div', 'ss-hint', 'Click the extension icon and press "Start listening in this tab". Chrome only lets the extension capture a tab from that click.'));
     return;
   }
   if (live.status === 'connecting') {
@@ -769,6 +831,7 @@ function body() {
       stats.append(statRow('Jumped', `${s.liveSkips} times · ${stamp(s.liveSecondsSkipped)} saved`));
     }
     b.append(stats);
+    b.append(liveLogView());
     return b;
   }
   if (a) {

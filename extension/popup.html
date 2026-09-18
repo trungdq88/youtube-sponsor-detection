@@ -26,8 +26,11 @@
       <option value="live">Live audio: listen to this tab, skip in steps</option>
     </select>
   </label>
-  <p class="hint" id="liveState"></p>
   <div id="liveSettings" hidden>
+    <div class="row buttons">
+      <button id="liveToggle" type="button">Start listening in this tab</button>
+    </div>
+    <p class="hint" id="liveState"></p>
     <div class="row">
       <input id="deepgramKey" type="password" placeholder="Deepgram API key" autocomplete="off" />
       <button id="saveDeepgramKey" type="button">Save</button>

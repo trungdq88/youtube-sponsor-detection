@@ -105,3 +105,16 @@
   font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
+
+#sponsor-skip-panel .ss-log { margin-top: 8px; padding-top: 8px; border-top: 1px solid #2a2f3a; }
+#sponsor-skip-panel .ss-log-head { display: flex; align-items: center; gap: 6px; }
+#sponsor-skip-panel .ss-log-title { flex: 1; color: #9aa3b2; font-size: 12px; }
+#sponsor-skip-panel .ss-button.ss-quiet { background: #262b36; color: #c7cdd8; }
+#sponsor-skip-panel .ss-log-list { margin-top: 6px; max-height: 180px; overflow-y: auto; font-size: 11px; line-height: 1.4; user-select: text; }
+#sponsor-skip-panel .ss-log-line { display: flex; gap: 6px; padding: 1px 0; color: #9aa3b2; }
+#sponsor-skip-panel .ss-log-time { flex: none; font-variant-numeric: tabular-nums; color: #6b7280; }
+#sponsor-skip-panel .ss-log-text { word-break: break-word; }
+#sponsor-skip-panel .ss-log-line.heard .ss-log-text { color: #c7cdd8; font-style: italic; }
+#sponsor-skip-panel .ss-log-line.check .ss-log-text { color: #e8eaf0; }
+#sponsor-skip-panel .ss-log-line.jump .ss-log-text { color: #ffcc4d; font-weight: 600; }
+#sponsor-skip-panel .ss-log-line.error .ss-log-text { color: #f3c2c2; }

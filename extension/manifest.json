@@ -3,7 +3,7 @@
   "name": "Sponsor Skip (Jev)",
   "version": "0.1.0",
   "description": "Finds the sponsor read in a YouTube video with Jev (TypeSafe) and skips it, from the transcript or by listening live.",
-  "permissions": ["storage", "offscreen", "tabCapture"],
+  "permissions": ["storage", "activeTab", "offscreen", "tabCapture"],
   "host_permissions": ["https://api.typesafe.ai/*"],
   "background": { "service_worker": "background.js", "type": "module" },
   "action": { "default_popup": "popup.html", "default_title": "Sponsor Skip" },
