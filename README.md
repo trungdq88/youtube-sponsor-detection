@@ -12,10 +12,11 @@ also need a [Deepgram](https://console.deepgram.com) key for speech-to-text.
 
 1. Clone this repo. Open `chrome://extensions`, turn on **Developer mode**,
    click **Load unpacked** and pick the `extension/` folder.
-2. Click the extension's icon, paste your TypeSafe key (and Deepgram key)
-   and choose a mode.
+2. Click the extension's icon and paste your TypeSafe key. Transcript mode
+   works from there; add a Deepgram key to try the Smart or Listen modes.
 3. Open any YouTube video. A panel appears bottom-right with the reads found,
-   a **Skip** button per read, the auto-skip toggle and the running cost.
+   a **Skip** button per read, the auto-skip toggle, the running cost and, in
+   the audio modes, what is being heard and a log of every decision.
 
 <p align="center"><img src="docs/panel.png" width="300" alt="The panel on a watch page" /></p>
 
@@ -23,17 +24,25 @@ also need a [Deepgram](https://console.deepgram.com) key for speech-to-text.
 
 | Mode | How it works | Needs | Cost per hour watched |
 | --- | --- | --- | --- |
-| **Smart** (recommended) | Transcript finds each read and its end; audio is listened to only around each read to confirm it is playing, then the video jumps to the end. | Both keys | about $0.05 |
-| **Transcript only** | Jev reads the captions, the whole read is skipped. Works only where YouTube hands the transcript over. | TypeSafe | under a cent |
+| **Transcript only** (default) | Jev reads the captions and the whole read is skipped. Works only where YouTube hands the transcript over. | TypeSafe | under a cent |
+| **Smart** | The transcript finds each read and its end; the audio is listened to only around each read, and once Jev agrees a read is playing the video jumps to its end. If the audio has not confirmed a read 12 s after its start, the transcript skips it anyway. | Both keys | about $0.05 |
 | **Listen only** | No transcript. The video's audio is streamed to Deepgram as it plays; when Jev hears a read, the video jumps ahead in 10 s steps until it is over. | Both keys | about $0.46 |
 
 When in doubt the extension watches a second of the read rather than cutting
 a second of content: a skip only happens above the confidence you set (70%
-by default), and Smart mode waits for the audio to agree with the transcript.
+by default), and in the audio modes everything Jev hears has already played,
+so a jump never lands before the read starts.
 
-The popup holds the mode, the keys, the skipping settings and the usage
-totals. Keys stay in `chrome.storage.local` and never reach the page. Results
-are cached per video; **Re-analyze** in the panel forces a fresh run.
+In the audio modes listening starts by itself when a video plays and stops
+shortly after it pauses; **Stop** in the panel turns it off for the current
+video. Audio is captured from the video element itself, so no extra browser
+permission is needed and playback is untouched.
+
+The popup holds the mode, the keys, the skipping settings (auto-skip, the
+confidence needed, the step for jumps by ear) and the usage totals, with the
+model and prices under *Advanced*. Keys stay in `chrome.storage.local` and
+never reach the page. Results are cached per video; **Re-analyze** in the
+panel forces a fresh run.
 
 <p align="center"><img src="docs/popup.png" width="360" alt="The popup" /></p>
 
@@ -84,10 +93,13 @@ A skip is cut at a phrase inside the boundary line, and only at a phrase Jev
 is at least 80% sure is sponsor. Run the pipeline on a real video with
 `npm run analyze -- <youtube url>` (`--verbose` shows every window).
 
-In the audio modes Jev is asked over the last minute of what was heard whether
-the speaker is inside a read *right now*. Everything it sees has already
-played, so a jump never lands before the read starts; the trade is that the
-first seconds of every read are heard. The decision loop is `src/live.js`.
+In the audio modes Jev is asked, every few seconds, over the last minute of
+what was heard whether the speaker is inside a read *right now*. After a
+jump it is asked again with the lines from before and after the jump side by
+side, and the video steps on while the answer stays yes. The trade for never
+cutting early is that the first seconds of every read are heard. The decision
+loop is `src/live.js`; the speech socket lives in `extension/offscreen.js`,
+where another provider can be added next to Deepgram.
 
 ## Accuracy against SponsorBlock
 
@@ -136,5 +148,8 @@ test/            node --test suite, stub client, mock API, extension e2e
 - Transcript fetching uses YouTube's private InnerTube API through
   `youtubei.js`; it can break when YouTube changes things, and the caption
   tracks are hidden from cloud IPs. The audio modes do not depend on it.
-- Audio capture needs the video unmuted and listens to one tab at a time.
+- The audio modes listen to one tab at a time, and the content script only
+  runs on youtube.com for now.
 - The last jump in Listen mode can overshoot into content by up to one step.
+- Deepgram bills per minute heard: Listen mode streams the whole video, Smart
+  mode only the minutes around each read.
