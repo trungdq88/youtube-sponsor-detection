@@ -219,3 +219,31 @@ test('json3 caption events become cues and English human tracks win', async () =
   assert.equal(pickCaptionTrack(tracks.slice(0, 1)).base_url, 'de');
   assert.equal(pickCaptionTrack([]), null);
 });
+
+test('a window the refine pass rejects is not scanned forever', async () => {
+  const cues = Array.from({ length: 30 }, (_, i) => ({
+    text: 'today we are looking at the history of the paperclip and how it was designed',
+    startMs: i * 6000,
+    endMs: (i + 1) * 6000
+  }));
+  // The scan's choice is sure some line names a sponsor, but every noul says no.
+  const requests = [];
+  const client = {
+    async systemOne(request) {
+      requests.push(request);
+      const answers = {};
+      for (const [name, q] of Object.entries(request.questions)) {
+        if (q.type === 'noul') answers[name] = { type: 'noul', noul: 0.04 };
+        else {
+          const labels = Object.keys(q.criteria).filter((l) => l.startsWith('L'));
+          const picked = labels[Math.floor(labels.length / 2)];
+          answers[name] = { type: 'choice', choice: picked, confidence: 0.9, probabilities: Object.fromEntries(Object.keys(q.criteria).map((l) => [l, l === picked ? 0.9 : 0])) };
+        }
+      }
+      return { model: 'jev-1.13.0', answers, usage: { input_tokens: 10, output_tokens: 1 } };
+    }
+  };
+  const result = await findSponsorSegment(buildLines(cues), { client });
+  assert.equal(result.status, 'not-found');
+  assert.ok(requests.length <= 3, `${requests.length} requests: scan, one refine, and no more`);
+});

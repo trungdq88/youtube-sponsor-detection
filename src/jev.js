@@ -178,8 +178,9 @@ export function startQuestions(lines) {
           'subject of the video (`video_title`) and begins the lead-in that ends at the sponsor?',
         rules: [
           'The lead-in belongs to the sponsor segment from its first line, even when it sounds like a personal story, an anecdote, a problem or a question and the sponsor is only named minutes later.',
+          'A lead-in exists to arrive at the sponsor: the story, problem or question it raises is what the sponsor answers.',
           'Lines that are still about the subject of the video are not part of the sponsor segment, even the ones immediately before it.',
-          'A closing call for comments, likes or subscriptions belongs to the video, not to the sponsor segment.',
+          'Wrapping up the video, thanking hosts, guests, crew or viewers, and a closing call for comments, likes or subscriptions belong to the video, not to the sponsor segment, even right before the sponsor is named.',
           'If there is no lead-in and the segment opens by naming the sponsor, choose the line given in `sponsor_named_at`.'
         ],
         ...SPONSOR
@@ -307,9 +308,13 @@ export async function findSponsorSegment(lines, opts) {
   const taken = new Set(); // line ids already inside a confirmed segment
 
   while (segments.length < MAX_SEGMENTS) {
-    const candidates = scans.filter((s) => s.presence >= MAYBE && s.startLineId && !taken.has(s.startLineId));
+    // A window is worth refining when either answer says so: the noul, or a
+    // choice that puts little weight on "none" (a read without the usual
+    // "sponsored by" wording can score low on the first and high on the
+    // second). The refine pass's own noul then confirms or rejects it.
+    const candidates = scans.filter((s) => looksLikeSponsor(s) >= MAYBE && s.startLineId && !taken.has(s.startLineId));
     if (!candidates.length) break;
-    const winner = candidates.reduce((a, b) => (b.presence > a.presence ? b : a));
+    const winner = candidates.reduce((a, b) => (looksLikeSponsor(b) > looksLikeSponsor(a) ? b : a));
 
     const segment = await refine(winner, lines, taken, ask, report, title);
     if (segment) {
@@ -322,6 +327,7 @@ export async function findSponsorSegment(lines, opts) {
     const remaining = winner.lines.filter((l) => !taken.has(l.id));
     if (!segment || remaining.length < 3) {
       winner.presence = 0;
+      winner.pNone = 1;
       continue;
     }
     const rescan = await scan(remaining, winner.index, windows.length);
@@ -414,13 +420,16 @@ async function refine(winner, lines, taken, ask, report, title) {
   // Third request(s): where inside the first and last lines the segment
   // really begins and ends. Both edges are independent, so they run together.
   report({ stage: 'cut' });
-  const [startCut, endCut] = await Promise.all([
+  let [startCut, endCut] = await Promise.all([
     cut(lines, startLine, 'start', ask, title, anchorLine),
     endOk ? cut(lines, endLine, 'end', ask, title, anchorLine) : null
   ]);
+  // A read of a few words can end up with its end cut before its start (no
+  // phrase was surely sponsor); the line-level end stands then.
+  if (endCut && endCut.seconds <= (startCut?.seconds ?? startLine.start)) endCut = null;
 
   return {
-    confidence: Math.min(winner.presence, presence),
+    confidence: Math.min(looksLikeSponsor(winner), presence),
     scanPresence: winner.presence,
     refinePresence: presence,
     start: {
@@ -457,10 +466,14 @@ async function refine(winner, lines, taken, ask, report, title) {
 async function cut(lines, line, edge, ask, title, anchorLine) {
   const at = lines.indexOf(line);
   if (at < 0) return null;
-  const phrases = buildPhrases(lines.slice(Math.max(0, at - 1), at + 2));
+  // The end line is the one most often a line late (a "[Music]" or a hand-back
+  // line gets chosen), so the end looks two lines back.
+  const from = Math.max(0, at - (edge === 'end' ? 2 : 1));
+  const to = at + 2;
+  const phrases = buildPhrases(lines.slice(from, to));
   if (phrases.length < 2) return null;
-  const before = lines.slice(Math.max(0, at - 1 - CUT_CONTEXT_LINES), Math.max(0, at - 1));
-  const after = lines.slice(at + 2, at + 2 + CUT_CONTEXT_LINES);
+  const before = lines.slice(Math.max(0, from - CUT_CONTEXT_LINES), from);
+  const after = lines.slice(to, to + CUT_CONTEXT_LINES);
 
   const result = await ask(
     {
@@ -474,7 +487,13 @@ async function cut(lines, line, edge, ask, title, anchorLine) {
   );
   const inSponsor = phrases.map((p) => result.answers[p.id]?.noul ?? 0);
   const index = cutPoint(inSponsor, edge);
-  if (index < 0) return null;
+  if (index < 0) {
+    // No phrase here is surely sponsor. For the start, the line-level answer
+    // stands: a lead-in reads as ordinary content phrase by phrase, and only
+    // the pass that saw the whole segment could tell it belongs. For the end,
+    // the read is over before these lines, so nothing in them is skipped.
+    return edge === 'end' ? { seconds: phrases[0].start, phrase: null } : null;
+  }
   const phrase = phrases[index];
   return {
     seconds: edge === 'start' ? phrase.start : phrase.end,
@@ -509,6 +528,10 @@ export function cutPoint(inSponsor, edge) {
     if (inSponsor[i] >= KEEP_CONTENT && (i === 0 || inSponsor[i - 1] >= IN_RUN)) return i;
   }
   return -1;
+}
+
+function looksLikeSponsor(scan) {
+  return Math.max(scan.presence, 1 - scan.pNone);
 }
 
 function summarise(scan) {

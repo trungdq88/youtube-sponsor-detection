@@ -15,6 +15,8 @@ export const WINDOW_OVERLAP = 6;
 
 /** Words per phrase when a line is split for the boundary pass: about a second of speech. */
 export const PHRASE_WORDS = 3;
+/** Longest a single word is taken to last, whatever its cue says. */
+const MAX_WORD_SECONDS = 1.5;
 
 /**
  * @typedef {{ text: string, offsetMs: number }} CueWord  offset from the cue's start
@@ -66,19 +68,49 @@ export function buildLines(cues) {
 function cueWords(cue, text) {
   const start = cue.startMs / 1000;
   const end = Math.max(start, cue.endMs / 1000);
-  if (cue.words?.length > 1) {
-    const words = cue.words.map((w) => ({ text: w.text, start: start + w.offsetMs / 1000 }));
-    return words.map((w, i) => ({ ...w, start: round(w.start), end: round(words[i + 1]?.start ?? Math.max(end, w.start)) }));
-  }
   const tokens = text.split(' ');
-  const chars = text.length + 1;
-  let at = 0;
-  return tokens.map((t) => {
-    const from = start + ((end - start) * at) / chars;
-    at += t.length + 1;
-    const to = start + ((end - start) * at) / chars;
-    return { text: t, start: round(from), end: round(Math.min(end, to)) };
-  });
+
+  // Times from the caption track, matched to the cue's words in order. A word
+  // the track did not time (or dropped) gets a time between its neighbours.
+  const timed = new Array(tokens.length).fill(null);
+  if (cue.words?.length) {
+    let next = 0;
+    for (const w of cue.words) {
+      const at = tokens.indexOf(w.text, next);
+      if (at < 0 || at > next + 2) continue;
+      timed[at] = start + w.offsetMs / 1000;
+      next = at + 1;
+    }
+  }
+
+  // Untimed words: the span between the nearest timed neighbours (or the
+  // cue's own edges), shared out by character count.
+  const words = [];
+  let i = 0;
+  while (i < tokens.length) {
+    if (timed[i] !== null) {
+      words.push({ text: tokens[i], start: timed[i] });
+      i++;
+      continue;
+    }
+    let j = i;
+    while (j < tokens.length && timed[j] === null) j++;
+    const from = i === 0 ? start : timed[i - 1];
+    const to = j < tokens.length ? timed[j] : end;
+    const chars = tokens.slice(i === 0 ? 0 : i - 1, j).reduce((n, t) => n + t.length + 1, 0);
+    let at = i === 0 ? 0 : tokens[i - 1].length + 1;
+    for (; i < j; i++) {
+      words.push({ text: tokens[i], start: from + ((to - from) * at) / chars });
+      at += tokens[i].length + 1;
+    }
+  }
+  // A cue's end can sit seconds after its last word (auto-generated cues run
+  // on until the next one starts), so a word never lasts longer than a word.
+  return words.map((w, i) => ({
+    text: w.text,
+    start: round(w.start),
+    end: round(Math.max(w.start, Math.min(words[i + 1]?.start ?? end, w.start + MAX_WORD_SECONDS)))
+  }));
 }
 
 const round = (n) => Number(n.toFixed(2));

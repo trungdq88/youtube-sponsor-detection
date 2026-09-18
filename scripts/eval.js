@@ -2,6 +2,7 @@
 //
 //   npm run eval                      # eval/videos.json (+ eval/videos.seed.json)
 //   npm run eval -- --limit 5 --fresh # first five videos, ignore cached Jev results
+//   npm run eval -- --lines           # score the same runs at line boundaries, without the cut pass
 //
 // For each video: fetch the transcript, run the pipeline, and compare the
 // segments Jev found with SponsorBlock's. Results are cached per video in
@@ -55,6 +56,12 @@ for (const video of videos.slice(0, limit)) {
       // Transcripts saved by `npm run transcripts` first; YouTube only for the rest.
       const { title, cues, route } = (await savedTranscript(video.videoID)) ?? (await fetchTranscript(video.videoID));
       const lines = buildLines(cues);
+      // A label past the end of the transcript means the video was re-cut since
+      // it was labelled (or the captions stop early); its labels cannot be trusted.
+      const transcriptEnd = lines.at(-1)?.end ?? 0;
+      if (video.segments.some((seg) => seg.start > transcriptEnd + 5)) {
+        throw new Error(`labels run past the end of the transcript (${formatTimestamp(transcriptEnd)})`);
+      }
       const started = Date.now();
       const result = await findSponsorSegment(lines, { client, title });
       run = {
@@ -63,7 +70,15 @@ for (const video of videos.slice(0, limit)) {
         lines: lines.length,
         elapsedMs: Date.now() - started,
         usage: result.usage,
-        predicted: result.segments.map((s) => ({ start: s.start.seconds, end: s.end?.seconds ?? null, confidence: s.confidence, anchor: s.anchor.seconds }))
+        predicted: result.segments.map((s) => ({
+          start: s.start.seconds,
+          end: s.end?.seconds ?? null,
+          // The line-level boundaries too, so --lines scores the pipeline without the cut pass.
+          lineStart: s.start.lineSeconds ?? s.start.seconds,
+          lineEnd: s.end ? (s.end.lineSeconds ?? s.end.seconds) : null,
+          confidence: s.confidence,
+          anchor: s.anchor.seconds
+        }))
       };
       console.log(`${result.segments.length} segment(s), ${result.usage.input_tokens.toLocaleString()} tokens`);
     } catch (error) {
@@ -84,7 +99,9 @@ console.log('\nwrote eval/results.json');
 function score(video, run) {
   if (run.error) return { videoID: video.videoID, error: run.error, truth: video.segments };
   const truth = video.segments;
-  const predicted = run.predicted;
+  const predicted = flag('--lines')
+    ? run.predicted.map((p) => ({ ...p, start: p.lineStart ?? p.start, end: p.lineEnd ?? p.end }))
+    : run.predicted;
   const matches = [];
   const usedPred = new Set();
 
@@ -165,9 +182,14 @@ function report(rows) {
   console.log(`tokens     ${tokens.toLocaleString()} input (≈ $${(tokens * 0.042 / 1e6).toFixed(4)} at $0.042/M)`);
 }
 
-const signed = (n) => `${n > 0 ? '+' : ''}${n.toFixed(1)}`;
-const mean = (xs) => xs.reduce((a, b) => a + b, 0) / xs.length;
-const median = (xs) => {
+// Function declarations, because report() runs above them at module top level.
+function signed(n) {
+  return `${n > 0 ? '+' : ''}${n.toFixed(1)}`;
+}
+function mean(xs) {
+  return xs.reduce((a, b) => a + b, 0) / xs.length;
+}
+function median(xs) {
   const s = [...xs].sort((a, b) => a - b);
   return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2;
-};
+}
