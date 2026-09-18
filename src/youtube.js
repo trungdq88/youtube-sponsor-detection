@@ -201,8 +201,10 @@ async function fetchCaptionTrack(baseUrl) {
 }
 
 /**
- * Parse YouTube's json3 caption format into cues.
- * @param {{ events?: { tStartMs?: number, dDurationMs?: number, segs?: { utf8?: string }[] }[] }} data
+ * Parse YouTube's json3 caption format into cues. Auto-generated tracks time
+ * every word (`tOffsetMs` on each segment); those offsets are kept on the cue
+ * as `words`, so a boundary can land on a word instead of a whole cue.
+ * @param {{ events?: { tStartMs?: number, dDurationMs?: number, segs?: { utf8?: string, tOffsetMs?: number }[] }[] }} data
  * @returns {Cue[]}
  */
 export function parseJson3(data) {
@@ -212,7 +214,12 @@ export function parseJson3(data) {
     const text = event.segs.map((s) => s.utf8 ?? '').join('').replace(/\s+/g, ' ').trim();
     if (!text) continue;
     const startMs = Number(event.tStartMs ?? 0);
-    cues.push({ text, startMs, endMs: startMs + Number(event.dDurationMs ?? 0) });
+    const cue = { text, startMs, endMs: startMs + Number(event.dDurationMs ?? 0) };
+    const words = event.segs
+      .filter((s) => s.tOffsetMs !== undefined && (s.utf8 ?? '').trim())
+      .map((s) => ({ text: s.utf8.trim(), offsetMs: Number(s.tOffsetMs) }));
+    if (words.length > 1) cue.words = words;
+    cues.push(cue);
   }
   return cues;
 }

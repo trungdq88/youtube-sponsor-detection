@@ -139,12 +139,21 @@ results are cached in `eval/cache/`; pass `--fresh` after changing the
 questions, `--limit N` to score a few, `--tolerance S` to change the window.
 `eval/videos.seed.json` holds hand-picked videos and is always included.
 
-`eval` needs a network address YouTube trusts: from a cloud or datacenter IP
-the player answers "sign in to confirm you're not a bot" and hides the caption
-tracks (the public Invidious and Piped mirrors are blocked the same way). Run
-it from a normal home connection. The transcript fetcher falls back to an
-Invidious instance when YouTube refuses; `INVIDIOUS_INSTANCES=a,b` overrides
-which ones it tries.
+Fetching transcripts needs a network address YouTube trusts: from a cloud or
+datacenter IP the player answers "sign in to confirm you're not a bot" and
+hides the caption tracks (the public Invidious and Piped mirrors are blocked
+the same way). So the transcripts are saved once, from a home connection, and
+committed:
+
+```sh
+npm run transcripts   # saves each eval video's transcript to eval/transcripts/
+git add eval/transcripts && git commit -m "Save eval transcripts" && git push
+```
+
+`eval` uses a saved transcript when there is one and only goes to YouTube for
+the rest, so with all of them saved it runs anywhere Jev is reachable. The
+fetcher falls back to an Invidious instance when YouTube refuses;
+`INVIDIOUS_INSTANCES=a,b` overrides which ones it tries.
 
 ## Layout
 
@@ -159,8 +168,9 @@ fixtures/            synthetic transcripts: a plain read at 1:27, and an outro w
 scripts/analyze.js   run the pipeline on a real video and print the boundaries
 scripts/sponsorblock-sample.js   sample labelled videos from a SponsorBlock mirror
 scripts/eval.js      score the pipeline against those labels
+scripts/save-transcripts.js   save the eval videos' transcripts (run from a home connection)
 src/sponsorblock.js  CSV parsing and label filtering for the above
-eval/                sampled videos, seed videos, cached runs and results
+eval/                sampled videos, seed videos, saved transcripts, cached runs and results
 test/                node --test suite, a stub client, and the mock API server
 ```
 

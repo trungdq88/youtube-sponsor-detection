@@ -382,6 +382,8 @@ function pickCaptionTrack(tracks) {
   return english.find((t) => t.kind !== 'asr') ?? english[0] ?? tracks[0];
 }
 
+// Same as parseJson3 in src/youtube.js: auto-generated tracks time every
+// word, and those offsets let a skip land on a word instead of a whole cue.
 function parseJson3(data) {
   const cues = [];
   for (const event of data?.events ?? []) {
@@ -389,7 +391,12 @@ function parseJson3(data) {
     const text = event.segs.map((s) => s.utf8 ?? '').join('').replace(/\s+/g, ' ').trim();
     if (!text) continue;
     const startMs = Number(event.tStartMs ?? 0);
-    cues.push({ text, startMs, endMs: startMs + Number(event.dDurationMs ?? 0) });
+    const cue = { text, startMs, endMs: startMs + Number(event.dDurationMs ?? 0) };
+    const words = event.segs
+      .filter((s) => s.tOffsetMs !== undefined && (s.utf8 ?? '').trim())
+      .map((s) => ({ text: s.utf8.trim(), offsetMs: Number(s.tOffsetMs) }));
+    if (words.length > 1) cue.words = words;
+    cues.push(cue);
   }
   return cues;
 }

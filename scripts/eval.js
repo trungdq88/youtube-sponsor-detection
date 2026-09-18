@@ -6,6 +6,9 @@
 // For each video: fetch the transcript, run the pipeline, and compare the
 // segments Jev found with SponsorBlock's. Results are cached per video in
 // eval/cache/ so re-scoring after a question change only re-runs with --fresh.
+//
+// The transcript comes from eval/transcripts/ when `npm run transcripts` has
+// saved it there, so the eval itself only needs to reach Jev.
 
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -14,6 +17,7 @@ import { TypeSafeClient } from '@typesafe-ai/sdk';
 import { fetchTranscript } from '../src/youtube.js';
 import { buildLines, formatTimestamp } from '../src/transcript.js';
 import { findSponsorSegment } from '../src/jev.js';
+import { evalVideos, savedTranscript } from '../src/eval-videos.js';
 
 const args = process.argv.slice(2);
 const flag = (n) => args.includes(n);
@@ -28,12 +32,7 @@ if (!process.env.TYPESAFE_API_KEY) {
   process.exit(1);
 }
 
-const videos = [];
-for (const file of ['eval/videos.seed.json', 'eval/videos.json']) {
-  if (!existsSync(file)) continue;
-  const data = JSON.parse(await readFile(file, 'utf8'));
-  for (const v of data.videos) if (!videos.some((x) => x.videoID === v.videoID)) videos.push(v);
-}
+const videos = await evalVideos();
 if (!videos.length) {
   console.error('No videos. Run: node scripts/sponsorblock-sample.js');
   process.exit(1);
@@ -51,7 +50,8 @@ for (const video of videos.slice(0, limit)) {
   } else {
     process.stdout.write(`${video.videoID} … `);
     try {
-      const { title, cues, route } = await fetchTranscript(video.videoID);
+      // Transcripts saved by `npm run transcripts` first; YouTube only for the rest.
+      const { title, cues, route } = (await savedTranscript(video.videoID)) ?? (await fetchTranscript(video.videoID));
       const lines = buildLines(cues);
       const started = Date.now();
       const result = await findSponsorSegment(lines, { client, title });
