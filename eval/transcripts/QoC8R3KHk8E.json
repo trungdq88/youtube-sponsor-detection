@@ -1,0 +1,2703 @@
+{
+ "videoID": "QoC8R3KHk8E",
+ "title": "My Smart Home is Stupid - HVAC Update",
+ "route": "captions/WEB",
+ "savedAt": "2026-09-18T02:32:24.097Z",
+ "cues": [
+  {
+   "text": "- A properly configured smart home is great.",
+   "startMs": 270,
+   "endMs": 2670
+  },
+  {
+   "text": "It makes just about everything faster, easier, and,",
+   "startMs": 2670,
+   "endMs": 5748
+  },
+  {
+   "text": "(slide whistle zoots)",
+   "startMs": 5748,
+   "endMs": 6581
+  },
+  {
+   "text": "even more efficient through automations.",
+   "startMs": 6581,
+   "endMs": 8220
+  },
+  {
+   "text": "Unfortunately, mine isn't configured properly.",
+   "startMs": 8220,
+   "endMs": 11760
+  },
+  {
+   "text": "Most notably, the fancy in-floor heating system",
+   "startMs": 11760,
+   "endMs": 14790
+  },
+  {
+   "text": "that's supposed to be configured with these,",
+   "startMs": 14790,
+   "endMs": 17280
+  },
+  {
+   "text": "is not initialized at all.",
+   "startMs": 17280,
+   "endMs": 20460
+  },
+  {
+   "text": "But, Canadian winters here,",
+   "startMs": 20460,
+   "endMs": 22530
+  },
+  {
+   "text": "which is why my poor heat pump system is struggling",
+   "startMs": 22530,
+   "endMs": 25080
+  },
+  {
+   "text": "to maintain room temperature.",
+   "startMs": 25080,
+   "endMs": 26790
+  },
+  {
+   "text": "The only reason this one is even close to what it's set to,",
+   "startMs": 26790,
+   "endMs": 30330
+  },
+  {
+   "text": "is because the server room is no longer",
+   "startMs": 30330,
+   "endMs": 32310
+  },
+  {
+   "text": "pumping heat outside.",
+   "startMs": 32310,
+   "endMs": 33570
+  },
+  {
+   "text": "It's pumping heat out into the basement.",
+   "startMs": 33570,
+   "endMs": 36180
+  },
+  {
+   "text": "I blame Jake, who assured me the whole thing",
+   "startMs": 36180,
+   "endMs": 38550
+  },
+  {
+   "text": "was perfectly simple, and it would be done",
+   "startMs": 38550,
+   "endMs": 40800
+  },
+  {
+   "text": "well before winter came.",
+   "startMs": 40800,
+   "endMs": 43201
+  },
+  {
+   "text": "(Jake laughs)",
+   "startMs": 43201,
+   "endMs": 44181
+  },
+  {
+   "text": "(mimics laughter) Yeah, very funny for you.",
+   "startMs": 44181,
+   "endMs": 46350
+  },
+  {
+   "text": "But, my kids have been going to bed with two,",
+   "startMs": 46350,
+   "endMs": 48120
+  },
+  {
+   "text": "or even three blankets at night,",
+   "startMs": 48120,
+   "endMs": 49740
+  },
+  {
+   "text": "because the upstairs is much colder than the downstairs.",
+   "startMs": 49740,
+   "endMs": 53100
+  },
+  {
+   "text": "- You just trying to guilt trip me now?",
+   "startMs": 53100,
+   "endMs": 54690
+  },
+  {
+   "text": "- Thankfully, we have the solution,",
+   "startMs": 54690,
+   "endMs": 56670
+  },
+  {
+   "text": "just like we have this segway to our sponsor.",
+   "startMs": 56670,
+   "endMs": 58860
+  },
+  {
+   "text": "Build Redux.",
+   "startMs": 58860,
+   "endMs": 59880
+  },
+  {
+   "text": "Build Redux takes the challenge and hassle out of building",
+   "startMs": 59880,
+   "endMs": 62340
+  },
+  {
+   "text": "your own PC",
+   "startMs": 62340,
+   "endMs": 63180
+  },
+  {
+   "text": "With pre-done configurations, support guides to aid you,",
+   "startMs": 63180,
+   "endMs": 65910
+  },
+  {
+   "text": "and competitive pricing versus building a PC yourself,",
+   "startMs": 65910,
+   "endMs": 68880
+  },
+  {
+   "text": "why not kick your feet up,",
+   "startMs": 68880,
+   "endMs": 69810
+  },
+  {
+   "text": "and let build Redux handle it for you?",
+   "startMs": 69810,
+   "endMs": 71850
+  },
+  {
+   "text": "Head to build redux.com/Linus,",
+   "startMs": 71850,
+   "endMs": 74160
+  },
+  {
+   "text": "and start your new build today.",
+   "startMs": 74160,
+   "endMs": 76340
+  },
+  {
+   "text": "(electronic swooshing)",
+   "startMs": 76340,
+   "endMs": 77215
+  },
+  {
+   "text": "(tinker tapping)",
+   "startMs": 77215,
+   "endMs": 78048
+  },
+  {
+   "text": "(electronic explosion)",
+   "startMs": 78048,
+   "endMs": 79531
+  },
+  {
+   "text": "(electro pop beats)",
+   "startMs": 79531,
+   "endMs": 82531
+  },
+  {
+   "text": "It pains me to say this, but Jake's not actually wrong.",
+   "startMs": 85020,
+   "endMs": 87750
+  },
+  {
+   "text": "The system is pretty simple.",
+   "startMs": 87750,
+   "endMs": 89640
+  },
+  {
+   "text": "The way this used to work,",
+   "startMs": 89640,
+   "endMs": 91410
+  },
+  {
+   "text": "was that each of these zones,",
+   "startMs": 91410,
+   "endMs": 93570
+  },
+  {
+   "text": "was wired up directly to one of those old school, like,",
+   "startMs": 93570,
+   "endMs": 96360
+  },
+  {
+   "text": "the Mercury tilts and completes the circuit thermostats,",
+   "startMs": 96360,
+   "endMs": 99900
+  },
+  {
+   "text": "which would (snaps fingers) activate it, if it got too cold.",
+   "startMs": 99900,
+   "endMs": 103050
+  },
+  {
+   "text": "It's really not that much more complicated.",
+   "startMs": 103050,
+   "endMs": 105690
+  },
+  {
+   "text": "Our Ecobees are positioned strategically around the house",
+   "startMs": 105690,
+   "endMs": 108870
+  },
+  {
+   "text": "in each of the heating zones,",
+   "startMs": 108870,
+   "endMs": 110340
+  },
+  {
+   "text": "that is fed by one of these pipes,",
+   "startMs": 110340,
+   "endMs": 113010
+  },
+  {
+   "text": "so, that reports back the temperature,",
+   "startMs": 113010,
+   "endMs": 115140
+  },
+  {
+   "text": "instead of a little tilting mercury vial.",
+   "startMs": 115140,
+   "endMs": 117840
+  },
+  {
+   "text": "Then, in order to actually activate that zone,",
+   "startMs": 117840,
+   "endMs": 121110
+  },
+  {
+   "text": "we use one of these cool little relay boards.",
+   "startMs": 121110,
+   "endMs": 124140
+  },
+  {
+   "text": "Basically, what you're looking at right here,",
+   "startMs": 124140,
+   "endMs": 125970
+  },
+  {
+   "text": "is a wifi chip set, and an antenna, power in,",
+   "startMs": 125970,
+   "endMs": 129720
+  },
+  {
+   "text": "and then eight dry contacts here,",
+   "startMs": 129720,
+   "endMs": 131610
+  },
+  {
+   "text": "each of which can activate one of our heating loops.",
+   "startMs": 131610,
+   "endMs": 133980
+  },
+  {
+   "text": "These are running Tasmota firmware,",
+   "startMs": 133980,
+   "endMs": 135660
+  },
+  {
+   "text": "which is open source and super cool,",
+   "startMs": 135660,
+   "endMs": 138180
+  },
+  {
+   "text": "and integrates perfectly with Home Assistant,",
+   "startMs": 138180,
+   "endMs": 141183
+  },
+  {
+   "text": "♪ Da, da, da, da, da ♪",
+   "startMs": 141183,
+   "endMs": 142470
+  },
+  {
+   "text": "which is running on a virtual machine on this server,",
+   "startMs": 142470,
+   "endMs": 146910
+  },
+  {
+   "text": "right here.",
+   "startMs": 146910,
+   "endMs": 147900
+  },
+  {
+   "text": "Home assistant can also talk to our heat pump,",
+   "startMs": 147900,
+   "endMs": 150210
+  },
+  {
+   "text": "to ensure that the two systems",
+   "startMs": 150210,
+   "endMs": 151620
+  },
+  {
+   "text": "aren't working against each other.",
+   "startMs": 151620,
+   "endMs": 153480
+  },
+  {
+   "text": "And, because the server is right here,",
+   "startMs": 153480,
+   "endMs": 156330
+  },
+  {
+   "text": "physical hardware that I can touch, and (sniffs) smell,",
+   "startMs": 156330,
+   "endMs": 160320
+  },
+  {
+   "text": "none of these systems are reliant on sending data",
+   "startMs": 160320,
+   "endMs": 163140
+  },
+  {
+   "text": "to the cloud or receiving data from the cloud,",
+   "startMs": 163140,
+   "endMs": 165510
+  },
+  {
+   "text": "in order to work, once they're set up.",
+   "startMs": 165510,
+   "endMs": 169680
+  },
+  {
+   "text": "But, we're gonna do that now, right?",
+   "startMs": 169680,
+   "endMs": 173190
+  },
+  {
+   "text": "- I don't remember what you said.",
+   "startMs": 173190,
+   "endMs": 174482
+  },
+  {
+   "text": "- (giggles) We're gonna fix it, right?",
+   "startMs": 174482,
+   "endMs": 175440
+  },
+  {
+   "text": "- Oh yeah, yeah, yeah.",
+   "startMs": 175440,
+   "endMs": 176273
+  },
+  {
+   "text": "We're definitely gonna fix it. (laughs)",
+   "startMs": 176273,
+   "endMs": 177720
+  },
+  {
+   "text": "- Realistically, this is the kind of thing of thing",
+   "startMs": 177720,
+   "endMs": 179070
+  },
+  {
+   "text": "I probably could have figured out on my own eventually,",
+   "startMs": 179070,
+   "endMs": 181410
+  },
+  {
+   "text": "but as you can see, I was very busy",
+   "startMs": 181410,
+   "endMs": 182789
+  },
+  {
+   "text": "(smacks wooden cabinet)",
+   "startMs": 182789,
+   "endMs": 183720
+  },
+  {
+   "text": "mounting the shelf.",
+   "startMs": 183720,
+   "endMs": 184553
+  },
+  {
+   "text": "You can fit so many cute little Eaton duckies on here.",
+   "startMs": 184553,
+   "endMs": 187830
+  },
+  {
+   "text": "- They're gonna be happy those finally made it into a video.",
+   "startMs": 187830,
+   "endMs": 190770
+  },
+  {
+   "text": "- They specifically asked for us to show them,",
+   "startMs": 190770,
+   "endMs": 192450
+  },
+  {
+   "text": "when we put the Eaton UPS, in the rack over there,",
+   "startMs": 192450,
+   "endMs": 194910
+  },
+  {
+   "text": "and we just totally didn't.",
+   "startMs": 194910,
+   "endMs": 196890
+  },
+  {
+   "text": "- Tasmota is great and all,",
+   "startMs": 196890,
+   "endMs": 198330
+  },
+  {
+   "text": "but there is a little configuration involved.",
+   "startMs": 198330,
+   "endMs": 199860
+  },
+  {
+   "text": "You might have actually not have been able",
+   "startMs": 199860,
+   "endMs": 201000
+  },
+  {
+   "text": "to figure this out on your own.",
+   "startMs": 201000,
+   "endMs": 202350
+  },
+  {
+   "text": "We need a few things first.",
+   "startMs": 202350,
+   "endMs": 203880
+  },
+  {
+   "text": "Tasmota devices use something called MQTT,",
+   "startMs": 203880,
+   "endMs": 206100
+  },
+  {
+   "text": "which is an IoT messaging protocol.",
+   "startMs": 206100,
+   "endMs": 208230
+  },
+  {
+   "text": "It's really lightweight. It's pretty cool actually.",
+   "startMs": 208230,
+   "endMs": 210360
+  },
+  {
+   "text": "But, to run MQTT, you need something called a broker.",
+   "startMs": 210360,
+   "endMs": 213660
+  },
+  {
+   "text": "It's kind of like a hub, a smart home hub,",
+   "startMs": 213660,
+   "endMs": 216390
+  },
+  {
+   "text": "just a piece of software",
+   "startMs": 216390,
+   "endMs": 217620
+  },
+  {
+   "text": "that actually facilitates the communication.",
+   "startMs": 217620,
+   "endMs": 219870
+  },
+  {
+   "text": "- Now if you had, like, a commercial smart home,",
+   "startMs": 219870,
+   "endMs": 222060
+  },
+  {
+   "text": "that would probably be your smart home hub.",
+   "startMs": 222060,
+   "endMs": 224250
+  },
+  {
+   "text": "- Yeah.",
+   "startMs": 224250,
+   "endMs": 225405
+  },
+  {
+   "text": "- But, for something like Home Assistant,",
+   "startMs": 225405,
+   "endMs": 226290
+  },
+  {
+   "text": "because it's infinitely configurable,",
+   "startMs": 226290,
+   "endMs": 228441
+  },
+  {
+   "text": "(Jake giggles)",
+   "startMs": 228441,
+   "endMs": 229450
+  },
+  {
+   "text": "it's also infinitely easy to screw it up,",
+   "startMs": 229450,
+   "endMs": 231210
+  },
+  {
+   "text": "and miss a particular plugin or module.",
+   "startMs": 231210,
+   "endMs": 232917
+  },
+  {
+   "text": "- Yup, definitely.",
+   "startMs": 232917,
+   "endMs": 234510
+  },
+  {
+   "text": "So, once we have it set up,",
+   "startMs": 234510,
+   "endMs": 235470
+  },
+  {
+   "text": "we're gonna be using something called Mosquito",
+   "startMs": 235470,
+   "endMs": 237210
+  },
+  {
+   "text": "which is, like, one that's built into Home Assistant.",
+   "startMs": 237210,
+   "endMs": 239190
+  },
+  {
+   "text": "Really easy to run.",
+   "startMs": 239190,
+   "endMs": 240500
+  },
+  {
+   "text": "(Linus mimics mosquito buzzing)",
+   "startMs": 240500,
+   "endMs": 242550
+  },
+  {
+   "text": "Yeah, this is how I feel every time I come here.",
+   "startMs": 242550,
+   "endMs": 245162
+  },
+  {
+   "text": "It's really easy to set up.",
+   "startMs": 245162,
+   "endMs": 246570
+  },
+  {
+   "text": "It's just in the add-on store. You can install it.",
+   "startMs": 246570,
+   "endMs": 248550
+  },
+  {
+   "text": "Then, we're gonna install the MQTT integration,",
+   "startMs": 248550,
+   "endMs": 251430
+  },
+  {
+   "text": "which is gonna hook everything up.",
+   "startMs": 251430,
+   "endMs": 253050
+  },
+  {
+   "text": "From there. you can add specific username and passwords",
+   "startMs": 253050,
+   "endMs": 256020
+  },
+  {
+   "text": "for MQTT , or you can use Home Assistant existing users.",
+   "startMs": 256020,
+   "endMs": 260790
+  },
+  {
+   "text": "- Yeah!",
+   "startMs": 260790,
+   "endMs": 261623
+  },
+  {
+   "text": "- That's what we're gonna use",
+   "startMs": 261623,
+   "endMs": 262910
+  },
+  {
+   "text": "to make it easy. - Cool.",
+   "startMs": 262910,
+   "endMs": 263759
+  },
+  {
+   "text": "Okay, why don't we just do that.",
+   "startMs": 263759,
+   "endMs": 264778
+  },
+  {
+   "text": "- The last thing, Tasmota.",
+   "startMs": 264778,
+   "endMs": 265800
+  },
+  {
+   "text": "You add Tasmota, and then it's gonna see MQTT devices.",
+   "startMs": 265800,
+   "endMs": 269010
+  },
+  {
+   "text": "- Wait, you already did all of this?",
+   "startMs": 269010,
+   "endMs": 270349
+  },
+  {
+   "text": "- I already did all of this. - Did you, like, screen cap it",
+   "startMs": 270349,
+   "endMs": 271182
+  },
+  {
+   "text": "at least, so you can show the people.",
+   "startMs": 271182,
+   "endMs": 272940
+  },
+  {
+   "text": "- I didn't, no.",
+   "startMs": 272940,
+   "endMs": 273773
+  },
+  {
+   "text": "- Okay, but you will later?",
+   "startMs": 273773,
+   "endMs": 274620
+  },
+  {
+   "text": "- Yeah, I will later. yeah.",
+   "startMs": 274620,
+   "endMs": 275760
+  },
+  {
+   "text": "- We still have a problem though.",
+   "startMs": 275760,
+   "endMs": 277350
+  },
+  {
+   "text": "Remember those Ecobee thermostats I mentioned?",
+   "startMs": 277350,
+   "endMs": 279870
+  },
+  {
+   "text": "Well, Ecobees do communicate through the cloud,",
+   "startMs": 279870,
+   "endMs": 283050
+  },
+  {
+   "text": "and one of my requirements in setting up this system,",
+   "startMs": 283050,
+   "endMs": 285780
+  },
+  {
+   "text": "was that I didn't want to not be able to change",
+   "startMs": 285780,
+   "endMs": 288600
+  },
+  {
+   "text": "anything about it,",
+   "startMs": 288600,
+   "endMs": 289680
+  },
+  {
+   "text": "if there was some kind of internet outage.",
+   "startMs": 289680,
+   "endMs": 291900
+  },
+  {
+   "text": "So, how do we work around that?",
+   "startMs": 291900,
+   "endMs": 294347
+  },
+  {
+   "text": "- (triumphant chuckle) Fortunately,",
+   "startMs": 294347,
+   "endMs": 296790
+  },
+  {
+   "text": "Ecobees have a trick up their sleeve.",
+   "startMs": 296790,
+   "endMs": 298320
+  },
+  {
+   "text": "Actually, for once, I'm gonna say \"thank you, Apple.\"",
+   "startMs": 298320,
+   "endMs": 301410
+  },
+  {
+   "text": "They have HomeKit integration, which all runs locally.",
+   "startMs": 301410,
+   "endMs": 304020
+  },
+  {
+   "text": "Now. we aren't using Apple devices,",
+   "startMs": 304020,
+   "endMs": 306900
+  },
+  {
+   "text": "but Home Assistant has a, kind of,",
+   "startMs": 306900,
+   "endMs": 308580
+  },
+  {
+   "text": "hacky way to connect to basically anything HomeKit.",
+   "startMs": 308580,
+   "endMs": 311310
+  },
+  {
+   "text": "So, we can use HomeKit protocol",
+   "startMs": 311310,
+   "endMs": 313380
+  },
+  {
+   "text": "to connect to all of them locally, no cloud required.",
+   "startMs": 313380,
+   "endMs": 315450
+  },
+  {
+   "text": "One thing I forgot to mention,",
+   "startMs": 315450,
+   "endMs": 317442
+  },
+  {
+   "text": "now that we have the broker set up,",
+   "startMs": 317442,
+   "endMs": 318275
+  },
+  {
+   "text": "we have to tell the Tasmota devices where that broker is.",
+   "startMs": 318275,
+   "endMs": 321420
+  },
+  {
+   "text": "So, we have to set an IP address, a username, and password,",
+   "startMs": 321420,
+   "endMs": 323970
+  },
+  {
+   "text": "like I mentioned before,",
+   "startMs": 323970,
+   "endMs": 324930
+  },
+  {
+   "text": "and once that's hooked up, it just finds, it's like magic.",
+   "startMs": 324930,
+   "endMs": 328140
+  },
+  {
+   "text": "And look, they're right there.",
+   "startMs": 328140,
+   "endMs": 329610
+  },
+  {
+   "text": "- Really?",
+   "startMs": 329610,
+   "endMs": 330813
+  },
+  {
+   "text": "- Yeah.",
+   "startMs": 330813,
+   "endMs": 331646
+  },
+  {
+   "text": "- So, let's do a quick test.",
+   "startMs": 331646,
+   "endMs": 332910
+  },
+  {
+   "text": "Why don't you press, oh, you already pressed it.",
+   "startMs": 332910,
+   "endMs": 334800
+  },
+  {
+   "text": "- And, Home Assistant.",
+   "startMs": 334800,
+   "endMs": 335850
+  },
+  {
+   "text": "So, look over there.",
+   "startMs": 335850,
+   "endMs": 336683
+  },
+  {
+   "text": "- Whoa.",
+   "startMs": 336683,
+   "endMs": 337516
+  },
+  {
+   "text": "- So, you should see, - Hey, the living room's",
+   "startMs": 338430,
+   "endMs": 339360
+  },
+  {
+   "text": "getting heat, Baby.",
+   "startMs": 339360,
+   "endMs": 340290
+  },
+  {
+   "text": "- Watch right down here.",
+   "startMs": 340290,
+   "endMs": 342584
+  },
+  {
+   "text": "See how these ones move all the way over here.",
+   "startMs": 342584,
+   "endMs": 344573
+  },
+  {
+   "text": "- Ah, yeah. - That one, it's open.",
+   "startMs": 345930,
+   "endMs": 347070
+  },
+  {
+   "text": "Cool. You might be wondering,",
+   "startMs": 347070,
+   "endMs": 348330
+  },
+  {
+   "text": "how does the boiler work into all of this?",
+   "startMs": 348330,
+   "endMs": 350220
+  },
+  {
+   "text": "Well, fortunately these valves,",
+   "startMs": 350220,
+   "endMs": 352260
+  },
+  {
+   "text": "you see they have four wires?",
+   "startMs": 352260,
+   "endMs": 353640
+  },
+  {
+   "text": "Two of those go to a thermostat,",
+   "startMs": 353640,
+   "endMs": 355260
+  },
+  {
+   "text": "which in our case is this guy,",
+   "startMs": 355260,
+   "endMs": 356820
+  },
+  {
+   "text": "and the the other two go to the boiler,",
+   "startMs": 356820,
+   "endMs": 358590
+  },
+  {
+   "text": "and that's what triggers it.",
+   "startMs": 358590,
+   "endMs": 359820
+  },
+  {
+   "text": "So, when this valve opens, it physically, like,",
+   "startMs": 359820,
+   "endMs": 362550
+  },
+  {
+   "text": "clicks the switch inside that bridges those other two wires.",
+   "startMs": 362550,
+   "endMs": 365940
+  },
+  {
+   "text": "Do you know how many times I've come down here and gone,",
+   "startMs": 365940,
+   "endMs": 368407
+  },
+  {
+   "text": "\"boy, I sure wish this didn't say \"system idle\",",
+   "startMs": 368407,
+   "endMs": 371580
+  },
+  {
+   "text": "on the front of this.",
+   "startMs": 371580,
+   "endMs": 372748
+  },
+  {
+   "text": "(both laugh)",
+   "startMs": 372748,
+   "endMs": 373620
+  },
+  {
+   "text": "- You ready? Watch this.",
+   "startMs": 373620,
+   "endMs": 375540
+  },
+  {
+   "text": "Boom, boom!",
+   "startMs": 375540,
+   "endMs": 376833
+  },
+  {
+   "text": "I love local connection stuff.",
+   "startMs": 379290,
+   "endMs": 381390
+  },
+  {
+   "text": "- Tell me about it. - So responsive.",
+   "startMs": 381390,
+   "endMs": 382758
+  },
+  {
+   "text": "- Anytime something goes through the cloud, you can feel it.",
+   "startMs": 382758,
+   "endMs": 385560
+  },
+  {
+   "text": "Even a really great cloud connection, it's like,",
+   "startMs": 385560,
+   "endMs": 388867
+  },
+  {
+   "text": "\"why! these devices are on the same network.",
+   "startMs": 388867,
+   "endMs": 392610
+  },
+  {
+   "text": "This could be literally fractions of a millisecond",
+   "startMs": 392610,
+   "endMs": 395880
+  },
+  {
+   "text": "of latency.\"",
+   "startMs": 395880,
+   "endMs": 396900
+  },
+  {
+   "text": "Now that all the valves are open and the boilers on,",
+   "startMs": 396900,
+   "endMs": 399030
+  },
+  {
+   "text": "we could verify that hot water is running",
+   "startMs": 399030,
+   "endMs": 401160
+  },
+  {
+   "text": "by simply touching these.",
+   "startMs": 401160,
+   "endMs": 402840
+  },
+  {
+   "text": "But, this is Linus Tech Tips, and I've actually been meaning",
+   "startMs": 402840,
+   "endMs": 405270
+  },
+  {
+   "text": "to talk about this super cool phone from Cat for a while,",
+   "startMs": 405270,
+   "endMs": 408990
+  },
+  {
+   "text": "that I brought home to play with my kids.",
+   "startMs": 408990,
+   "endMs": 411300
+  },
+  {
+   "text": "It has an integrated FLIR thermal camera,",
+   "startMs": 411300,
+   "endMs": 414540
+  },
+  {
+   "text": "so we can actually see right here.",
+   "startMs": 414540,
+   "endMs": 416553
+  },
+  {
+   "text": "There they are!",
+   "startMs": 418740,
+   "endMs": 420900
+  },
+  {
+   "text": "They're all lit up.",
+   "startMs": 420900,
+   "endMs": 423000
+  },
+  {
+   "text": "Hey, uh, Jake !",
+   "startMs": 423000,
+   "endMs": 424230
+  },
+  {
+   "text": "- What?",
+   "startMs": 424230,
+   "endMs": 425507
+  },
+  {
+   "text": "Where was the return for these guys?",
+   "startMs": 425507,
+   "endMs": 426660
+  },
+  {
+   "text": "- Which ones?",
+   "startMs": 426660,
+   "endMs": 427620
+  },
+  {
+   "text": "- Ah, you can see the return is actually still quite cool,",
+   "startMs": 427620,
+   "endMs": 432000
+  },
+  {
+   "text": "which means that the concrete in the floors",
+   "startMs": 432000,
+   "endMs": 434250
+  },
+  {
+   "text": "hasn't really heated up yet.",
+   "startMs": 434250,
+   "endMs": 435900
+  },
+  {
+   "text": "So, that heat's being dissipated outside.",
+   "startMs": 435900,
+   "endMs": 438293
+  },
+  {
+   "text": "- Yeah. these are returns down here too.",
+   "startMs": 438293,
+   "endMs": 439565
+  },
+  {
+   "text": "I mean these are closed, but.",
+   "startMs": 439565,
+   "endMs": 440398
+  },
+  {
+   "text": "- These ones? That's the out.",
+   "startMs": 440398,
+   "endMs": 441450
+  },
+  {
+   "text": "- That's the hot side.",
+   "startMs": 441450,
+   "endMs": 443280
+  },
+  {
+   "text": "- Oh, I guess I can validate that easily enough. (laughs)",
+   "startMs": 443280,
+   "endMs": 447630
+  },
+  {
+   "text": "Obviously, I'm mostly just playing with this thing",
+   "startMs": 447630,
+   "endMs": 449760
+  },
+  {
+   "text": "right now, but I'm sure you can see",
+   "startMs": 449760,
+   "endMs": 451050
+  },
+  {
+   "text": "how this would be an invaluable tool for contractors.",
+   "startMs": 451050,
+   "endMs": 454020
+  },
+  {
+   "text": "Say, for example, if you were trying to diagnose",
+   "startMs": 454020,
+   "endMs": 456930
+  },
+  {
+   "text": "an overloaded circuit by finding a hot wire.",
+   "startMs": 456930,
+   "endMs": 460740
+  },
+  {
+   "text": "Looks like everything here is in pretty good shape,",
+   "startMs": 460740,
+   "endMs": 463140
+  },
+  {
+   "text": "so that's definitely good to know.",
+   "startMs": 463140,
+   "endMs": 465450
+  },
+  {
+   "text": "- Does it find tools?",
+   "startMs": 465450,
+   "endMs": 467280
+  },
+  {
+   "text": "- Find which now?",
+   "startMs": 467280,
+   "endMs": 468113
+  },
+  {
+   "text": "- Tools.",
+   "startMs": 468113,
+   "endMs": 469581
+  },
+  {
+   "text": "- Tools.",
+   "startMs": 469581,
+   "endMs": 470414
+  },
+  {
+   "text": "Well, there's a big glowing yellow blob on it right now.",
+   "startMs": 470414,
+   "endMs": 471690
+  },
+  {
+   "text": "That's why our Ecobees are hooked up",
+   "startMs": 471690,
+   "endMs": 473220
+  },
+  {
+   "text": "in a bit of an unconventional way.",
+   "startMs": 473220,
+   "endMs": 475200
+  },
+  {
+   "text": "If you check the manual, it says",
+   "startMs": 475200,
+   "endMs": 476827
+  },
+  {
+   "text": "\"oh well you need four conductors",
+   "startMs": 476827,
+   "endMs": 479100
+  },
+  {
+   "text": "for this kind of configuration, and five wires for this.\"",
+   "startMs": 479100,
+   "endMs": 481860
+  },
+  {
+   "text": "I mean, you can have up to 10 fricking wires in this thing,",
+   "startMs": 481860,
+   "endMs": 484950
+  },
+  {
+   "text": "but, we've got only.",
+   "startMs": 484950,
+   "endMs": 486450
+  },
+  {
+   "text": "- Only two hooked up - Two. (chuckles)",
+   "startMs": 486450,
+   "endMs": 487800
+  },
+  {
+   "text": "This red one's not even real. It's fake.",
+   "startMs": 487800,
+   "endMs": 490050
+  },
+  {
+   "text": "All we've got is power.",
+   "startMs": 490050,
+   "endMs": 491760
+  },
+  {
+   "text": "- And, that's for an interesting reason.",
+   "startMs": 491760,
+   "endMs": 493230
+  },
+  {
+   "text": "Now conventionally, these would not hook up to those valves.",
+   "startMs": 493230,
+   "endMs": 496170
+  },
+  {
+   "text": "They're just different kinds of systems.",
+   "startMs": 496170,
+   "endMs": 497790
+  },
+  {
+   "text": "(Linus laughs)",
+   "startMs": 497790,
+   "endMs": 498623
+  },
+  {
+   "text": "So, there's probably some way we could have hacked it,",
+   "startMs": 498623,
+   "endMs": 500580
+  },
+  {
+   "text": "or you know, had direct contacts to the whatever.",
+   "startMs": 500580,
+   "endMs": 504930
+  },
+  {
+   "text": "Either way we're doing it over wifi.",
+   "startMs": 504930,
+   "endMs": 506700
+  },
+  {
+   "text": "Now, the nice thing about Ecobees,",
+   "startMs": 506700,
+   "endMs": 508560
+  },
+  {
+   "text": "is we can plug this in and tell it,",
+   "startMs": 508560,
+   "endMs": 512107
+  },
+  {
+   "text": "\"Hey, you actually do have a heat wire connected.",
+   "startMs": 512107,
+   "endMs": 515370
+  },
+  {
+   "text": "You actually do have a cooling wire connected\",",
+   "startMs": 515370,
+   "endMs": 517560
+  },
+  {
+   "text": "even though it doesn't detect it.",
+   "startMs": 517560,
+   "endMs": 519000
+  },
+  {
+   "text": "- I still remember how stoked you were,",
+   "startMs": 519000,
+   "endMs": 520920
+  },
+  {
+   "text": "when it was, like, it was hidden in, like,",
+   "startMs": 520920,
+   "endMs": 522540
+  },
+  {
+   "text": "a support article somewhere",
+   "startMs": 522540,
+   "endMs": 524100
+  },
+  {
+   "text": "or something like that. - (laughs) Yeah",
+   "startMs": 524100,
+   "endMs": 525690
+  },
+  {
+   "text": "- It's like, \"we found one, yes!\"",
+   "startMs": 525690,
+   "endMs": 527820
+  },
+  {
+   "text": "- So, that means they can act as a thermostat",
+   "startMs": 527820,
+   "endMs": 529680
+  },
+  {
+   "text": "and think they're connected to a a boiler system",
+   "startMs": 529680,
+   "endMs": 532470
+  },
+  {
+   "text": "of some sort, but they're actually not.",
+   "startMs": 532470,
+   "endMs": 534810
+  },
+  {
+   "text": "And, we still read the data off of it,",
+   "startMs": 534810,
+   "endMs": 536430
+  },
+  {
+   "text": "so we still get the brain.",
+   "startMs": 536430,
+   "endMs": 537911
+  },
+  {
+   "text": "- (giggles) He just thinks he's helping.",
+   "startMs": 537911,
+   "endMs": 538860
+  },
+  {
+   "text": "Glorified thermostat.",
+   "startMs": 538860,
+   "endMs": 540240
+  },
+  {
+   "text": "- Yeah, yeah, basically. I mean.",
+   "startMs": 540240,
+   "endMs": 541830
+  },
+  {
+   "text": "- Glorified thermometer, actually.",
+   "startMs": 541830,
+   "endMs": 542980
+  },
+  {
+   "text": "- Yeah, yeah, yeah.",
+   "startMs": 542980,
+   "endMs": 544384
+  },
+  {
+   "text": "- (laughs) What?",
+   "startMs": 544384,
+   "endMs": 545430
+  },
+  {
+   "text": "- There's a fancier version of these.",
+   "startMs": 545430,
+   "endMs": 547050
+  },
+  {
+   "text": "The one that I have in my house,",
+   "startMs": 547050,
+   "endMs": 548190
+  },
+  {
+   "text": "that has built in occupancy detection.",
+   "startMs": 548190,
+   "endMs": 550140
+  },
+  {
+   "text": "- Shut up!",
+   "startMs": 550140,
+   "endMs": 551084
+  },
+  {
+   "text": "- (laughs) I think these ones, (laughs) they just released",
+   "startMs": 551084,
+   "endMs": 554730
+  },
+  {
+   "text": "- This whole fiasco was so avoidable. So avoidable.",
+   "startMs": 554730,
+   "endMs": 557366
+  },
+  {
+   "text": "Inovelli is working on a switch with, like,",
+   "startMs": 557366,
+   "endMs": 561150
+  },
+  {
+   "text": "millimeter wave occupancy detection.",
+   "startMs": 561150,
+   "endMs": 563220
+  },
+  {
+   "text": "There's also that cool product,",
+   "startMs": 563220,
+   "endMs": 564570
+  },
+  {
+   "text": "from one of my fellow YouTubers.",
+   "startMs": 564570,
+   "endMs": 566700
+  },
+  {
+   "text": "I know you can't get their product on LTTstore.com,",
+   "startMs": 566700,
+   "endMs": 569130
+  },
+  {
+   "text": "but who knows, maybe someday.",
+   "startMs": 569130,
+   "endMs": 570180
+  },
+  {
+   "text": "Maybe we'd be interested in carrying it,",
+   "startMs": 570180,
+   "endMs": 571500
+  },
+  {
+   "text": "along with cool color block hoodies,",
+   "startMs": 571500,
+   "endMs": 572910
+  },
+  {
+   "text": "like the one I'm wearing.",
+   "startMs": 572910,
+   "endMs": 574160
+  },
+  {
+   "text": "- Yeah, I'm a homeowner.",
+   "startMs": 575400,
+   "endMs": 576568
+  },
+  {
+   "text": "- Mhm, mhm, mhm.",
+   "startMs": 576568,
+   "endMs": 577401
+  },
+  {
+   "text": "- It says only RC.",
+   "startMs": 577401,
+   "endMs": 578430
+  },
+  {
+   "text": "So, that would be the wire for Cool.",
+   "startMs": 578430,
+   "endMs": 580470
+  },
+  {
+   "text": "We'll go next.",
+   "startMs": 580470,
+   "endMs": 581670
+  },
+  {
+   "text": "These are the wires that are detected",
+   "startMs": 581670,
+   "endMs": 582960
+  },
+  {
+   "text": "and you go, \"(fake laughs) No. Modify. (laughs triumphantly)",
+   "startMs": 582960,
+   "endMs": 586470
+  },
+  {
+   "text": "We want that one.\"",
+   "startMs": 586470,
+   "endMs": 588360
+  },
+  {
+   "text": "Once an individual Ecobee is connected to wifi,",
+   "startMs": 588360,
+   "endMs": 590850
+  },
+  {
+   "text": "we go over to Home Assistant, and you can see",
+   "startMs": 590850,
+   "endMs": 593040
+  },
+  {
+   "text": "it's already been discovered. over HomeKit.",
+   "startMs": 593040,
+   "endMs": 595557
+  },
+  {
+   "text": "- Oh, that's super cool.",
+   "startMs": 595557,
+   "endMs": 596550
+  },
+  {
+   "text": "- We just hit Configure.",
+   "startMs": 596550,
+   "endMs": 597660
+  },
+  {
+   "text": "It should pop up a HomeKit code here.",
+   "startMs": 597660,
+   "endMs": 599910
+  },
+  {
+   "text": "- No way. - In a second.",
+   "startMs": 599910,
+   "endMs": 600883
+  },
+  {
+   "text": "- It's like, \"I swear to you, we had it working,",
+   "startMs": 600883,
+   "endMs": 603780
+  },
+  {
+   "text": "it was working perfectly.\"",
+   "startMs": 603780,
+   "endMs": 605400
+  },
+  {
+   "text": "- I just did it, and I was like,",
+   "startMs": 605400,
+   "endMs": 606907
+  },
+  {
+   "text": "\"dammit, why did I do that?\"",
+   "startMs": 606907,
+   "endMs": 608460
+  },
+  {
+   "text": "- Buddy?",
+   "startMs": 608460,
+   "endMs": 610080
+  },
+  {
+   "text": "- I might need to restart it.",
+   "startMs": 610080,
+   "endMs": 611370
+  },
+  {
+   "text": "Well, in the meantime we could go do another one. (laughs)",
+   "startMs": 611370,
+   "endMs": 612900
+  },
+  {
+   "text": "- Yeah, let's go do a different one.",
+   "startMs": 612900,
+   "endMs": 614580
+  },
+  {
+   "text": "Do I need an iPhone to do these things?",
+   "startMs": 614580,
+   "endMs": 616470
+  },
+  {
+   "text": "No, it just makes it way faster if you do it this way.",
+   "startMs": 616470,
+   "endMs": 619050
+  },
+  {
+   "text": "If they just opened the standard for making things easy.",
+   "startMs": 619050,
+   "endMs": 622170
+  },
+  {
+   "text": "- Or. - then everyone could use it.",
+   "startMs": 622170,
+   "endMs": 623310
+  },
+  {
+   "text": "- If when it's really not as easy,",
+   "startMs": 623310,
+   "endMs": 624810
+  },
+  {
+   "text": "and it's not working properly,",
+   "startMs": 624810,
+   "endMs": 626460
+  },
+  {
+   "text": "there was obvious workarounds, that would be great.",
+   "startMs": 626460,
+   "endMs": 628500
+  },
+  {
+   "text": "- Okay, it's here. Let's see if we can do HomeKit now.",
+   "startMs": 628500,
+   "endMs": 631170
+  },
+  {
+   "text": "Configure. Ah, there we go.",
+   "startMs": 631170,
+   "endMs": 632760
+  },
+  {
+   "text": "- That's it.",
+   "startMs": 632760,
+   "endMs": 633593
+  },
+  {
+   "text": "- Devices.",
+   "startMs": 633593,
+   "endMs": 634920
+  },
+  {
+   "text": "- So, I could tell this thing,",
+   "startMs": 634920,
+   "endMs": 636967
+  },
+  {
+   "text": "\"Hey, yeah, you don't, actually, really need to do that.\"",
+   "startMs": 636967,
+   "endMs": 640410
+  },
+  {
+   "text": "And, I could set this guy to, like, I don't know,",
+   "startMs": 640410,
+   "endMs": 642720
+  },
+  {
+   "text": "what's a good room temperature?",
+   "startMs": 642720,
+   "endMs": 644138
+  },
+  {
+   "text": "- (sigh) So, here's the thing.",
+   "startMs": 644138,
+   "endMs": 645270
+  },
+  {
+   "text": "We do, maybe, still want some supplemental heat",
+   "startMs": 645270,
+   "endMs": 648150
+  },
+  {
+   "text": "from your heat pump,",
+   "startMs": 648150,
+   "endMs": 648983
+  },
+  {
+   "text": "because the problem with in-floor heating,",
+   "startMs": 648983,
+   "endMs": 651030
+  },
+  {
+   "text": "is the run up and rundown takes hours.",
+   "startMs": 651030,
+   "endMs": 653850
+  },
+  {
+   "text": "Like, maybe, this is a big slab.",
+   "startMs": 653850,
+   "endMs": 655680
+  },
+  {
+   "text": "This could take, like, eight hours to",
+   "startMs": 655680,
+   "endMs": 657510
+  },
+  {
+   "text": "- Yeah. - To cool off.",
+   "startMs": 657510,
+   "endMs": 659220
+  },
+  {
+   "text": "So, if you're trying to heat it to like 22,",
+   "startMs": 659220,
+   "endMs": 662437
+  },
+  {
+   "text": "that's your ideal temperature,",
+   "startMs": 662437,
+   "endMs": 663270
+  },
+  {
+   "text": "and you do it with your in-floor heating,",
+   "startMs": 663270,
+   "endMs": 664800
+  },
+  {
+   "text": "you're gonna hit that.",
+   "startMs": 664800,
+   "endMs": 665940
+  },
+  {
+   "text": "It's gonna shut off, but it's gonna keep heating up, right?",
+   "startMs": 665940,
+   "endMs": 669300
+  },
+  {
+   "text": "And then, it's like, \"ah, now it's too cold.\"",
+   "startMs": 669300,
+   "endMs": 671040
+  },
+  {
+   "text": "So, you kind of have to set a threshold",
+   "startMs": 671040,
+   "endMs": 672540
+  },
+  {
+   "text": "that's, like, a bit lower.",
+   "startMs": 672540,
+   "endMs": 673860
+  },
+  {
+   "text": "- I mean, my understanding is you just set it.",
+   "startMs": 673860,
+   "endMs": 676350
+  },
+  {
+   "text": "- And forget it. - And never touch it again.",
+   "startMs": 676350,
+   "endMs": 677340
+  },
+  {
+   "text": "That's what I mean.",
+   "startMs": 677340,
+   "endMs": 678173
+  },
+  {
+   "text": "So, we're gonna set it,",
+   "startMs": 678173,
+   "endMs": 679263
+  },
+  {
+   "text": "and then these are the ones you would touch",
+   "startMs": 680172,
+   "endMs": 681480
+  },
+  {
+   "text": "if you want to go a little bit hotter or a little bit.",
+   "startMs": 682388,
+   "endMs": 683663
+  },
+  {
+   "text": "- Just temporarily or something,",
+   "startMs": 683663,
+   "endMs": 684496
+  },
+  {
+   "text": "- Yeah.",
+   "startMs": 684496,
+   "endMs": 685426
+  },
+  {
+   "text": "- So, then, yeah, so then, I should just set this guy to,",
+   "startMs": 685426,
+   "endMs": 687060
+  },
+  {
+   "text": "I mean, you'd never wanna be lower than 19 inside.",
+   "startMs": 687060,
+   "endMs": 689188
+  },
+  {
+   "text": "- [Jake ] Mhm.",
+   "startMs": 689188,
+   "endMs": 690155
+  },
+  {
+   "text": "- And, if I just have this set to 22",
+   "startMs": 690155,
+   "endMs": 692490
+  },
+  {
+   "text": "Actually, I probably. - I would set that one to 20.",
+   "startMs": 692490,
+   "endMs": 694590
+  },
+  {
+   "text": "Now the eco be should compensate a bit.",
+   "startMs": 694590,
+   "endMs": 696390
+  },
+  {
+   "text": "It's gonna learn the run up and rundown times.",
+   "startMs": 696390,
+   "endMs": 699360
+  },
+  {
+   "text": "That will help. You definitely wanna be careful.",
+   "startMs": 699360,
+   "endMs": 701400
+  },
+  {
+   "text": "- Why does the Ecobee think it's 23 and a half in here?",
+   "startMs": 701400,
+   "endMs": 703830
+  },
+  {
+   "text": "- So, that's (heavy sigh) - 'cause it's not.",
+   "startMs": 703830,
+   "endMs": 705403
+  },
+  {
+   "text": "- Yeah, that's another thing",
+   "startMs": 705403,
+   "endMs": 707250
+  },
+  {
+   "text": "that's a little bit interesting.",
+   "startMs": 707250,
+   "endMs": 708540
+  },
+  {
+   "text": "So, you can have weird temperature readings,",
+   "startMs": 708540,
+   "endMs": 710250
+  },
+  {
+   "text": "if there's like, if we look behind here,",
+   "startMs": 710250,
+   "endMs": 712320
+  },
+  {
+   "text": "if there's, like, an air gap and,",
+   "startMs": 712320,
+   "endMs": 714540
+  },
+  {
+   "text": "there's hot air blowing in there or something",
+   "startMs": 714540,
+   "endMs": 716150
+  },
+  {
+   "text": "- Or if this stupid thing is.",
+   "startMs": 716150,
+   "endMs": 717960
+  },
+  {
+   "text": "- [Jake] Heating. - Exhausting heat.",
+   "startMs": 717960,
+   "endMs": 719280
+  },
+  {
+   "text": "- Which it kind of is, actually.",
+   "startMs": 719280,
+   "endMs": 720780
+  },
+  {
+   "text": "- Crap!",
+   "startMs": 720780,
+   "endMs": 722290
+  },
+  {
+   "text": "- Do you feel that?",
+   "startMs": 722290,
+   "endMs": 723123
+  },
+  {
+   "text": "- Yes, I do. - Warm.",
+   "startMs": 723123,
+   "endMs": 723956
+  },
+  {
+   "text": "It's totally warm.",
+   "startMs": 723956,
+   "endMs": 724789
+  },
+  {
+   "text": "Are they all like that?",
+   "startMs": 724789,
+   "endMs": 725820
+  },
+  {
+   "text": "No. - No.",
+   "startMs": 725820,
+   "endMs": 726690
+  },
+  {
+   "text": "- No.",
+   "startMs": 726690,
+   "endMs": 727523
+  },
+  {
+   "text": "- They're all kind of different,",
+   "startMs": 727523,
+   "endMs": 728356
+  },
+  {
+   "text": "depending on how the studs were laid out and everything.",
+   "startMs": 728356,
+   "endMs": 732060
+  },
+  {
+   "text": "I'm gonna go look.",
+   "startMs": 732060,
+   "endMs": 733090
+  },
+  {
+   "text": "(Jake sighs dramatically)",
+   "startMs": 733090,
+   "endMs": 734490
+  },
+  {
+   "text": "This one's even worse.",
+   "startMs": 734490,
+   "endMs": 736740
+  },
+  {
+   "text": "Why is the small one so much hotter?",
+   "startMs": 736740,
+   "endMs": 739334
+  },
+  {
+   "text": "- (defeated laugh) Look, there's a silver lining here.",
+   "startMs": 739334,
+   "endMs": 741802
+  },
+  {
+   "text": "It just means we get to make more content about your house.",
+   "startMs": 741802,
+   "endMs": 743510
+  },
+  {
+   "text": "- (whines) I just want my heat to work!",
+   "startMs": 743510,
+   "endMs": 745349
+  },
+  {
+   "text": "- (laughs) Okay, here. Problem solved.",
+   "startMs": 745349,
+   "endMs": 746182
+  },
+  {
+   "text": "(plastic snaps off wall)",
+   "startMs": 746182,
+   "endMs": 747960
+  },
+  {
+   "text": "- I mean, he's not wrong.",
+   "startMs": 747960,
+   "endMs": 749014
+  },
+  {
+   "text": "(Jake giggled)",
+   "startMs": 749014,
+   "endMs": 749847
+  },
+  {
+   "text": "Fortunately, the upstairs is mounted the other way around,",
+   "startMs": 749847,
+   "endMs": 753510
+  },
+  {
+   "text": "because.",
+   "startMs": 753510,
+   "endMs": 754343
+  },
+  {
+   "text": "(Jake laughs)",
+   "startMs": 754343,
+   "endMs": 755176
+  },
+  {
+   "text": "This time, I'm gonna do it.",
+   "startMs": 755176,
+   "endMs": 756120
+  },
+  {
+   "text": "So, sorry, which one was it?",
+   "startMs": 756120,
+   "endMs": 757710
+  },
+  {
+   "text": "- So, click Modify.",
+   "startMs": 757710,
+   "endMs": 759180
+  },
+  {
+   "text": "- What is your ideal home temperature during the winter?",
+   "startMs": 759180,
+   "endMs": 761490
+  },
+  {
+   "text": "Why is it in Fahrenheit?",
+   "startMs": 761490,
+   "endMs": 763040
+  },
+  {
+   "text": "- Just, who care. Just click Next.",
+   "startMs": 763040,
+   "endMs": 764280
+  },
+  {
+   "text": "- But, I don't know.",
+   "startMs": 764280,
+   "endMs": 765570
+  },
+  {
+   "text": "69. Nice. - Oh, Linus.",
+   "startMs": 765570,
+   "endMs": 766950
+  },
+  {
+   "text": "- that's probably what the temperature is in here.",
+   "startMs": 766950,
+   "endMs": 769080
+  },
+  {
+   "text": "- Yeah, 19? It is a little chilly in here.",
+   "startMs": 769080,
+   "endMs": 771198
+  },
+  {
+   "text": "- It's a little chilly in here.",
+   "startMs": 771198,
+   "endMs": 772230
+  },
+  {
+   "text": "- Okay. - The wife doesn't like it.",
+   "startMs": 772230,
+   "endMs": 773760
+  },
+  {
+   "text": "Honestly, it's fine for me.",
+   "startMs": 773760,
+   "endMs": 774750
+  },
+  {
+   "text": "That's, like, my. - [Jake ] I like it.",
+   "startMs": 774750,
+   "endMs": 776186
+  },
+  {
+   "text": "- Ideal sleeping temperature. - [Jake ] Yeah, same.",
+   "startMs": 776186,
+   "endMs": 777404
+  },
+  {
+   "text": "I agree.",
+   "startMs": 777404,
+   "endMs": 778346
+  },
+  {
+   "text": "- But, she is not stoked on it.",
+   "startMs": 778346,
+   "endMs": 779940
+  },
+  {
+   "text": "She's got the extra blanket on her side of the bed.",
+   "startMs": 779940,
+   "endMs": 782100
+  },
+  {
+   "text": "She's got the fuzzy PJs on,",
+   "startMs": 782100,
+   "endMs": 783720
+  },
+  {
+   "text": "and she's like.",
+   "startMs": 783720,
+   "endMs": 784553
+  },
+  {
+   "text": "Can't live with them, can't live without 'em.",
+   "startMs": 785430,
+   "endMs": 787249
+  },
+  {
+   "text": "(Jake laughs)",
+   "startMs": 787249,
+   "endMs": 788082
+  },
+  {
+   "text": "So, how do I, I don't want it to be a hold.",
+   "startMs": 788082,
+   "endMs": 790080
+  },
+  {
+   "text": "I just want that to be, like, the temperature, right?",
+   "startMs": 790080,
+   "endMs": 792090
+  },
+  {
+   "text": "So, oh, I gotta set a schedule.",
+   "startMs": 792090,
+   "endMs": 794490
+  },
+  {
+   "text": "- Yeah, it's way better to do this on your phone.",
+   "startMs": 794490,
+   "endMs": 796500
+  },
+  {
+   "text": "- Has it not found this one yet?",
+   "startMs": 796500,
+   "endMs": 798330
+  },
+  {
+   "text": "- No, but, you know, multicast on wifi,",
+   "startMs": 798330,
+   "endMs": 801990
+  },
+  {
+   "text": "is a whole whole other bag of worms,",
+   "startMs": 801990,
+   "endMs": 804120
+  },
+  {
+   "text": "especially when you have multiple APs.",
+   "startMs": 804120,
+   "endMs": 806340
+  },
+  {
+   "text": "You know, if you opted for the ruckus controller thing,",
+   "startMs": 806340,
+   "endMs": 809970
+  },
+  {
+   "text": "we could probably configure multicast enhancement,",
+   "startMs": 809970,
+   "endMs": 813090
+  },
+  {
+   "text": "but I don't think we can do it with Unleashed.",
+   "startMs": 813090,
+   "endMs": 815130
+  },
+  {
+   "text": "- [Voice On Phone] Oh wow! - Check this out, Andy.",
+   "startMs": 815130,
+   "endMs": 816330
+  },
+  {
+   "text": "It's totally working already.",
+   "startMs": 816330,
+   "endMs": 818490
+  },
+  {
+   "text": "- Does it feel?",
+   "startMs": 818490,
+   "endMs": 819870
+  },
+  {
+   "text": "Not really. - No, you're not gonna",
+   "startMs": 819870,
+   "endMs": 820980
+  },
+  {
+   "text": "be able, no you're a lot warmer than the floor is still.",
+   "startMs": 820980,
+   "endMs": 823697
+  },
+  {
+   "text": "(Jake giggles)",
+   "startMs": 823697,
+   "endMs": 824530
+  },
+  {
+   "text": "But, see that? You can see the in-floor lines.",
+   "startMs": 824530,
+   "endMs": 827550
+  },
+  {
+   "text": "Man, I'm stoked.",
+   "startMs": 827550,
+   "endMs": 828840
+  },
+  {
+   "text": "- Why don't we try another one of these?",
+   "startMs": 828840,
+   "endMs": 830415
+  },
+  {
+   "text": "♪ Wanna don't show me how to do it? ♪",
+   "startMs": 830415,
+   "endMs": 831990
+  },
+  {
+   "text": "That would be pretty cool.",
+   "startMs": 831990,
+   "endMs": 833290
+  },
+  {
+   "text": "- Yeah. So, (sighs deeply) I'm gonna make you a script.",
+   "startMs": 834729,
+   "endMs": 837256
+  },
+  {
+   "text": "That is one script, that takes all the inputs,",
+   "startMs": 837256,
+   "endMs": 838950
+  },
+  {
+   "text": "from all the thermostats,",
+   "startMs": 838950,
+   "endMs": 840360
+  },
+  {
+   "text": "and then when it detects a change on any of them,",
+   "startMs": 840360,
+   "endMs": 843150
+  },
+  {
+   "text": "it, like, plums the input into the output,",
+   "startMs": 843150,
+   "endMs": 846782
+  },
+  {
+   "text": "so it's just one script.",
+   "startMs": 846782,
+   "endMs": 849000
+  },
+  {
+   "text": "But for now, let's just, we can just make one for each.",
+   "startMs": 849000,
+   "endMs": 851940
+  },
+  {
+   "text": "We gotta select the climate device, which is Boy,",
+   "startMs": 851940,
+   "endMs": 854790
+  },
+  {
+   "text": "and then the attribute is HVAC action,",
+   "startMs": 854790,
+   "endMs": 856650
+  },
+  {
+   "text": "that means what it's doing right now.",
+   "startMs": 856650,
+   "endMs": 858870
+  },
+  {
+   "text": "So, that'll either be a value of heating or idle.",
+   "startMs": 858870,
+   "endMs": 861990
+  },
+  {
+   "text": "You could also have cooling if we had AC, but we don't.",
+   "startMs": 861990,
+   "endMs": 864717
+  },
+  {
+   "text": "- Yeah.",
+   "startMs": 864717,
+   "endMs": 865550
+  },
+  {
+   "text": "- So, we're just gonna detect that it's changing at all.",
+   "startMs": 865550,
+   "endMs": 867390
+  },
+  {
+   "text": "- Well, we do, but as a reminder,",
+   "startMs": 867390,
+   "endMs": 869483
+  },
+  {
+   "text": "the AC must go through these American standard thermostats,",
+   "startMs": 869483,
+   "endMs": 873540
+  },
+  {
+   "text": "that I did not want,",
+   "startMs": 873540,
+   "endMs": 874890
+  },
+  {
+   "text": "because of their stupid proprietary communication protocol.",
+   "startMs": 874890,
+   "endMs": 878400
+  },
+  {
+   "text": "American standard? More like American non-standard.",
+   "startMs": 878400,
+   "endMs": 881629
+  },
+  {
+   "text": "Very annoying because, realistically,",
+   "startMs": 881629,
+   "endMs": 883600
+  },
+  {
+   "text": "everything could go through this otherwise,",
+   "startMs": 883600,
+   "endMs": 886200
+  },
+  {
+   "text": "especially because your stupid thermostats",
+   "startMs": 886200,
+   "endMs": 888450
+  },
+  {
+   "text": "are heating up the Ecobees, throwing off the temp sensor.",
+   "startMs": 888450,
+   "endMs": 891810
+  },
+  {
+   "text": "Now we're gonna have to have separate temp sensors.",
+   "startMs": 891810,
+   "endMs": 894270
+  },
+  {
+   "text": "- Okay, we got a little script action here.",
+   "startMs": 894270,
+   "endMs": 895980
+  },
+  {
+   "text": "So, we have a choose action.",
+   "startMs": 895980,
+   "endMs": 898320
+  },
+  {
+   "text": "So, it's gonna choose between two conditions.",
+   "startMs": 898320,
+   "endMs": 900210
+  },
+  {
+   "text": "First one, we're checking the trigger,",
+   "startMs": 900210,
+   "endMs": 901770
+  },
+  {
+   "text": "which is the device that triggered this automation.",
+   "startMs": 901770,
+   "endMs": 904290
+  },
+  {
+   "text": "It's HVAC action as heating.",
+   "startMs": 904290,
+   "endMs": 906360
+  },
+  {
+   "text": "Then, we're gonna switch turn on,",
+   "startMs": 906360,
+   "endMs": 908790
+  },
+  {
+   "text": "and we gotta set the entity ID,",
+   "startMs": 908790,
+   "endMs": 910200
+  },
+  {
+   "text": "to the switch of the Tasmota device.",
+   "startMs": 910200,
+   "endMs": 912480
+  },
+  {
+   "text": "- Right, okay.",
+   "startMs": 912480,
+   "endMs": 913500
+  },
+  {
+   "text": "- And then, we also have an option for if it's idle,",
+   "startMs": 913500,
+   "endMs": 915930
+  },
+  {
+   "text": "and then we're gonna turn the switch off.",
+   "startMs": 915930,
+   "endMs": 917880
+  },
+  {
+   "text": "- This basically allows Home Assistant",
+   "startMs": 917880,
+   "endMs": 919830
+  },
+  {
+   "text": "to take what the desired status of the Ecobee is,",
+   "startMs": 919830,
+   "endMs": 923040
+  },
+  {
+   "text": "that is to say, if it thinks it should be heating",
+   "startMs": 923040,
+   "endMs": 925260
+  },
+  {
+   "text": "or thinks it should not be heating, and then use that",
+   "startMs": 925260,
+   "endMs": 928260
+  },
+  {
+   "text": "to trigger the relay on the Tasmota device,",
+   "startMs": 928260,
+   "endMs": 930630
+  },
+  {
+   "text": "which is gonna open the valve.",
+   "startMs": 930630,
+   "endMs": 932430
+  },
+  {
+   "text": "There we go. It's working, yes!",
+   "startMs": 932430,
+   "endMs": 936930
+  },
+  {
+   "text": "If you go downstairs, and I stay up here,",
+   "startMs": 936930,
+   "endMs": 939180
+  },
+  {
+   "text": "and I change the temperature below the heating threshold,",
+   "startMs": 939180,
+   "endMs": 942090
+  },
+  {
+   "text": "theoretically, that valve should go off.",
+   "startMs": 942090,
+   "endMs": 944460
+  },
+  {
+   "text": "- Yeah, okay, sure.",
+   "startMs": 944460,
+   "endMs": 945293
+  },
+  {
+   "text": "- Let's give it a shot.",
+   "startMs": 945293,
+   "endMs": 946126
+  },
+  {
+   "text": "Actually, we're gonna go the other way around.",
+   "startMs": 946126,
+   "endMs": 947850
+  },
+  {
+   "text": "I've got it set",
+   "startMs": 947850,
+   "endMs": 948683
+  },
+  {
+   "text": "to hold it 16 right now. - [Jake] Okay, its on!",
+   "startMs": 948683,
+   "endMs": 950640
+  },
+  {
+   "text": "- And then, I'm gonna set it to, I don't know,",
+   "startMs": 950640,
+   "endMs": 954467
+  },
+  {
+   "text": "- [Jake] Hello? - 25. Sure.",
+   "startMs": 954467,
+   "endMs": 956446
+  },
+  {
+   "text": "Theoretically, downstairs, Jake should see the valve open.",
+   "startMs": 956446,
+   "endMs": 961020
+  },
+  {
+   "text": "Hey Jake, did it work?",
+   "startMs": 961020,
+   "endMs": 963027
+  },
+  {
+   "text": "- Did he say he turned it on?",
+   "startMs": 963027,
+   "endMs": 964517
+  },
+  {
+   "text": "- [Andy] Yeah.",
+   "startMs": 964517,
+   "endMs": 966054
+  },
+  {
+   "text": "- Hey. Jake!",
+   "startMs": 966054,
+   "endMs": 966923
+  },
+  {
+   "text": "- [Jake] Hey, it worked.",
+   "startMs": 966923,
+   "endMs": 968198
+  },
+  {
+   "text": "- Did it work?",
+   "startMs": 968198,
+   "endMs": 969219
+  },
+  {
+   "text": "- [Jake] It worked.",
+   "startMs": 969219,
+   "endMs": 970601
+  },
+  {
+   "text": "- [Linus] Yes!",
+   "startMs": 970601,
+   "endMs": 971587
+  },
+  {
+   "text": "- Did you see it click on?",
+   "startMs": 971587,
+   "endMs": 972420
+  },
+  {
+   "text": "- [Linus] It worked.",
+   "startMs": 972420,
+   "endMs": 973658
+  },
+  {
+   "text": "- It's gonna open in a minute.",
+   "startMs": 973658,
+   "endMs": 974491
+  },
+  {
+   "text": "Oh, I heard it. I heard it click.",
+   "startMs": 974491,
+   "endMs": 975960
+  },
+  {
+   "text": "It's starting to open.",
+   "startMs": 975960,
+   "endMs": 977730
+  },
+  {
+   "text": "- Oh, that's awesome.",
+   "startMs": 977730,
+   "endMs": 978960
+  },
+  {
+   "text": "Oh, I didn't bring the thermal camera with me, but.",
+   "startMs": 978960,
+   "endMs": 980550
+  },
+  {
+   "text": "- Or my phone.",
+   "startMs": 980550,
+   "endMs": 981630
+  },
+  {
+   "text": "I left my phone over there.",
+   "startMs": 981630,
+   "endMs": 983419
+  },
+  {
+   "text": "- Oh, all right, cool.",
+   "startMs": 983419,
+   "endMs": 984559
+  },
+  {
+   "text": "Just like I left this segway, to our sponsor.",
+   "startMs": 984559,
+   "endMs": 986190
+  },
+  {
+   "text": "Squarespace.",
+   "startMs": 986190,
+   "endMs": 987240
+  },
+  {
+   "text": "If you need to build a brand online, you need a website.",
+   "startMs": 987240,
+   "endMs": 989887
+  },
+  {
+   "text": "\"But, but, Linus, I just learned how to turn on",
+   "startMs": 989887,
+   "endMs": 992370
+  },
+  {
+   "text": "the little flashlight on my phone.",
+   "startMs": 992370,
+   "endMs": 993810
+  },
+  {
+   "text": "How am I gonna build a whole website?\", you ask.",
+   "startMs": 993810,
+   "endMs": 995850
+  },
+  {
+   "text": "With Squarespace.",
+   "startMs": 995850,
+   "endMs": 996683
+  },
+  {
+   "text": "Squarespace is a one stop, no frills, all-in-one platform",
+   "startMs": 996683,
+   "endMs": 1000710
+  },
+  {
+   "text": "for expanding your presence on the internet.",
+   "startMs": 1000710,
+   "endMs": 1002300
+  },
+  {
+   "text": "Squarespace lets you build beautiful websites,",
+   "startMs": 1002300,
+   "endMs": 1004250
+  },
+  {
+   "text": "engage with the audience,",
+   "startMs": 1004250,
+   "endMs": 1005570
+  },
+  {
+   "text": "and sell anything and everything, from products to content,",
+   "startMs": 1005570,
+   "endMs": 1008420
+  },
+  {
+   "text": "without needing to attend the Linus Tech Wart,",
+   "startMs": 1008420,
+   "endMs": 1011090
+  },
+  {
+   "text": "School of Tech Wizardry.",
+   "startMs": 1011090,
+   "endMs": 1012800
+  },
+  {
+   "text": "We love Squarespace so much,",
+   "startMs": 1012800,
+   "endMs": 1015172
+  },
+  {
+   "text": "that we use it here at Linus Media Group.",
+   "startMs": 1015172,
+   "endMs": 1016580
+  },
+  {
+   "text": "It's custom templates make it easy to stand out,",
+   "startMs": 1016580,
+   "endMs": 1018830
+  },
+  {
+   "text": "with a plethora of themes and customization options",
+   "startMs": 1018830,
+   "endMs": 1021050
+  },
+  {
+   "text": "to fit your needs.",
+   "startMs": 1021050,
+   "endMs": 1021883
+  },
+  {
+   "text": "And, you can maximize your visibility,",
+   "startMs": 1021883,
+   "endMs": 1023390
+  },
+  {
+   "text": "thanks to their suite of integrated SEO features.",
+   "startMs": 1023390,
+   "endMs": 1025820
+  },
+  {
+   "text": "There's also analytic insights,",
+   "startMs": 1025820,
+   "endMs": 1027230
+  },
+  {
+   "text": "to help you optimize for performance,",
+   "startMs": 1027230,
+   "endMs": 1028940
+  },
+  {
+   "text": "so you can see what's working well and what needs tweaking.",
+   "startMs": 1028940,
+   "endMs": 1031910
+  },
+  {
+   "text": "So, don't wait.",
+   "startMs": 1031910,
+   "endMs": 1032743
+  },
+  {
+   "text": "Get started today and head to squarespace.com/LTT",
+   "startMs": 1032743,
+   "endMs": 1036380
+  },
+  {
+   "text": "to get 10% off your first purchase.",
+   "startMs": 1036380,
+   "endMs": 1038720
+  },
+  {
+   "text": "If you guys enjoyed this video, well,",
+   "startMs": 1038720,
+   "endMs": 1040978
+  },
+  {
+   "text": "it's not so much about enjoyment or not,",
+   "startMs": 1040978,
+   "endMs": 1042290
+  },
+  {
+   "text": "but you should definitely go check out the part",
+   "startMs": 1042290,
+   "endMs": 1043850
+  },
+  {
+   "text": "where we laid out the plan,",
+   "startMs": 1043850,
+   "endMs": 1045290
+  },
+  {
+   "text": "because it had a fair bit more detail",
+   "startMs": 1045290,
+   "endMs": 1046820
+  },
+  {
+   "text": "about what exactly is going on here.",
+   "startMs": 1046820,
+   "endMs": 1048450
+  },
+  {
+   "text": "- Yeah, and get subscribed, because we're probably",
+   "startMs": 1048450,
+   "endMs": 1050330
+  },
+  {
+   "text": "gonna have to move all those thermostats now.",
+   "startMs": 1050330,
+   "endMs": 1052220
+  },
+  {
+   "text": "- Yeah, I'm very unhappy right now.",
+   "startMs": 1052220,
+   "endMs": 1054490
+  },
+  {
+   "text": "- Okay.",
+   "startMs": 1054490,
+   "endMs": 1055323
+  },
+  {
+   "text": "- We might just have to get separate temperature sensors",
+   "startMs": 1055323,
+   "endMs": 1056690
+  },
+  {
+   "text": "or something.",
+   "startMs": 1056690,
+   "endMs": 1058190
+  },
+  {
+   "text": "I know, I know. I know, I know, I know. I know. (Sigh)",
+   "startMs": 1058190,
+   "endMs": 1061573
+  }
+ ]
+}

@@ -1,0 +1,4378 @@
+{
+ "videoID": "uO6DMWHK_HA",
+ "title": "Mark Rober! I Built You a Computer! - Double NAS Build",
+ "route": "captions/WEB",
+ "savedAt": "2026-09-18T02:32:34.020Z",
+ "cues": [
+  {
+   "text": "Everyone knows Mark Rober.",
+   "startMs": 0,
+   "endMs": 2102
+  },
+  {
+   "text": "He has dashing good looks, helped design a Mars Rover,",
+   "startMs": 2102,
+   "endMs": 5338
+  },
+  {
+   "text": "single-handedly solved the porch pirating pandemic,",
+   "startMs": 5338,
+   "endMs": 8541
+  },
+  {
+   "text": "and even has more subscribers than me.",
+   "startMs": 8541,
+   "endMs": 11611
+  },
+  {
+   "text": "But it turns out he can make mistakes,",
+   "startMs": 11611,
+   "endMs": 14681
+  },
+  {
+   "text": "like the way that his team is handling storage.",
+   "startMs": 14681,
+   "endMs": 17183
+  },
+  {
+   "text": "We're talking towers of external hard drives,",
+   "startMs": 17183,
+   "endMs": 20687
+  },
+  {
+   "text": "no real backup, and worst of all,",
+   "startMs": 20687,
+   "endMs": 23223
+  },
+  {
+   "text": "editing videos off of Dropbox.",
+   "startMs": 23223,
+   "endMs": 25658
+  },
+  {
+   "text": "Thankfully, he knew where to come for help.",
+   "startMs": 25658,
+   "endMs": 27794
+  },
+  {
+   "text": "That's right, boys and girls.",
+   "startMs": 27794,
+   "endMs": 29262
+  },
+  {
+   "text": "Today, we are building not one,",
+   "startMs": 29262,
+   "endMs": 31097
+  },
+  {
+   "text": "but two identical storage servers",
+   "startMs": 31097,
+   "endMs": 33500
+  },
+  {
+   "text": "for the one, the only Mark Rober.",
+   "startMs": 33500,
+   "endMs": 36970
+  },
+  {
+   "text": "And not only that, but we're gonna show you guys",
+   "startMs": 36970,
+   "endMs": 39172
+  },
+  {
+   "text": "how with basically zero networking configuration,",
+   "startMs": 39172,
+   "endMs": 43143
+  },
+  {
+   "text": "no port forwarding, any of that stuff,",
+   "startMs": 43143,
+   "endMs": 45812
+  },
+  {
+   "text": "these two epic machines are gonna be able to remotely",
+   "startMs": 45812,
+   "endMs": 49716
+  },
+  {
+   "text": "and securely sync to each other from miles away.",
+   "startMs": 49716,
+   "endMs": 53787
+  },
+  {
+   "text": "Just like I'm gonna remotely sync this message",
+   "startMs": 53787,
+   "endMs": 56756
+  },
+  {
+   "text": "from today's sponsor.",
+   "startMs": 56756,
+   "endMs": 57924
+  },
+  {
+   "text": "CableMod, worry no more about your graphics card",
+   "startMs": 57924,
+   "endMs": 60660
+  },
+  {
+   "text": "going pyromaniac.",
+   "startMs": 60660,
+   "endMs": 62195
+  },
+  {
+   "text": "Upgrade your default power cable",
+   "startMs": 62195,
+   "endMs": 63830
+  },
+  {
+   "text": "to CableMod's 12-volt high power basic replacement cable.",
+   "startMs": 63830,
+   "endMs": 67133
+  },
+  {
+   "text": "Learn more at the end of the video.",
+   "startMs": 67133,
+   "endMs": 68768
+  },
+  {
+   "text": "When Mark first reached out,",
+   "startMs": 68768,
+   "endMs": 70203
+  },
+  {
+   "text": "he had already come up with actually a pretty reasonable plan",
+   "startMs": 70203,
+   "endMs": 73606
+  },
+  {
+   "text": "to solve their issues.",
+   "startMs": 73606,
+   "endMs": 74941
+  },
+  {
+   "text": "To migrate off of the stacks of external hard drives,",
+   "startMs": 74941,
+   "endMs": 78478
+  },
+  {
+   "text": "they had spec'd out an OWC Thunder Bay Flex 8,",
+   "startMs": 78478,
+   "endMs": 82182
+  },
+  {
+   "text": "which is a DAS, or direct-attached storage chassis,",
+   "startMs": 82182,
+   "endMs": 85752
+  },
+  {
+   "text": "that as the name implies, directly connects to the computer",
+   "startMs": 85752,
+   "endMs": 89589
+  },
+  {
+   "text": "using a 40 gigabit Thunderbolt connection.",
+   "startMs": 89589,
+   "endMs": 92225
+  },
+  {
+   "text": "Then for remote backup,",
+   "startMs": 92225,
+   "endMs": 93760
+  },
+  {
+   "text": "they chose a smaller DAS box from that same company.",
+   "startMs": 93760,
+   "endMs": 97864
+  },
+  {
+   "text": "These kinds of storage docs are great",
+   "startMs": 97864,
+   "endMs": 100400
+  },
+  {
+   "text": "for the solo photographer or freelance video editor,",
+   "startMs": 100400,
+   "endMs": 104070
+  },
+  {
+   "text": "where only that one person needs to access the data.",
+   "startMs": 104070,
+   "endMs": 107674
+  },
+  {
+   "text": "To their credit, their current workflow",
+   "startMs": 107674,
+   "endMs": 110076
+  },
+  {
+   "text": "only actually requires that one computer",
+   "startMs": 110076,
+   "endMs": 112712
+  },
+  {
+   "text": "to be able to access the raw footage",
+   "startMs": 112712,
+   "endMs": 115115
+  },
+  {
+   "text": "in order to generate low-quality proxy footage",
+   "startMs": 115115,
+   "endMs": 117383
+  },
+  {
+   "text": "for their remote editors.",
+   "startMs": 117383,
+   "endMs": 118785
+  },
+  {
+   "text": "Once the project is complete,",
+   "startMs": 118785,
+   "endMs": 120153
+  },
+  {
+   "text": "that computer with the raw footage directly attached to it",
+   "startMs": 120153,
+   "endMs": 123123
+  },
+  {
+   "text": "would run the final export for YouTube.",
+   "startMs": 123123,
+   "endMs": 125225
+  },
+  {
+   "text": "However, just because that works for them today",
+   "startMs": 125225,
+   "endMs": 128094
+  },
+  {
+   "text": "doesn't mean it's going to work for them in the future.",
+   "startMs": 128094,
+   "endMs": 130697
+  },
+  {
+   "text": "And given the flexibility and the upgradeability",
+   "startMs": 130697,
+   "endMs": 133933
+  },
+  {
+   "text": "that's afforded by a DIY NAS,",
+   "startMs": 133933,
+   "endMs": 136536
+  },
+  {
+   "text": "or a network-attached storage box,",
+   "startMs": 136536,
+   "endMs": 140106
+  },
+  {
+   "text": "like being able to access the footage",
+   "startMs": 140106,
+   "endMs": 141941
+  },
+  {
+   "text": "on any computer on your network,",
+   "startMs": 141941,
+   "endMs": 143743
+  },
+  {
+   "text": "or, I mean, heck, any computer in the world through a VPN,",
+   "startMs": 143743,
+   "endMs": 147680
+  },
+  {
+   "text": "well, when you're spending this kind of money",
+   "startMs": 147680,
+   "endMs": 149716
+  },
+  {
+   "text": "and you operate on a scale larger than one person,",
+   "startMs": 149716,
+   "endMs": 152051
+  },
+  {
+   "text": "NAS is a no-brainer.",
+   "startMs": 152051,
+   "endMs": 154120
+  },
+  {
+   "text": "Not to mention that whatever machine",
+   "startMs": 154120,
+   "endMs": 156022
+  },
+  {
+   "text": "you end up plugging these storage boxes into",
+   "startMs": 156022,
+   "endMs": 158258
+  },
+  {
+   "text": "is gonna be bogged down every time it has to sync",
+   "startMs": 158258,
+   "endMs": 161861
+  },
+  {
+   "text": "to that offsite backup.",
+   "startMs": 161861,
+   "endMs": 163563
+  },
+  {
+   "text": "So what do we build him?",
+   "startMs": 163563,
+   "endMs": 166332
+  },
+  {
+   "text": "Well, the capacity is easy to figure out.",
+   "startMs": 166332,
+   "endMs": 168935
+  },
+  {
+   "text": "He needs lots.",
+   "startMs": 168935,
+   "endMs": 171004
+  },
+  {
+   "text": "He asked for 200 terabytes at each site.",
+   "startMs": 171004,
+   "endMs": 174440
+  },
+  {
+   "text": "But what about the form factor or the hardware platform?",
+   "startMs": 174440,
+   "endMs": 178411
+  },
+  {
+   "text": "Originally, we specced out two options,",
+   "startMs": 178411,
+   "endMs": 180914
+  },
+  {
+   "text": "one based on AMD's enterprise Epic platform",
+   "startMs": 180914,
+   "endMs": 184384
+  },
+  {
+   "text": "and one with their consumer-grade Ryzen parts.",
+   "startMs": 184384,
+   "endMs": 187453
+  },
+  {
+   "text": "But it was immediately apparent",
+   "startMs": 187453,
+   "endMs": 189022
+  },
+  {
+   "text": "that the cost was gonna be basically the same,",
+   "startMs": 189022,
+   "endMs": 191491
+  },
+  {
+   "text": "so Epic was the obvious choice.",
+   "startMs": 191491,
+   "endMs": 195028
+  },
+  {
+   "text": "This is gonna be a really fun build",
+   "startMs": 195028,
+   "endMs": 196329
+  },
+  {
+   "text": "because while Mark obviously wants to take",
+   "startMs": 196329,
+   "endMs": 198731
+  },
+  {
+   "text": "a spare no expense approach to keeping his data safe,",
+   "startMs": 198731,
+   "endMs": 201935
+  },
+  {
+   "text": "we also don't wanna waste his money,",
+   "startMs": 201935,
+   "endMs": 203469
+  },
+  {
+   "text": "meaning that this is a really solutions-oriented video",
+   "startMs": 203469,
+   "endMs": 206873
+  },
+  {
+   "text": "and we tried to keep it really practical.",
+   "startMs": 206873,
+   "endMs": 209342
+  },
+  {
+   "text": "So back when we specced this out,",
+   "startMs": 209342,
+   "endMs": 210910
+  },
+  {
+   "text": "the Epic 7302P, a 16-core processor,",
+   "startMs": 210910,
+   "endMs": 215215
+  },
+  {
+   "text": "was available on eBay for around $380 a piece.",
+   "startMs": 215215,
+   "endMs": 219719
+  },
+  {
+   "text": "Now, the 16 cores might not be the fastest on the market,",
+   "startMs": 219719,
+   "endMs": 222889
+  },
+  {
+   "text": "but they're frankly overkill",
+   "startMs": 222889,
+   "endMs": 224724
+  },
+  {
+   "text": "for a hard drive-based storage workload like this.",
+   "startMs": 224724,
+   "endMs": 227794
+  },
+  {
+   "text": "And considering the platform advantages,",
+   "startMs": 227794,
+   "endMs": 230263
+  },
+  {
+   "text": "like tons of PCIe lanes and registered ECC memory,",
+   "startMs": 230263,
+   "endMs": 234334
+  },
+  {
+   "text": "it's basically the perfect option.",
+   "startMs": 234334,
+   "endMs": 236202
+  },
+  {
+   "text": "And it's gotten even more perfect.",
+   "startMs": 236202,
+   "endMs": 238571
+  },
+  {
+   "text": "If you check eBay today,",
+   "startMs": 238571,
+   "endMs": 240139
+  },
+  {
+   "text": "you can pick these things up for just $150 used",
+   "startMs": 240139,
+   "endMs": 244410
+  },
+  {
+   "text": "or with a used Supermicro motherboard for less than $500.",
+   "startMs": 244410,
+   "endMs": 248581
+  },
+  {
+   "text": "Now, some of you are probably freaking out right now,",
+   "startMs": 248581,
+   "endMs": 250850
+  },
+  {
+   "text": "like, seriously, Linus,",
+   "startMs": 250850,
+   "endMs": 251951
+  },
+  {
+   "text": "you're putting a used CPU in a system for Mark Rober?",
+   "startMs": 251951,
+   "endMs": 254821
+  },
+  {
+   "text": "That's fair.",
+   "startMs": 254821,
+   "endMs": 255655
+  },
+  {
+   "text": "That thought did occur to us.",
+   "startMs": 255655,
+   "endMs": 257957
+  },
+  {
+   "text": "But if you pay attention to how used CPUs drop in price,",
+   "startMs": 257957,
+   "endMs": 262161
+  },
+  {
+   "text": "when each new generation comes out,",
+   "startMs": 262161,
+   "endMs": 264130
+  },
+  {
+   "text": "they go kachunk, kachunk, and there's a reason for that.",
+   "startMs": 264130,
+   "endMs": 268368
+  },
+  {
+   "text": "It's because CPUs are damn near indestructible",
+   "startMs": 268368,
+   "endMs": 273373
+  },
+  {
+   "text": "compared to, say, a motherboard or a GPU.",
+   "startMs": 273673,
+   "endMs": 278678
+  },
+  {
+   "text": "So what happens is you've got this glut of CPUs",
+   "startMs": 278678,
+   "endMs": 282181
+  },
+  {
+   "text": "on the market with no boards to put them in.",
+   "startMs": 282181,
+   "endMs": 284817
+  },
+  {
+   "text": "You say indestructible code.",
+   "startMs": 284817,
+   "endMs": 286319
+  },
+  {
+   "text": "Can we cut to that clip of him destroying that $10,000 Xeon?",
+   "startMs": 286319,
+   "endMs": 289155
+  },
+  {
+   "text": "Yes, very funny.",
+   "startMs": 289155,
+   "endMs": 290089
+  },
+  {
+   "text": "Except that's also a great way to prove my point",
+   "startMs": 290089,
+   "endMs": 293092
+  },
+  {
+   "text": "because that $10,000 CPU that I ruined four years ago",
+   "startMs": 293092,
+   "endMs": 298097
+  },
+  {
+   "text": "can now be found on the used market",
+   "startMs": 298364,
+   "endMs": 299999
+  },
+  {
+   "text": "for as little as $1,000.",
+   "startMs": 299999,
+   "endMs": 302568
+  },
+  {
+   "text": "Or if you're willing to accept a qualification sample,",
+   "startMs": 302568,
+   "endMs": 305972
+  },
+  {
+   "text": "full performance one, as little as 350 bucks.",
+   "startMs": 305972,
+   "endMs": 309409
+  },
+  {
+   "text": "I mean, for these kinds of prices,",
+   "startMs": 309409,
+   "endMs": 312011
+  },
+  {
+   "text": "Mark could literally have four spare chips sitting on hand",
+   "startMs": 312011,
+   "endMs": 317016
+  },
+  {
+   "text": "with needing only a screwdriver to swap them out",
+   "startMs": 317250,
+   "endMs": 320520
+  },
+  {
+   "text": "for the price of one brand new one.",
+   "startMs": 320520,
+   "endMs": 322855
+  },
+  {
+   "text": "Coming back to our motherboard,",
+   "startMs": 322855,
+   "endMs": 324090
+  },
+  {
+   "text": "unlike a lot of other data center platforms,",
+   "startMs": 324090,
+   "endMs": 326526
+  },
+  {
+   "text": "the Epic SP3 socket was used on three generations of chips,",
+   "startMs": 326526,
+   "endMs": 330963
+  },
+  {
+   "text": "Naples, Rome, and Milan.",
+   "startMs": 330963,
+   "endMs": 333099
+  },
+  {
+   "text": "That means that there's still a metric boatload of boards",
+   "startMs": 333099,
+   "endMs": 336502
+  },
+  {
+   "text": "that are available, both new and on the used market.",
+   "startMs": 336502,
+   "endMs": 339939
+  },
+  {
+   "text": "But since motherboards aren't anywhere near",
+   "startMs": 339939,
+   "endMs": 342675
+  },
+  {
+   "text": "as reliable as CPUs, we ordered a brand new pair",
+   "startMs": 342675,
+   "endMs": 345778
+  },
+  {
+   "text": "of ASRock Rack's Rome D8-2T.",
+   "startMs": 345778,
+   "endMs": 349248
+  },
+  {
+   "text": "I love these boards.",
+   "startMs": 349248,
+   "endMs": 350616
+  },
+  {
+   "text": "We've got several of them in the office",
+   "startMs": 350616,
+   "endMs": 352352
+  },
+  {
+   "text": "that have been rock solid",
+   "startMs": 352352,
+   "endMs": 353753
+  },
+  {
+   "text": "and they have an absolutely comical amount of IO.",
+   "startMs": 353753,
+   "endMs": 357056
+  },
+  {
+   "text": "There's an IPMI port for remote management,",
+   "startMs": 357056,
+   "endMs": 359359
+  },
+  {
+   "text": "dual onboard 10 gig networking,",
+   "startMs": 359359,
+   "endMs": 361394
+  },
+  {
+   "text": "meaning we don't even need a separate network card,",
+   "startMs": 361394,
+   "endMs": 363796
+  },
+  {
+   "text": "although we'd have plenty of places to put them,",
+   "startMs": 363796,
+   "endMs": 365898
+  },
+  {
+   "text": "with seven PCIe Gen 4 by 16 slots,",
+   "startMs": 365898,
+   "endMs": 369802
+  },
+  {
+   "text": "dual M.2, dual Oculink, which is another PCIe by four each,",
+   "startMs": 369802,
+   "endMs": 374607
+  },
+  {
+   "text": "eight SATA ports through these onboard",
+   "startMs": 374607,
+   "endMs": 376075
+  },
+  {
+   "text": "mini SAS HD connectors, and eight channel memory,",
+   "startMs": 376075,
+   "endMs": 380079
+  },
+  {
+   "text": "all mounted to a standard ATX form factor PCB.",
+   "startMs": 380079,
+   "endMs": 383783
+  },
+  {
+   "text": "This thing, it's better than the bee's knees.",
+   "startMs": 383783,
+   "endMs": 386252
+  },
+  {
+   "text": "It's the shit.",
+   "startMs": 386252,
+   "endMs": 387420
+  },
+  {
+   "text": "And for a bee, that's honey, right?",
+   "startMs": 387420,
+   "endMs": 389722
+  },
+  {
+   "text": "I think.",
+   "startMs": 389722,
+   "endMs": 390556
+  },
+  {
+   "text": "It'll fit in basically any case",
+   "startMs": 390556,
+   "endMs": 391958
+  },
+  {
+   "text": "and it shows off the monstrous 128 PCIe lanes",
+   "startMs": 391958,
+   "endMs": 396963
+  },
+  {
+   "text": "of our Epic CPU quite nicely.",
+   "startMs": 397096,
+   "endMs": 399432
+  },
+  {
+   "text": "Next up is RAM, apparently.",
+   "startMs": 399432,
+   "endMs": 402402
+  },
+  {
+   "text": "One moment, please.",
+   "startMs": 402402,
+   "endMs": 403336
+  },
+  {
+   "text": "Since we're using Epic,",
+   "startMs": 403336,
+   "endMs": 404604
+  },
+  {
+   "text": "Micron sent over four 32 gigabyte DDR4",
+   "startMs": 404604,
+   "endMs": 408541
+  },
+  {
+   "text": "registered ECC modules that are running",
+   "startMs": 408541,
+   "endMs": 410543
+  },
+  {
+   "text": "at 3,200 mega transfers per second.",
+   "startMs": 410543,
+   "endMs": 412612
+  },
+  {
+   "text": "RAM, honestly speaking, is also another place",
+   "startMs": 412612,
+   "endMs": 415648
+  },
+  {
+   "text": "that you can save some money if you're doing this at home.",
+   "startMs": 415648,
+   "endMs": 418117
+  },
+  {
+   "text": "It's just that when we were looking,",
+   "startMs": 418117,
+   "endMs": 419919
+  },
+  {
+   "text": "the price cap wasn't huge for this specific capacity",
+   "startMs": 419919,
+   "endMs": 422955
+  },
+  {
+   "text": "and speed between brand new and used.",
+   "startMs": 422955,
+   "endMs": 425191
+  },
+  {
+   "text": "We're talking a difference of about $20 a stick.",
+   "startMs": 425191,
+   "endMs": 428327
+  },
+  {
+   "text": "Now the experienced among you may be raising your eyebrows",
+   "startMs": 428327,
+   "endMs": 430930
+  },
+  {
+   "text": "a little bit at our RAM configuration.",
+   "startMs": 430930,
+   "endMs": 432999
+  },
+  {
+   "text": "On the one hand, we've got 128 gigs in a NAS,",
+   "startMs": 432999,
+   "endMs": 438871
+  },
+  {
+   "text": "but on the other hand, we've kind of cheaped out.",
+   "startMs": 438871,
+   "endMs": 441774
+  },
+  {
+   "text": "By using only four sticks on an eight channel platform,",
+   "startMs": 441774,
+   "endMs": 445878
+  },
+  {
+   "text": "we're giving up half of our total potential memory bandwidth.",
+   "startMs": 445878,
+   "endMs": 450249
+  },
+  {
+   "text": "But believe it or not,",
+   "startMs": 450249,
+   "endMs": 451350
+  },
+  {
+   "text": "there's a pretty good reason for both of those things.",
+   "startMs": 451350,
+   "endMs": 454320
+  },
+  {
+   "text": "One is that, okay,",
+   "startMs": 454320,
+   "endMs": 456456
+  },
+  {
+   "text": "say you're using a QNAP small business NAS",
+   "startMs": 456456,
+   "endMs": 458758
+  },
+  {
+   "text": "or something like that.",
+   "startMs": 458758,
+   "endMs": 459759
+  },
+  {
+   "text": "You're not gonna use much RAM,",
+   "startMs": 459759,
+   "endMs": 461561
+  },
+  {
+   "text": "but we are using TrueNAS scale.",
+   "startMs": 461561,
+   "endMs": 463996
+  },
+  {
+   "text": "And since it uses ZFS,",
+   "startMs": 463996,
+   "endMs": 466165
+  },
+  {
+   "text": "it uses system memory as a read cache",
+   "startMs": 466165,
+   "endMs": 468768
+  },
+  {
+   "text": "for our most frequently accessed files.",
+   "startMs": 468768,
+   "endMs": 471137
+  },
+  {
+   "text": "This is called ARC or adaptive replacement cache.",
+   "startMs": 471137,
+   "endMs": 474640
+  },
+  {
+   "text": "And the rough guideline is to have one gigabyte of ARC",
+   "startMs": 474640,
+   "endMs": 477910
+  },
+  {
+   "text": "per terabyte of magnetic storage.",
+   "startMs": 477910,
+   "endMs": 480713
+  },
+  {
+   "text": "So we are right in that sweet spot with 128 gigs.",
+   "startMs": 480713,
+   "endMs": 485218
+  },
+  {
+   "text": "As for why we only opted for a four channel configuration,",
+   "startMs": 485218,
+   "endMs": 488888
+  },
+  {
+   "text": "well, if we were using NVMe storage,",
+   "startMs": 488888,
+   "endMs": 491357
+  },
+  {
+   "text": "we might need the additional speed,",
+   "startMs": 491357,
+   "endMs": 493159
+  },
+  {
+   "text": "but because we're using hard drives,",
+   "startMs": 493159,
+   "endMs": 494961
+  },
+  {
+   "text": "I don't think our memory bandwidth is gonna be an issue.",
+   "startMs": 495895,
+   "endMs": 498331
+  },
+  {
+   "text": "And this gives Mark plenty of room to upgrade in the future.",
+   "startMs": 498331,
+   "endMs": 501501
+  },
+  {
+   "text": "All he has to do is double his memory",
+   "startMs": 501501,
+   "endMs": 503603
+  },
+  {
+   "text": "and he could throw twice as many hard drives",
+   "startMs": 503603,
+   "endMs": 505538
+  },
+  {
+   "text": "into his system.",
+   "startMs": 505538,
+   "endMs": 506372
+  },
+  {
+   "text": "Of course, given Mark's budget,",
+   "startMs": 506372,
+   "endMs": 507940
+  },
+  {
+   "text": "that is to say he didn't really provide one,",
+   "startMs": 507940,
+   "endMs": 509475
+  },
+  {
+   "text": "we just tried to be sensible,",
+   "startMs": 509475,
+   "endMs": 510977
+  },
+  {
+   "text": "we could have easily put in twice as much memory today",
+   "startMs": 510977,
+   "endMs": 513779
+  },
+  {
+   "text": "or four times or eight times as much.",
+   "startMs": 513779,
+   "endMs": 516282
+  },
+  {
+   "text": "And when we're talking about a very read intensive",
+   "startMs": 516282,
+   "endMs": 518851
+  },
+  {
+   "text": "application like video editing,",
+   "startMs": 518851,
+   "endMs": 520553
+  },
+  {
+   "text": "there would have been a clear benefit to that.",
+   "startMs": 520553,
+   "endMs": 522822
+  },
+  {
+   "text": "But there are other ways to skin this cat.",
+   "startMs": 522822,
+   "endMs": 526259
+  },
+  {
+   "text": "ZFS has another trick up its sleeve called L2",
+   "startMs": 526259,
+   "endMs": 529529
+  },
+  {
+   "text": "or level two ARC,",
+   "startMs": 529529,
+   "endMs": 530997
+  },
+  {
+   "text": "which is a second tier of read caching",
+   "startMs": 530997,
+   "endMs": 533199
+  },
+  {
+   "text": "that can be set up using commodity SSDs.",
+   "startMs": 533199,
+   "endMs": 536235
+  },
+  {
+   "text": "And that's exactly what we're gonna do",
+   "startMs": 536235,
+   "endMs": 537937
+  },
+  {
+   "text": "with this one terabyte Sabrent Gen 4 NVMe SSD.",
+   "startMs": 537937,
+   "endMs": 541340
+  },
+  {
+   "text": "Now it's worth mentioning",
+   "startMs": 541340,
+   "endMs": 542408
+  },
+  {
+   "text": "that you can go ludicrous overkill on level two ARC",
+   "startMs": 542408,
+   "endMs": 546178
+  },
+  {
+   "text": "and put like 10 terabytes in a system like this,",
+   "startMs": 546178,
+   "endMs": 549849
+  },
+  {
+   "text": "but that would actually use up",
+   "startMs": 549849,
+   "endMs": 552818
+  },
+  {
+   "text": "some of your RAM based ARC capacity to index it,",
+   "startMs": 552818,
+   "endMs": 556222
+  },
+  {
+   "text": "which could actually end up hurting your performance.",
+   "startMs": 556222,
+   "endMs": 558791
+  },
+  {
+   "text": "Also, the level two ARC is filled up by stuff",
+   "startMs": 558791,
+   "endMs": 561561
+  },
+  {
+   "text": "that gets evicted from the main ARC cache.",
+   "startMs": 561561,
+   "endMs": 564297
+  },
+  {
+   "text": "So it might not even help",
+   "startMs": 564297,
+   "endMs": 566599
+  },
+  {
+   "text": "until your system has actually been powered on",
+   "startMs": 566599,
+   "endMs": 568834
+  },
+  {
+   "text": "for quite a while.",
+   "startMs": 568834,
+   "endMs": 570202
+  },
+  {
+   "text": "The last thing to go on our board is our CPU cooler.",
+   "startMs": 570202,
+   "endMs": 572838
+  },
+  {
+   "text": "And we've gone with a Noctua U14S TR4SP3.",
+   "startMs": 572838,
+   "endMs": 576442
+  },
+  {
+   "text": "We want this machine to be reliable in the longterm.",
+   "startMs": 576442,
+   "endMs": 578978
+  },
+  {
+   "text": "So using an AIO liquid cooler was out of the question.",
+   "startMs": 578978,
+   "endMs": 582582
+  },
+  {
+   "text": "We also want it to be quiet",
+   "startMs": 582582,
+   "endMs": 584350
+  },
+  {
+   "text": "since one of them is going to live at Mark's house",
+   "startMs": 584350,
+   "endMs": 587687
+  },
+  {
+   "text": "and the other is gonna be within earshot",
+   "startMs": 587687,
+   "endMs": 589822
+  },
+  {
+   "text": "of people's desks at their office.",
+   "startMs": 589822,
+   "endMs": 592058
+  },
+  {
+   "text": "This one happens to meet both of our requirements.",
+   "startMs": 592058,
+   "endMs": 595561
+  },
+  {
+   "text": "Just like I am required to tell you",
+   "startMs": 595561,
+   "endMs": 597997
+  },
+  {
+   "text": "about the LTT screwdriver that is reliable",
+   "startMs": 597997,
+   "endMs": 600633
+  },
+  {
+   "text": "and soon to be available in, that's right,",
+   "startMs": 600633,
+   "endMs": 603235
+  },
+  {
+   "text": "a Noctua color scheme.",
+   "startMs": 603235,
+   "endMs": 604937
+  },
+  {
+   "text": "Sign up for a notification on lttstore.com.",
+   "startMs": 604937,
+   "endMs": 607840
+  },
+  {
+   "text": "Wait, are these even the same?",
+   "startMs": 607840,
+   "endMs": 609342
+  },
+  {
+   "text": "They're not?",
+   "startMs": 610810,
+   "endMs": 611644
+  },
+  {
+   "text": "Oh, these are like big chunky ones.",
+   "startMs": 611644,
+   "endMs": 613179
+  },
+  {
+   "text": "We're trying to put two fans on it.",
+   "startMs": 613179,
+   "endMs": 614614
+  },
+  {
+   "text": "That way in the unlikely event that one of them fails,",
+   "startMs": 614614,
+   "endMs": 617383
+  },
+  {
+   "text": "the machine will still operate completely normally.",
+   "startMs": 617383,
+   "endMs": 619251
+  },
+  {
+   "text": "It's not to get extra cooling.",
+   "startMs": 619251,
+   "endMs": 620553
+  },
+  {
+   "text": "This is not a particularly hot running chip.",
+   "startMs": 620553,
+   "endMs": 623122
+  },
+  {
+   "text": "This one has one of the big chunky ones on it.",
+   "startMs": 623122,
+   "endMs": 624957
+  },
+  {
+   "text": "What, you left one of them on there?",
+   "startMs": 624957,
+   "endMs": 626225
+  },
+  {
+   "text": "No, there are five big chunky ones.",
+   "startMs": 626225,
+   "endMs": 628928
+  },
+  {
+   "text": "The four that I have and the one that's hot here.",
+   "startMs": 628928,
+   "endMs": 630963
+  },
+  {
+   "text": "Holy fuck.",
+   "startMs": 630963,
+   "endMs": 632498
+  },
+  {
+   "text": "Okay, let me go steal one more from another fan.",
+   "startMs": 632498,
+   "endMs": 635167
+  },
+  {
+   "text": "Are you fucking kidding me?",
+   "startMs": 635167,
+   "endMs": 636636
+  },
+  {
+   "text": "What the fuck?",
+   "startMs": 637970,
+   "endMs": 639271
+  },
+  {
+   "text": "Are you just screwing with me at this point?",
+   "startMs": 639271,
+   "endMs": 641340
+  },
+  {
+   "text": "I'm not.",
+   "startMs": 641340,
+   "endMs": 642174
+  },
+  {
+   "text": "Like legitimately?",
+   "startMs": 642174,
+   "endMs": 643009
+  },
+  {
+   "text": "No, legitimately, I'm not screwing with you.",
+   "startMs": 643009,
+   "endMs": 645244
+  },
+  {
+   "text": "So you're telling me one of these came out of the box",
+   "startMs": 645244,
+   "endMs": 647279
+  },
+  {
+   "text": "with the wrong one on there.",
+   "startMs": 647279,
+   "endMs": 648114
+  },
+  {
+   "text": "There's no way.",
+   "startMs": 648114,
+   "endMs": 648948
+  },
+  {
+   "text": "No, you must have messed it up.",
+   "startMs": 648948,
+   "endMs": 649982
+  },
+  {
+   "text": "No, they must have gotten mixed up.",
+   "startMs": 649982,
+   "endMs": 651517
+  },
+  {
+   "text": "No, the one that was still missing one",
+   "startMs": 651517,
+   "endMs": 652918
+  },
+  {
+   "text": "was the one you brought me.",
+   "startMs": 652918,
+   "endMs": 653986
+  },
+  {
+   "text": "Wait, I have three fans.",
+   "startMs": 653986,
+   "endMs": 655154
+  },
+  {
+   "text": "Oh my God.",
+   "startMs": 655154,
+   "endMs": 656922
+  },
+  {
+   "text": "Oh, this was the one I borrowed it from.",
+   "startMs": 656922,
+   "endMs": 659792
+  },
+  {
+   "text": "That's the closer color match.",
+   "startMs": 659792,
+   "endMs": 661193
+  },
+  {
+   "text": "Is it?",
+   "startMs": 661193,
+   "endMs": 662128
+  },
+  {
+   "text": "Yeah.",
+   "startMs": 662128,
+   "endMs": 662962
+  },
+  {
+   "text": "I don't think so, I think you're wrong.",
+   "startMs": 662962,
+   "endMs": 663963
+  },
+  {
+   "text": "What?",
+   "startMs": 663963,
+   "endMs": 664797
+  },
+  {
+   "text": "Yeah, that's really close.",
+   "startMs": 664797,
+   "endMs": 665631
+  },
+  {
+   "text": "No, no, no, that's wrong.",
+   "startMs": 665631,
+   "endMs": 666465
+  },
+  {
+   "text": "This is the closer one.",
+   "startMs": 666465,
+   "endMs": 667366
+  },
+  {
+   "text": "No way.",
+   "startMs": 667366,
+   "endMs": 668200
+  },
+  {
+   "text": "Oh, the brown is the way.",
+   "startMs": 668200,
+   "endMs": 669035
+  },
+  {
+   "text": "No way, it's not even close.",
+   "startMs": 669035,
+   "endMs": 671003
+  },
+  {
+   "text": "Why the hell?",
+   "startMs": 671003,
+   "endMs": 672438
+  },
+  {
+   "text": "Was this one outside or something?",
+   "startMs": 672438,
+   "endMs": 673939
+  },
+  {
+   "text": "No, they just are all over the place.",
+   "startMs": 673939,
+   "endMs": 675975
+  },
+  {
+   "text": "Remember when I said that this thing",
+   "startMs": 675975,
+   "endMs": 677443
+  },
+  {
+   "text": "is gonna live at Mark's house?",
+   "startMs": 677443,
+   "endMs": 679145
+  },
+  {
+   "text": "Obviously, he doesn't have a server rack at his house.",
+   "startMs": 679145,
+   "endMs": 681781
+  },
+  {
+   "text": "I mean, what kind of crazy person",
+   "startMs": 681781,
+   "endMs": 685084
+  },
+  {
+   "text": "would have a server rack in their house?",
+   "startMs": 685084,
+   "endMs": 686952
+  },
+  {
+   "text": "Especially a pink one.",
+   "startMs": 686952,
+   "endMs": 688220
+  },
+  {
+   "text": "That means that building this into a rack mount chassis",
+   "startMs": 688220,
+   "endMs": 691357
+  },
+  {
+   "text": "isn't necessarily the best option this time around.",
+   "startMs": 691357,
+   "endMs": 695094
+  },
+  {
+   "text": "Typically, for a high capacity storage machine like this,",
+   "startMs": 695094,
+   "endMs": 698931
+  },
+  {
+   "text": "you want a rack mount since regular tower cases",
+   "startMs": 698931,
+   "endMs": 702601
+  },
+  {
+   "text": "just don't have enough drive bays anymore.",
+   "startMs": 702601,
+   "endMs": 705638
+  },
+  {
+   "text": "But if you're a long time watcher,",
+   "startMs": 705638,
+   "endMs": 708140
+  },
+  {
+   "text": "you might remember one that does.",
+   "startMs": 708140,
+   "endMs": 710843
+  },
+  {
+   "text": "Ah, yes, the Fractal Define R7 XL is back,",
+   "startMs": 710843,
+   "endMs": 715848
+  },
+  {
+   "text": "which with its optional drive bays can house 18 hard drives,",
+   "startMs": 717083,
+   "endMs": 722088
+  },
+  {
+   "text": "which is plenty for the 12 we're putting in today",
+   "startMs": 723122,
+   "endMs": 725558
+  },
+  {
+   "text": "and for them to add another six down the road.",
+   "startMs": 725558,
+   "endMs": 728327
+  },
+  {
+   "text": "Of course, by default, since most people",
+   "startMs": 728327,
+   "endMs": 731163
+  },
+  {
+   "text": "are not gonna put a ton of hard drives in here,",
+   "startMs": 731163,
+   "endMs": 733032
+  },
+  {
+   "text": "it only holds four three and a half inch drives.",
+   "startMs": 733032,
+   "endMs": 736402
+  },
+  {
+   "text": "But we've converted it just by moving this plate right here",
+   "startMs": 736402,
+   "endMs": 739772
+  },
+  {
+   "text": "from the back up to the front",
+   "startMs": 739772,
+   "endMs": 741640
+  },
+  {
+   "text": "into what Fractal calls storage layout.",
+   "startMs": 741640,
+   "endMs": 744643
+  },
+  {
+   "text": "It's been a little while since I've done this,",
+   "startMs": 744643,
+   "endMs": 746245
+  },
+  {
+   "text": "but basically you've got this slide and this nubbin",
+   "startMs": 746245,
+   "endMs": 749715
+  },
+  {
+   "text": "and those hook in on the other side there, okay?",
+   "startMs": 749715,
+   "endMs": 753152
+  },
+  {
+   "text": "And then you got a screw that goes in here.",
+   "startMs": 753152,
+   "endMs": 756021
+  },
+  {
+   "text": "There you go, and it gets supported by this little tab.",
+   "startMs": 756021,
+   "endMs": 758524
+  },
+  {
+   "text": "So, I mean, it's not amazing,",
+   "startMs": 758524,
+   "endMs": 760359
+  },
+  {
+   "text": "but what are your other options for cases",
+   "startMs": 760359,
+   "endMs": 762661
+  },
+  {
+   "text": "that carry hold this many hard drives?",
+   "startMs": 762661,
+   "endMs": 764330
+  },
+  {
+   "text": "These are not sticking into the nubbin thing.",
+   "startMs": 764330,
+   "endMs": 766832
+  },
+  {
+   "text": "Every mounting mechanism is great to do once.",
+   "startMs": 766832,
+   "endMs": 769735
+  },
+  {
+   "text": "Now, I'm not gonna do it",
+   "startMs": 769735,
+   "endMs": 770736
+  },
+  {
+   "text": "because we're gonna pull all these drives out",
+   "startMs": 770736,
+   "endMs": 772037
+  },
+  {
+   "text": "for shipping anyway, but Mark,",
+   "startMs": 772037,
+   "endMs": 774073
+  },
+  {
+   "text": "or someone from Mark's team more realistically,",
+   "startMs": 774073,
+   "endMs": 776542
+  },
+  {
+   "text": "once it arrives, I would also, wow, that's heavy.",
+   "startMs": 776542,
+   "endMs": 779845
+  },
+  {
+   "text": "Okay, like you to put the second screw",
+   "startMs": 779845,
+   "endMs": 783315
+  },
+  {
+   "text": "into each drive right here.",
+   "startMs": 783315,
+   "endMs": 784984
+  },
+  {
+   "text": "That's just gonna snug this up,",
+   "startMs": 784984,
+   "endMs": 787419
+  },
+  {
+   "text": "make sure that this little nubbin stays in place",
+   "startMs": 787419,
+   "endMs": 789722
+  },
+  {
+   "text": "and ensure that these drives don't just suddenly go,",
+   "startMs": 789722,
+   "endMs": 792792
+  },
+  {
+   "text": "fall or anything like that.",
+   "startMs": 792792,
+   "endMs": 795294
+  },
+  {
+   "text": "That would be bad.",
+   "startMs": 795294,
+   "endMs": 796996
+  },
+  {
+   "text": "One thing we are putting the work into though",
+   "startMs": 796996,
+   "endMs": 799198
+  },
+  {
+   "text": "is putting all of these silicone grommets",
+   "startMs": 799198,
+   "endMs": 801367
+  },
+  {
+   "text": "on the hard drive trays.",
+   "startMs": 801367,
+   "endMs": 802735
+  },
+  {
+   "text": "This gives them a nice little anti-vibrational cloud",
+   "startMs": 802735,
+   "endMs": 806806
+  },
+  {
+   "text": "to sit on.",
+   "startMs": 806806,
+   "endMs": 807640
+  },
+  {
+   "text": "And while you're not gonna kill a hard drive",
+   "startMs": 807640,
+   "endMs": 809208
+  },
+  {
+   "text": "by moving it around,",
+   "startMs": 809208,
+   "endMs": 810476
+  },
+  {
+   "text": "we had hard drives and laptops for literal decades,",
+   "startMs": 810476,
+   "endMs": 813345
+  },
+  {
+   "text": "it's pretty well documented that any excess vibration",
+   "startMs": 813345,
+   "endMs": 817049
+  },
+  {
+   "text": "is pretty bad for them.",
+   "startMs": 817049,
+   "endMs": 818884
+  },
+  {
+   "text": "The other benefit is this keeps the drives,",
+   "startMs": 818884,
+   "endMs": 821453
+  },
+  {
+   "text": "which have moving parts in them of course,",
+   "startMs": 821453,
+   "endMs": 823222
+  },
+  {
+   "text": "from transferring their vibrational noise to the case",
+   "startMs": 823222,
+   "endMs": 826392
+  },
+  {
+   "text": "and causing it to rattle.",
+   "startMs": 826392,
+   "endMs": 827960
+  },
+  {
+   "text": "Which again, is a concern for the system",
+   "startMs": 827960,
+   "endMs": 829595
+  },
+  {
+   "text": "because it will be near where people are working or living.",
+   "startMs": 829595,
+   "endMs": 832998
+  },
+  {
+   "text": "It's like a storage brick in the front of the case.",
+   "startMs": 832998,
+   "endMs": 836902
+  },
+  {
+   "text": "Good Lord.",
+   "startMs": 836902,
+   "endMs": 838370
+  },
+  {
+   "text": "Oh, oh yeah.",
+   "startMs": 838370,
+   "endMs": 841006
+  },
+  {
+   "text": "Storage brick.",
+   "startMs": 841006,
+   "endMs": 842174
+  },
+  {
+   "text": "It's a good brick right there.",
+   "startMs": 843342,
+   "endMs": 845144
+  },
+  {
+   "text": "Of course.",
+   "startMs": 845144,
+   "endMs": 846512
+  },
+  {
+   "text": "What good is a brick without a brain?",
+   "startMs": 846512,
+   "endMs": 849582
+  },
+  {
+   "text": "Let's go ahead and put our IO shield in.",
+   "startMs": 849582,
+   "endMs": 851917
+  },
+  {
+   "text": "Your face is a brain.",
+   "startMs": 851917,
+   "endMs": 853319
+  },
+  {
+   "text": "Because the year is 1998.",
+   "startMs": 853319,
+   "endMs": 855554
+  },
+  {
+   "text": "Got them.",
+   "startMs": 855554,
+   "endMs": 856689
+  },
+  {
+   "text": "I'm just trying not to slice my hand open.",
+   "startMs": 856689,
+   "endMs": 858724
+  },
+  {
+   "text": "Thing of beauty right there.",
+   "startMs": 858724,
+   "endMs": 860960
+  },
+  {
+   "text": "I don't know what it is,",
+   "startMs": 860960,
+   "endMs": 861894
+  },
+  {
+   "text": "but compared to whatever the flavor du jour,",
+   "startMs": 861894,
+   "endMs": 865197
+  },
+  {
+   "text": "RGB fiesta thing that's going on in the gaming spaces,",
+   "startMs": 865197,
+   "endMs": 868567
+  },
+  {
+   "text": "workstations, server class stuff,",
+   "startMs": 868567,
+   "endMs": 871437
+  },
+  {
+   "text": "just has that classic high performance look, you know?",
+   "startMs": 871437,
+   "endMs": 874440
+  },
+  {
+   "text": "Black PCB, I sleep.",
+   "startMs": 874440,
+   "endMs": 876842
+  },
+  {
+   "text": "Green PCB, real.",
+   "startMs": 876842,
+   "endMs": 878777
+  },
+  {
+   "text": "Hey, hey, hey, what do you call the cold season",
+   "startMs": 878777,
+   "endMs": 882448
+  },
+  {
+   "text": "when I'm making this video?",
+   "startMs": 882448,
+   "endMs": 883816
+  },
+  {
+   "text": "The winter of my disc content.",
+   "startMs": 883816,
+   "endMs": 885718
+  },
+  {
+   "text": "We got ourselves a computer here.",
+   "startMs": 889054,
+   "endMs": 891290
+  },
+  {
+   "text": "Sort of.",
+   "startMs": 891290,
+   "endMs": 892124
+  },
+  {
+   "text": "We got to talk about cooling.",
+   "startMs": 892124,
+   "endMs": 893259
+  },
+  {
+   "text": "Oh, this is getting very heavy.",
+   "startMs": 893259,
+   "endMs": 895895
+  },
+  {
+   "text": "Hopefully, yes.",
+   "startMs": 895895,
+   "endMs": 897897
+  },
+  {
+   "text": "Oh, easy.",
+   "startMs": 897897,
+   "endMs": 899999
+  },
+  {
+   "text": "Time to put some fans in the front.",
+   "startMs": 899999,
+   "endMs": 901700
+  },
+  {
+   "text": "Just use the stock ones.",
+   "startMs": 901700,
+   "endMs": 902902
+  },
+  {
+   "text": "Stock ones?",
+   "startMs": 902902,
+   "endMs": 903736
+  },
+  {
+   "text": "Yeah, we'll use the Noctuas for the top.",
+   "startMs": 903736,
+   "endMs": 906338
+  },
+  {
+   "text": "What?",
+   "startMs": 906338,
+   "endMs": 907573
+  },
+  {
+   "text": "Where would I like to put my fan for it",
+   "startMs": 907573,
+   "endMs": 910009
+  },
+  {
+   "text": "to have all of its airflow blocked",
+   "startMs": 910009,
+   "endMs": 911610
+  },
+  {
+   "text": "by this wall of hard drives?",
+   "startMs": 911610,
+   "endMs": 913412
+  },
+  {
+   "text": "I could put it here, or here, or here.",
+   "startMs": 913412,
+   "endMs": 918417
+  },
+  {
+   "text": "There's not gonna be a GPU in this system.",
+   "startMs": 918951,
+   "endMs": 921320
+  },
+  {
+   "text": "Ooh, at least not now.",
+   "startMs": 921320,
+   "endMs": 923355
+  },
+  {
+   "text": "Well, no, he could put a GPU in it in the future",
+   "startMs": 923355,
+   "endMs": 925357
+  },
+  {
+   "text": "if he wanted to pass through a GPU",
+   "startMs": 925357,
+   "endMs": 927726
+  },
+  {
+   "text": "to a Plex VM or something like that.",
+   "startMs": 927726,
+   "endMs": 931063
+  },
+  {
+   "text": "I thought you said he wasn't doing VMs.",
+   "startMs": 931063,
+   "endMs": 931964
+  },
+  {
+   "text": "No, he's not gonna do any of that,",
+   "startMs": 931964,
+   "endMs": 933165
+  },
+  {
+   "text": "but I am going to put the fans in such a place",
+   "startMs": 933165,
+   "endMs": 936702
+  },
+  {
+   "text": "that they would deliver fresh airflow",
+   "startMs": 936702,
+   "endMs": 938370
+  },
+  {
+   "text": "to a GPU or accelerator card",
+   "startMs": 938370,
+   "endMs": 940239
+  },
+  {
+   "text": "or any other kind of thing you might want to put in here.",
+   "startMs": 940239,
+   "endMs": 942341
+  },
+  {
+   "text": "I'm modifying the HBM, putting some cooling on here.",
+   "startMs": 942341,
+   "endMs": 945110
+  },
+  {
+   "text": "This is a little big.",
+   "startMs": 945110,
+   "endMs": 946879
+  },
+  {
+   "text": "That's a little small.",
+   "startMs": 946879,
+   "endMs": 947780
+  },
+  {
+   "text": "This is fine.",
+   "startMs": 947780,
+   "endMs": 948814
+  },
+  {
+   "text": "This is fine?",
+   "startMs": 948814,
+   "endMs": 949615
+  },
+  {
+   "text": "Yeah, just put that in there.",
+   "startMs": 949615,
+   "endMs": 950482
+  },
+  {
+   "text": "You're so cute.",
+   "startMs": 950482,
+   "endMs": 951317
+  },
+  {
+   "text": "Realistically, a card like this,",
+   "startMs": 951317,
+   "endMs": 953085
+  },
+  {
+   "text": "which we haven't actually talked about yet,",
+   "startMs": 953085,
+   "endMs": 954920
+  },
+  {
+   "text": "but we need because our motherboard only supports",
+   "startMs": 954920,
+   "endMs": 957656
+  },
+  {
+   "text": "eight SATA hard drives out of the box.",
+   "startMs": 957656,
+   "endMs": 959692
+  },
+  {
+   "text": "10, oh, well, whatever.",
+   "startMs": 959692,
+   "endMs": 960993
+  },
+  {
+   "text": "That's still not 16 or 18 or whatever this can support.",
+   "startMs": 960993,
+   "endMs": 964296
+  },
+  {
+   "text": "The point is we need to add some more SATA ports.",
+   "startMs": 964296,
+   "endMs": 967032
+  },
+  {
+   "text": "This is an HBA host bus adapter,",
+   "startMs": 967032,
+   "endMs": 969535
+  },
+  {
+   "text": "and it's kind of designed to get passive airflow",
+   "startMs": 969535,
+   "endMs": 972438
+  },
+  {
+   "text": "from the server fans that are way over here somewhere.",
+   "startMs": 972438,
+   "endMs": 975774
+  },
+  {
+   "text": "Right now it's got nothing.",
+   "startMs": 975774,
+   "endMs": 976842
+  },
+  {
+   "text": "So we need to add something to this.",
+   "startMs": 976842,
+   "endMs": 978610
+  },
+  {
+   "text": "And I mean, that's better than nothing.",
+   "startMs": 978610,
+   "endMs": 981013
+  },
+  {
+   "text": "To be fair, it'll probably be fine.",
+   "startMs": 981013,
+   "endMs": 983182
+  },
+  {
+   "text": "We're just doing it just in case.",
+   "startMs": 984049,
+   "endMs": 986018
+  },
+  {
+   "text": "I think it's time for us to talk power supply.",
+   "startMs": 986018,
+   "endMs": 988921
+  },
+  {
+   "text": "We could have gone with something redundant.",
+   "startMs": 988921,
+   "endMs": 990956
+  },
+  {
+   "text": "In fact, there are some really cool ATX dual unit",
+   "startMs": 990956,
+   "endMs": 994393
+  },
+  {
+   "text": "power supplies these days, but it's not quiet.",
+   "startMs": 994393,
+   "endMs": 998364
+  },
+  {
+   "text": "So we've opted for the second best thing,",
+   "startMs": 998364,
+   "endMs": 1001700
+  },
+  {
+   "text": "this excellent Seasonic Prime Platinum",
+   "startMs": 1001700,
+   "endMs": 1004937
+  },
+  {
+   "text": "1300 watt power supply.",
+   "startMs": 1004937,
+   "endMs": 1006872
+  },
+  {
+   "text": "Did we need 1300 watts?",
+   "startMs": 1006872,
+   "endMs": 1009441
+  },
+  {
+   "text": "The answer is no.",
+   "startMs": 1009441,
+   "endMs": 1011410
+  },
+  {
+   "text": "But the 1300 watt has native support",
+   "startMs": 1011410,
+   "endMs": 1014847
+  },
+  {
+   "text": "for 16 SATA power connectors.",
+   "startMs": 1014847,
+   "endMs": 1017583
+  },
+  {
+   "text": "And while we could have adapted something else",
+   "startMs": 1017583,
+   "endMs": 1020352
+  },
+  {
+   "text": "or even used splitters, particularly for SATA,",
+   "startMs": 1020352,
+   "endMs": 1024089
+  },
+  {
+   "text": "using splitters is not recommended",
+   "startMs": 1024089,
+   "endMs": 1025657
+  },
+  {
+   "text": "because of the tiny little pins.",
+   "startMs": 1025657,
+   "endMs": 1027259
+  },
+  {
+   "text": "If you drop too much current over them, they melt.",
+   "startMs": 1027259,
+   "endMs": 1029862
+  },
+  {
+   "text": "And that's bad.",
+   "startMs": 1029862,
+   "endMs": 1031030
+  },
+  {
+   "text": "This is a machine that's intended to be operated",
+   "startMs": 1031030,
+   "endMs": 1032998
+  },
+  {
+   "text": "continuously for years on end.",
+   "startMs": 1032998,
+   "endMs": 1036335
+  },
+  {
+   "text": "I mean, we don't know how long he's gonna keep it.",
+   "startMs": 1036335,
+   "endMs": 1037936
+  },
+  {
+   "text": "Nothing would stop him from running this for like,",
+   "startMs": 1037936,
+   "endMs": 1040372
+  },
+  {
+   "text": "I don't know, 10 years,",
+   "startMs": 1040372,
+   "endMs": 1041840
+  },
+  {
+   "text": "as long as he replaces hard drives as they fail.",
+   "startMs": 1041840,
+   "endMs": 1044243
+  },
+  {
+   "text": "So we don't wanna take any chances.",
+   "startMs": 1044243,
+   "endMs": 1046378
+  },
+  {
+   "text": "I didn't have four of the same size zip ties.",
+   "startMs": 1046378,
+   "endMs": 1048247
+  },
+  {
+   "text": "So there's two different size zip ties,",
+   "startMs": 1048247,
+   "endMs": 1049882
+  },
+  {
+   "text": "but it's mint, okay?",
+   "startMs": 1049882,
+   "endMs": 1051950
+  },
+  {
+   "text": "I mean, it's not going anywhere.",
+   "startMs": 1053085,
+   "endMs": 1054953
+  },
+  {
+   "text": "No, it's not.",
+   "startMs": 1054953,
+   "endMs": 1055821
+  },
+  {
+   "text": "You might be wondering how this HBA",
+   "startMs": 1055821,
+   "endMs": 1057322
+  },
+  {
+   "text": "is gonna plug into our hard drives",
+   "startMs": 1057322,
+   "endMs": 1058690
+  },
+  {
+   "text": "because that doesn't look anything",
+   "startMs": 1058690,
+   "endMs": 1060526
+  },
+  {
+   "text": "like the port on a hard drive.",
+   "startMs": 1060526,
+   "endMs": 1061894
+  },
+  {
+   "text": "So we have to use these mini SAS HD,",
+   "startMs": 1061894,
+   "endMs": 1064663
+  },
+  {
+   "text": "that's the connector on the HBA,",
+   "startMs": 1064663,
+   "endMs": 1066432
+  },
+  {
+   "text": "to four SATA connectors.",
+   "startMs": 1066432,
+   "endMs": 1068534
+  },
+  {
+   "text": "And then we can plug directly in, no problem.",
+   "startMs": 1068534,
+   "endMs": 1070436
+  },
+  {
+   "text": "Like Linus mentioned before,",
+   "startMs": 1070436,
+   "endMs": 1071770
+  },
+  {
+   "text": "the motherboard actually has",
+   "startMs": 1071770,
+   "endMs": 1073005
+  },
+  {
+   "text": "two of these mini SAS HD connectors,",
+   "startMs": 1073005,
+   "endMs": 1074740
+  },
+  {
+   "text": "which means eight of our 12 hard drives",
+   "startMs": 1074740,
+   "endMs": 1076475
+  },
+  {
+   "text": "are already covered.",
+   "startMs": 1076475,
+   "endMs": 1077409
+  },
+  {
+   "text": "So this HBA is only gonna be used on one port.",
+   "startMs": 1077409,
+   "endMs": 1080279
+  },
+  {
+   "text": "Now you can buy ones that are cheaper with less ports.",
+   "startMs": 1080279,
+   "endMs": 1083782
+  },
+  {
+   "text": "This is a 16i, and they make an 8i,",
+   "startMs": 1083782,
+   "endMs": 1085717
+  },
+  {
+   "text": "and I think some other companies might even make a 4i,",
+   "startMs": 1085717,
+   "endMs": 1087920
+  },
+  {
+   "text": "which would be just one connector.",
+   "startMs": 1087920,
+   "endMs": 1090122
+  },
+  {
+   "text": "It's just that we wanted to set it up for future expansion.",
+   "startMs": 1090122,
+   "endMs": 1092458
+  },
+  {
+   "text": "Even in the situation where he went",
+   "startMs": 1092458,
+   "endMs": 1093992
+  },
+  {
+   "text": "well beyond the capacity of this case",
+   "startMs": 1093992,
+   "endMs": 1095994
+  },
+  {
+   "text": "and switched to like a rack mount chassis,",
+   "startMs": 1095994,
+   "endMs": 1097996
+  },
+  {
+   "text": "this HBA is still gonna work,",
+   "startMs": 1097996,
+   "endMs": 1100099
+  },
+  {
+   "text": "and he has enough ports for another 12 drives on here.",
+   "startMs": 1100099,
+   "endMs": 1103302
+  },
+  {
+   "text": "You just slide it on in.",
+   "startMs": 1103302,
+   "endMs": 1104603
+  },
+  {
+   "text": "There's no graphics card because it's a server,",
+   "startMs": 1104603,
+   "endMs": 1106338
+  },
+  {
+   "text": "so we can put this right in the top slot like that.",
+   "startMs": 1106338,
+   "endMs": 1108774
+  },
+  {
+   "text": "It's pretty cute, right?",
+   "startMs": 1108774,
+   "endMs": 1109775
+  },
+  {
+   "text": "Aside from like an hour of cable management,",
+   "startMs": 1109775,
+   "endMs": 1111977
+  },
+  {
+   "text": "the last thing this system needs is boot drives.",
+   "startMs": 1111977,
+   "endMs": 1114279
+  },
+  {
+   "text": "We're gonna be using a pair",
+   "startMs": 1114279,
+   "endMs": 1115380
+  },
+  {
+   "text": "of Micron's 5400 Pro series drives.",
+   "startMs": 1115380,
+   "endMs": 1117916
+  },
+  {
+   "text": "These are like data center grade SATA SSDs.",
+   "startMs": 1117916,
+   "endMs": 1121019
+  },
+  {
+   "text": "They're honestly overkill and probably more expensive",
+   "startMs": 1121019,
+   "endMs": 1124389
+  },
+  {
+   "text": "than I would have spent on boot drives,",
+   "startMs": 1124389,
+   "endMs": 1126458
+  },
+  {
+   "text": "but Micron sent them for the project, so not a big deal.",
+   "startMs": 1126458,
+   "endMs": 1128594
+  },
+  {
+   "text": "And these are gonna last gosh dang pretty much forever.",
+   "startMs": 1128594,
+   "endMs": 1131897
+  },
+  {
+   "text": "TrueNAS like doesn't really write",
+   "startMs": 1131897,
+   "endMs": 1133999
+  },
+  {
+   "text": "a whole lot to the boot drives.",
+   "startMs": 1133999,
+   "endMs": 1135701
+  },
+  {
+   "text": "You know, you're talking like the configuration",
+   "startMs": 1135701,
+   "endMs": 1137803
+  },
+  {
+   "text": "and some, you know, some statistics and like logs and stuff,",
+   "startMs": 1137803,
+   "endMs": 1141173
+  },
+  {
+   "text": "so you could probably run it on a USB if you had to.",
+   "startMs": 1141173,
+   "endMs": 1143942
+  },
+  {
+   "text": "I wouldn't recommend that, but you could.",
+   "startMs": 1143942,
+   "endMs": 1146044
+  },
+  {
+   "text": "So these are super, super overkill.",
+   "startMs": 1146044,
+   "endMs": 1148080
+  },
+  {
+   "text": "Hey, look, it's working.",
+   "startMs": 1148080,
+   "endMs": 1149414
+  },
+  {
+   "text": "Okay, let's see if all of our drives, ooh.",
+   "startMs": 1149414,
+   "endMs": 1153519
+  },
+  {
+   "text": "These are just because these are new drives.",
+   "startMs": 1153519,
+   "endMs": 1155721
+  },
+  {
+   "text": "Okay, we got one, two, three, four, five, six, seven,",
+   "startMs": 1155721,
+   "endMs": 1158724
+  },
+  {
+   "text": "eight, nine, 10, 11, 12.",
+   "startMs": 1158724,
+   "endMs": 1160659
+  },
+  {
+   "text": "Beautiful.",
+   "startMs": 1160659,
+   "endMs": 1161527
+  },
+  {
+   "text": "Where are our boot drives?",
+   "startMs": 1161527,
+   "endMs": 1163595
+  },
+  {
+   "text": "There are some weird stipulations on this board.",
+   "startMs": 1163595,
+   "endMs": 1165731
+  },
+  {
+   "text": "Despite it having a bajillion IO, some of them are shared.",
+   "startMs": 1165731,
+   "endMs": 1170135
+  },
+  {
+   "text": "I think slot two, which is either the second",
+   "startMs": 1170135,
+   "endMs": 1172471
+  },
+  {
+   "text": "from the bottom or the second from the top,",
+   "startMs": 1172471,
+   "endMs": 1173939
+  },
+  {
+   "text": "is shared with like the M.2, these ports,",
+   "startMs": 1173939,
+   "endMs": 1177543
+  },
+  {
+   "text": "the Oculink ports, so depending on,",
+   "startMs": 1177543,
+   "endMs": 1180112
+  },
+  {
+   "text": "there's like a little jumper you can move around,",
+   "startMs": 1180112,
+   "endMs": 1182014
+  },
+  {
+   "text": "some of the things get disabled.",
+   "startMs": 1182014,
+   "endMs": 1183382
+  },
+  {
+   "text": "I suspect that that's what the problem is right now,",
+   "startMs": 1183382,
+   "endMs": 1185350
+  },
+  {
+   "text": "so I just gotta check the motherboard manual and see.",
+   "startMs": 1185350,
+   "endMs": 1188320
+  },
+  {
+   "text": "We can see from this jumper chart",
+   "startMs": 1188320,
+   "endMs": 1190022
+  },
+  {
+   "text": "that SATA four underscore seven,",
+   "startMs": 1190022,
+   "endMs": 1191757
+  },
+  {
+   "text": "so four to seven does get disabled in some circumstances,",
+   "startMs": 1191757,
+   "endMs": 1195894
+  },
+  {
+   "text": "and four to seven is the bottom one,",
+   "startMs": 1195894,
+   "endMs": 1198297
+  },
+  {
+   "text": "which is what our boot drives are plugged into.",
+   "startMs": 1198297,
+   "endMs": 1200332
+  },
+  {
+   "text": "So I was right, we're good.",
+   "startMs": 1200332,
+   "endMs": 1201600
+  },
+  {
+   "text": "We just need to move this jumper.",
+   "startMs": 1201600,
+   "endMs": 1203268
+  },
+  {
+   "text": "The Xs mean that it's disabled.",
+   "startMs": 1203268,
+   "endMs": 1205270
+  },
+  {
+   "text": "We have two M.2 slots, so we don't have to worry",
+   "startMs": 1205270,
+   "endMs": 1207339
+  },
+  {
+   "text": "about our M.2 because this M.2 slot is always on.",
+   "startMs": 1207339,
+   "endMs": 1210642
+  },
+  {
+   "text": "Actually, the only thing we need to worry about",
+   "startMs": 1210642,
+   "endMs": 1212110
+  },
+  {
+   "text": "is the SATA and probably that PCIe slot.",
+   "startMs": 1212110,
+   "endMs": 1216014
+  },
+  {
+   "text": "So I think I'm gonna put it in this configuration",
+   "startMs": 1216014,
+   "endMs": 1217816
+  },
+  {
+   "text": "because that means we get eight X on the PCIe slot.",
+   "startMs": 1217816,
+   "endMs": 1220552
+  },
+  {
+   "text": "That other M.2 is gonna work and our SATA work.",
+   "startMs": 1220552,
+   "endMs": 1222821
+  },
+  {
+   "text": "I don't think Mark is ever gonna wanna use",
+   "startMs": 1222821,
+   "endMs": 1224456
+  },
+  {
+   "text": "Oculink for anything, and I would suspect",
+   "startMs": 1224456,
+   "endMs": 1228193
+  },
+  {
+   "text": "if anything they might wanna use that PCIe slot.",
+   "startMs": 1228193,
+   "endMs": 1230729
+  },
+  {
+   "text": "Maybe they won't use it.",
+   "startMs": 1230729,
+   "endMs": 1231563
+  },
+  {
+   "text": "I don't know, I'm just gonna put it in that config",
+   "startMs": 1231563,
+   "endMs": 1232731
+  },
+  {
+   "text": "and don't call me.",
+   "startMs": 1232731,
+   "endMs": 1234633
+  },
+  {
+   "text": "This guy is already in the correct position.",
+   "startMs": 1234633,
+   "endMs": 1236401
+  },
+  {
+   "text": "We just need to move the right-hand one over one pin.",
+   "startMs": 1236401,
+   "endMs": 1239738
+  },
+  {
+   "text": "And now our boot drive should work.",
+   "startMs": 1241073,
+   "endMs": 1243575
+  },
+  {
+   "text": "The system's booted up and we've got",
+   "startMs": 1243575,
+   "endMs": 1244843
+  },
+  {
+   "text": "TrueNAS scale installed.",
+   "startMs": 1244843,
+   "endMs": 1246378
+  },
+  {
+   "text": "Now we can set up our array.",
+   "startMs": 1246378,
+   "endMs": 1248814
+  },
+  {
+   "text": "Because this is, you know, it's mission critical data.",
+   "startMs": 1248814,
+   "endMs": 1252718
+  },
+  {
+   "text": "They don't wanna lose this stuff.",
+   "startMs": 1252718,
+   "endMs": 1253785
+  },
+  {
+   "text": "This is already gonna have an offsite backup.",
+   "startMs": 1253785,
+   "endMs": 1255821
+  },
+  {
+   "text": "We're gonna set it up in a pretty safe configuration,",
+   "startMs": 1255821,
+   "endMs": 1258123
+  },
+  {
+   "text": "but one that is still gonna be very performant.",
+   "startMs": 1258123,
+   "endMs": 1260259
+  },
+  {
+   "text": "In our experience with Zetafest,",
+   "startMs": 1260259,
+   "endMs": 1262060
+  },
+  {
+   "text": "usually the best option to get good sequential",
+   "startMs": 1262060,
+   "endMs": 1264696
+  },
+  {
+   "text": "and random performance,",
+   "startMs": 1264696,
+   "endMs": 1265931
+  },
+  {
+   "text": "sequential being big video clips and whatnot,",
+   "startMs": 1265931,
+   "endMs": 1268433
+  },
+  {
+   "text": "and random kind of being small text files,",
+   "startMs": 1268433,
+   "endMs": 1270435
+  },
+  {
+   "text": "or if you have lots of photos,",
+   "startMs": 1270435,
+   "endMs": 1271570
+  },
+  {
+   "text": "you're copying all those at once,",
+   "startMs": 1271570,
+   "endMs": 1272804
+  },
+  {
+   "text": "is to use a VDEV size of six,",
+   "startMs": 1272804,
+   "endMs": 1274473
+  },
+  {
+   "text": "which works great with our 12 drives.",
+   "startMs": 1274473,
+   "endMs": 1276074
+  },
+  {
+   "text": "However, because they're hard drives,",
+   "startMs": 1276074,
+   "endMs": 1277476
+  },
+  {
+   "text": "we do need to have some sort of protection for that array.",
+   "startMs": 1277476,
+   "endMs": 1279711
+  },
+  {
+   "text": "They are at some point going to fail.",
+   "startMs": 1279711,
+   "endMs": 1282014
+  },
+  {
+   "text": "It's a for sure thing.",
+   "startMs": 1282014,
+   "endMs": 1283715
+  },
+  {
+   "text": "So we're gonna use two of those six drives as parity data.",
+   "startMs": 1283715,
+   "endMs": 1287185
+  },
+  {
+   "text": "That means in each of those pools of six,",
+   "startMs": 1287185,
+   "endMs": 1289721
+  },
+  {
+   "text": "we can lose two drives before our data is at jeopardy,",
+   "startMs": 1289721,
+   "endMs": 1292724
+  },
+  {
+   "text": "which means we're gonna lose a little bit of capacity.",
+   "startMs": 1292724,
+   "endMs": 1294726
+  },
+  {
+   "text": "I think that brings us from 240 terabytes,",
+   "startMs": 1294726,
+   "endMs": 1297562
+  },
+  {
+   "text": "because these are 20 terabyte drives,",
+   "startMs": 1297562,
+   "endMs": 1299298
+  },
+  {
+   "text": "down to 160 or something like that.",
+   "startMs": 1299298,
+   "endMs": 1301199
+  },
+  {
+   "text": "It's a pretty substantial loss,",
+   "startMs": 1301199,
+   "endMs": 1303402
+  },
+  {
+   "text": "but it's not as substantial as losing everything",
+   "startMs": 1303402,
+   "endMs": 1305737
+  },
+  {
+   "text": "because you didn't have enough parity drives.",
+   "startMs": 1305737,
+   "endMs": 1307439
+  },
+  {
+   "text": "So it's very important to set up your array",
+   "startMs": 1307439,
+   "endMs": 1309341
+  },
+  {
+   "text": "in a safe configuration like this.",
+   "startMs": 1309341,
+   "endMs": 1311677
+  },
+  {
+   "text": "So let's just do that.",
+   "startMs": 1311677,
+   "endMs": 1312577
+  },
+  {
+   "text": "We'll pick six drives.",
+   "startMs": 1312577,
+   "endMs": 1313512
+  },
+  {
+   "text": "One, two, three, four, five, six.",
+   "startMs": 1313512,
+   "endMs": 1317449
+  },
+  {
+   "text": "I suspect TrueNAS is actually gonna automatically do this.",
+   "startMs": 1317449,
+   "endMs": 1319651
+  },
+  {
+   "text": "Yeah, look at that RAID-Z2.",
+   "startMs": 1319651,
+   "endMs": 1321119
+  },
+  {
+   "text": "It picked for us.",
+   "startMs": 1321119,
+   "endMs": 1322487
+  },
+  {
+   "text": "This is what you're doing.",
+   "startMs": 1322487,
+   "endMs": 1323322
+  },
+  {
+   "text": "You don't have a choice.",
+   "startMs": 1323322,
+   "endMs": 1324523
+  },
+  {
+   "text": "And then we'll just hit repeat,",
+   "startMs": 1324523,
+   "endMs": 1325724
+  },
+  {
+   "text": "because we can make an additional one.",
+   "startMs": 1325724,
+   "endMs": 1326992
+  },
+  {
+   "text": "That's gonna give us a formatted capacity",
+   "startMs": 1326992,
+   "endMs": 1328694
+  },
+  {
+   "text": "of about 150 terabytes.",
+   "startMs": 1328694,
+   "endMs": 1330262
+  },
+  {
+   "text": "Also, before we're done here,",
+   "startMs": 1330262,
+   "endMs": 1331263
+  },
+  {
+   "text": "we're gonna add our level two arc.",
+   "startMs": 1331263,
+   "endMs": 1332931
+  },
+  {
+   "text": "You can see there's a cache type of VDEV,",
+   "startMs": 1332931,
+   "endMs": 1335500
+  },
+  {
+   "text": "so we'll just add that,",
+   "startMs": 1335500,
+   "endMs": 1336601
+  },
+  {
+   "text": "select our one terabyte NVMe drive, and plop it on there.",
+   "startMs": 1336601,
+   "endMs": 1340038
+  },
+  {
+   "text": "There are a few more steps we still have to do.",
+   "startMs": 1340038,
+   "endMs": 1341640
+  },
+  {
+   "text": "I wanna set up email alerts,",
+   "startMs": 1341640,
+   "endMs": 1343041
+  },
+  {
+   "text": "so if a drive were to die, they actually know.",
+   "startMs": 1343041,
+   "endMs": 1345610
+  },
+  {
+   "text": "It doesn't tell you.",
+   "startMs": 1345610,
+   "endMs": 1346511
+  },
+  {
+   "text": "It just goes, hey, my drive's dead.",
+   "startMs": 1346511,
+   "endMs": 1348280
+  },
+  {
+   "text": "You have to get an email for that.",
+   "startMs": 1348280,
+   "endMs": 1349614
+  },
+  {
+   "text": "We're also gonna have to set up a data set,",
+   "startMs": 1349614,
+   "endMs": 1351249
+  },
+  {
+   "text": "some user accounts,",
+   "startMs": 1351249,
+   "endMs": 1352150
+  },
+  {
+   "text": "so they can actually read the data off of it.",
+   "startMs": 1352150,
+   "endMs": 1353752
+  },
+  {
+   "text": "We're gonna have to set up the software for our remote sync,",
+   "startMs": 1353752,
+   "endMs": 1355854
+  },
+  {
+   "text": "which is called Tailscale,",
+   "startMs": 1355854,
+   "endMs": 1357155
+  },
+  {
+   "text": "and then set up the sync process.",
+   "startMs": 1357155,
+   "endMs": 1358557
+  },
+  {
+   "text": "But we're gonna do all that",
+   "startMs": 1358557,
+   "endMs": 1359558
+  },
+  {
+   "text": "when we're on the phone with Mark.",
+   "startMs": 1359558,
+   "endMs": 1360692
+  },
+  {
+   "text": "Also, we said we were gonna build two of these today.",
+   "startMs": 1360692,
+   "endMs": 1363261
+  },
+  {
+   "text": "That was fake news.",
+   "startMs": 1363261,
+   "endMs": 1364896
+  },
+  {
+   "text": "We already built the first one.",
+   "startMs": 1364896,
+   "endMs": 1366531
+  },
+  {
+   "text": "It was probably like six, nine,",
+   "startMs": 1366531,
+   "endMs": 1368700
+  },
+  {
+   "text": "might even been a year ago that we built this thing,",
+   "startMs": 1368700,
+   "endMs": 1370769
+  },
+  {
+   "text": "and shipped it to Mark's team,",
+   "startMs": 1370769,
+   "endMs": 1371903
+  },
+  {
+   "text": "because we don't actually need both of them",
+   "startMs": 1371903,
+   "endMs": 1374406
+  },
+  {
+   "text": "to build on camera.",
+   "startMs": 1374406,
+   "endMs": 1375340
+  },
+  {
+   "text": "This way, we actually get to do the sync remotely.",
+   "startMs": 1375340,
+   "endMs": 1378143
+  },
+  {
+   "text": "It's already with them all the way in Los Angeles.",
+   "startMs": 1378143,
+   "endMs": 1380112
+  },
+  {
+   "text": "We're up here in Vancouver,",
+   "startMs": 1380112,
+   "endMs": 1381079
+  },
+  {
+   "text": "so this'll be an even better demo.",
+   "startMs": 1381079,
+   "endMs": 1382614
+  },
+  {
+   "text": "We're thousands of miles away.",
+   "startMs": 1382614,
+   "endMs": 1384516
+  },
+  {
+   "text": "There are a few things we need to finalize",
+   "startMs": 1384516,
+   "endMs": 1386151
+  },
+  {
+   "text": "before we actually ship the machine,",
+   "startMs": 1386151,
+   "endMs": 1387886
+  },
+  {
+   "text": "but we've got it working enough now",
+   "startMs": 1387886,
+   "endMs": 1390455
+  },
+  {
+   "text": "that we're ready to hear from its new owner",
+   "startMs": 1390455,
+   "endMs": 1392991
+  },
+  {
+   "text": "and do a live demonstration where we blow Mark's mind",
+   "startMs": 1392991,
+   "endMs": 1397129
+  },
+  {
+   "text": "with an automatic scheduled backup",
+   "startMs": 1397129,
+   "endMs": 1399631
+  },
+  {
+   "text": "across this unassuming black wire over hundreds of miles.",
+   "startMs": 1399631,
+   "endMs": 1404202
+  },
+  {
+   "text": "We're recording good audio for you over here.",
+   "startMs": 1404202,
+   "endMs": 1406338
+  },
+  {
+   "text": "What up?",
+   "startMs": 1406338,
+   "endMs": 1407806
+  },
+  {
+   "text": "Oh, hi, Mark.",
+   "startMs": 1407806,
+   "endMs": 1408774
+  },
+  {
+   "text": "Oh, hi, Mark.",
+   "startMs": 1408774,
+   "endMs": 1410242
+  },
+  {
+   "text": "Oh, hi, Mark.",
+   "startMs": 1410242,
+   "endMs": 1411076
+  },
+  {
+   "text": "God damn it.",
+   "startMs": 1412043,
+   "endMs": 1412878
+  },
+  {
+   "text": "So how's the NAS treating you?",
+   "startMs": 1412878,
+   "endMs": 1414379
+  },
+  {
+   "text": "Yeah, the NAS is amazing.",
+   "startMs": 1414379,
+   "endMs": 1415881
+  },
+  {
+   "text": "And then I also love the idea too,",
+   "startMs": 1415881,
+   "endMs": 1417816
+  },
+  {
+   "text": "because we're gonna do a second one",
+   "startMs": 1417816,
+   "endMs": 1419651
+  },
+  {
+   "text": "that's like at another location,",
+   "startMs": 1419651,
+   "endMs": 1421052
+  },
+  {
+   "text": "so then we're like, really?",
+   "startMs": 1421052,
+   "endMs": 1422554
+  },
+  {
+   "text": "Really, I have no idea what you're talking about.",
+   "startMs": 1422554,
+   "endMs": 1424122
+  },
+  {
+   "text": "You don't say.",
+   "startMs": 1424122,
+   "endMs": 1425190
+  },
+  {
+   "text": "Is that it?",
+   "startMs": 1425190,
+   "endMs": 1426258
+  },
+  {
+   "text": "No way.",
+   "startMs": 1427893,
+   "endMs": 1428927
+  },
+  {
+   "text": "Thank you for sharing your future plans with me.",
+   "startMs": 1428927,
+   "endMs": 1431663
+  },
+  {
+   "text": "Yeah, maybe they didn't brief you too much on this,",
+   "startMs": 1432831,
+   "endMs": 1435033
+  },
+  {
+   "text": "but that's what we're doing today.",
+   "startMs": 1435033,
+   "endMs": 1437436
+  },
+  {
+   "text": "Oh, really?",
+   "startMs": 1437436,
+   "endMs": 1438270
+  },
+  {
+   "text": "Yeah, we're gonna do an offsite backup,",
+   "startMs": 1438270,
+   "endMs": 1440472
+  },
+  {
+   "text": "and you are going to sleep so much easier at night",
+   "startMs": 1440472,
+   "endMs": 1443742
+  },
+  {
+   "text": "knowing that every night,",
+   "startMs": 1443742,
+   "endMs": 1445777
+  },
+  {
+   "text": "everything that you ingest to your main editing NAS,",
+   "startMs": 1445777,
+   "endMs": 1448880
+  },
+  {
+   "text": "which can be used by any of his editors,",
+   "startMs": 1448880,
+   "endMs": 1451650
+  },
+  {
+   "text": "both local, remote, whatever.",
+   "startMs": 1451650,
+   "endMs": 1453151
+  },
+  {
+   "text": "If Mark just wants to check on something,",
+   "startMs": 1453151,
+   "endMs": 1454953
+  },
+  {
+   "text": "everything that he dumps on there",
+   "startMs": 1454953,
+   "endMs": 1456655
+  },
+  {
+   "text": "is going to be replicated to this one",
+   "startMs": 1456655,
+   "endMs": 1458590
+  },
+  {
+   "text": "so that in the event of a fire or other disaster,",
+   "startMs": 1458590,
+   "endMs": 1463595
+  },
+  {
+   "text": "the data won't be lost because the hardware has a value,",
+   "startMs": 1463762,
+   "endMs": 1466765
+  },
+  {
+   "text": "sure, in thousands of dollars.",
+   "startMs": 1466765,
+   "endMs": 1469100
+  },
+  {
+   "text": "What's the data worth to you, Mark?",
+   "startMs": 1469100,
+   "endMs": 1471303
+  },
+  {
+   "text": "$20 minimum, just kidding.",
+   "startMs": 1471303,
+   "endMs": 1474172
+  },
+  {
+   "text": "Per kilobyte.",
+   "startMs": 1474172,
+   "endMs": 1475006
+  },
+  {
+   "text": "Priceless, Linus.",
+   "startMs": 1475006,
+   "endMs": 1476141
+  },
+  {
+   "text": "It's priceless.",
+   "startMs": 1476141,
+   "endMs": 1477442
+  },
+  {
+   "text": "And that is the punchline here is it's like,",
+   "startMs": 1477442,
+   "endMs": 1479411
+  },
+  {
+   "text": "it's the peace of mind.",
+   "startMs": 1479411,
+   "endMs": 1480879
+  },
+  {
+   "text": "Even just having the NAS, I wish I should go grab it,",
+   "startMs": 1480879,
+   "endMs": 1484316
+  },
+  {
+   "text": "but I'll send you a B-roll shot of it,",
+   "startMs": 1484316,
+   "endMs": 1485851
+  },
+  {
+   "text": "but it was stored on these little",
+   "startMs": 1485851,
+   "endMs": 1487652
+  },
+  {
+   "text": "Western Digital hard drives in a Tupperware",
+   "startMs": 1487652,
+   "endMs": 1491256
+  },
+  {
+   "text": "in my freaking closet.",
+   "startMs": 1491256,
+   "endMs": 1492958
+  },
+  {
+   "text": "Everything I own is in a NAS here,",
+   "startMs": 1492958,
+   "endMs": 1495060
+  },
+  {
+   "text": "and then now, if we have a fire here",
+   "startMs": 1495060,
+   "endMs": 1497462
+  },
+  {
+   "text": "and knowing that it's backed up a second physical location,",
+   "startMs": 1497462,
+   "endMs": 1499998
+  },
+  {
+   "text": "knock on whatever, a game changer.",
+   "startMs": 1499998,
+   "endMs": 1503568
+  },
+  {
+   "text": "Absolute game changer.",
+   "startMs": 1503568,
+   "endMs": 1505003
+  },
+  {
+   "text": "Do you have any regrets not going with a DAS?",
+   "startMs": 1505003,
+   "endMs": 1508373
+  },
+  {
+   "text": "Because I gotta give them credit.",
+   "startMs": 1508373,
+   "endMs": 1510442
+  },
+  {
+   "text": "They did the research.",
+   "startMs": 1510442,
+   "endMs": 1511877
+  },
+  {
+   "text": "Like your plan was not stupid.",
+   "startMs": 1511877,
+   "endMs": 1513812
+  },
+  {
+   "text": "It was like the Mac plan.",
+   "startMs": 1513812,
+   "endMs": 1516248
+  },
+  {
+   "text": "No, I think it's working well for us.",
+   "startMs": 1516248,
+   "endMs": 1518283
+  },
+  {
+   "text": "I think the other thing that was different,",
+   "startMs": 1518283,
+   "endMs": 1520151
+  },
+  {
+   "text": "that kind of was something we had to wrap our head around",
+   "startMs": 1520151,
+   "endMs": 1524222
+  },
+  {
+   "text": "was that we don't necessarily have like a bunch of editors",
+   "startMs": 1524222,
+   "endMs": 1527359
+  },
+  {
+   "text": "in here working physically in like onsite, right?",
+   "startMs": 1527359,
+   "endMs": 1530962
+  },
+  {
+   "text": "Where you need a network",
+   "startMs": 1530962,
+   "endMs": 1531997
+  },
+  {
+   "text": "that we're all connected to the ethernet.",
+   "startMs": 1531997,
+   "endMs": 1533965
+  },
+  {
+   "text": "We don't have a lot of editors, first of all,",
+   "startMs": 1533965,
+   "endMs": 1535767
+  },
+  {
+   "text": "but second of all, like we just kind of put it on proxies",
+   "startMs": 1535767,
+   "endMs": 1538136
+  },
+  {
+   "text": "on Dropbox, it's kind of our workflow.",
+   "startMs": 1538136,
+   "endMs": 1540171
+  },
+  {
+   "text": "Our main need was just like a one central computer",
+   "startMs": 1540171,
+   "endMs": 1543375
+  },
+  {
+   "text": "that had the raws on it, that stored it all,",
+   "startMs": 1543375,
+   "endMs": 1545544
+  },
+  {
+   "text": "that when it's time to export the video,",
+   "startMs": 1545544,
+   "endMs": 1548380
+  },
+  {
+   "text": "we all work on proxies, then we remote into that",
+   "startMs": 1548380,
+   "endMs": 1552017
+  },
+  {
+   "text": "and export it from that computer.",
+   "startMs": 1552017,
+   "endMs": 1553652
+  },
+  {
+   "text": "So yeah, it's working amazingly.",
+   "startMs": 1553652,
+   "endMs": 1555453
+  },
+  {
+   "text": "It's the freaking best.",
+   "startMs": 1555453,
+   "endMs": 1557155
+  },
+  {
+   "text": "It's just the best.",
+   "startMs": 1557155,
+   "endMs": 1558323
+  },
+  {
+   "text": "And it's something we wouldn't have been able",
+   "startMs": 1558323,
+   "endMs": 1561192
+  },
+  {
+   "text": "to figure out on our own at all.",
+   "startMs": 1561192,
+   "endMs": 1562861
+  },
+  {
+   "text": "And our solution was gonna be a lot more expensive",
+   "startMs": 1562861,
+   "endMs": 1565997
+  },
+  {
+   "text": "than the one you guys proposed.",
+   "startMs": 1565997,
+   "endMs": 1567232
+  },
+  {
+   "text": "So you were able to like look at what our actual needs were",
+   "startMs": 1567232,
+   "endMs": 1569734
+  },
+  {
+   "text": "and being like, look, you don't need the Ferrari",
+   "startMs": 1569734,
+   "endMs": 1571436
+  },
+  {
+   "text": "to go to the grocery store.",
+   "startMs": 1571436,
+   "endMs": 1573138
+  },
+  {
+   "text": "You know, you just need, for what you guys need,",
+   "startMs": 1573138,
+   "endMs": 1575173
+  },
+  {
+   "text": "this is what the perfect like solution would be.",
+   "startMs": 1575173,
+   "endMs": 1578009
+  },
+  {
+   "text": "Just one of those things we're just like having this,",
+   "startMs": 1578009,
+   "endMs": 1580111
+  },
+  {
+   "text": "because this is what we are, we make videos.",
+   "startMs": 1580111,
+   "endMs": 1582314
+  },
+  {
+   "text": "This is our core product, right?",
+   "startMs": 1582314,
+   "endMs": 1584082
+  },
+  {
+   "text": "So it's like our Fort Knox for everything",
+   "startMs": 1584082,
+   "endMs": 1587485
+  },
+  {
+   "text": "just didn't even have a lock on it.",
+   "startMs": 1587485,
+   "endMs": 1588920
+  },
+  {
+   "text": "And now it's actually organized and locked",
+   "startMs": 1588920,
+   "endMs": 1591423
+  },
+  {
+   "text": "and I can sleep at night, so.",
+   "startMs": 1591423,
+   "endMs": 1593658
+  },
+  {
+   "text": "You're probably gonna go back",
+   "startMs": 1593658,
+   "endMs": 1595060
+  },
+  {
+   "text": "and actually use this footage like very rarely,",
+   "startMs": 1595060,
+   "endMs": 1598897
+  },
+  {
+   "text": "but it's there.",
+   "startMs": 1598897,
+   "endMs": 1599831
+  },
+  {
+   "text": "Yeah, that's right.",
+   "startMs": 1599831,
+   "endMs": 1601232
+  },
+  {
+   "text": "It's there.",
+   "startMs": 1601232,
+   "endMs": 1602400
+  },
+  {
+   "text": "But we just had this situation.",
+   "startMs": 1602400,
+   "endMs": 1604235
+  },
+  {
+   "text": "We're getting a bunch of our videos translated",
+   "startMs": 1604235,
+   "endMs": 1605971
+  },
+  {
+   "text": "and we had to, we used this like,",
+   "startMs": 1605971,
+   "endMs": 1609674
+  },
+  {
+   "text": "cause we had to go back and like get the stems and stuff.",
+   "startMs": 1609674,
+   "endMs": 1612777
+  },
+  {
+   "text": "And no, if we didn't have the server,",
+   "startMs": 1612777,
+   "endMs": 1614479
+  },
+  {
+   "text": "like that made our lives infinitely easier.",
+   "startMs": 1614479,
+   "endMs": 1617282
+  },
+  {
+   "text": "We went back like 40 videos, right?",
+   "startMs": 1617282,
+   "endMs": 1619551
+  },
+  {
+   "text": "That's awesome.",
+   "startMs": 1619551,
+   "endMs": 1620418
+  },
+  {
+   "text": "I'm so glad.",
+   "startMs": 1620418,
+   "endMs": 1621219
+  },
+  {
+   "text": "So we are just about set up here",
+   "startMs": 1621219,
+   "endMs": 1622721
+  },
+  {
+   "text": "to demo the offsite backup capabilities.",
+   "startMs": 1622721,
+   "endMs": 1627492
+  },
+  {
+   "text": "Jake.",
+   "startMs": 1627492,
+   "endMs": 1628293
+  },
+  {
+   "text": "We're gonna live try to sync the machine that's with you,",
+   "startMs": 1628293,
+   "endMs": 1631663
+  },
+  {
+   "text": "which is thousands of miles away from us",
+   "startMs": 1631663,
+   "endMs": 1634733
+  },
+  {
+   "text": "up here in Vancouver to this machine right here.",
+   "startMs": 1634733,
+   "endMs": 1637736
+  },
+  {
+   "text": "And hopefully it'll just work.",
+   "startMs": 1637736,
+   "endMs": 1640171
+  },
+  {
+   "text": "It all rests on this little cable right here.",
+   "startMs": 1640171,
+   "endMs": 1642407
+  },
+  {
+   "text": "This also means that you'll be in possession",
+   "startMs": 1642407,
+   "endMs": 1645377
+  },
+  {
+   "text": "of my entire back catalog of footage.",
+   "startMs": 1645377,
+   "endMs": 1647579
+  },
+  {
+   "text": "So you better not start like a TikTok",
+   "startMs": 1647579,
+   "endMs": 1649314
+  },
+  {
+   "text": "and bootlegging all my videos, Linus.",
+   "startMs": 1649314,
+   "endMs": 1651783
+  },
+  {
+   "text": "I mean, you signed the end user license agreement, right?",
+   "startMs": 1653318,
+   "endMs": 1657155
+  },
+  {
+   "text": "And the privacy policy.",
+   "startMs": 1657155,
+   "endMs": 1658890
+  },
+  {
+   "text": "Did you read it?",
+   "startMs": 1658890,
+   "endMs": 1659858
+  },
+  {
+   "text": "This was your end game all along.",
+   "startMs": 1659858,
+   "endMs": 1661993
+  },
+  {
+   "text": "Curse you.",
+   "startMs": 1661993,
+   "endMs": 1663395
+  },
+  {
+   "text": "You're only one of them.",
+   "startMs": 1663395,
+   "endMs": 1665163
+  },
+  {
+   "text": "You are just one gear in this machine.",
+   "startMs": 1665163,
+   "endMs": 1667699
+  },
+  {
+   "text": "This is exciting.",
+   "startMs": 1668767,
+   "endMs": 1669734
+  },
+  {
+   "text": "So how long will it take?",
+   "startMs": 1669734,
+   "endMs": 1671703
+  },
+  {
+   "text": "Cause I think we have like.",
+   "startMs": 1671703,
+   "endMs": 1673271
+  },
+  {
+   "text": "You have a hundred terabytes.",
+   "startMs": 1673271,
+   "endMs": 1674472
+  },
+  {
+   "text": "It's gonna take like a week.",
+   "startMs": 1674472,
+   "endMs": 1677175
+  },
+  {
+   "text": "Yeah.",
+   "startMs": 1677175,
+   "endMs": 1678209
+  },
+  {
+   "text": "The first go will take, you know, however,",
+   "startMs": 1678209,
+   "endMs": 1681312
+  },
+  {
+   "text": "I mean, you've got one gig connection there.",
+   "startMs": 1681312,
+   "endMs": 1683648
+  },
+  {
+   "text": "We'll probably set it to run at like half that speed.",
+   "startMs": 1683648,
+   "endMs": 1685550
+  },
+  {
+   "text": "So it doesn't just destroy your internet.",
+   "startMs": 1685550,
+   "endMs": 1686951
+  },
+  {
+   "text": "Yeah, so you don't go to like upload a video.",
+   "startMs": 1686951,
+   "endMs": 1690355
+  },
+  {
+   "text": "Yeah, what's going on?",
+   "startMs": 1690355,
+   "endMs": 1691690
+  },
+  {
+   "text": "Why does Google suck?",
+   "startMs": 1691690,
+   "endMs": 1693558
+  },
+  {
+   "text": "So probably like a week or two.",
+   "startMs": 1693558,
+   "endMs": 1695060
+  },
+  {
+   "text": "And then once that's done, every subsequent sync,",
+   "startMs": 1695060,
+   "endMs": 1697862
+  },
+  {
+   "text": "it only copies that extra little bit.",
+   "startMs": 1697862,
+   "endMs": 1700732
+  },
+  {
+   "text": "Yeah.",
+   "startMs": 1700732,
+   "endMs": 1701566
+  },
+  {
+   "text": "So it's a lot faster.",
+   "startMs": 1701566,
+   "endMs": 1702434
+  },
+  {
+   "text": "What's really cool about this is that in the event that",
+   "startMs": 1702434,
+   "endMs": 1705837
+  },
+  {
+   "text": "you guys were to suffer from some kind of a",
+   "startMs": 1706871,
+   "endMs": 1710675
+  },
+  {
+   "text": "cryptographic attack, right?",
+   "startMs": 1710675,
+   "endMs": 1712477
+  },
+  {
+   "text": "Like a ransomware.",
+   "startMs": 1712477,
+   "endMs": 1713678
+  },
+  {
+   "text": "There's really advanced ransomware's out there",
+   "startMs": 1713678,
+   "endMs": 1716014
+  },
+  {
+   "text": "that will go and they will start encrypting everything,",
+   "startMs": 1716014,
+   "endMs": 1719050
+  },
+  {
+   "text": "even on network attached drives that are accessible",
+   "startMs": 1719050,
+   "endMs": 1722220
+  },
+  {
+   "text": "to the infected machine.",
+   "startMs": 1722220,
+   "endMs": 1723621
+  },
+  {
+   "text": "So because we're using a technology called snapshotting,",
+   "startMs": 1723621,
+   "endMs": 1727292
+  },
+  {
+   "text": "where it will actually retain an old non encrypted copy",
+   "startMs": 1727292,
+   "endMs": 1732230
+  },
+  {
+   "text": "on that remote server, theoretically,",
+   "startMs": 1732230,
+   "endMs": 1734833
+  },
+  {
+   "text": "you will be able to go back in time,",
+   "startMs": 1736434,
+   "endMs": 1738236
+  },
+  {
+   "text": "kind of like Apple time machine and restore it to a state",
+   "startMs": 1738236,
+   "endMs": 1741473
+  },
+  {
+   "text": "before it was encrypted.",
+   "startMs": 1741473,
+   "endMs": 1742974
+  },
+  {
+   "text": "And it'll be super inconvenient and it'll suck.",
+   "startMs": 1742974,
+   "endMs": 1745777
+  },
+  {
+   "text": "In fact, it might even be faster to literally get in the car",
+   "startMs": 1745777,
+   "endMs": 1749147
+  },
+  {
+   "text": "and sneaker net that other machine back into the office.",
+   "startMs": 1749147,
+   "endMs": 1752417
+  },
+  {
+   "text": "So you can not lose production time compared to, you know,",
+   "startMs": 1752417,
+   "endMs": 1755520
+  },
+  {
+   "text": "copying it back over or whatever,",
+   "startMs": 1755520,
+   "endMs": 1757622
+  },
+  {
+   "text": "but you'll have it, which is better.",
+   "startMs": 1757622,
+   "endMs": 1760091
+  },
+  {
+   "text": "Cause so I see, so when you guys ship it to us,",
+   "startMs": 1760091,
+   "endMs": 1762160
+  },
+  {
+   "text": "it'll already have all this stuff on it, huh?",
+   "startMs": 1762160,
+   "endMs": 1764696
+  },
+  {
+   "text": "It will sort of, so it'll have everything on it,",
+   "startMs": 1764696,
+   "endMs": 1767599
+  },
+  {
+   "text": "but we're going to pull all the hard drives out for safety",
+   "startMs": 1767599,
+   "endMs": 1770001
+  },
+  {
+   "text": "during shipping, because they can be quite sensitive.",
+   "startMs": 1770001,
+   "endMs": 1772237
+  },
+  {
+   "text": "We want to ship them in a proper hard drive",
+   "startMs": 1772237,
+   "endMs": 1774539
+  },
+  {
+   "text": "shipping container.",
+   "startMs": 1774539,
+   "endMs": 1775707
+  },
+  {
+   "text": "So theoretically, and we might need to give you a little,",
+   "startMs": 1775707,
+   "endMs": 1778209
+  },
+  {
+   "text": "you know, 15 minutes of remote help with it or whatever,",
+   "startMs": 1778209,
+   "endMs": 1780512
+  },
+  {
+   "text": "but theoretically.",
+   "startMs": 1780512,
+   "endMs": 1781379
+  },
+  {
+   "text": "We already did this once, remember?",
+   "startMs": 1781379,
+   "endMs": 1782914
+  },
+  {
+   "text": "Okay. So you'll take those drives,",
+   "startMs": 1782914,
+   "endMs": 1784582
+  },
+  {
+   "text": "you'll slam them into this machine and everything will just",
+   "startMs": 1784582,
+   "endMs": 1787519
+  },
+  {
+   "text": "pick up.",
+   "startMs": 1787519,
+   "endMs": 1788353
+  },
+  {
+   "text": "I'm truly just something in my brain.",
+   "startMs": 1788353,
+   "endMs": 1790054
+  },
+  {
+   "text": "It's just like,",
+   "startMs": 1790054,
+   "endMs": 1790889
+  },
+  {
+   "text": "it's just so excited to get this peace of mind.",
+   "startMs": 1790889,
+   "endMs": 1793258
+  },
+  {
+   "text": "Cause that's what this is.",
+   "startMs": 1793258,
+   "endMs": 1794092
+  },
+  {
+   "text": "This is like insurance and peace of mind and something",
+   "startMs": 1794092,
+   "endMs": 1796561
+  },
+  {
+   "text": "that's been nagging on me forever.",
+   "startMs": 1796561,
+   "endMs": 1798363
+  },
+  {
+   "text": "Every time I opened the freaking closet and see that pile of",
+   "startMs": 1798363,
+   "endMs": 1801599
+  },
+  {
+   "text": "hard drives. So.",
+   "startMs": 1801599,
+   "endMs": 1802834
+  },
+  {
+   "text": "Okay. In theory, it's running now.",
+   "startMs": 1802834,
+   "endMs": 1805570
+  },
+  {
+   "text": "Hey, look at that.",
+   "startMs": 1805570,
+   "endMs": 1806805
+  },
+  {
+   "text": "We're getting about 40 megabytes a second.",
+   "startMs": 1806805,
+   "endMs": 1809674
+  },
+  {
+   "text": "And I think you said too,",
+   "startMs": 1809674,
+   "endMs": 1811009
+  },
+  {
+   "text": "we can set it on schedules where they just do it after 9 PM",
+   "startMs": 1811009,
+   "endMs": 1815847
+  },
+  {
+   "text": "or something, right?",
+   "startMs": 1815847,
+   "endMs": 1817015
+  },
+  {
+   "text": "Yeah, totally.",
+   "startMs": 1817015,
+   "endMs": 1817882
+  },
+  {
+   "text": "And another thing you can do too actually is if it's not too",
+   "startMs": 1817882,
+   "endMs": 1821753
+  },
+  {
+   "text": "much of a trek between your two locations,",
+   "startMs": 1821753,
+   "endMs": 1824222
+  },
+  {
+   "text": "you could bring it onsite,",
+   "startMs": 1824222,
+   "endMs": 1825857
+  },
+  {
+   "text": "do the first sync at full gigabit or even,",
+   "startMs": 1825857,
+   "endMs": 1828526
+  },
+  {
+   "text": "I don't know if I switched that.",
+   "startMs": 1828526,
+   "endMs": 1829994
+  },
+  {
+   "text": "Okay. So at ball in speeds,",
+   "startMs": 1829994,
+   "endMs": 1832730
+  },
+  {
+   "text": "and then you can go and take the other one offsite after the",
+   "startMs": 1832730,
+   "endMs": 1836134
+  },
+  {
+   "text": "fact.",
+   "startMs": 1836134,
+   "endMs": 1837001
+  },
+  {
+   "text": "This is awesome, dude.",
+   "startMs": 1837001,
+   "endMs": 1837969
+  },
+  {
+   "text": "We've already,",
+   "startMs": 1837969,
+   "endMs": 1838803
+  },
+  {
+   "text": "we've actually already transferred two gigabytes here.",
+   "startMs": 1838803,
+   "endMs": 1841272
+  },
+  {
+   "text": "Really?",
+   "startMs": 1841272,
+   "endMs": 1842140
+  },
+  {
+   "text": "I was going to say like two, two gigabytes.",
+   "startMs": 1842140,
+   "endMs": 1845210
+  },
+  {
+   "text": "That's like my first,",
+   "startMs": 1845210,
+   "endMs": 1846311
+  },
+  {
+   "text": "probably 12 videos when I was filming camera.",
+   "startMs": 1846311,
+   "endMs": 1850748
+  },
+  {
+   "text": "I think this whole project is six gigs.",
+   "startMs": 1850748,
+   "endMs": 1852617
+  },
+  {
+   "text": "Do you remember it was called like watermelon smoothie or",
+   "startMs": 1852617,
+   "endMs": 1854819
+  },
+  {
+   "text": "something?",
+   "startMs": 1854819,
+   "endMs": 1855620
+  },
+  {
+   "text": "Oh yeah. Yeah.",
+   "startMs": 1855620,
+   "endMs": 1856454
+  },
+  {
+   "text": "I know the watermelon smoothie.",
+   "startMs": 1856454,
+   "endMs": 1857488
+  },
+  {
+   "text": "It's a classic.",
+   "startMs": 1857488,
+   "endMs": 1858323
+  },
+  {
+   "text": "Look it's baby Mark.",
+   "startMs": 1858323,
+   "endMs": 1859858
+  },
+  {
+   "text": "I know still rocking the backwards cap though.",
+   "startMs": 1859858,
+   "endMs": 1862927
+  },
+  {
+   "text": "Show up to that last picnic of the summertime,",
+   "startMs": 1862927,
+   "endMs": 1864996
+  },
+  {
+   "text": "like a boss.",
+   "startMs": 1864996,
+   "endMs": 1865830
+  },
+  {
+   "text": "And all you're going to need is a watermelon,",
+   "startMs": 1865830,
+   "endMs": 1868166
+  },
+  {
+   "text": "a coat hanger and a drill.",
+   "startMs": 1868166,
+   "endMs": 1870235
+  },
+  {
+   "text": "Like a boss.",
+   "startMs": 1871336,
+   "endMs": 1872837
+  },
+  {
+   "text": "Wow. That sideways gangster drill movement.",
+   "startMs": 1872837,
+   "endMs": 1877842
+  },
+  {
+   "text": "That's still cool.",
+   "startMs": 1878009,
+   "endMs": 1879010
+  },
+  {
+   "text": "I still stand by that drill movement.",
+   "startMs": 1879010,
+   "endMs": 1881880
+  },
+  {
+   "text": "Well, this is a quick video.",
+   "startMs": 1881880,
+   "endMs": 1882714
+  },
+  {
+   "text": "We can just watch the whole thing.",
+   "startMs": 1882714,
+   "endMs": 1883581
+  },
+  {
+   "text": "It is kind of short.",
+   "startMs": 1883581,
+   "endMs": 1884782
+  },
+  {
+   "text": "Did you clean the coat hanger before you used it for this?",
+   "startMs": 1884782,
+   "endMs": 1887285
+  },
+  {
+   "text": "Have you re-uploaded?",
+   "startMs": 1887285,
+   "endMs": 1888286
+  },
+  {
+   "text": "No, I didn't.",
+   "startMs": 1888286,
+   "endMs": 1890588
+  },
+  {
+   "text": "Have you re-uploaded this as a short yet?",
+   "startMs": 1890588,
+   "endMs": 1892624
+  },
+  {
+   "text": "No, I should.",
+   "startMs": 1892624,
+   "endMs": 1894225
+  },
+  {
+   "text": "You should.",
+   "startMs": 1894225,
+   "endMs": 1895059
+  },
+  {
+   "text": "How long is this video?",
+   "startMs": 1895059,
+   "endMs": 1896461
+  },
+  {
+   "text": "Like two minutes.",
+   "startMs": 1896461,
+   "endMs": 1897695
+  },
+  {
+   "text": "Yeah.",
+   "startMs": 1897695,
+   "endMs": 1898796
+  },
+  {
+   "text": "No minute and 42.",
+   "startMs": 1898796,
+   "endMs": 1899797
+  },
+  {
+   "text": "Oh, this could then no offense,",
+   "startMs": 1899797,
+   "endMs": 1901532
+  },
+  {
+   "text": "but there's some dead air.",
+   "startMs": 1901532,
+   "endMs": 1904035
+  },
+  {
+   "text": "Again, you picked an early folder to look into it.",
+   "startMs": 1905336,
+   "endMs": 1908973
+  },
+  {
+   "text": "I'll put this on me.",
+   "startMs": 1908973,
+   "endMs": 1910375
+  },
+  {
+   "text": "No, this is great.",
+   "startMs": 1910375,
+   "endMs": 1911910
+  },
+  {
+   "text": "You have an age today. I swear.",
+   "startMs": 1911910,
+   "endMs": 1914112
+  },
+  {
+   "text": "Yeah.",
+   "startMs": 1914112,
+   "endMs": 1914979
+  },
+  {
+   "text": "I like the part where the watermelon juice goes in and then",
+   "startMs": 1914979,
+   "endMs": 1916748
+  },
+  {
+   "text": "out and then in and then out.",
+   "startMs": 1916748,
+   "endMs": 1917949
+  },
+  {
+   "text": "I still stand behind that barfing watermelon scene.",
+   "startMs": 1917949,
+   "endMs": 1922353
+  },
+  {
+   "text": "So I think that's it.",
+   "startMs": 1922353,
+   "endMs": 1923955
+  },
+  {
+   "text": "You have a meeting in one minute.",
+   "startMs": 1923955,
+   "endMs": 1925690
+  },
+  {
+   "text": "So we got that resolved just in time.",
+   "startMs": 1925690,
+   "endMs": 1928026
+  },
+  {
+   "text": "Thank goodness.",
+   "startMs": 1928026,
+   "endMs": 1928860
+  },
+  {
+   "text": "Perfect timing.",
+   "startMs": 1928860,
+   "endMs": 1929694
+  },
+  {
+   "text": "Enjoy the new NAS-ziz.",
+   "startMs": 1929694,
+   "endMs": 1931596
+  },
+  {
+   "text": "You guys are legends.",
+   "startMs": 1931596,
+   "endMs": 1933264
+  },
+  {
+   "text": "Eternally grateful.",
+   "startMs": 1933264,
+   "endMs": 1934499
+  },
+  {
+   "text": "Thank you so much.",
+   "startMs": 1934499,
+   "endMs": 1935800
+  },
+  {
+   "text": "You make it so I can sleep at night.",
+   "startMs": 1935800,
+   "endMs": 1937769
+  },
+  {
+   "text": "Now it's time to rip this whole thing apart.",
+   "startMs": 1937769,
+   "endMs": 1941072
+  },
+  {
+   "text": "Pack it up, ship it and tell you about our sponsor.",
+   "startMs": 1941072,
+   "endMs": 1945076
+  },
+  {
+   "text": "Cable mod.",
+   "startMs": 1945076,
+   "endMs": 1945977
+  },
+  {
+   "text": "You're still using that ugly space consuming",
+   "startMs": 1945977,
+   "endMs": 1948479
+  },
+  {
+   "text": "12 volt high power adapter that came with your GPU.",
+   "startMs": 1948479,
+   "endMs": 1951316
+  },
+  {
+   "text": "Why?",
+   "startMs": 1952317,
+   "endMs": 1953484
+  },
+  {
+   "text": "Cable mods, basic 12 volt high power replacement cables",
+   "startMs": 1953484,
+   "endMs": 1956654
+  },
+  {
+   "text": "are designed to get rid of that squiddish adapter",
+   "startMs": 1956654,
+   "endMs": 1959257
+  },
+  {
+   "text": "and leave you with a cleaner looking PC.",
+   "startMs": 1959257,
+   "endMs": 1961592
+  },
+  {
+   "text": "These cables enable your ATX 2.0 power supply",
+   "startMs": 1961592,
+   "endMs": 1964262
+  },
+  {
+   "text": "to power any graphics card with a 12 volt high power port.",
+   "startMs": 1964262,
+   "endMs": 1967465
+  },
+  {
+   "text": "They're available for a wide variety of power supplies",
+   "startMs": 1967465,
+   "endMs": 1969600
+  },
+  {
+   "text": "like Seasonic, EVGA, Corsair, and more.",
+   "startMs": 1969600,
+   "endMs": 1972437
+  },
+  {
+   "text": "And just like Cable Mod's famous sleeved cables,",
+   "startMs": 1972437,
+   "endMs": 1974639
+  },
+  {
+   "text": "these 12 volt high power cables are made with 16 AWG wire",
+   "startMs": 1974639,
+   "endMs": 1978543
+  },
+  {
+   "text": "to fully support 600 Watts of safe aesthetic power delivery.",
+   "startMs": 1978543,
+   "endMs": 1982847
+  },
+  {
+   "text": "So treat yourself and upgrade your build",
+   "startMs": 1982847,
+   "endMs": 1985350
+  },
+  {
+   "text": "with Cable Mod today at the link below.",
+   "startMs": 1985350,
+   "endMs": 1987585
+  },
+  {
+   "text": "You guys enjoyed this video.",
+   "startMs": 1987585,
+   "endMs": 1988686
+  },
+  {
+   "text": "Maybe check out the time we built the NAS for dream.",
+   "startMs": 1988686,
+   "endMs": 1991889
+  },
+  {
+   "text": "It was, yeah, it was less reasonable.",
+   "startMs": 1991889,
+   "endMs": 1996894
+  }
+ ]
+}

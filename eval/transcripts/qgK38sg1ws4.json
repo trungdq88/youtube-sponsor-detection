@@ -1,0 +1,1868 @@
+{
+ "videoID": "qgK38sg1ws4",
+ "title": "I’m NOT Supposed to Have This - Stadia Dev Kit",
+ "route": "captions/WEB",
+ "savedAt": "2026-09-18T02:32:32.602Z",
+ "cues": [
+  {
+   "text": "- [Riley] Do you have any idea?",
+   "startMs": 99,
+   "endMs": 1808
+  },
+  {
+   "text": "- I know how to (beep) do this! This is my job!",
+   "startMs": 1808,
+   "endMs": 4120
+  },
+  {
+   "text": "Do you have any idea- (production beeps)",
+   "startMs": 4120,
+   "endMs": 5720
+  },
+  {
+   "text": "Do you have any idea",
+   "startMs": 5720,
+   "endMs": 6660
+  },
+  {
+   "text": "how games were developed for Google Stadia?",
+   "startMs": 6660,
+   "endMs": 9390
+  },
+  {
+   "text": "'Cause I don't, but it has got to be totally different,",
+   "startMs": 9390,
+   "endMs": 12390
+  },
+  {
+   "text": "and I bet it's fascinating.",
+   "startMs": 12390,
+   "endMs": 14160
+  },
+  {
+   "text": "And if we don't learn about it now,",
+   "startMs": 14160,
+   "endMs": 16080
+  },
+  {
+   "text": "we may never get the opportunity.",
+   "startMs": 16080,
+   "endMs": 17820
+  },
+  {
+   "text": "The thing is for traditional consoles,",
+   "startMs": 17820,
+   "endMs": 20460
+  },
+  {
+   "text": "there's always some development hardware",
+   "startMs": 20460,
+   "endMs": 22611
+  },
+  {
+   "text": "and documentation that goes missing",
+   "startMs": 22611,
+   "endMs": 25680
+  },
+  {
+   "text": "and finds its way onto eBay, even if it takes years.",
+   "startMs": 25680,
+   "endMs": 28680
+  },
+  {
+   "text": "But this time, everything's in the cloud.",
+   "startMs": 28680,
+   "endMs": 31350
+  },
+  {
+   "text": "So next month, when Google presses that button, it's gone.",
+   "startMs": 31350,
+   "endMs": 35550
+  },
+  {
+   "text": "Or is it?",
+   "startMs": 35550,
+   "endMs": 36810
+  },
+  {
+   "text": "See, the thing about rug-pulling an entire industry",
+   "startMs": 36810,
+   "endMs": 40050
+  },
+  {
+   "text": "of passionate creatives is",
+   "startMs": 40050,
+   "endMs": 41430
+  },
+  {
+   "text": "that someone is gonna end up salty enough to say,",
+   "startMs": 41430,
+   "endMs": 45007
+  },
+  {
+   "text": "\"Screw it,\" to your NDA and talk to the press,",
+   "startMs": 45007,
+   "endMs": 48750
+  },
+  {
+   "text": "and we found one such someone.",
+   "startMs": 48750,
+   "endMs": 51299
+  },
+  {
+   "text": "(box thuds)",
+   "startMs": 51299,
+   "endMs": 52500
+  },
+  {
+   "text": "It's real.",
+   "startMs": 52500,
+   "endMs": 53520
+  },
+  {
+   "text": "We not only got our hands",
+   "startMs": 53520,
+   "endMs": 54780
+  },
+  {
+   "text": "on extensive documentation and screen captures",
+   "startMs": 54780,
+   "endMs": 57420
+  },
+  {
+   "text": "so that we can preserve this important little piece",
+   "startMs": 57420,
+   "endMs": 59460
+  },
+  {
+   "text": "of gaming history,",
+   "startMs": 59460,
+   "endMs": 60600
+  },
+  {
+   "text": "but we also got a Stadia Development Node,",
+   "startMs": 60600,
+   "endMs": 64170
+  },
+  {
+   "text": "a piece of hardware designed to play Stadia cloud games,",
+   "startMs": 64170,
+   "endMs": 68370
+  },
+  {
+   "text": "but from right in front of you.",
+   "startMs": 68370,
+   "endMs": 71700
+  },
+  {
+   "text": "Time really is a flat circle, isn't it?",
+   "startMs": 71700,
+   "endMs": 73770
+  },
+  {
+   "text": "I had no idea that these things even existed,",
+   "startMs": 73770,
+   "endMs": 76950
+  },
+  {
+   "text": "but they do, and we're gonna be taking a close look.",
+   "startMs": 76950,
+   "endMs": 80910
+  },
+  {
+   "text": "You know what else exists? This message from our sponsor.",
+   "startMs": 80910,
+   "endMs": 83966
+  },
+  {
+   "text": "- Hetzner.",
+   "startMs": 83966,
+   "endMs": 85080
+  },
+  {
+   "text": "Hetzner offers high-performance cloud service",
+   "startMs": 85080,
+   "endMs": 87210
+  },
+  {
+   "text": "for a great price.",
+   "startMs": 87210,
+   "endMs": 88620
+  },
+  {
+   "text": "They now cover the east and west coast of the United States",
+   "startMs": 88620,
+   "endMs": 91710
+  },
+  {
+   "text": "with their latest location in Hillsboro, Oregon.",
+   "startMs": 91710,
+   "endMs": 94260
+  },
+  {
+   "text": "Use the code LTT22 at the link below for $20 off.",
+   "startMs": 94260,
+   "endMs": 98413
+  },
+  {
+   "text": "(upbeat music)",
+   "startMs": 98413,
+   "endMs": 100996
+  },
+  {
+   "text": "- When you create a game, particularly AAA,",
+   "startMs": 107610,
+   "endMs": 110130
+  },
+  {
+   "text": "assets are often version controlled by Perforce",
+   "startMs": 110130,
+   "endMs": 113130
+  },
+  {
+   "text": "and stored on a local server",
+   "startMs": 113130,
+   "endMs": 114840
+  },
+  {
+   "text": "as well as on your own workstation.",
+   "startMs": 114840,
+   "endMs": 116850
+  },
+  {
+   "text": "As you develop,",
+   "startMs": 116850,
+   "endMs": 117750
+  },
+  {
+   "text": "team members submit their changes to the server,",
+   "startMs": 117750,
+   "endMs": 120390
+  },
+  {
+   "text": "and new builds get created for QA to test.",
+   "startMs": 120390,
+   "endMs": 123120
+  },
+  {
+   "text": "These builds are then loaded onto dev kits",
+   "startMs": 123120,
+   "endMs": 125460
+  },
+  {
+   "text": "that will attempt to run them locally",
+   "startMs": 125460,
+   "endMs": 127170
+  },
+  {
+   "text": "on pre-production hardware.",
+   "startMs": 127170,
+   "endMs": 128700
+  },
+  {
+   "text": "That's pretty much the workflow that we've shown before,",
+   "startMs": 128700,
+   "endMs": 131670
+  },
+  {
+   "text": "and the process with Stadia game development was similar,",
+   "startMs": 131670,
+   "endMs": 135810
+  },
+  {
+   "text": "but with a key difference,",
+   "startMs": 135810,
+   "endMs": 137640
+  },
+  {
+   "text": "and that's that for most developers,",
+   "startMs": 137640,
+   "endMs": 139860
+  },
+  {
+   "text": "there is no local testing hardware at all.",
+   "startMs": 139860,
+   "endMs": 143430
+  },
+  {
+   "text": "Instead, you would have to submit your build",
+   "startMs": 143430,
+   "endMs": 145680
+  },
+  {
+   "text": "and wait for it to transfer to Google's servers,",
+   "startMs": 145680,
+   "endMs": 148500
+  },
+  {
+   "text": "a process that could take up to 40 minutes for,",
+   "startMs": 148500,
+   "endMs": 151770
+  },
+  {
+   "text": "wait for it, about two gigabytes of content.",
+   "startMs": 151770,
+   "endMs": 155520
+  },
+  {
+   "text": "For context, a 60-gigabyte game should take",
+   "startMs": 155520,
+   "endMs": 158400
+  },
+  {
+   "text": "just a few minutes to load onto a dev kit console",
+   "startMs": 158400,
+   "endMs": 161760
+  },
+  {
+   "text": "as long as you've got good infrastructure.",
+   "startMs": 161760,
+   "endMs": 163860
+  },
+  {
+   "text": "Talk about an efficiency nightmare.",
+   "startMs": 163860,
+   "endMs": 165900
+  },
+  {
+   "text": "There are workarounds if you're desperate.",
+   "startMs": 165900,
+   "endMs": 167940
+  },
+  {
+   "text": "Someone can make a change in Unity, for example,",
+   "startMs": 167940,
+   "endMs": 170400
+  },
+  {
+   "text": "and then just try it on their development workstation",
+   "startMs": 170400,
+   "endMs": 173070
+  },
+  {
+   "text": "to see if it works.",
+   "startMs": 173070,
+   "endMs": 174360
+  },
+  {
+   "text": "But to properly verify,",
+   "startMs": 174360,
+   "endMs": 176310
+  },
+  {
+   "text": "you need to run it on the same hardware",
+   "startMs": 176310,
+   "endMs": 178560
+  },
+  {
+   "text": "that the user will have in a built package.",
+   "startMs": 178560,
+   "endMs": 181230
+  },
+  {
+   "text": "That's why in a typical studio,",
+   "startMs": 181230,
+   "endMs": 182760
+  },
+  {
+   "text": "most devs would have their own console",
+   "startMs": 182760,
+   "endMs": 185310
+  },
+  {
+   "text": "or more than one console at their desk",
+   "startMs": 185310,
+   "endMs": 187890
+  },
+  {
+   "text": "so they can quickly verify changes.",
+   "startMs": 187890,
+   "endMs": 189660
+  },
+  {
+   "text": "Of course, that version of things,",
+   "startMs": 189660,
+   "endMs": 192480
+  },
+  {
+   "text": "you know, where Stadia doesn't have local dev kits,",
+   "startMs": 192480,
+   "endMs": 195120
+  },
+  {
+   "text": "doesn't really jive with the existence of this, does it?",
+   "startMs": 195120,
+   "endMs": 199020
+  },
+  {
+   "text": "Ah, well, when these slow transfer speeds (grunts)",
+   "startMs": 199020,
+   "endMs": 203730
+  },
+  {
+   "text": "become an insurmountable problem for you,",
+   "startMs": 203730,
+   "endMs": 206400
+  },
+  {
+   "text": "you can actually reach out to Google",
+   "startMs": 206400,
+   "endMs": 208440
+  },
+  {
+   "text": "and request a local Dev Node like this one,",
+   "startMs": 208440,
+   "endMs": 212460
+  },
+  {
+   "text": "which is basically (grunts) a Stadia cloud server",
+   "startMs": 212460,
+   "endMs": 215920
+  },
+  {
+   "text": "that sits right on your desk.",
+   "startMs": 217530,
+   "endMs": 219360
+  },
+  {
+   "text": "As far as our friend could tell,",
+   "startMs": 219360,
+   "endMs": 222450
+  },
+  {
+   "text": "they didn't just hand them out to anyone though.",
+   "startMs": 222450,
+   "endMs": 224460
+  },
+  {
+   "text": "You had to justify why you needed one.",
+   "startMs": 224460,
+   "endMs": 227190
+  },
+  {
+   "text": "And (grunts) even once you were approved,",
+   "startMs": 227190,
+   "endMs": 230700
+  },
+  {
+   "text": "the experience wasn't exactly with a white glove.",
+   "startMs": 230700,
+   "endMs": 234840
+  },
+  {
+   "text": "For example, they asked Google about providing controllers,",
+   "startMs": 234840,
+   "endMs": 237690
+  },
+  {
+   "text": "and the reply was a link to the product page",
+   "startMs": 237690,
+   "endMs": 240090
+  },
+  {
+   "text": "where they could buy them for MSRP.",
+   "startMs": 240090,
+   "endMs": 242790
+  },
+  {
+   "text": "Nice.",
+   "startMs": 242790,
+   "endMs": 243623
+  },
+  {
+   "text": "So with all that work out of the way,",
+   "startMs": 243623,
+   "endMs": 245550
+  },
+  {
+   "text": "what exactly is it that you get in the mail?",
+   "startMs": 245550,
+   "endMs": 247890
+  },
+  {
+   "text": "On the surface,",
+   "startMs": 247890,
+   "endMs": 248723
+  },
+  {
+   "text": "it appears to be a Stadia-branded Lenovo ThinkStation,",
+   "startMs": 248723,
+   "endMs": 253320
+  },
+  {
+   "text": "but maybe we're gonna find something more interesting",
+   "startMs": 253320,
+   "endMs": 256740
+  },
+  {
+   "text": "on the inside.",
+   "startMs": 256740,
+   "endMs": 258458
+  },
+  {
+   "text": "(Linus grunts) (Dev Node case rattles)",
+   "startMs": 258458,
+   "endMs": 259924
+  },
+  {
+   "text": "There we go, a little dusty.",
+   "startMs": 259924,
+   "endMs": 262110
+  },
+  {
+   "text": "What are we looking at here?",
+   "startMs": 262110,
+   "endMs": 264150
+  },
+  {
+   "text": "Well, it isn't getting less standard-looking.",
+   "startMs": 264150,
+   "endMs": 266970
+  },
+  {
+   "text": "I love that Lenovo does their front IO",
+   "startMs": 266970,
+   "endMs": 268920
+  },
+  {
+   "text": "on an actual hard PCB instead of with wires.",
+   "startMs": 268920,
+   "endMs": 272670
+  },
+  {
+   "text": "So that's pretty cool for cable management.",
+   "startMs": 272670,
+   "endMs": 274830
+  },
+  {
+   "text": "Wow, 64 gigs of RAM. That's a lot for a gaming pc.",
+   "startMs": 274830,
+   "endMs": 278040
+  },
+  {
+   "text": "I wonder if that's just Lenovo's minimum spec.",
+   "startMs": 278040,
+   "endMs": 279990
+  },
+  {
+   "text": "Mind you'd think that they're ordering enough",
+   "startMs": 279990,
+   "endMs": 281460
+  },
+  {
+   "text": "to customize the branding on the front.",
+   "startMs": 281460,
+   "endMs": 283590
+  },
+  {
+   "text": "Oh, that's apparently really easy to do. (laughs)",
+   "startMs": 283590,
+   "endMs": 287533
+  },
+  {
+   "text": "Modular.",
+   "startMs": 288660,
+   "endMs": 289980
+  },
+  {
+   "text": "Even the CPU's only a six-core,",
+   "startMs": 289980,
+   "endMs": 291810
+  },
+  {
+   "text": "meaning that this thing has pretty pedestrian specs,",
+   "startMs": 291810,
+   "endMs": 295290
+  },
+  {
+   "text": "other than, you know,",
+   "startMs": 295290,
+   "endMs": 296700
+  },
+  {
+   "text": "obviously having a workstation-class GPU in it.",
+   "startMs": 296700,
+   "endMs": 300000
+  },
+  {
+   "text": "And even this workstation GPU,",
+   "startMs": 300000,
+   "endMs": 302460
+  },
+  {
+   "text": "it's not exactly a powerful one,",
+   "startMs": 302460,
+   "endMs": 304920
+  },
+  {
+   "text": "not that we'll have any way of knowing that for sure",
+   "startMs": 304920,
+   "endMs": 308130
+  },
+  {
+   "text": "because unfortunately, we couldn't find any reference",
+   "startMs": 308130,
+   "endMs": 311520
+  },
+  {
+   "text": "to the Radeon Pro V320 on AMD's site whatsoever.",
+   "startMs": 311520,
+   "endMs": 315780
+  },
+  {
+   "text": "And in fact, the only resource we could find",
+   "startMs": 315780,
+   "endMs": 318540
+  },
+  {
+   "text": "was a TechPowerUp page that had different specs listed",
+   "startMs": 318540,
+   "endMs": 321870
+  },
+  {
+   "text": "than the card that we have.",
+   "startMs": 321870,
+   "endMs": 323670
+  },
+  {
+   "text": "The page says 16 gigs of ram,",
+   "startMs": 323670,
+   "endMs": 325470
+  },
+  {
+   "text": "but ours apparently only has eight.",
+   "startMs": 325470,
+   "endMs": 327720
+  },
+  {
+   "text": "So it's actually even worse than a basic V320.",
+   "startMs": 327720,
+   "endMs": 330687
+  },
+  {
+   "text": "You know what's not bad?",
+   "startMs": 330687,
+   "endMs": 332100
+  },
+  {
+   "text": "Is our basic blank T-shirts, lttstore.com.",
+   "startMs": 332100,
+   "endMs": 334843
+  },
+  {
+   "text": "(GPU clicks)",
+   "startMs": 334843,
+   "endMs": 336480
+  },
+  {
+   "text": "So if this thing isn't powerful then,",
+   "startMs": 336480,
+   "endMs": 338340
+  },
+  {
+   "text": "how could it be useful for development?",
+   "startMs": 338340,
+   "endMs": 341010
+  },
+  {
+   "text": "Well, it's because it's not for actually doing development.",
+   "startMs": 341010,
+   "endMs": 344940
+  },
+  {
+   "text": "Like a console dev kit,",
+   "startMs": 344940,
+   "endMs": 346530
+  },
+  {
+   "text": "this station is for testing to see",
+   "startMs": 346530,
+   "endMs": 348480
+  },
+  {
+   "text": "how your game is gonna run.",
+   "startMs": 348480,
+   "endMs": 349950
+  },
+  {
+   "text": "It's not for making the game,",
+   "startMs": 349950,
+   "endMs": 351240
+  },
+  {
+   "text": "so it makes sense that you would want a test node",
+   "startMs": 351240,
+   "endMs": 354030
+  },
+  {
+   "text": "that isn't too powerful.",
+   "startMs": 354030,
+   "endMs": 356040
+  },
+  {
+   "text": "You'd want something that's as close to the servers",
+   "startMs": 356040,
+   "endMs": 358440
+  },
+  {
+   "text": "that Google is using to run the service as possible.",
+   "startMs": 358440,
+   "endMs": 361140
+  },
+  {
+   "text": "That way, what the dev sees there",
+   "startMs": 361140,
+   "endMs": 363150
+  },
+  {
+   "text": "at their station should be representative",
+   "startMs": 363150,
+   "endMs": 365040
+  },
+  {
+   "text": "of the end-user experience.",
+   "startMs": 365040,
+   "endMs": 367020
+  },
+  {
+   "text": "Now obviously, an army of Lenovo ThinkStations isn't exactly",
+   "startMs": 367020,
+   "endMs": 372020
+  },
+  {
+   "text": "what Google is using in their data centers.",
+   "startMs": 372330,
+   "endMs": 374010
+  },
+  {
+   "text": "They actually confirmed the hardware specs for Stadia,",
+   "startMs": 374010,
+   "endMs": 376680
+  },
+  {
+   "text": "and we know that each",
+   "startMs": 376680,
+   "endMs": 378000
+  },
+  {
+   "text": "of their servers can run four 1080p instances.",
+   "startMs": 378000,
+   "endMs": 381930
+  },
+  {
+   "text": "Ours can only do one, but it seems to be pretty close,",
+   "startMs": 381930,
+   "endMs": 386850
+  },
+  {
+   "text": "erring on the side of not as powerful.",
+   "startMs": 386850,
+   "endMs": 389820
+  },
+  {
+   "text": "Our dev friend who sent us the node mentioned",
+   "startMs": 389820,
+   "endMs": 392130
+  },
+  {
+   "text": "that with how well some games ran",
+   "startMs": 392130,
+   "endMs": 393930
+  },
+  {
+   "text": "at 1080p through the cloud,",
+   "startMs": 393930,
+   "endMs": 395760
+  },
+  {
+   "text": "the data center nodes might actually have better GPUs,",
+   "startMs": 395760,
+   "endMs": 399060
+  },
+  {
+   "text": "and I guess obviously the 4K nodes",
+   "startMs": 399060,
+   "endMs": 401400
+  },
+  {
+   "text": "would be substantially better than this,",
+   "startMs": 401400,
+   "endMs": 403440
+  },
+  {
+   "text": "but we weren't able to get our hands on one of those.",
+   "startMs": 403440,
+   "endMs": 405737
+  },
+  {
+   "text": "Hey, look at that, you got Stadia splash screen in the BIOS.",
+   "startMs": 405737,
+   "endMs": 408930
+  },
+  {
+   "text": "- [Plouffe] This is what happens.",
+   "startMs": 408930,
+   "endMs": 410130
+  },
+  {
+   "text": "- This is it? Oh, okay. - The fan gets louder.",
+   "startMs": 410130,
+   "endMs": 412253
+  },
+  {
+   "text": "- Fan's ramping up.",
+   "startMs": 414120,
+   "endMs": 415293
+  },
+  {
+   "text": "(Dev Node thuds)",
+   "startMs": 417184,
+   "endMs": 418170
+  },
+  {
+   "text": "Can fit so much fan in this bad boy.",
+   "startMs": 418170,
+   "endMs": 420780
+  },
+  {
+   "text": "And that's actually as far as we're gonna get",
+   "startMs": 420780,
+   "endMs": 423600
+  },
+  {
+   "text": "with the software.",
+   "startMs": 423600,
+   "endMs": 424980
+  },
+  {
+   "text": "If we connected this ethernet cable, it might boot up,",
+   "startMs": 424980,
+   "endMs": 428040
+  },
+  {
+   "text": "but our kit would immediately phone home,",
+   "startMs": 428040,
+   "endMs": 431280
+  },
+  {
+   "text": "reporting a location that is hundreds or thousands",
+   "startMs": 431280,
+   "endMs": 434160
+  },
+  {
+   "text": "of kilometers from where it's supposed to be,",
+   "startMs": 434160,
+   "endMs": 436170
+  },
+  {
+   "text": "and our friend would get a nasty letter",
+   "startMs": 436170,
+   "endMs": 438330
+  },
+  {
+   "text": "in the mail from Google's lawyers.",
+   "startMs": 438330,
+   "endMs": 440100
+  },
+  {
+   "text": "But that doesn't mean our adventure is over.",
+   "startMs": 440100,
+   "endMs": 442530
+  },
+  {
+   "text": "If we could plug it into a network and launch a game,",
+   "startMs": 442530,
+   "endMs": 445290
+  },
+  {
+   "text": "it might look a little something like this.",
+   "startMs": 445290,
+   "endMs": 448470
+  },
+  {
+   "text": "You launch the Stadia partner portal on your PC",
+   "startMs": 448470,
+   "endMs": 451560
+  },
+  {
+   "text": "and select a node from the pool.",
+   "startMs": 451560,
+   "endMs": 453630
+  },
+  {
+   "text": "It'll either be a remote one",
+   "startMs": 453630,
+   "endMs": 455700
+  },
+  {
+   "text": "or your local one if you're so lucky.",
+   "startMs": 455700,
+   "endMs": 458280
+  },
+  {
+   "text": "Once it's reserved, you then create an instance",
+   "startMs": 458280,
+   "endMs": 460950
+  },
+  {
+   "text": "of your game by selecting the application",
+   "startMs": 460950,
+   "endMs": 463410
+  },
+  {
+   "text": "and which version of it you want to launch.",
+   "startMs": 463410,
+   "endMs": 465360
+  },
+  {
+   "text": "There's a one-terabyte drive in our nodes,",
+   "startMs": 465360,
+   "endMs": 467220
+  },
+  {
+   "text": "so you can store plenty of iterations of your projects",
+   "startMs": 467220,
+   "endMs": 469740
+  },
+  {
+   "text": "as long as you have the space.",
+   "startMs": 469740,
+   "endMs": 471090
+  },
+  {
+   "text": "You select which endpoint you want your instance",
+   "startMs": 471090,
+   "endMs": 473160
+  },
+  {
+   "text": "to launch from, and boom, we're in.",
+   "startMs": 473160,
+   "endMs": 476550
+  },
+  {
+   "text": "At this point, you're testing your game",
+   "startMs": 476550,
+   "endMs": 478530
+  },
+  {
+   "text": "like you would on any other dev kit.",
+   "startMs": 478530,
+   "endMs": 480690
+  },
+  {
+   "text": "Pretty cool, but this local node actually still suffers",
+   "startMs": 480690,
+   "endMs": 485370
+  },
+  {
+   "text": "from a problem that the main servers at Google also have.",
+   "startMs": 485370,
+   "endMs": 488820
+  },
+  {
+   "text": "When you're testing unfinished software,",
+   "startMs": 488820,
+   "endMs": 490920
+  },
+  {
+   "text": "crashes and hangs are inevitable,",
+   "startMs": 490920,
+   "endMs": 493200
+  },
+  {
+   "text": "and they can sometimes be so bad",
+   "startMs": 493200,
+   "endMs": 494940
+  },
+  {
+   "text": "that you need to restart your test console.",
+   "startMs": 494940,
+   "endMs": 497040
+  },
+  {
+   "text": "With Stadia, that takes at least 10 to 15 minutes",
+   "startMs": 497040,
+   "endMs": 501600
+  },
+  {
+   "text": "for it to reboot and re-register itself with the backend.",
+   "startMs": 501600,
+   "endMs": 505950
+  },
+  {
+   "text": "I don't know when the last time you restarted your PS5",
+   "startMs": 505950,
+   "endMs": 508080
+  },
+  {
+   "text": "or your Xbox was,",
+   "startMs": 508080,
+   "endMs": 509160
+  },
+  {
+   "text": "but I mean a minute, maybe two minutes tops.",
+   "startMs": 509160,
+   "endMs": 513300
+  },
+  {
+   "text": "So it's easy to see why developers might want",
+   "startMs": 513300,
+   "endMs": 515430
+  },
+  {
+   "text": "to avoid this sort of workflow,",
+   "startMs": 515430,
+   "endMs": 516930
+  },
+  {
+   "text": "considering how much time is potentially wasted",
+   "startMs": 516930,
+   "endMs": 519660
+  },
+  {
+   "text": "at all these steps of the game creation process.",
+   "startMs": 519660,
+   "endMs": 522600
+  },
+  {
+   "text": "But somehow, they were still doing it,",
+   "startMs": 522600,
+   "endMs": 525390
+  },
+  {
+   "text": "developing for Stadia,",
+   "startMs": 525390,
+   "endMs": 526770
+  },
+  {
+   "text": "and everything seemed to be going pretty okay.",
+   "startMs": 526770,
+   "endMs": 530010
+  },
+  {
+   "text": "So why did Google just kill this entire project?",
+   "startMs": 530010,
+   "endMs": 533790
+  },
+  {
+   "text": "The memes have certainly been fun, but humor aside,",
+   "startMs": 533790,
+   "endMs": 536760
+  },
+  {
+   "text": "there are also legions of satisfied Stadia customers",
+   "startMs": 536760,
+   "endMs": 540360
+  },
+  {
+   "text": "and successful devs who were making money hand over fist,",
+   "startMs": 540360,
+   "endMs": 544530
+  },
+  {
+   "text": "at least once the payment model got changed",
+   "startMs": 544530,
+   "endMs": 546360
+  },
+  {
+   "text": "from getting cash up front to a cut",
+   "startMs": 546360,
+   "endMs": 548370
+  },
+  {
+   "text": "of the subscription revenue based on time played.",
+   "startMs": 548370,
+   "endMs": 551190
+  },
+  {
+   "text": "So there are people whose lives have been affected",
+   "startMs": 551190,
+   "endMs": 553410
+  },
+  {
+   "text": "in a very negative way by Google's decision here.",
+   "startMs": 553410,
+   "endMs": 555900
+  },
+  {
+   "text": "Like if you had a big chunk",
+   "startMs": 555900,
+   "endMs": 557040
+  },
+  {
+   "text": "of the userbase playing your game every day,",
+   "startMs": 557040,
+   "endMs": 559320
+  },
+  {
+   "text": "we're talking potentially hundreds",
+   "startMs": 559320,
+   "endMs": 560760
+  },
+  {
+   "text": "of thousands of dollars a month.",
+   "startMs": 560760,
+   "endMs": 562380
+  },
+  {
+   "text": "Without hard numbers,",
+   "startMs": 562380,
+   "endMs": 563430
+  },
+  {
+   "text": "we can't say exactly how many Stadia users",
+   "startMs": 563430,
+   "endMs": 566280
+  },
+  {
+   "text": "and Stadia Pro subscribers there were,",
+   "startMs": 566280,
+   "endMs": 568590
+  },
+  {
+   "text": "but a few rough internet estimates put the peak",
+   "startMs": 568590,
+   "endMs": 571290
+  },
+  {
+   "text": "at about 2 million,",
+   "startMs": 571290,
+   "endMs": 572700
+  },
+  {
+   "text": "and that sounds realistic given that anyone",
+   "startMs": 572700,
+   "endMs": 574950
+  },
+  {
+   "text": "with a phone could install the free app.",
+   "startMs": 574950,
+   "endMs": 576720
+  },
+  {
+   "text": "However, Stadia Pro was a monthly $10 subscription,",
+   "startMs": 576720,
+   "endMs": 580500
+  },
+  {
+   "text": "and the estimate seemed to vary for that one",
+   "startMs": 580500,
+   "endMs": 582360
+  },
+  {
+   "text": "between 160 to 180,000 active users.",
+   "startMs": 582360,
+   "endMs": 586200
+  },
+  {
+   "text": "If we average to 170,",
+   "startMs": 586200,
+   "endMs": 588180
+  },
+  {
+   "text": "that's 1.7 million in revenue per month,",
+   "startMs": 588180,
+   "endMs": 591630
+  },
+  {
+   "text": "which is a lot of money,",
+   "startMs": 591630,
+   "endMs": 594000
+  },
+  {
+   "text": "but not nearly enough when you consider the overhead",
+   "startMs": 594000,
+   "endMs": 598440
+  },
+  {
+   "text": "that it needs to support.",
+   "startMs": 598440,
+   "endMs": 599460
+  },
+  {
+   "text": "The Stadia team at Google was apparently hundreds",
+   "startMs": 599460,
+   "endMs": 601890
+  },
+  {
+   "text": "of employees, nearly 300 at its peak.",
+   "startMs": 601890,
+   "endMs": 604590
+  },
+  {
+   "text": "Plus they needed to maintain hardware",
+   "startMs": 604590,
+   "endMs": 606990
+  },
+  {
+   "text": "and programs for distributing it and infrastructure,",
+   "startMs": 606990,
+   "endMs": 610560
+  },
+  {
+   "text": "and obviously, they needed to pay out a significant chunk",
+   "startMs": 610560,
+   "endMs": 614400
+  },
+  {
+   "text": "of that revenue in shares to game developers.",
+   "startMs": 614400,
+   "endMs": 617070
+  },
+  {
+   "text": "But in spite of how obviously unsustainable all",
+   "startMs": 617070,
+   "endMs": 620370
+  },
+  {
+   "text": "of that sounds now in the aftermath,",
+   "startMs": 620370,
+   "endMs": 623250
+  },
+  {
+   "text": "apparently at no point did anyone internally at Google seem",
+   "startMs": 623250,
+   "endMs": 627570
+  },
+  {
+   "text": "to acknowledge that Stadia was on its deathbed.",
+   "startMs": 627570,
+   "endMs": 630150
+  },
+  {
+   "text": "Despite all of the outside rumors,",
+   "startMs": 630150,
+   "endMs": 632220
+  },
+  {
+   "text": "it was seemingly business as usual right up",
+   "startMs": 632220,
+   "endMs": 635070
+  },
+  {
+   "text": "until the very bitter end.",
+   "startMs": 635070,
+   "endMs": 637230
+  },
+  {
+   "text": "In February of 2021,",
+   "startMs": 637230,
+   "endMs": 638970
+  },
+  {
+   "text": "Google shut down their in-house dev studio,",
+   "startMs": 638970,
+   "endMs": 641430
+  },
+  {
+   "text": "but insisted that it was for the best",
+   "startMs": 641430,
+   "endMs": 643710
+  },
+  {
+   "text": "so they could focus on the business side of things.",
+   "startMs": 643710,
+   "endMs": 645960
+  },
+  {
+   "text": "Then in July, they tried lowering their cut of the sales.",
+   "startMs": 645960,
+   "endMs": 649440
+  },
+  {
+   "text": "Then in September, they moved Jack Buser",
+   "startMs": 649440,
+   "endMs": 651690
+  },
+  {
+   "text": "to Google Cloud's head of gaming solutions.",
+   "startMs": 651690,
+   "endMs": 653970
+  },
+  {
+   "text": "In November, they cut the price of the hardware",
+   "startMs": 653970,
+   "endMs": 655920
+  },
+  {
+   "text": "from $60 to $22 as the program was now two years old, cute.",
+   "startMs": 655920,
+   "endMs": 660920
+  },
+  {
+   "text": "And then in February of 2022,",
+   "startMs": 661320,
+   "endMs": 663360
+  },
+  {
+   "text": "they said that everything was perfectly fine despite rumors",
+   "startMs": 663360,
+   "endMs": 666600
+  },
+  {
+   "text": "of an internal Stadia deprioritization.",
+   "startMs": 666600,
+   "endMs": 669333
+  },
+  {
+   "text": "Right.",
+   "startMs": 670290,
+   "endMs": 671130
+  },
+  {
+   "text": "Our inside source says that they",
+   "startMs": 671130,
+   "endMs": 672990
+  },
+  {
+   "text": "and every other studio were being lied",
+   "startMs": 672990,
+   "endMs": 675240
+  },
+  {
+   "text": "to just as much as we were,",
+   "startMs": 675240,
+   "endMs": 677280
+  },
+  {
+   "text": "and we have no way of knowing",
+   "startMs": 677280,
+   "endMs": 679470
+  },
+  {
+   "text": "how high up the chain you actually needed to be",
+   "startMs": 679470,
+   "endMs": 682320
+  },
+  {
+   "text": "to know what was going on.",
+   "startMs": 682320,
+   "endMs": 683820
+  },
+  {
+   "text": "When rumors popped up in the summer,",
+   "startMs": 683820,
+   "endMs": 685500
+  },
+  {
+   "text": "they emailed corporate, the dev friend,",
+   "startMs": 685500,
+   "endMs": 687540
+  },
+  {
+   "text": "and they got a reassuring reply.",
+   "startMs": 687540,
+   "endMs": 689130
+  },
+  {
+   "text": "A couple of days before the announcement,",
+   "startMs": 689130,
+   "endMs": 691320
+  },
+  {
+   "text": "they actually got a new version of the SDK,",
+   "startMs": 691320,
+   "endMs": 693900
+  },
+  {
+   "text": "the software development kit that was pushed out",
+   "startMs": 693900,
+   "endMs": 696330
+  },
+  {
+   "text": "to developers to work on Stadia.",
+   "startMs": 696330,
+   "endMs": 698880
+  },
+  {
+   "text": "An industry colleague of our friends",
+   "startMs": 698880,
+   "endMs": 701160
+  },
+  {
+   "text": "from another studio even flew from Japan to San Francisco",
+   "startMs": 701160,
+   "endMs": 705240
+  },
+  {
+   "text": "to talk about the future of Stadia with Google the day",
+   "startMs": 705240,
+   "endMs": 708510
+  },
+  {
+   "text": "before they shut it all down.",
+   "startMs": 708510,
+   "endMs": 710520
+  },
+  {
+   "text": "Now luckily for the team we got this unit from,",
+   "startMs": 710520,
+   "endMs": 712770
+  },
+  {
+   "text": "the writing was on the wall and they had already pivoted",
+   "startMs": 712770,
+   "endMs": 715260
+  },
+  {
+   "text": "to porting their game to other platforms.",
+   "startMs": 715260,
+   "endMs": 717510
+  },
+  {
+   "text": "As for others, Google's actually trying pretty hard",
+   "startMs": 717510,
+   "endMs": 720630
+  },
+  {
+   "text": "to properly pay out studios' fair shares,",
+   "startMs": 720630,
+   "endMs": 723000
+  },
+  {
+   "text": "almost like a severance for a fired employee.",
+   "startMs": 723000,
+   "endMs": 725700
+  },
+  {
+   "text": "Customers have already been refunded",
+   "startMs": 725700,
+   "endMs": 727530
+  },
+  {
+   "text": "or are going to get refunds, and Google isn't broke.",
+   "startMs": 727530,
+   "endMs": 730680
+  },
+  {
+   "text": "So hopefully, the checks clear",
+   "startMs": 730680,
+   "endMs": 732900
+  },
+  {
+   "text": "and that's all sorted out pretty quickly.",
+   "startMs": 732900,
+   "endMs": 734550
+  },
+  {
+   "text": "In fact, they've done such a good job of canning this thing",
+   "startMs": 734550,
+   "endMs": 738150
+  },
+  {
+   "text": "that the person we spoke with only had good things to say",
+   "startMs": 738150,
+   "endMs": 740910
+  },
+  {
+   "text": "about their experience dealing with Google.",
+   "startMs": 740910,
+   "endMs": 742860
+  },
+  {
+   "text": "They all seem friendly, they're nice to work with.",
+   "startMs": 742860,
+   "endMs": 745320
+  },
+  {
+   "text": "It almost has this like super weird mutual breakup vibe.",
+   "startMs": 745320,
+   "endMs": 749940
+  },
+  {
+   "text": "Will anyone ever trust Google",
+   "startMs": 749940,
+   "endMs": 751620
+  },
+  {
+   "text": "if they try to re-enter the gaming space?",
+   "startMs": 751620,
+   "endMs": 753420
+  },
+  {
+   "text": "Almost certainly not,",
+   "startMs": 753420,
+   "endMs": 754950
+  },
+  {
+   "text": "but there doesn't seem to be a lot of anger either.",
+   "startMs": 754950,
+   "endMs": 758010
+  },
+  {
+   "text": "With the entirety of what's referred to",
+   "startMs": 758010,
+   "endMs": 759570
+  },
+  {
+   "text": "as the Google graveyard being in plain view",
+   "startMs": 759570,
+   "endMs": 761340
+  },
+  {
+   "text": "for anyone to see,",
+   "startMs": 761340,
+   "endMs": 762300
+  },
+  {
+   "text": "it's almost like everyone kind of knew this was coming,",
+   "startMs": 762300,
+   "endMs": 765390
+  },
+  {
+   "text": "but they were willing to take the bag of money",
+   "startMs": 765390,
+   "endMs": 767070
+  },
+  {
+   "text": "for their work and see if, who knows,",
+   "startMs": 767070,
+   "endMs": 768870
+  },
+  {
+   "text": "maybe this is one of those projects that stays.",
+   "startMs": 768870,
+   "endMs": 771510
+  },
+  {
+   "text": "Hey, maybe that's where the name came from.",
+   "startMs": 771510,
+   "endMs": 773880
+  },
+  {
+   "text": "Stay-dia. Huh, not so much.",
+   "startMs": 773880,
+   "endMs": 776430
+  },
+  {
+   "text": "Though maybe it will stay around in some form.",
+   "startMs": 776430,
+   "endMs": 778980
+  },
+  {
+   "text": "I have no evidence to support either of these theories,",
+   "startMs": 778980,
+   "endMs": 781440
+  },
+  {
+   "text": "but I think it's possible",
+   "startMs": 781440,
+   "endMs": 782820
+  },
+  {
+   "text": "that Google could sell the technology",
+   "startMs": 782820,
+   "endMs": 784770
+  },
+  {
+   "text": "to an interested party,",
+   "startMs": 784770,
+   "endMs": 786600
+  },
+  {
+   "text": "and I also don't think it's impossible",
+   "startMs": 786600,
+   "endMs": 789060
+  },
+  {
+   "text": "that Stadia could resurface",
+   "startMs": 789060,
+   "endMs": 790890
+  },
+  {
+   "text": "as a business-to-business product.",
+   "startMs": 790890,
+   "endMs": 792450
+  },
+  {
+   "text": "Say a mobile carrier wanted",
+   "startMs": 792450,
+   "endMs": 794700
+  },
+  {
+   "text": "to introduce a cloud gaming service,",
+   "startMs": 794700,
+   "endMs": 796590
+  },
+  {
+   "text": "they could use white-label Stadia",
+   "startMs": 796590,
+   "endMs": 798240
+  },
+  {
+   "text": "to spin it up extremely quickly.",
+   "startMs": 798240,
+   "endMs": 800100
+  },
+  {
+   "text": "Until that happens though,",
+   "startMs": 800100,
+   "endMs": 801510
+  },
+  {
+   "text": "it's yet another line on killedbygoogle.com,",
+   "startMs": 801510,
+   "endMs": 803940
+  },
+  {
+   "text": "which for those who are not in the know,",
+   "startMs": 803940,
+   "endMs": 806010
+  },
+  {
+   "text": "is an amazing site that chronicles all the products",
+   "startMs": 806010,
+   "endMs": 808470
+  },
+  {
+   "text": "and services that Google has launched,",
+   "startMs": 808470,
+   "endMs": 810270
+  },
+  {
+   "text": "ran sometimes for years, and ultimately killed.",
+   "startMs": 810270,
+   "endMs": 813540
+  },
+  {
+   "text": "At least in this case, unlike Google Play Music,",
+   "startMs": 813540,
+   "endMs": 816000
+  },
+  {
+   "text": "which is still better than YouTube Music,",
+   "startMs": 816000,
+   "endMs": 818220
+  },
+  {
+   "text": "they have fully compensated their customers",
+   "startMs": 818220,
+   "endMs": 820170
+  },
+  {
+   "text": "and seemingly partners.",
+   "startMs": 820170,
+   "endMs": 821370
+  },
+  {
+   "text": "But there is one more thing",
+   "startMs": 821370,
+   "endMs": 823140
+  },
+  {
+   "text": "that I would like to see resolved,",
+   "startMs": 823140,
+   "endMs": 824760
+  },
+  {
+   "text": "that's the Stadia controller.",
+   "startMs": 824760,
+   "endMs": 826380
+  },
+  {
+   "text": "While it can be used on your PC with a USB-C cable,",
+   "startMs": 826380,
+   "endMs": 830220
+  },
+  {
+   "text": "I suspect that many gamers in 2022",
+   "startMs": 830220,
+   "endMs": 833160
+  },
+  {
+   "text": "and beyond are not gonna wanna deal with that",
+   "startMs": 833160,
+   "endMs": 835350
+  },
+  {
+   "text": "and are gonna end up junking them.",
+   "startMs": 835350,
+   "endMs": 836940
+  },
+  {
+   "text": "So Google, I'm asking you,",
+   "startMs": 836940,
+   "endMs": 838710
+  },
+  {
+   "text": "please either provide a fix or open up the firmware",
+   "startMs": 838710,
+   "endMs": 842550
+  },
+  {
+   "text": "so that the community can work",
+   "startMs": 842550,
+   "endMs": 843870
+  },
+  {
+   "text": "on getting it working wirelessly over Bluetooth.",
+   "startMs": 843870,
+   "endMs": 846510
+  },
+  {
+   "text": "Please and thank you.",
+   "startMs": 846510,
+   "endMs": 849090
+  },
+  {
+   "text": "And thank you for checking out our sponsor, Squarespace.",
+   "startMs": 849090,
+   "endMs": 852780
+  },
+  {
+   "text": "If you need to build a brand online, you need a website.",
+   "startMs": 852780,
+   "endMs": 855487
+  },
+  {
+   "text": "\"But Linus, I just learned",
+   "startMs": 855487,
+   "endMs": 857310
+  },
+  {
+   "text": "how to turn on the little flashlight on my phone.",
+   "startMs": 857310,
+   "endMs": 859410
+  },
+  {
+   "text": "How am I gonna build a whole website,\" you ask.",
+   "startMs": 859410,
+   "endMs": 861480
+  },
+  {
+   "text": "With Squarespace.",
+   "startMs": 861480,
+   "endMs": 862624
+  },
+  {
+   "text": "Squarespace is a one-stop,",
+   "startMs": 862624,
+   "endMs": 864450
+  },
+  {
+   "text": "no-frills, all-in-one platform",
+   "startMs": 864450,
+   "endMs": 866370
+  },
+  {
+   "text": "for expanding your presence on the internet.",
+   "startMs": 866370,
+   "endMs": 867960
+  },
+  {
+   "text": "Squarespace lets you build beautiful websites,",
+   "startMs": 867960,
+   "endMs": 870060
+  },
+  {
+   "text": "engage with your audience, and sell anything and everything,",
+   "startMs": 870060,
+   "endMs": 873000
+  },
+  {
+   "text": "from products to content without needing",
+   "startMs": 873000,
+   "endMs": 874890
+  },
+  {
+   "text": "to attend the Linus Techwarts School of Tech Wizardry.",
+   "startMs": 874890,
+   "endMs": 878580
+  },
+  {
+   "text": "We love Squarespace so much",
+   "startMs": 878580,
+   "endMs": 880080
+  },
+  {
+   "text": "that we use it here at Linus Media Group.",
+   "startMs": 880080,
+   "endMs": 882360
+  },
+  {
+   "text": "Its custom templates make it easy",
+   "startMs": 882360,
+   "endMs": 884130
+  },
+  {
+   "text": "to stand out with a plethora of themes",
+   "startMs": 884130,
+   "endMs": 885810
+  },
+  {
+   "text": "and customization options to fit your needs,",
+   "startMs": 885810,
+   "endMs": 887610
+  },
+  {
+   "text": "and you can maximize your visibility thanks",
+   "startMs": 887610,
+   "endMs": 889440
+  },
+  {
+   "text": "to their suite of integrated SEO features.",
+   "startMs": 889440,
+   "endMs": 891660
+  },
+  {
+   "text": "There's also analytic insights",
+   "startMs": 891660,
+   "endMs": 893100
+  },
+  {
+   "text": "to help you optimize for performance",
+   "startMs": 893100,
+   "endMs": 894810
+  },
+  {
+   "text": "so you can see what's working well and what needs tweaking.",
+   "startMs": 894810,
+   "endMs": 897780
+  },
+  {
+   "text": "So don't wait, get started today",
+   "startMs": 897780,
+   "endMs": 899430
+  },
+  {
+   "text": "and head to squarespace.com/ltt",
+   "startMs": 899430,
+   "endMs": 902280
+  },
+  {
+   "text": "to get 10% off your first purchase.",
+   "startMs": 902280,
+   "endMs": 904710
+  },
+  {
+   "text": "If you guys enjoyed this video,",
+   "startMs": 904710,
+   "endMs": 905970
+  },
+  {
+   "text": "maybe check out the last time we tried",
+   "startMs": 905970,
+   "endMs": 907590
+  },
+  {
+   "text": "all the streaming services.",
+   "startMs": 907590,
+   "endMs": 909570
+  },
+  {
+   "text": "That was our last chance to do it.",
+   "startMs": 909570,
+   "endMs": 911703
+  },
+  {
+   "text": "Now it's over for Stadia,",
+   "startMs": 912540,
+   "endMs": 914910
+  },
+  {
+   "text": "probably (indistinct) at some point.",
+   "startMs": 914910,
+   "endMs": 916710
+  }
+ ]
+}

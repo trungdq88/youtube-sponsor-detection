@@ -1,0 +1,1098 @@
+{
+ "videoID": "c3CN8elYKrY",
+ "title": "Fedora drops old BIOS, Nvidia opens up, and Steam on Chrome OS - Linux and Open Source news",
+ "route": "captions/WEB",
+ "savedAt": "2026-09-18T02:32:41.034Z",
+ "cues": [
+  {
+   "text": "hey everyone this is nick and just like every week i have to give you the latest",
+   "startMs": 0,
+   "endMs": 7440
+  },
+  {
+   "text": "linux and open source news because if i didn't you probably would make your own",
+   "startMs": 4799,
+   "endMs": 11920
+  },
+  {
+   "text": "list of rss feeds and that would be way too much to ask what do you mean no one",
+   "startMs": 9360,
+   "endMs": 16880
+  },
+  {
+   "text": "uses rss feeds anymore everybody's wrong then okay so this week we have fedora",
+   "startMs": 14000,
+   "endMs": 22320
+  },
+  {
+   "text": "dropping support for older legacy bios we have nvidia dropping some open source",
+   "startMs": 19279,
+   "endMs": 27359
+  },
+  {
+   "text": "code for drivers although their intent isn't exactly clear and we have more",
+   "startMs": 24880,
+   "endMs": 32399
+  },
+  {
+   "text": "details about how steam will run on chrome os let's get into it but first if",
+   "startMs": 29840,
+   "endMs": 37040
+  },
+  {
+   "text": "you're interested in making sure that your organization is up to par in terms",
+   "startMs": 35360,
+   "endMs": 41680
+  },
+  {
+   "text": "of linux security best practices you might want to listen to this message",
+   "startMs": 39600,
+   "endMs": 46000
+  },
+  {
+   "text": "this video is sponsored by tuxcare but this time i'm not going to talk to you",
+   "startMs": 43440,
+   "endMs": 49520
+  },
+  {
+   "text": "about their services to handle and manage your linux server fleet this time",
+   "startMs": 47840,
+   "endMs": 54399
+  },
+  {
+   "text": "they want you to take a look at a report that they sponsored about linux security",
+   "startMs": 52079,
+   "endMs": 58879
+  },
+  {
+   "text": "best practices this research was conducted by the independent ponemon",
+   "startMs": 56719,
+   "endMs": 63120
+  },
+  {
+   "text": "institute and the results which are freely downloadable will let you",
+   "startMs": 61120,
+   "endMs": 67360
+  },
+  {
+   "text": "benchmark your processes against a set of best practices for example research",
+   "startMs": 65040,
+   "endMs": 71760
+  },
+  {
+   "text": "shows that organizations spend about 1075",
+   "startMs": 69760,
+   "endMs": 76240
+  },
+  {
+   "text": "man hours monitoring and patching systems each week including 340 hours of",
+   "startMs": 73600,
+   "endMs": 83920
+  },
+  {
+   "text": "downtime to apply those patches 45 of respondents also indicated that their",
+   "startMs": 80320,
+   "endMs": 89920
+  },
+  {
+   "text": "organization has no tolerance for system patching downtime",
+   "startMs": 86560,
+   "endMs": 93600
+  },
+  {
+   "text": "of course that's a problem that tuxcare solves with their live patching services",
+   "startMs": 91759,
+   "endMs": 97439
+  },
+  {
+   "text": "but if you want to learn more about linux security best practices how to",
+   "startMs": 95759,
+   "endMs": 101600
+  },
+  {
+   "text": "implement them in your organization head over to the link in the description",
+   "startMs": 99520,
+   "endMs": 104640
+  },
+  {
+   "text": "below and download the full report for free no strings attached okay so it",
+   "startMs": 102880,
+   "endMs": 109439
+  },
+  {
+   "text": "seems that fedora wants to drop support for legacy bios as in everything that's",
+   "startMs": 106880,
+   "endMs": 116000
+  },
+  {
+   "text": "not based on uefi fedora 37 will mark older bios installs as deprecated and",
+   "startMs": 112079,
+   "endMs": 121280
+  },
+  {
+   "text": "new installs won't be possible on these architectures",
+   "startMs": 118960,
+   "endMs": 124880
+  },
+  {
+   "text": "existing installs of fedora will still be supported and will keep working but",
+   "startMs": 122719,
+   "endMs": 129679
+  },
+  {
+   "text": "your older devices won't be able to get a new fresh fedora install",
+   "startMs": 127200,
+   "endMs": 134400
+  },
+  {
+   "text": "while the move might seem surprising it's driven by the fact that a lot of",
+   "startMs": 132480,
+   "endMs": 139120
+  },
+  {
+   "text": "modern features depend on more recent uefi bios for example secure boot",
+   "startMs": 136480,
+   "endMs": 143680
+  },
+  {
+   "text": "support or using the firmware update tool fw upd it also makes the installer",
+   "startMs": 141760,
+   "endMs": 149280
+  },
+  {
+   "text": "and live session for fedora way easier to maintain as it allows the team to",
+   "startMs": 146879,
+   "endMs": 153360
+  },
+  {
+   "text": "stop supporting an architecture that seems to require a range of ancient",
+   "startMs": 151360,
+   "endMs": 157519
+  },
+  {
+   "text": "hacks and complex code to be at future parody with uefi fedora has always",
+   "startMs": 155200,
+   "endMs": 162400
+  },
+  {
+   "text": "looked to the future and is generally one of the first main distros to",
+   "startMs": 160480,
+   "endMs": 166720
+  },
+  {
+   "text": "implement new tech so i'm not super surprised about that change but i'm sure",
+   "startMs": 164400,
+   "endMs": 170239
+  },
+  {
+   "text": "that it's going to piss a lot of people off though",
+   "startMs": 168640,
+   "endMs": 173200
+  },
+  {
+   "text": "what would these videos look like without more kde news we won't find out",
+   "startMs": 171519,
+   "endMs": 178560
+  },
+  {
+   "text": "today as nate graham keeps on publishing articles detailing what the kde team is",
+   "startMs": 176080,
+   "endMs": 182239
+  },
+  {
+   "text": "working on this time there's a new 15 minute bug",
+   "startMs": 180959,
+   "endMs": 186560
+  },
+  {
+   "text": "fixed and changing accent colors will now be done with a smooth cross fade so",
+   "startMs": 184319,
+   "endMs": 191360
+  },
+  {
+   "text": "the change is less jarring much like what gnome does when moving from light",
+   "startMs": 189200,
+   "endMs": 195840
+  },
+  {
+   "text": "to dark mode the info center in the system settings now displays more",
+   "startMs": 193360,
+   "endMs": 199760
+  },
+  {
+   "text": "details about your device including the serial number or the product name and",
+   "startMs": 197680,
+   "endMs": 204879
+  },
+  {
+   "text": "manufacturer on weyland apps that need access to screen recording won't prompt",
+   "startMs": 201920,
+   "endMs": 208959
+  },
+  {
+   "text": "you every time you open them they'll remember that they got access once",
+   "startMs": 207040,
+   "endMs": 213519
+  },
+  {
+   "text": "there are also tons of bug fixes as always and a few user interface",
+   "startMs": 211440,
+   "endMs": 217840
+  },
+  {
+   "text": "improvements for eliza the music player as well as for kate and k wright which",
+   "startMs": 215440,
+   "endMs": 222319
+  },
+  {
+   "text": "now share the same code base and the four finger swipe gesture used to open",
+   "startMs": 220080,
+   "endMs": 226959
+  },
+  {
+   "text": "the kde overview effect is now one to one so it follows your fingers that's a",
+   "startMs": 224400,
+   "endMs": 230879
+  },
+  {
+   "text": "lot of good stuff and i really like seeing the portals being implemented",
+   "startMs": 229200,
+   "endMs": 234640
+  },
+  {
+   "text": "they really add a ton of polish and security to the desktop it's top-notch",
+   "startMs": 232720,
+   "endMs": 239920
+  },
+  {
+   "text": "raspberry pi os is getting some big updates",
+   "startMs": 237280,
+   "endMs": 243760
+  },
+  {
+   "text": "first the setup wizard is now mandatory because it lets you create a user",
+   "startMs": 240959,
+   "endMs": 247120
+  },
+  {
+   "text": "account on your system the default pi user made brute force",
+   "startMs": 245360,
+   "endMs": 251920
+  },
+  {
+   "text": "attacks a bit too easy since each raspberry pi had the same username so",
+   "startMs": 249519,
+   "endMs": 256560
+  },
+  {
+   "text": "you only had to guess the password people who wouldn't be able to see the",
+   "startMs": 254159,
+   "endMs": 260400
+  },
+  {
+   "text": "graphical wizard also have a solution of course the raspberry pi imagery tool",
+   "startMs": 258320,
+   "endMs": 264880
+  },
+  {
+   "text": "lets you pre-configure an image with the user already created the team also added",
+   "startMs": 262800,
+   "endMs": 270000
+  },
+  {
+   "text": "a way to rename the user for existing installs so you won't have to reinstall",
+   "startMs": 267840,
+   "endMs": 274080
+  },
+  {
+   "text": "the whole system to get the same level of security as if you had a fresh one",
+   "startMs": 272000,
+   "endMs": 278639
+  },
+  {
+   "text": "the wizard also allows you to pair a bluetooth keyboard or mouse right from",
+   "startMs": 276639,
+   "endMs": 282960
+  },
+  {
+   "text": "the start without plugging it in through usb which should make the initial setup",
+   "startMs": 280880,
+   "endMs": 287199
+  },
+  {
+   "text": "a bit less irritating they also added experimental wayland",
+   "startMs": 285199,
+   "endMs": 291520
+  },
+  {
+   "text": "support although it's not complete yet and more of a hybrid between wayland and",
+   "startMs": 289199,
+   "endMs": 294800
+  },
+  {
+   "text": "x pretty good stuff all around and it",
+   "startMs": 294000,
+   "endMs": 299840
+  },
+  {
+   "text": "should make these teeny tiny pcs a teeny tiny bit more secure",
+   "startMs": 296479,
+   "endMs": 303600
+  },
+  {
+   "text": "if your distro already graced you with gnome 42 but you were using a few",
+   "startMs": 301759,
+   "endMs": 308160
+  },
+  {
+   "text": "extensions that had not been updated yet you can rejoice two of the major ones",
+   "startMs": 305759,
+   "endMs": 313440
+  },
+  {
+   "text": "are now compatible with gnome 42 namely dash 2 panel and material shell",
+   "startMs": 310960,
+   "endMs": 318400
+  },
+  {
+   "text": "dash 2 panel doesn't have any new features in their latest release version",
+   "startMs": 316400,
+   "endMs": 323759
+  },
+  {
+   "text": "46 apart from being compatible again you can install it from the gnome",
+   "startMs": 320320,
+   "endMs": 327520
+  },
+  {
+   "text": "extensions website or from extension manager a great app i already talked",
+   "startMs": 325120,
+   "endMs": 331840
+  },
+  {
+   "text": "about a few times users of material shell can also now",
+   "startMs": 329919,
+   "endMs": 336960
+  },
+  {
+   "text": "move to gnome 42 and enjoy its styling window manager-like features for people",
+   "startMs": 334400,
+   "endMs": 341759
+  },
+  {
+   "text": "who never heard about it material shell automatically organizes your windows by",
+   "startMs": 339520,
+   "endMs": 346000
+  },
+  {
+   "text": "tiling them to the various halves or corners of the screen much like what",
+   "startMs": 344000,
+   "endMs": 349680
+  },
+  {
+   "text": "you'd find on popos it's also very keyboard friendly of",
+   "startMs": 347919,
+   "endMs": 353919
+  },
+  {
+   "text": "course and can be installed as every other extension from the gnome",
+   "startMs": 351600,
+   "endMs": 357520
+  },
+  {
+   "text": "extensions website or from extension manager so now you have no excuse to not",
+   "startMs": 355520,
+   "endMs": 362800
+  },
+  {
+   "text": "move to the latest and greatest gnome release",
+   "startMs": 360639,
+   "endMs": 364800
+  },
+  {
+   "text": "nice linux mint 21 revealed itself in more",
+   "startMs": 363840,
+   "endMs": 370160
+  },
+  {
+   "text": "details it will of course be based on ubuntu 22.04 lts still and still",
+   "startMs": 367440,
+   "endMs": 376720
+  },
+  {
+   "text": "supports cinnamon mate and xfc but that's not all its code name is vanessa",
+   "startMs": 373600,
+   "endMs": 381199
+  },
+  {
+   "text": "and the team is working on a new upgrade tool to make moving from one version to",
+   "startMs": 379120,
+   "endMs": 385440
+  },
+  {
+   "text": "the next even easier it will be fully graphical and localized",
+   "startMs": 383360,
+   "endMs": 389759
+  },
+  {
+   "text": "as opposed to the current one that is only in english",
+   "startMs": 388080,
+   "endMs": 393120
+  },
+  {
+   "text": "it will perform a few checks to see if it's safe to upgrade it automatically",
+   "startMs": 391440,
+   "endMs": 397600
+  },
+  {
+   "text": "migrates your ppas and repos to the right version if that exists and it",
+   "startMs": 395280,
+   "endMs": 401680
+  },
+  {
+   "text": "should generally be a much safer and cleaner approach to upgrading your",
+   "startMs": 399759,
+   "endMs": 404479
+  },
+  {
+   "text": "system of course you will be able to skip some",
+   "startMs": 403280,
+   "endMs": 408080
+  },
+  {
+   "text": "of the checks the app performs if you're certain of what you're doing like for",
+   "startMs": 406160,
+   "endMs": 411599
+  },
+  {
+   "text": "example skipping the check to see if a time shift backup exists it will also",
+   "startMs": 410000,
+   "endMs": 415759
+  },
+  {
+   "text": "preserve the mirrors you might have picked for apt so download speeds should",
+   "startMs": 414160,
+   "endMs": 420240
+  },
+  {
+   "text": "be at their best for the upgrade the tool will be made available for",
+   "startMs": 417919,
+   "endMs": 424400
+  },
+  {
+   "text": "linux mint debian edition 4 to move to the latest version 5 and then it will",
+   "startMs": 421759,
+   "endMs": 429599
+  },
+  {
+   "text": "roll out to mint 20.3 to upgrade to mint 21. it's nice to see distributions",
+   "startMs": 426720,
+   "endMs": 434720
+  },
+  {
+   "text": "paying attention to the in-place upgrade process because that can be pretty",
+   "startMs": 432240,
+   "endMs": 438160
+  },
+  {
+   "text": "tricky especially if you have tons of ppas and repos which don't get migrated",
+   "startMs": 436560,
+   "endMs": 443039
+  },
+  {
+   "text": "and break your libraries and stuff it's a good choice",
+   "startMs": 440960,
+   "endMs": 446800
+  },
+  {
+   "text": "a few distros also got some nice updates this week first is endeavor os an",
+   "startMs": 444319,
+   "endMs": 451919
+  },
+  {
+   "text": "arch-based distro that sees its latest release codenamed apollo",
+   "startMs": 449840,
+   "endMs": 457120
+  },
+  {
+   "text": "it brings the linux kernel version 5.17 and the mesa 22 graphics drivers so you",
+   "startMs": 454000,
+   "endMs": 461199
+  },
+  {
+   "text": "should be all caught up in terms of hardware support",
+   "startMs": 459599,
+   "endMs": 464560
+  },
+  {
+   "text": "it also brings a new window manager called worm it seems to be made for x11",
+   "startMs": 462720,
+   "endMs": 470240
+  },
+  {
+   "text": "and not wayland and it supports styling or floating windows it's also very",
+   "startMs": 467680,
+   "endMs": 473599
+  },
+  {
+   "text": "lightweight you will also get a new graphical",
+   "startMs": 472240,
+   "endMs": 476879
+  },
+  {
+   "text": "utility to pick the apps you want to install and a command line tool to",
+   "startMs": 475120,
+   "endMs": 481759
+  },
+  {
+   "text": "install nvidia drivers mx linux also got a new release version 21.1 it's based on",
+   "startMs": 478639,
+   "endMs": 487280
+  },
+  {
+   "text": "debian 11 and packs the linux kernel 5.16 the disk utility right on the iso",
+   "startMs": 484960,
+   "endMs": 493039
+  },
+  {
+   "text": "and it also improves the installer and updates most of the pre-installed",
+   "startMs": 490960,
+   "endMs": 495520
+  },
+  {
+   "text": "packages both look pretty good i might give them",
+   "startMs": 494479,
+   "endMs": 500000
+  },
+  {
+   "text": "a shot in the future i know the mx linux crowd is pretty vocal about how they",
+   "startMs": 497360,
+   "endMs": 503280
+  },
+  {
+   "text": "like their distro christian schaller the desktop lead at",
+   "startMs": 501759,
+   "endMs": 507680
+  },
+  {
+   "text": "red hat wrote a blog post detailing new things happening on zync which is an",
+   "startMs": 505199,
+   "endMs": 512479
+  },
+  {
+   "text": "opengl implementation that runs on top of vulkan",
+   "startMs": 509919,
+   "endMs": 515839
+  },
+  {
+   "text": "basically it means that devices that don't have a native opengl driver but",
+   "startMs": 513919,
+   "endMs": 521039
+  },
+  {
+   "text": "only a vulcan driver can still have opengl support because that thing is",
+   "startMs": 518399,
+   "endMs": 526240
+  },
+  {
+   "text": "still widely used by our desktops and applications",
+   "startMs": 523760,
+   "endMs": 530160
+  },
+  {
+   "text": "this might seem like a minor development but as manufacturers release new devices",
+   "startMs": 527680,
+   "endMs": 534240
+  },
+  {
+   "text": "they are progressively phasing out support for opengl and focusing on",
+   "startMs": 532640,
+   "endMs": 538959
+  },
+  {
+   "text": "vulkan so this ensures that we'll keep compatibility for the time being",
+   "startMs": 536480,
+   "endMs": 543120
+  },
+  {
+   "text": "this new support will be included in mesa 22.1 and will be made available on",
+   "startMs": 541440,
+   "endMs": 549040
+  },
+  {
+   "text": "fedora 36 performance is still a bit slower than native opengl but they",
+   "startMs": 546160,
+   "endMs": 553120
+  },
+  {
+   "text": "expect that difference to shrink as the codebase becomes more refined it seems",
+   "startMs": 551279,
+   "endMs": 557600
+  },
+  {
+   "text": "important to maintain compatibility with older games and older apps so i'm all",
+   "startMs": 555600,
+   "endMs": 561040
+  },
+  {
+   "text": "for it speaking of drivers it looks like nvidia",
+   "startMs": 560000,
+   "endMs": 566000
+  },
+  {
+   "text": "is making another step towards open source they released the code for their",
+   "startMs": 563760,
+   "endMs": 570480
+  },
+  {
+   "text": "tegra 4 driver for linux and this seems to be accompanied by a previously unseen",
+   "startMs": 567920,
+   "endMs": 575600
+  },
+  {
+   "text": "kernel driver that's also open source but not based on nuvo it actually",
+   "startMs": 573120,
+   "endMs": 579920
+  },
+  {
+   "text": "includes references dating back to the 90s so it might be a more all",
+   "startMs": 578080,
+   "endMs": 584480
+  },
+  {
+   "text": "encompassing driver for a lot of their gpus",
+   "startMs": 582480,
+   "endMs": 587680
+  },
+  {
+   "text": "this new driver is licensed under the mit license and it appears to be derived",
+   "startMs": 585839,
+   "endMs": 592240
+  },
+  {
+   "text": "from their proprietary driver for now it's limited to tegra graphics hardware",
+   "startMs": 590080,
+   "endMs": 596720
+  },
+  {
+   "text": "support and regular desktop gpus don't work with it but since it mentions a lot",
+   "startMs": 594320,
+   "endMs": 601680
+  },
+  {
+   "text": "of these gpus in its code there might be hope that nvidia has finally seen the",
+   "startMs": 599279,
+   "endMs": 606399
+  },
+  {
+   "text": "light and will work on a complete open source driver in the future or maybe",
+   "startMs": 603920,
+   "endMs": 611279
+  },
+  {
+   "text": "they just decided to not clean up a lot of the old code in the driver and i'm",
+   "startMs": 608959,
+   "endMs": 615680
+  },
+  {
+   "text": "getting excited for nothing only time will tell",
+   "startMs": 613519,
+   "endMs": 619680
+  },
+  {
+   "text": "lx cute is a desktop environment i don't talk about much so it's time to remedy",
+   "startMs": 616880,
+   "endMs": 623920
+  },
+  {
+   "text": "that the team published an article detailing changes to their next release",
+   "startMs": 621680,
+   "endMs": 627839
+  },
+  {
+   "text": "version 1.1.0 that was at the end of march so sorry",
+   "startMs": 625760,
+   "endMs": 632320
+  },
+  {
+   "text": "for missing it this new version brings color palettes matching the dark themes",
+   "startMs": 630079,
+   "endMs": 637440
+  },
+  {
+   "text": "as well as two new menu choices simple and compact the latter as you can guess",
+   "startMs": 634560,
+   "endMs": 641839
+  },
+  {
+   "text": "using a bit less horizontal space there's also an improved color picker a",
+   "startMs": 639920,
+   "endMs": 645519
+  },
+  {
+   "text": "separate settings panel to configure the look of gtk apps and they added some",
+   "startMs": 643760,
+   "endMs": 650000
+  },
+  {
+   "text": "icons on the desktop by default accompanied with a new theme a new",
+   "startMs": 647920,
+   "endMs": 655760
+  },
+  {
+   "text": "wallpaper and new icons lxqt 1.1 will also start the transition to q6 and will",
+   "startMs": 651680,
+   "endMs": 660640
+  },
+  {
+   "text": "support the portal spec that's used by a lot of flat pack apps i was inclined to",
+   "startMs": 658320,
+   "endMs": 665440
+  },
+  {
+   "text": "give it a shot when it releases but they added desktop icons i need to think",
+   "startMs": 662880,
+   "endMs": 669120
+  },
+  {
+   "text": "about it more obs is a wonderful tool but its",
+   "startMs": 667839,
+   "endMs": 674160
+  },
+  {
+   "text": "performance impacts can be quite high especially when recording gameplay",
+   "startMs": 671760,
+   "endMs": 677040
+  },
+  {
+   "text": "footage fortunately we might have a new solution",
+   "startMs": 676000,
+   "endMs": 682000
+  },
+  {
+   "text": "in the works called gpu screen recorder a very descriptive name that aims to be",
+   "startMs": 679200,
+   "endMs": 685920
+  },
+  {
+   "text": "the shadow player of linux it will start with nvidia and nvnc",
+   "startMs": 684079,
+   "endMs": 690640
+  },
+  {
+   "text": "support initially but the team has plans to make it work with amd and intel gpus",
+   "startMs": 688320,
+   "endMs": 694800
+  },
+  {
+   "text": "in the future initial performance tests seem to",
+   "startMs": 693440,
+   "endMs": 698480
+  },
+  {
+   "text": "indicate that it does have a much smaller footprint than obs and nvinc and",
+   "startMs": 696480,
+   "endMs": 704399
+  },
+  {
+   "text": "might not disturb gameplay as much the reason the developers gave is that",
+   "startMs": 701600,
+   "endMs": 709440
+  },
+  {
+   "text": "while obs does use the gpu to record the screen each frame is still passed to the",
+   "startMs": 706800,
+   "endMs": 715120
+  },
+  {
+   "text": "cpu and then back to the gpu which slows everything down and causes fps drops",
+   "startMs": 711920,
+   "endMs": 720160
+  },
+  {
+   "text": "this new solution keeps everything on the gpu using cuda so the cpu usage",
+   "startMs": 718000,
+   "endMs": 726160
+  },
+  {
+   "text": "stays at zero percent and only your gpu is being used pretty cool stuff and i",
+   "startMs": 723279,
+   "endMs": 730800
+  },
+  {
+   "text": "hope they can add that back into obs in the future or maybe at least provide a",
+   "startMs": 728560,
+   "endMs": 735440
+  },
+  {
+   "text": "nice graphical user interface to let you like start a recording start streaming",
+   "startMs": 732959,
+   "endMs": 739040
+  },
+  {
+   "text": "or at least just configure what you're recording",
+   "startMs": 737440,
+   "endMs": 742000
+  },
+  {
+   "text": "the steam deck journey continues with 2100 games now being playable on the not",
+   "startMs": 740000,
+   "endMs": 748399
+  },
+  {
+   "text": "so small device we now have 1090 verified titles and 1013 playable games",
+   "startMs": 745200,
+   "endMs": 754399
+  },
+  {
+   "text": "that's still about 30 games added to the list per day big names this time include",
+   "startMs": 752399,
+   "endMs": 760639
+  },
+  {
+   "text": "metro 2033 redux resonance of fate overlord equinox or deus ex invisible",
+   "startMs": 757040,
+   "endMs": 766720
+  },
+  {
+   "text": "war okay admittedly this last one blows but equinox come on for fans like me of",
+   "startMs": 763680,
+   "endMs": 773040
+  },
+  {
+   "text": "the polaris rpg like pen and paper rpg this was an amazing game other good",
+   "startMs": 769839,
+   "endMs": 777839
+  },
+  {
+   "text": "steam deck related news back for blood added experimental support for linux and",
+   "startMs": 775519,
+   "endMs": 782639
+  },
+  {
+   "text": "the deck and more importantly halo the master chief collection now includes the",
+   "startMs": 780160,
+   "endMs": 787440
+  },
+  {
+   "text": "necessary easy anti-cheat files to be playable online on linux and on deck",
+   "startMs": 784800,
+   "endMs": 793040
+  },
+  {
+   "text": "unfortunately it seemed to also have broken the game for some but gaming on",
+   "startMs": 791040,
+   "endMs": 797040
+  },
+  {
+   "text": "linux has a solution for that link in the description that's pretty nuts isn't",
+   "startMs": 795120,
+   "endMs": 801760
+  },
+  {
+   "text": "it a microsoft game making changes specifically to be able to run on linux",
+   "startMs": 799279,
+   "endMs": 806959
+  },
+  {
+   "text": "and on the steam deck it's crazy times we live in",
+   "startMs": 804560,
+   "endMs": 810560
+  },
+  {
+   "text": "google detailed the inner workings of steam on chrome os and it's quite",
+   "startMs": 808320,
+   "endMs": 813680
+  },
+  {
+   "text": "interesting steam will run using a virtual machine",
+   "startMs": 812480,
+   "endMs": 818000
+  },
+  {
+   "text": "which runs a modified version of arch linux specifically designed for gaming",
+   "startMs": 815839,
+   "endMs": 823199
+  },
+  {
+   "text": "the image is named borealis and gets updates with every chrome os update so",
+   "startMs": 820800,
+   "endMs": 827360
+  },
+  {
+   "text": "you don't have two systems to manage separately it also seems to use a very",
+   "startMs": 825440,
+   "endMs": 832000
+  },
+  {
+   "text": "recent version of mesa to ensure the best performance possible in fact google",
+   "startMs": 829760,
+   "endMs": 836480
+  },
+  {
+   "text": "says that this system offers near native performance thanks to venus a",
+   "startMs": 834320,
+   "endMs": 841199
+  },
+  {
+   "text": "lightweight vulcan virtualization driver basically apps will use vulkan and",
+   "startMs": 838399,
+   "endMs": 845760
+  },
+  {
+   "text": "opengl the frames are then passed to x-wayland and to sommelier which is",
+   "startMs": 843120,
+   "endMs": 850160
+  },
+  {
+   "text": "their wayland compositor and finally to chrome's wayland display server",
+   "startMs": 847920,
+   "endMs": 854480
+  },
+  {
+   "text": "everything should be transparent and seamless for the user and developers",
+   "startMs": 852720,
+   "endMs": 858560
+  },
+  {
+   "text": "just need to make games for linux or ensure they run with proton for them to",
+   "startMs": 856480,
+   "endMs": 862720
+  },
+  {
+   "text": "run on chrome os hopefully this will open up the linux gaming market even",
+   "startMs": 860399,
+   "endMs": 867120
+  },
+  {
+   "text": "more because chromebooks seem to be very popular they already passed desktop",
+   "startMs": 864880,
+   "endMs": 871839
+  },
+  {
+   "text": "linux in terms of market share and maybe we'll see more games being compatible",
+   "startMs": 869120,
+   "endMs": 875600
+  },
+  {
+   "text": "with our systems in the future and as always there's a new version of",
+   "startMs": 873519,
+   "endMs": 881519
+  },
+  {
+   "text": "wine out wine 7.6 updates the mono engine used to run.net apps to version",
+   "startMs": 877920,
+   "endMs": 886639
+  },
+  {
+   "text": "7.2 and graphics drivers are being progressively moved to the pe executable",
+   "startMs": 884000,
+   "endMs": 891279
+  },
+  {
+   "text": "format to be more compatible it also fixes 17 bucks including for the crew",
+   "startMs": 888959,
+   "endMs": 896560
+  },
+  {
+   "text": "the uplay version the oculus runtime silk road tale of the star island or",
+   "startMs": 893839,
+   "endMs": 900880
+  },
+  {
+   "text": "adobe photoshop 7. and as always wine 7.6 will serve as the",
+   "startMs": 898720,
+   "endMs": 906639
+  },
+  {
+   "text": "basis for the next releases of proton so don't you worry you're pretty little",
+   "startMs": 904079,
+   "endMs": 909600
+  },
+  {
+   "text": "ahead about it you'll get the new stuff soon just like you can get some hot new",
+   "startMs": 907920,
+   "endMs": 914160
+  },
+  {
+   "text": "stuff from today's sponsor slim book these guys are based in valencia spain",
+   "startMs": 912000,
+   "endMs": 918720
+  },
+  {
+   "text": "they make linux laptops linux desktops linux all in ones linux knucks keyboards",
+   "startMs": 916480,
+   "endMs": 923760
+  },
+  {
+   "text": "whatever you name it it runs linux out of the box i use their laptop the",
+   "startMs": 921920,
+   "endMs": 928160
+  },
+  {
+   "text": "slimbook pro x14 i use their desktop the slimbook chimera i use their keyboard",
+   "startMs": 925839,
+   "endMs": 932880
+  },
+  {
+   "text": "the slimbook rgb keyboard and well they've been partners of the channel for",
+   "startMs": 930399,
+   "endMs": 936320
+  },
+  {
+   "text": "a while now i really enjoy working with them they make really cool stuff head",
+   "startMs": 934240,
+   "endMs": 939839
+  },
+  {
+   "text": "over to the link in the description if you want to learn more about their",
+   "startMs": 938240,
+   "endMs": 943360
+  },
+  {
+   "text": "devices and maybe grab one for yourself so thanks everyone for watching the",
+   "startMs": 940959,
+   "endMs": 946959
+  },
+  {
+   "text": "video if you enjoyed it don't hesitate to like to subscribe to turn on",
+   "startMs": 944800,
+   "endMs": 950880
+  },
+  {
+   "text": "notifications or to leave a comment and if you didn't like it you can also",
+   "startMs": 948800,
+   "endMs": 954639
+  },
+  {
+   "text": "dislike and tell me why in the comments as well if you want to help me make more",
+   "startMs": 952560,
+   "endMs": 958240
+  },
+  {
+   "text": "of these videos you can also join my patreon subscribers or my youtube",
+   "startMs": 956560,
+   "endMs": 961759
+  },
+  {
+   "text": "members both get access to a weekly patreon cast every monday and the right",
+   "startMs": 959920,
+   "endMs": 965600
+  },
+  {
+   "text": "to vote on the next topics i'll cover on the channel so thanks everyone for",
+   "startMs": 963920,
+   "endMs": 968560
+  },
+  {
+   "text": "watching and i guess you'll see me in the next one bye",
+   "startMs": 967120,
+   "endMs": 1009680
+  },
+  {
+   "text": "[Music] you",
+   "startMs": 972150,
+   "endMs": 1011759
+  }
+ ]
+}

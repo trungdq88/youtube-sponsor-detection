@@ -1,0 +1,2928 @@
+{
+ "videoID": "2ehSCWoaOqQ",
+ "title": "I Can Die Now. - Intel Fab Tour!",
+ "route": "captions/WEB",
+ "savedAt": "2026-09-18T02:32:31.476Z",
+ "cues": [
+  {
+   "text": "- I've spent most of my career",
+   "startMs": 120,
+   "endMs": 1540
+  },
+  {
+   "text": "trying to get into a chip fab.",
+   "startMs": 1540,
+   "endMs": 3250
+  },
+  {
+   "text": "Samsung's a hard no,",
+   "startMs": 3250,
+   "endMs": 4750
+  },
+  {
+   "text": "Global Foundries was open to it in person,",
+   "startMs": 4750,
+   "endMs": 6750
+  },
+  {
+   "text": "then ghosted me when I followed up",
+   "startMs": 6750,
+   "endMs": 8710
+  },
+  {
+   "text": "and Intel has said no to me,",
+   "startMs": 8710,
+   "endMs": 10630
+  },
+  {
+   "text": "every single time I've asked except one.",
+   "startMs": 10630,
+   "endMs": 14350
+  },
+  {
+   "text": "Honestly, I'm pretty overwhelmed today",
+   "startMs": 14350,
+   "endMs": 16290
+  },
+  {
+   "text": "because I'm gonna be taking three major items",
+   "startMs": 16290,
+   "endMs": 19180
+  },
+  {
+   "text": "off my bucket list.",
+   "startMs": 19180,
+   "endMs": 20440
+  },
+  {
+   "text": "I'm visiting Israel for the first time,",
+   "startMs": 20440,
+   "endMs": 22390
+  },
+  {
+   "text": "I'm gonna be going deep into the heart of Intel's",
+   "startMs": 22390,
+   "endMs": 24410
+  },
+  {
+   "text": "state of the art fab 28",
+   "startMs": 24410,
+   "endMs": 26440
+  },
+  {
+   "text": "and I get to tell you about our sponsor.",
+   "startMs": 26440,
+   "endMs": 29650
+  },
+  {
+   "text": "- Zoho CRM,",
+   "startMs": 29650,
+   "endMs": 30550
+  },
+  {
+   "text": "Zoho CRM is a 360 degree solution",
+   "startMs": 30550,
+   "endMs": 32470
+  },
+  {
+   "text": "that offers an intuitive UI,",
+   "startMs": 32470,
+   "endMs": 34450
+  },
+  {
+   "text": "AI predictions and a design studio",
+   "startMs": 34450,
+   "endMs": 36680
+  },
+  {
+   "text": "to help you get your sales done faster.",
+   "startMs": 36680,
+   "endMs": 38670
+  },
+  {
+   "text": "Get 50% off with the code ZCRM50 using the link below.",
+   "startMs": 38670,
+   "endMs": 42453
+  },
+  {
+   "text": "(upbeat music)",
+   "startMs": 45166,
+   "endMs": 48005
+  },
+  {
+   "text": "(upbeat music)",
+   "startMs": 48005,
+   "endMs": 50588
+  },
+  {
+   "text": "- My tour guide today couldn't be more experienced.",
+   "startMs": 51500,
+   "endMs": 54010
+  },
+  {
+   "text": "Dani is the Co-General Manager",
+   "startMs": 54010,
+   "endMs": 55640
+  },
+  {
+   "text": "of Worldwide Semiconductor Manufacturing",
+   "startMs": 55640,
+   "endMs": 57710
+  },
+  {
+   "text": "and started at Intel working in fab 8 in Jerusalem",
+   "startMs": 57710,
+   "endMs": 61030
+  },
+  {
+   "text": "back when state of the art was the Pentium one.",
+   "startMs": 61030,
+   "endMs": 63710
+  },
+  {
+   "text": "Microprocessor fabrication experts",
+   "startMs": 63710,
+   "endMs": 65440
+  },
+  {
+   "text": "can safely skip ahead a couple of minutes,",
+   "startMs": 65440,
+   "endMs": 67150
+  },
+  {
+   "text": "but for everyone else,",
+   "startMs": 67150,
+   "endMs": 68330
+  },
+  {
+   "text": "let's run through the basics.",
+   "startMs": 68330,
+   "endMs": 69900
+  },
+  {
+   "text": "Every CPU die,",
+   "startMs": 69900,
+   "endMs": 71370
+  },
+  {
+   "text": "every one of these starts with a sliced up silicon ingot",
+   "startMs": 71370,
+   "endMs": 75130
+  },
+  {
+   "text": "like the one right here.",
+   "startMs": 75130,
+   "endMs": 76560
+  },
+  {
+   "text": "These are astonishingly pure",
+   "startMs": 76560,
+   "endMs": 78440
+  },
+  {
+   "text": "and are exactly 300 millimeters in diameter.",
+   "startMs": 78440,
+   "endMs": 81530
+  },
+  {
+   "text": "If they went in any smaller,",
+   "startMs": 81530,
+   "endMs": 82870
+  },
+  {
+   "text": "they'd increase waste around the edges.",
+   "startMs": 82870,
+   "endMs": 84430
+  },
+  {
+   "text": "I mean look at this,",
+   "startMs": 84430,
+   "endMs": 85560
+  },
+  {
+   "text": "obviously this is not gonna be a working chip",
+   "startMs": 85560,
+   "endMs": 88150
+  },
+  {
+   "text": "if it's cut off by the edge of the circle.",
+   "startMs": 88150,
+   "endMs": 90160
+  },
+  {
+   "text": "Fun fact by the way,",
+   "startMs": 90160,
+   "endMs": 91430
+  },
+  {
+   "text": "the reason that they run the non-working edge dies",
+   "startMs": 91430,
+   "endMs": 94640
+  },
+  {
+   "text": "through all of the same fabrication processes",
+   "startMs": 94640,
+   "endMs": 97110
+  },
+  {
+   "text": "is that it actually improves the uniformity",
+   "startMs": 97110,
+   "endMs": 99520
+  },
+  {
+   "text": "of the full chips next to them.",
+   "startMs": 99520,
+   "endMs": 101730
+  },
+  {
+   "text": "Consistency is key in CPU manufacturing,",
+   "startMs": 101730,
+   "endMs": 104400
+  },
+  {
+   "text": "because even though we talk about these chips in terms like",
+   "startMs": 104400,
+   "endMs": 107670
+  },
+  {
+   "text": "14 or 10 nanometer,",
+   "startMs": 107670,
+   "endMs": 109730
+  },
+  {
+   "text": "the components that make up these transistors",
+   "startMs": 109730,
+   "endMs": 112550
+  },
+  {
+   "text": "are much smaller,",
+   "startMs": 112550,
+   "endMs": 113980
+  },
+  {
+   "text": "like on the order of less than a nanometer",
+   "startMs": 113980,
+   "endMs": 116410
+  },
+  {
+   "text": "and a tiny error or contaminant",
+   "startMs": 116410,
+   "endMs": 118000
+  },
+  {
+   "text": "in any of the hundreds of manufacturing steps",
+   "startMs": 118000,
+   "endMs": 120160
+  },
+  {
+   "text": "means that that die, he no worky.",
+   "startMs": 120160,
+   "endMs": 123260
+  },
+  {
+   "text": "I mean it's a modern miracle that any of this is possible",
+   "startMs": 123260,
+   "endMs": 126360
+  },
+  {
+   "text": "and is basically unheard of",
+   "startMs": 126360,
+   "endMs": 128350
+  },
+  {
+   "text": "to get an entire 300 millimeter wafer through the fab",
+   "startMs": 128350,
+   "endMs": 131410
+  },
+  {
+   "text": "without a single defective dye on it.",
+   "startMs": 131410,
+   "endMs": 133230
+  },
+  {
+   "text": "Before it can be sold however,",
+   "startMs": 133230,
+   "endMs": 134910
+  },
+  {
+   "text": "it needs to be transformed from melted sand like this",
+   "startMs": 134910,
+   "endMs": 138390
+  },
+  {
+   "text": "into the brains of your PC.",
+   "startMs": 138390,
+   "endMs": 140030
+  },
+  {
+   "text": "Silicon you see is neither an insulator,",
+   "startMs": 140030,
+   "endMs": 142430
+  },
+  {
+   "text": "nor is it a true conductor.",
+   "startMs": 142430,
+   "endMs": 143820
+  },
+  {
+   "text": "So to create all the little transistors",
+   "startMs": 143820,
+   "endMs": 146050
+  },
+  {
+   "text": "or switches that control current flow",
+   "startMs": 146050,
+   "endMs": 147870
+  },
+  {
+   "text": "through the logic gates",
+   "startMs": 147870,
+   "endMs": 148890
+  },
+  {
+   "text": "and other microstructures on the chip,",
+   "startMs": 148890,
+   "endMs": 150690
+  },
+  {
+   "text": "the wafer needs to undergo many processes.",
+   "startMs": 150690,
+   "endMs": 153550
+  },
+  {
+   "text": "Implantation fires dopant ions",
+   "startMs": 153550,
+   "endMs": 156130
+  },
+  {
+   "text": "into the surface of the silicon",
+   "startMs": 156130,
+   "endMs": 157650
+  },
+  {
+   "text": "to alter its electrical characteristics.",
+   "startMs": 157650,
+   "endMs": 159780
+  },
+  {
+   "text": "So depending on what kinds of ions are implanted,",
+   "startMs": 159780,
+   "endMs": 162360
+  },
+  {
+   "text": "say phosphorous or boron,",
+   "startMs": 162360,
+   "endMs": 164420
+  },
+  {
+   "text": "you might be laying the groundwork for an n-type",
+   "startMs": 164420,
+   "endMs": 166620
+  },
+  {
+   "text": "or a p-type transistor.",
+   "startMs": 166620,
+   "endMs": 168170
+  },
+  {
+   "text": "This determines if the voltage is negative or positive",
+   "startMs": 168170,
+   "endMs": 170710
+  },
+  {
+   "text": "to open the gate.",
+   "startMs": 170710,
+   "endMs": 172040
+  },
+  {
+   "text": "Diffusion furnaces create new combined materials",
+   "startMs": 172040,
+   "endMs": 175380
+  },
+  {
+   "text": "by exposing the wafer to various gases",
+   "startMs": 175380,
+   "endMs": 177660
+  },
+  {
+   "text": "at up to 100s of degrees celsius.",
+   "startMs": 177660,
+   "endMs": 179360
+  },
+  {
+   "text": "Lithography,",
+   "startMs": 179360,
+   "endMs": 180200
+  },
+  {
+   "text": "is one of the easiest steps to understand conceptually,",
+   "startMs": 180200,
+   "endMs": 183300
+  },
+  {
+   "text": "but also one of the most important.",
+   "startMs": 183300,
+   "endMs": 185700
+  },
+  {
+   "text": "Within a single processor die,",
+   "startMs": 185700,
+   "endMs": 187560
+  },
+  {
+   "text": "there are billions of transistors",
+   "startMs": 187560,
+   "endMs": 189610
+  },
+  {
+   "text": "and literally kilometers of tiny wires,",
+   "startMs": 189610,
+   "endMs": 192400
+  },
+  {
+   "text": "but they're obviously far too small to build them",
+   "startMs": 192400,
+   "endMs": 195160
+  },
+  {
+   "text": "and solder them together by hand.",
+   "startMs": 195160,
+   "endMs": 197010
+  },
+  {
+   "text": "So the wafer gets coated with a material called photoresist,",
+   "startMs": 197010,
+   "endMs": 200630
+  },
+  {
+   "text": "then exposed to UV light through a mask.",
+   "startMs": 200630,
+   "endMs": 203690
+  },
+  {
+   "text": "Anywhere the light passes through the mask,",
+   "startMs": 203690,
+   "endMs": 205940
+  },
+  {
+   "text": "the photo resist will be removed,",
+   "startMs": 205940,
+   "endMs": 208030
+  },
+  {
+   "text": "allowing the exposed portions to be processed.",
+   "startMs": 208030,
+   "endMs": 210820
+  },
+  {
+   "text": "Then it's quite literally rinse and repeat.",
+   "startMs": 210820,
+   "endMs": 214440
+  },
+  {
+   "text": "Nikon, who does a lot more than make cameras by the way",
+   "startMs": 214440,
+   "endMs": 217260
+  },
+  {
+   "text": "has a great diagram on their site demonstrating this.",
+   "startMs": 217260,
+   "endMs": 220200
+  },
+  {
+   "text": "So one such potential processing step is etching",
+   "startMs": 220200,
+   "endMs": 223940
+  },
+  {
+   "text": "where the goal is to selectively remove material",
+   "startMs": 223940,
+   "endMs": 226550
+  },
+  {
+   "text": "from the top of the wafer, creating trenches in it.",
+   "startMs": 226550,
+   "endMs": 229730
+  },
+  {
+   "text": "These can be overfilled with copper to create interconnects",
+   "startMs": 229730,
+   "endMs": 233690
+  },
+  {
+   "text": "then the excess gets removed by polishing it off",
+   "startMs": 233690,
+   "endMs": 236780
+  },
+  {
+   "text": "using brushes and slurry",
+   "startMs": 236780,
+   "endMs": 238360
+  },
+  {
+   "text": "in a process called Chemical Mechanical Planarization.",
+   "startMs": 238360,
+   "endMs": 241890
+  },
+  {
+   "text": "There are different kinds of etching",
+   "startMs": 241890,
+   "endMs": 243560
+  },
+  {
+   "text": "but we can talk about that more once we get inside.",
+   "startMs": 243560,
+   "endMs": 246987
+  },
+  {
+   "text": "(upbeat music)",
+   "startMs": 246987,
+   "endMs": 249570
+  },
+  {
+   "text": "This is it.",
+   "startMs": 251060,
+   "endMs": 252070
+  },
+  {
+   "text": "Point no return, here we go.",
+   "startMs": 252070,
+   "endMs": 254280
+  },
+  {
+   "text": "There's no card or anything just, yeah it's very,",
+   "startMs": 254280,
+   "endMs": 257540
+  },
+  {
+   "text": "good high security.",
+   "startMs": 257540,
+   "endMs": 259270
+  },
+  {
+   "text": "Time to learn the procedure.",
+   "startMs": 259270,
+   "endMs": 261120
+  },
+  {
+   "text": "This is great, this is very inclusive,",
+   "startMs": 261120,
+   "endMs": 262530
+  },
+  {
+   "text": "they have child size gloves for people like me.",
+   "startMs": 262530,
+   "endMs": 264580
+  },
+  {
+   "text": "This is crazy.",
+   "startMs": 264580,
+   "endMs": 265590
+  },
+  {
+   "text": "So these are not the gloves we wear in the clean room,",
+   "startMs": 265590,
+   "endMs": 268040
+  },
+  {
+   "text": "these are the gloves",
+   "startMs": 268040,
+   "endMs": 269420
+  },
+  {
+   "text": "to put on the stuff that we're gonna wear in the clean room",
+   "startMs": 269420,
+   "endMs": 272220
+  },
+  {
+   "text": "that will be contaminated",
+   "startMs": 272220,
+   "endMs": 273380
+  },
+  {
+   "text": "that then we will get rid of after.",
+   "startMs": 273380,
+   "endMs": 274820
+  },
+  {
+   "text": "Wow,",
+   "startMs": 274820,
+   "endMs": 276230
+  },
+  {
+   "text": "man I'm looking sharp.",
+   "startMs": 276230,
+   "endMs": 278030
+  },
+  {
+   "text": "Now time for stage two.",
+   "startMs": 278030,
+   "endMs": 279680
+  },
+  {
+   "text": "basically we grab have a couple of little",
+   "startMs": 279680,
+   "endMs": 281940
+  },
+  {
+   "text": "foot cover doodads here and this room is pressurized",
+   "startMs": 281940,
+   "endMs": 285210
+  },
+  {
+   "text": "and the idea is that these, these aren't like",
+   "startMs": 285210,
+   "endMs": 287470
+  },
+  {
+   "text": "filtered like the clean room or anything like that",
+   "startMs": 287470,
+   "endMs": 289920
+  },
+  {
+   "text": "but by having a little bit of pressure in this room,",
+   "startMs": 289920,
+   "endMs": 291920
+  },
+  {
+   "text": "we keep the super stanky air from outside, out.",
+   "startMs": 291920,
+   "endMs": 295070
+  },
+  {
+   "text": "So when you walk into here,",
+   "startMs": 295070,
+   "endMs": 295990
+  },
+  {
+   "text": "you feel this gust of air coming out",
+   "startMs": 295990,
+   "endMs": 297980
+  },
+  {
+   "text": "and then what you're supposed to do",
+   "startMs": 297980,
+   "endMs": 299230
+  },
+  {
+   "text": "is you're supposed to have dirty stuff on this side",
+   "startMs": 299230,
+   "endMs": 301730
+  },
+  {
+   "text": "and then clean stuff on this side.",
+   "startMs": 301730,
+   "endMs": 303080
+  },
+  {
+   "text": "So I gotta put my little booties on,",
+   "startMs": 303080,
+   "endMs": 304880
+  },
+  {
+   "text": "did I do it right?",
+   "startMs": 305800,
+   "endMs": 307000
+  },
+  {
+   "text": "Yep.",
+   "startMs": 307000,
+   "endMs": 307833
+  },
+  {
+   "text": "Okay so there's more positive pressure in here",
+   "startMs": 307833,
+   "endMs": 309610
+  },
+  {
+   "text": "blowing that way, right?",
+   "startMs": 309610,
+   "endMs": 310904
+  },
+  {
+   "text": "- Yes.",
+   "startMs": 310904,
+   "endMs": 311737
+  },
+  {
+   "text": "- So the idea then I guess is",
+   "startMs": 311737,
+   "endMs": 312630
+  },
+  {
+   "text": "the air gets cleaner and cleaner as we go.",
+   "startMs": 312630,
+   "endMs": 314930
+  },
+  {
+   "text": "Okay, what do I do?",
+   "startMs": 314930,
+   "endMs": 315847
+  },
+  {
+   "text": "- You start with the hood. - Yes.",
+   "startMs": 315847,
+   "endMs": 317696
+  },
+  {
+   "text": "- [Staff] Start from bot, top to bottom.",
+   "startMs": 317696,
+   "endMs": 319240
+  },
+  {
+   "text": "- Top to bottom. - Yeah.",
+   "startMs": 319240,
+   "endMs": 320440
+  },
+  {
+   "text": "- Okay, why do we go top to bottom?",
+   "startMs": 320440,
+   "endMs": 322120
+  },
+  {
+   "text": "So that the dust won't fall off our top onto our bottom.",
+   "startMs": 322120,
+   "endMs": 324950
+  },
+  {
+   "text": "- Better that it'll suit into the bunny suits.",
+   "startMs": 324950,
+   "endMs": 327980
+  },
+  {
+   "text": "- Oh, got it.",
+   "startMs": 327980,
+   "endMs": 328900
+  },
+  {
+   "text": "'Cause that's how the garments overlap.",
+   "startMs": 328900,
+   "endMs": 330710
+  },
+  {
+   "text": "I have a feeling our audio is not gonna be",
+   "startMs": 330710,
+   "endMs": 333610
+  },
+  {
+   "text": "our finest ever for this video.",
+   "startMs": 333610,
+   "endMs": 335320
+  },
+  {
+   "text": "Ladies and gentlemen you'll have to bear with us",
+   "startMs": 335320,
+   "endMs": 337350
+  },
+  {
+   "text": "cuz my microphone is already under",
+   "startMs": 337350,
+   "endMs": 338990
+  },
+  {
+   "text": "three layers of fabric now.",
+   "startMs": 338990,
+   "endMs": 341018
+  },
+  {
+   "text": "(upbeat music)",
+   "startMs": 341018,
+   "endMs": 343798
+  },
+  {
+   "text": "- We're out of the gown room into the fab.",
+   "startMs": 343798,
+   "endMs": 346797
+  },
+  {
+   "text": "- Into the fab.",
+   "startMs": 346797,
+   "endMs": 347630
+  },
+  {
+   "text": "- And it's already crazy.",
+   "startMs": 347630,
+   "endMs": 348829
+  },
+  {
+   "text": "Can you see these like robots on tracks up here.",
+   "startMs": 348829,
+   "endMs": 351060
+  },
+  {
+   "text": "Apparently these are taking the foups,",
+   "startMs": 351060,
+   "endMs": 354080
+  },
+  {
+   "text": "and I check that is actually what's called F O U P,",
+   "startMs": 354080,
+   "endMs": 357190
+  },
+  {
+   "text": "which is 25 wafers.",
+   "startMs": 357190,
+   "endMs": 360010
+  },
+  {
+   "text": "So that's 25 slices of the original silicon ingot.",
+   "startMs": 360010,
+   "endMs": 364200
+  },
+  {
+   "text": "That foup we just saw, that little robot on the track",
+   "startMs": 364200,
+   "endMs": 366980
+  },
+  {
+   "text": "had hundreds of CPU dies in it,",
+   "startMs": 366980,
+   "endMs": 369570
+  },
+  {
+   "text": "but we don't know how many of them are good",
+   "startMs": 369570,
+   "endMs": 371250
+  },
+  {
+   "text": "because they're actually on their way to sorting",
+   "startMs": 371250,
+   "endMs": 373600
+  },
+  {
+   "text": "where not only will they determine if they work,",
+   "startMs": 373600,
+   "endMs": 375610
+  },
+  {
+   "text": "but they'll determine how well.",
+   "startMs": 375610,
+   "endMs": 376840
+  },
+  {
+   "text": "So is it a core I7 or a core I9.",
+   "startMs": 376840,
+   "endMs": 379563
+  },
+  {
+   "text": "Every guy wants to live,",
+   "startMs": 380620,
+   "endMs": 381880
+  },
+  {
+   "text": "it sounds like a nerdy James Bond film.",
+   "startMs": 381880,
+   "endMs": 384220
+  },
+  {
+   "text": "I love it.",
+   "startMs": 384220,
+   "endMs": 385466
+  },
+  {
+   "text": "(upbeat music)",
+   "startMs": 385466,
+   "endMs": 387760
+  },
+  {
+   "text": "Oh my God.",
+   "startMs": 387760,
+   "endMs": 388593
+  },
+  {
+   "text": "This place is a lot bigger than it initially looked.",
+   "startMs": 388593,
+   "endMs": 390900
+  },
+  {
+   "text": "How many square feet is this?",
+   "startMs": 390900,
+   "endMs": 392560
+  },
+  {
+   "text": "- Four football fields.",
+   "startMs": 392560,
+   "endMs": 394274
+  },
+  {
+   "text": "- [Dani] So lithography is over there.",
+   "startMs": 394274,
+   "endMs": 396112
+  },
+  {
+   "text": "Diffusion is over there. - Diffusion over there.",
+   "startMs": 396112,
+   "endMs": 397993
+  },
+  {
+   "text": "- ...the result of diffusion.",
+   "startMs": 397993,
+   "endMs": 399237
+  },
+  {
+   "text": "- and deposition was over there?",
+   "startMs": 399237,
+   "endMs": 400870
+  },
+  {
+   "text": "- Dry and wet etching on the side.",
+   "startMs": 400870,
+   "endMs": 403640
+  },
+  {
+   "text": "- Etching.",
+   "startMs": 403640,
+   "endMs": 404473
+  },
+  {
+   "text": "- And planar.",
+   "startMs": 404473,
+   "endMs": 405306
+  },
+  {
+   "text": "- And planing.",
+   "startMs": 405306,
+   "endMs": 406139
+  },
+  {
+   "text": "So we're gonna look at all of that",
+   "startMs": 406139,
+   "endMs": 407300
+  },
+  {
+   "text": "but there's no particular order for these steps",
+   "startMs": 407300,
+   "endMs": 410370
+  },
+  {
+   "text": "because once a foup comes in here, you guys can see,",
+   "startMs": 410370,
+   "endMs": 414240
+  },
+  {
+   "text": "there're whipping around all over the place.",
+   "startMs": 414240,
+   "endMs": 415800
+  },
+  {
+   "text": "There are hundreds of stages.",
+   "startMs": 415800,
+   "endMs": 418780
+  },
+  {
+   "text": "Each Alder Lake CPU die might go from lithography to",
+   "startMs": 418780,
+   "endMs": 423780
+  },
+  {
+   "text": "planing to deposition,",
+   "startMs": 424340,
+   "endMs": 426940
+  },
+  {
+   "text": "back and forth hundreds of times,",
+   "startMs": 426940,
+   "endMs": 430215
+  },
+  {
+   "text": "(upbeat music)",
+   "startMs": 430215,
+   "endMs": 432798
+  },
+  {
+   "text": "Every silicon wafer comes to diffusion land",
+   "startMs": 433810,
+   "endMs": 437380
+  },
+  {
+   "text": "and basically what these machines do.",
+   "startMs": 437380,
+   "endMs": 439170
+  },
+  {
+   "text": "They're more like a, a furnace",
+   "startMs": 439170,
+   "endMs": 441570
+  },
+  {
+   "text": "and they will take that top layer of silicon on the wafer",
+   "startMs": 441570,
+   "endMs": 445010
+  },
+  {
+   "text": "and they will diffuse it with some kind of other material.",
+   "startMs": 445010,
+   "endMs": 448290
+  },
+  {
+   "text": "I asked for some examples,",
+   "startMs": 448290,
+   "endMs": 450000
+  },
+  {
+   "text": "but other than silicon oxide,",
+   "startMs": 450000,
+   "endMs": 451920
+  },
+  {
+   "text": "they wouldn't really tell anything",
+   "startMs": 451920,
+   "endMs": 453137
+  },
+  {
+   "text": "and in fact, they wouldn't even tell me",
+   "startMs": 453137,
+   "endMs": 455430
+  },
+  {
+   "text": "what the first material layer would be",
+   "startMs": 455430,
+   "endMs": 458020
+  },
+  {
+   "text": "for pure processors that they're making here now.",
+   "startMs": 458020,
+   "endMs": 460480
+  },
+  {
+   "text": "Here we go, we can actually see the robot arm inside",
+   "startMs": 460480,
+   "endMs": 463210
+  },
+  {
+   "text": "that would take the silicon wafers out of the foup",
+   "startMs": 463210,
+   "endMs": 466290
+  },
+  {
+   "text": "and position them as needed for the machine.",
+   "startMs": 466290,
+   "endMs": 468660
+  },
+  {
+   "text": "This is the loading area down here",
+   "startMs": 468660,
+   "endMs": 470160
+  },
+  {
+   "text": "that we can see through the window",
+   "startMs": 470160,
+   "endMs": 471800
+  },
+  {
+   "text": "and then on top is the actual furnace",
+   "startMs": 471800,
+   "endMs": 474230
+  },
+  {
+   "text": "where it reaches 100s of degrees",
+   "startMs": 474230,
+   "endMs": 475844
+  },
+  {
+   "text": "and then it has gases in there",
+   "startMs": 475844,
+   "endMs": 477810
+  },
+  {
+   "text": "that help them to achieve",
+   "startMs": 477810,
+   "endMs": 478900
+  },
+  {
+   "text": "whatever kind of chemical changes that they're going for",
+   "startMs": 478900,
+   "endMs": 482000
+  },
+  {
+   "text": "on top of the wafer.",
+   "startMs": 482000,
+   "endMs": 483190
+  },
+  {
+   "text": "One thing Intel's been very particular about is",
+   "startMs": 483190,
+   "endMs": 486340
+  },
+  {
+   "text": "don't touch anything because it's more than just, you know,",
+   "startMs": 486340,
+   "endMs": 490210
+  },
+  {
+   "text": "not pressing the wrong button,",
+   "startMs": 490210,
+   "endMs": 491950
+  },
+  {
+   "text": "but actually even just bumping these machines.",
+   "startMs": 491950,
+   "endMs": 494420
+  },
+  {
+   "text": "When you're trying to build something that has structures in",
+   "startMs": 494420,
+   "endMs": 497670
+  },
+  {
+   "text": "it that are on the side eyes order of nanometers,",
+   "startMs": 497670,
+   "endMs": 501910
+  },
+  {
+   "text": "that means that the building blocks of that thing",
+   "startMs": 501910,
+   "endMs": 504950
+  },
+  {
+   "text": "are sub-nanometer in some cases.",
+   "startMs": 504950,
+   "endMs": 507570
+  },
+  {
+   "text": "So you, you actually, you cannot,",
+   "startMs": 507570,
+   "endMs": 509630
+  },
+  {
+   "text": "you cannot bump one of these machines while it's running",
+   "startMs": 509630,
+   "endMs": 512690
+  },
+  {
+   "text": "and in fact, they only build their fabs",
+   "startMs": 512690,
+   "endMs": 515180
+  },
+  {
+   "text": "on particularly stable parts of the world",
+   "startMs": 515180,
+   "endMs": 518180
+  },
+  {
+   "text": "where they don't have to worry about seismic activity.",
+   "startMs": 518180,
+   "endMs": 521403
+  },
+  {
+   "text": "This is cool.",
+   "startMs": 522400,
+   "endMs": 523233
+  },
+  {
+   "text": "As we're walking through diffusion,",
+   "startMs": 523233,
+   "endMs": 524540
+  },
+  {
+   "text": "we actually got a great opportunity to show you guys",
+   "startMs": 524540,
+   "endMs": 527020
+  },
+  {
+   "text": "the multi-level structure of the fab.",
+   "startMs": 527020,
+   "endMs": 529210
+  },
+  {
+   "text": "So what we're walking on is only 1 of 4 total layers.",
+   "startMs": 529210,
+   "endMs": 533800
+  },
+  {
+   "text": "Above us are filters",
+   "startMs": 533800,
+   "endMs": 535820
+  },
+  {
+   "text": "and the air comes from there down to here.",
+   "startMs": 535820,
+   "endMs": 538850
+  },
+  {
+   "text": "Then below us is where they're gonna have pumps,",
+   "startMs": 538850,
+   "endMs": 542470
+  },
+  {
+   "text": "chemistry delivery,",
+   "startMs": 542470,
+   "endMs": 543830
+  },
+  {
+   "text": "you can see these punch-outs in the floor here.",
+   "startMs": 543830,
+   "endMs": 545867
+  },
+  {
+   "text": "You can actually see there's like a foam,",
+   "startMs": 545867,
+   "endMs": 548460
+  },
+  {
+   "text": "like vent of some sort going up into the machine",
+   "startMs": 548460,
+   "endMs": 550780
+  },
+  {
+   "text": "that's next to us",
+   "startMs": 550780,
+   "endMs": 551670
+  },
+  {
+   "text": "and then the air flows from top to bottom",
+   "startMs": 551670,
+   "endMs": 554500
+  },
+  {
+   "text": "so it goes down to that layer,",
+   "startMs": 554500,
+   "endMs": 556090
+  },
+  {
+   "text": "then it goes down to one more layer",
+   "startMs": 556090,
+   "endMs": 558100
+  },
+  {
+   "text": "where they have water, utilities like electricity",
+   "startMs": 558100,
+   "endMs": 561530
+  },
+  {
+   "text": "as well as exhaust.",
+   "startMs": 561530,
+   "endMs": 562970
+  },
+  {
+   "text": "So that air goes back up the side of the building",
+   "startMs": 562970,
+   "endMs": 565820
+  },
+  {
+   "text": "and recirculates.",
+   "startMs": 565820,
+   "endMs": 567350
+  },
+  {
+   "text": "In total, Intel expects anywhere from 0",
+   "startMs": 567350,
+   "endMs": 570420
+  },
+  {
+   "text": "to 1 particle part,",
+   "startMs": 570420,
+   "endMs": 572190
+  },
+  {
+   "text": "what was the unit of volume?",
+   "startMs": 572190,
+   "endMs": 574260
+  },
+  {
+   "text": "1 meter cubed and for context,",
+   "startMs": 574260,
+   "endMs": 576780
+  },
+  {
+   "text": "an operating room could have",
+   "startMs": 576780,
+   "endMs": 579110
+  },
+  {
+   "text": "tens of thousands of particles per meter cubed.",
+   "startMs": 579110,
+   "endMs": 581870
+  },
+  {
+   "text": "So you,",
+   "startMs": 581870,
+   "endMs": 582703
+  },
+  {
+   "text": "you could conceivably perform surgery in here,",
+   "startMs": 582703,
+   "endMs": 584860
+  },
+  {
+   "text": "assuming you were qualified.",
+   "startMs": 584860,
+   "endMs": 586570
+  },
+  {
+   "text": "I asked about this sign",
+   "startMs": 586570,
+   "endMs": 587920
+  },
+  {
+   "text": "and apparently it's just to make sure that",
+   "startMs": 587920,
+   "endMs": 589792
+  },
+  {
+   "text": "as people are blowing though this corridor,",
+   "startMs": 589792,
+   "endMs": 592119
+  },
+  {
+   "text": "they don't accidentally smoke someone",
+   "startMs": 592119,
+   "endMs": 593450
+  },
+  {
+   "text": "coming out of the reticle room.",
+   "startMs": 593450,
+   "endMs": 595019
+  },
+  {
+   "text": "This is one of those secret areas,",
+   "startMs": 595019,
+   "endMs": 596990
+  },
+  {
+   "text": "even here inside the fab which is already a secret area",
+   "startMs": 596990,
+   "endMs": 600170
+  },
+  {
+   "text": "because it contains some of the most expensive materials",
+   "startMs": 600170,
+   "endMs": 602650
+  },
+  {
+   "text": "that they need for lithography",
+   "startMs": 602650,
+   "endMs": 604250
+  },
+  {
+   "text": "it's also some of the most top secret.",
+   "startMs": 604250,
+   "endMs": 606600
+  },
+  {
+   "text": "Now under normal circumstances,",
+   "startMs": 606600,
+   "endMs": 608860
+  },
+  {
+   "text": "every one of these stations would be occupied by someone.",
+   "startMs": 608860,
+   "endMs": 611850
+  },
+  {
+   "text": "In fact, the entire factory runs on 4 shifts a day,",
+   "startMs": 611850,
+   "endMs": 616170
+  },
+  {
+   "text": "24/7, 364 days a year, only shutting down for Yom Kippur.",
+   "startMs": 616170,
+   "endMs": 621170
+  },
+  {
+   "text": "So I didn't ask because I'm afraid to know the answer,",
+   "startMs": 621560,
+   "endMs": 625300
+  },
+  {
+   "text": "but I think it's probably costing Intel a fair amount",
+   "startMs": 625300,
+   "endMs": 629060
+  },
+  {
+   "text": "to have us in here poking around",
+   "startMs": 629060,
+   "endMs": 631320
+  },
+  {
+   "text": "while they didn't sponsor the video or anything.",
+   "startMs": 631320,
+   "endMs": 633220
+  },
+  {
+   "text": "Definitely shout out to Intel",
+   "startMs": 633220,
+   "endMs": 634970
+  },
+  {
+   "text": "for how much it's costing them for us to make this video.",
+   "startMs": 634970,
+   "endMs": 637820
+  },
+  {
+   "text": "On that note, here's something cool.",
+   "startMs": 638700,
+   "endMs": 640760
+  },
+  {
+   "text": "These tools are maybe not as sophisticated",
+   "startMs": 640760,
+   "endMs": 643120
+  },
+  {
+   "text": "as some of the other tools here in the fab,",
+   "startMs": 643120,
+   "endMs": 644853
+  },
+  {
+   "text": "you got your flathead screwdriver",
+   "startMs": 644853,
+   "endMs": 647940
+  },
+  {
+   "text": "but the process is what's fascinating",
+   "startMs": 647940,
+   "endMs": 650300
+  },
+  {
+   "text": "because taking a machine like this offline",
+   "startMs": 650300,
+   "endMs": 652950
+  },
+  {
+   "text": "for more than a few minutes at a time, very, very costly.",
+   "startMs": 652950,
+   "endMs": 656770
+  },
+  {
+   "text": "So they handle it kind of like a formula one pit crew.",
+   "startMs": 656770,
+   "endMs": 660630
+  },
+  {
+   "text": "They've got all their tools, everything's arranged,",
+   "startMs": 660630,
+   "endMs": 663200
+  },
+  {
+   "text": "freaking ready to rock.",
+   "startMs": 663200,
+   "endMs": 664070
+  },
+  {
+   "text": "They go, okay time,",
+   "startMs": 664070,
+   "endMs": 666000
+  },
+  {
+   "text": "we're shutting it off, we're performing maintenance,",
+   "startMs": 666000,
+   "endMs": 668210
+  },
+  {
+   "text": "go, go, go, go, go, go, go,",
+   "startMs": 668210,
+   "endMs": 670220
+  },
+  {
+   "text": "fire it back up.",
+   "startMs": 670220,
+   "endMs": 671113
+  },
+  {
+   "text": "That's it.",
+   "startMs": 672000,
+   "endMs": 672870
+  },
+  {
+   "text": "Don't worry, I will not hit any buttons.",
+   "startMs": 672870,
+   "endMs": 675470
+  },
+  {
+   "text": "This is the emo button, okay?",
+   "startMs": 675470,
+   "endMs": 677870
+  },
+  {
+   "text": "The machine will get very sad if you press it.",
+   "startMs": 677870,
+   "endMs": 680320
+  },
+  {
+   "text": "This machine right here is doing dry etching right now.",
+   "startMs": 680320,
+   "endMs": 684150
+  },
+  {
+   "text": "So the foups come down off of the track up there",
+   "startMs": 684150,
+   "endMs": 688440
+  },
+  {
+   "text": "and then while they're waiting,",
+   "startMs": 688440,
+   "endMs": 689470
+  },
+  {
+   "text": "you can see they're actually sitting out",
+   "startMs": 689470,
+   "endMs": 691600
+  },
+  {
+   "text": "cause they sit away from the machine",
+   "startMs": 691600,
+   "endMs": 693110
+  },
+  {
+   "text": "and while they're being processed,",
+   "startMs": 693110,
+   "endMs": 694540
+  },
+  {
+   "text": "they come up right next to it here,",
+   "startMs": 694540,
+   "endMs": 696197
+  },
+  {
+   "text": "and then you can see there's a robot arm inside",
+   "startMs": 696197,
+   "endMs": 699050
+  },
+  {
+   "text": "grabbing wafers, whipping them around.",
+   "startMs": 699050,
+   "endMs": 702150
+  },
+  {
+   "text": "It just throws it on here for a span of, I don't know,",
+   "startMs": 702150,
+   "endMs": 704740
+  },
+  {
+   "text": "5 or 10 seconds,",
+   "startMs": 704740,
+   "endMs": 706960
+  },
+  {
+   "text": "boom, it's dry etched.",
+   "startMs": 706960,
+   "endMs": 708960
+  },
+  {
+   "text": "It goes back in the foup",
+   "startMs": 708960,
+   "endMs": 710330
+  },
+  {
+   "text": "and then that whole foup is gonna head off to",
+   "startMs": 710330,
+   "endMs": 712630
+  },
+  {
+   "text": "whatever the next step is for this particular processor.",
+   "startMs": 712630,
+   "endMs": 715250
+  },
+  {
+   "text": "We don't know exactly what it's making,",
+   "startMs": 715250,
+   "endMs": 716810
+  },
+  {
+   "text": "but everything here is Intel 7 so,",
+   "startMs": 716810,
+   "endMs": 719270
+  },
+  {
+   "text": "modern CPUs pretty much",
+   "startMs": 719270,
+   "endMs": 721210
+  },
+  {
+   "text": "or maybe future CPUs for all I know.",
+   "startMs": 721210,
+   "endMs": 723240
+  },
+  {
+   "text": "Not every drying machine is identical",
+   "startMs": 723240,
+   "endMs": 725410
+  },
+  {
+   "text": "as you guys can imagine.",
+   "startMs": 725410,
+   "endMs": 726660
+  },
+  {
+   "text": "For all the different specialized processes",
+   "startMs": 726660,
+   "endMs": 728590
+  },
+  {
+   "text": "that a wafer goes through,",
+   "startMs": 728590,
+   "endMs": 729690
+  },
+  {
+   "text": "there might be different machinery.",
+   "startMs": 729690,
+   "endMs": 731270
+  },
+  {
+   "text": "So this is another example of a dry etching machine",
+   "startMs": 731270,
+   "endMs": 734280
+  },
+  {
+   "text": "where the wafer actually sits in this chamber in here",
+   "startMs": 734280,
+   "endMs": 736770
+  },
+  {
+   "text": "and does whatever the heck it's doing.",
+   "startMs": 736770,
+   "endMs": 740640
+  },
+  {
+   "text": "Now we're heading back to the lithography area again,",
+   "startMs": 740640,
+   "endMs": 742600
+  },
+  {
+   "text": "which is why the lighting in the fab",
+   "startMs": 742600,
+   "endMs": 744170
+  },
+  {
+   "text": "has changed back to yellow",
+   "startMs": 744170,
+   "endMs": 745990
+  },
+  {
+   "text": "and the reason for that is they use UV light",
+   "startMs": 745990,
+   "endMs": 748490
+  },
+  {
+   "text": "to expose the wafers.",
+   "startMs": 748490,
+   "endMs": 749890
+  },
+  {
+   "text": "So if they have white light,",
+   "startMs": 749890,
+   "endMs": 750800
+  },
+  {
+   "text": "it could easily contain parts of the spectrum",
+   "startMs": 750800,
+   "endMs": 752450
+  },
+  {
+   "text": "that could accidentally expose the wafer.",
+   "startMs": 752450,
+   "endMs": 755580
+  },
+  {
+   "text": "So they have to use these carefully controlled light sources",
+   "startMs": 755580,
+   "endMs": 758870
+  },
+  {
+   "text": "that will not cause any damage to the wafer",
+   "startMs": 758870,
+   "endMs": 760630
+  },
+  {
+   "text": "as they're ripping around in the foup",
+   "startMs": 760630,
+   "endMs": 762730
+  },
+  {
+   "text": "or going in and out of the machines.",
+   "startMs": 762730,
+   "endMs": 765140
+  },
+  {
+   "text": "Fun fact,",
+   "startMs": 765140,
+   "endMs": 766270
+  },
+  {
+   "text": "each of these machines costs on the order of",
+   "startMs": 766270,
+   "endMs": 768570
+  },
+  {
+   "text": "30$ to $40 million",
+   "startMs": 768570,
+   "endMs": 770580
+  },
+  {
+   "text": "and it doesn't take a rocket scientist",
+   "startMs": 771490,
+   "endMs": 773940
+  },
+  {
+   "text": "to figure out or I should say a,",
+   "startMs": 773940,
+   "endMs": 776523
+  },
+  {
+   "text": "a chip architect to figure out",
+   "startMs": 776523,
+   "endMs": 778970
+  },
+  {
+   "text": "that when you put this many of them packed this tight",
+   "startMs": 778970,
+   "endMs": 781720
+  },
+  {
+   "text": "into an area of the size of four football pitches,",
+   "startMs": 781720,
+   "endMs": 784423
+  },
+  {
+   "text": "that's gonna cost a pretty penny",
+   "startMs": 785400,
+   "endMs": 787240
+  },
+  {
+   "text": "and it's because of those costs that they actually have this",
+   "startMs": 787240,
+   "endMs": 790730
+  },
+  {
+   "text": "entire sort of row of cabinets I guess you could call it",
+   "startMs": 790730,
+   "endMs": 794660
+  },
+  {
+   "text": "in between the east and west side of the fab.",
+   "startMs": 794660,
+   "endMs": 797400
+  },
+  {
+   "text": "This entire thing is full of foups",
+   "startMs": 797400,
+   "endMs": 799810
+  },
+  {
+   "text": "that are just waiting to be processed",
+   "startMs": 799810,
+   "endMs": 801380
+  },
+  {
+   "text": "because the second one of those machines is available,",
+   "startMs": 801380,
+   "endMs": 804120
+  },
+  {
+   "text": "you want to be loading it up with silicon",
+   "startMs": 804120,
+   "endMs": 806200
+  },
+  {
+   "text": "so you can make more processors.",
+   "startMs": 806200,
+   "endMs": 808080
+  },
+  {
+   "text": "Now we're out of lithography again,",
+   "startMs": 808080,
+   "endMs": 809370
+  },
+  {
+   "text": "we're in the east side of the fab",
+   "startMs": 809370,
+   "endMs": 810650
+  },
+  {
+   "text": "which is also freaking enormous",
+   "startMs": 810650,
+   "endMs": 812990
+  },
+  {
+   "text": "and the first machine that we're encountering",
+   "startMs": 812990,
+   "endMs": 815210
+  },
+  {
+   "text": "are deposition machines.",
+   "startMs": 815210,
+   "endMs": 817050
+  },
+  {
+   "text": "So what these do",
+   "startMs": 817050,
+   "endMs": 818710
+  },
+  {
+   "text": "is they'll take the wafer",
+   "startMs": 818710,
+   "endMs": 820430
+  },
+  {
+   "text": "and they'll apply some",
+   "startMs": 820430,
+   "endMs": 822485
+  },
+  {
+   "text": "extraordinarily thin layer of something,",
+   "startMs": 822485,
+   "endMs": 824830
+  },
+  {
+   "text": "say for example, metal,",
+   "startMs": 824830,
+   "endMs": 827380
+  },
+  {
+   "text": "okay?",
+   "startMs": 827380,
+   "endMs": 828213
+  },
+  {
+   "text": "Then it comes back into the foup,",
+   "startMs": 828213,
+   "endMs": 830050
+  },
+  {
+   "text": "back up to the rails and off to the next step.",
+   "startMs": 830050,
+   "endMs": 833100
+  },
+  {
+   "text": "Did I ever say, we're gonna go see the planers.",
+   "startMs": 833100,
+   "endMs": 834783
+  },
+  {
+   "text": "- [Dennis] - Yes you did.",
+   "startMs": 834783,
+   "endMs": 835680
+  },
+  {
+   "text": "- Now depending on the stage of wafer processing,",
+   "startMs": 835680,
+   "endMs": 837890
+  },
+  {
+   "text": "cuz remember they you go back and forth",
+   "startMs": 837890,
+   "endMs": 839340
+  },
+  {
+   "text": "hundreds of times for a single die,",
+   "startMs": 839340,
+   "endMs": 841410
+  },
+  {
+   "text": "you don't necessarily want the straight edges of a dry etch,",
+   "startMs": 841410,
+   "endMs": 845880
+  },
+  {
+   "text": "you might want this kind of curved shape of a wet edge.",
+   "startMs": 845880,
+   "endMs": 849730
+  },
+  {
+   "text": "Now the actual exact shape is apparently extremely important",
+   "startMs": 849730,
+   "endMs": 854440
+  },
+  {
+   "text": "and extremely difficult to control",
+   "startMs": 854440,
+   "endMs": 856860
+  },
+  {
+   "text": "because unlike a dry etch, there's actually,",
+   "startMs": 856860,
+   "endMs": 859100
+  },
+  {
+   "text": "you can actually hear the sound of the pump.",
+   "startMs": 859100,
+   "endMs": 861300
+  },
+  {
+   "text": "You hear that right now,",
+   "startMs": 862400,
+   "endMs": 863250
+  },
+  {
+   "text": "so there's actually chemicals pumping inside.",
+   "startMs": 863250,
+   "endMs": 865770
+  },
+  {
+   "text": "Another key consideration",
+   "startMs": 865770,
+   "endMs": 866970
+  },
+  {
+   "text": "if you've got such expensive machinery is training.",
+   "startMs": 866970,
+   "endMs": 870100
+  },
+  {
+   "text": "So one of the things that Intel wanted to show us",
+   "startMs": 870100,
+   "endMs": 872360
+  },
+  {
+   "text": "is how they're using augmented reality",
+   "startMs": 872360,
+   "endMs": 874620
+  },
+  {
+   "text": "practically right here in the fab for a variety of purposes.",
+   "startMs": 874620,
+   "endMs": 877900
+  },
+  {
+   "text": "So one is due to COVID 19.",
+   "startMs": 877900,
+   "endMs": 880070
+  },
+  {
+   "text": "Obviously some personnel were not able to be here in person",
+   "startMs": 880070,
+   "endMs": 884020
+  },
+  {
+   "text": "for an extended period of time.",
+   "startMs": 884020,
+   "endMs": 885600
+  },
+  {
+   "text": "So remote assist allows someone who is here in person",
+   "startMs": 885600,
+   "endMs": 889500
+  },
+  {
+   "text": "to actually have someone else scribbling on a schematic",
+   "startMs": 889500,
+   "endMs": 892680
+  },
+  {
+   "text": "or explaining it to them while it hovers in front of them.",
+   "startMs": 892680,
+   "endMs": 895510
+  },
+  {
+   "text": "Pretty freaking cool.",
+   "startMs": 895510,
+   "endMs": 896450
+  },
+  {
+   "text": "It's also used as a training resource",
+   "startMs": 896450,
+   "endMs": 898150
+  },
+  {
+   "text": "for maintenance of old machines",
+   "startMs": 898150,
+   "endMs": 899710
+  },
+  {
+   "text": "so you can kind of learn by doing,",
+   "startMs": 899710,
+   "endMs": 901910
+  },
+  {
+   "text": "and they're actually gonna do a practical demo for us.",
+   "startMs": 901910,
+   "endMs": 904360
+  },
+  {
+   "text": "Hey, here's our, here's our test guinea pig here",
+   "startMs": 904360,
+   "endMs": 906690
+  },
+  {
+   "text": "and you got some my mug, that's unfortunate.",
+   "startMs": 906690,
+   "endMs": 910093
+  },
+  {
+   "text": "Oh, that's awesome.",
+   "startMs": 912010,
+   "endMs": 912843
+  },
+  {
+   "text": "So it shows you all the tools you need.",
+   "startMs": 912843,
+   "endMs": 914790
+  },
+  {
+   "text": "So there's a little instructional video for how to do it.",
+   "startMs": 915780,
+   "endMs": 919340
+  },
+  {
+   "text": "Very cool.",
+   "startMs": 919340,
+   "endMs": 920290
+  },
+  {
+   "text": "Hey, look at me, I'm a fab equipment maintenance technician.",
+   "startMs": 920290,
+   "endMs": 923570
+  },
+  {
+   "text": "Unfortunately the windows on these machines are quite dark",
+   "startMs": 923570,
+   "endMs": 925910
+  },
+  {
+   "text": "but we did manage to catch one",
+   "startMs": 925910,
+   "endMs": 927793
+  },
+  {
+   "text": "that is being processed right now",
+   "startMs": 927793,
+   "endMs": 929670
+  },
+  {
+   "text": "so we've got some footage to show guys.",
+   "startMs": 929670,
+   "endMs": 931670
+  },
+  {
+   "text": "Essentially after the deposition step,",
+   "startMs": 931670,
+   "endMs": 934170
+  },
+  {
+   "text": "you're gonna end up with some inherent unevenness",
+   "startMs": 934170,
+   "endMs": 937070
+  },
+  {
+   "text": "that needs to be polished off.",
+   "startMs": 937070,
+   "endMs": 938650
+  },
+  {
+   "text": "Now in the past,",
+   "startMs": 938650,
+   "endMs": 939520
+  },
+  {
+   "text": "they might have actually submerged the wafers for polishing,",
+   "startMs": 939520,
+   "endMs": 942780
+  },
+  {
+   "text": "but now it's actually done by a brush",
+   "startMs": 942780,
+   "endMs": 946042
+  },
+  {
+   "text": "that has a slurry on it that Intel said is,",
+   "startMs": 946042,
+   "endMs": 948950
+  },
+  {
+   "text": "very proprietary.",
+   "startMs": 948950,
+   "endMs": 950030
+  },
+  {
+   "text": "They wouldn't even give me any hints as to what is in this,",
+   "startMs": 950030,
+   "endMs": 953550
+  },
+  {
+   "text": "this polishing with liquid",
+   "startMs": 953550,
+   "endMs": 955160
+  },
+  {
+   "text": "but they did tell me",
+   "startMs": 955160,
+   "endMs": 956490
+  },
+  {
+   "text": "that the pressure as well as the motion of it",
+   "startMs": 956490,
+   "endMs": 960160
+  },
+  {
+   "text": "has to be so precise that they could take off as little as",
+   "startMs": 960160,
+   "endMs": 963920
+  },
+  {
+   "text": "a few atoms or molecules at a time.",
+   "startMs": 963920,
+   "endMs": 966977
+  },
+  {
+   "text": "You could see the way for moving back and forth on the, like",
+   "startMs": 966977,
+   "endMs": 969940
+  },
+  {
+   "text": "spinning bottom.",
+   "startMs": 969940,
+   "endMs": 971200
+  },
+  {
+   "text": "Crazy.",
+   "startMs": 971200,
+   "endMs": 972033
+  },
+  {
+   "text": "One thing that's missing is I don't see where that tray,",
+   "startMs": 972033,
+   "endMs": 974150
+  },
+  {
+   "text": "that loads all the wafers in is.",
+   "startMs": 974150,
+   "endMs": 976590
+  },
+  {
+   "text": "Where the foup is it?",
+   "startMs": 976590,
+   "endMs": 978270
+  },
+  {
+   "text": "Haha, get it?",
+   "startMs": 978270,
+   "endMs": 979375
+  },
+  {
+   "text": "Cause it's a foup.",
+   "startMs": 979375,
+   "endMs": 980240
+  },
+  {
+   "text": "By the way,",
+   "startMs": 980240,
+   "endMs": 981073
+  },
+  {
+   "text": "something I didn't mention before",
+   "startMs": 981073,
+   "endMs": 982550
+  },
+  {
+   "text": "is that each of the different types of machines",
+   "startMs": 982550,
+   "endMs": 985240
+  },
+  {
+   "text": "actually has a number,",
+   "startMs": 985240,
+   "endMs": 986950
+  },
+  {
+   "text": "but it also has these animals",
+   "startMs": 986950,
+   "endMs": 989170
+  },
+  {
+   "text": "because Intel found that",
+   "startMs": 989170,
+   "endMs": 990870
+  },
+  {
+   "text": "especially in a multi-layered design like fab 28,",
+   "startMs": 990870,
+   "endMs": 994610
+  },
+  {
+   "text": "in order to make sure that the maintenance crew down below",
+   "startMs": 994610,
+   "endMs": 997530
+  },
+  {
+   "text": "is actually, you know,",
+   "startMs": 997530,
+   "endMs": 998750
+  },
+  {
+   "text": "shutting down the correct machine for maintenance up above,",
+   "startMs": 998750,
+   "endMs": 1002400
+  },
+  {
+   "text": "it's much easier to communicate and much easier to remember,",
+   "startMs": 1002400,
+   "endMs": 1005620
+  },
+  {
+   "text": "Oh, we're working on a giraffe machine or a ladybug machine.",
+   "startMs": 1005620,
+   "endMs": 1010620
+  },
+  {
+   "text": "Apparently most of the staff that we saw in there though",
+   "startMs": 1010920,
+   "endMs": 1012900
+  },
+  {
+   "text": "we're actually maintenance staff for the machines",
+   "startMs": 1012900,
+   "endMs": 1015837
+  },
+  {
+   "text": "and the actual control center or brain of the operation",
+   "startMs": 1015837,
+   "endMs": 1019200
+  },
+  {
+   "text": "is elsewhere.",
+   "startMs": 1019200,
+   "endMs": 1020033
+  },
+  {
+   "text": "So we're gonna head over there now.",
+   "startMs": 1020033,
+   "endMs": 1021770
+  },
+  {
+   "text": "This is the remote operational center, which is,",
+   "startMs": 1021770,
+   "endMs": 1023940
+  },
+  {
+   "text": "you could think of kind of like the brains of the fab",
+   "startMs": 1023940,
+   "endMs": 1026510
+  },
+  {
+   "text": "that we just saw.",
+   "startMs": 1026510,
+   "endMs": 1027620
+  },
+  {
+   "text": "So if something goes wrong,",
+   "startMs": 1027620,
+   "endMs": 1030180
+  },
+  {
+   "text": "it's gonna pop up as an error on someone's screen",
+   "startMs": 1030180,
+   "endMs": 1032040
+  },
+  {
+   "text": "so it's the job of everyone in this room",
+   "startMs": 1032040,
+   "endMs": 1033690
+  },
+  {
+   "text": "to optimize the overall throughput of the fab.",
+   "startMs": 1033690,
+   "endMs": 1036200
+  },
+  {
+   "text": "So instead of having technicians there on the fab floor,",
+   "startMs": 1036200,
+   "endMs": 1039810
+  },
+  {
+   "text": "moving things around and looking at screens",
+   "startMs": 1039810,
+   "endMs": 1042170
+  },
+  {
+   "text": "and turning dials,",
+   "startMs": 1042170,
+   "endMs": 1043360
+  },
+  {
+   "text": "everything is done right here to ensure",
+   "startMs": 1043360,
+   "endMs": 1045780
+  },
+  {
+   "text": "that they're pumping as many chips out as possible",
+   "startMs": 1045780,
+   "endMs": 1047550
+  },
+  {
+   "text": "because once you invest",
+   "startMs": 1047550,
+   "endMs": 1048580
+  },
+  {
+   "text": "30$ to 40$ million in a machine times,",
+   "startMs": 1048580,
+   "endMs": 1051800
+  },
+  {
+   "text": "however many were in there,",
+   "startMs": 1051800,
+   "endMs": 1053236
+  },
+  {
+   "text": "(chuckles)",
+   "startMs": 1053236,
+   "endMs": 1054410
+  },
+  {
+   "text": "you want them going as hard as you possibly can,",
+   "startMs": 1054410,
+   "endMs": 1057660
+  },
+  {
+   "text": "as often as you possibly can.",
+   "startMs": 1057660,
+   "endMs": 1059183
+  },
+  {
+   "text": "(upbeat music)",
+   "startMs": 1060045,
+   "endMs": 1062628
+  },
+  {
+   "text": "Every shift,",
+   "startMs": 1065270,
+   "endMs": 1066103
+  },
+  {
+   "text": "they have to do two stretching sessions in order to,",
+   "startMs": 1066103,
+   "endMs": 1068820
+  },
+  {
+   "text": "you know, minimize the risk of RSI,",
+   "startMs": 1068820,
+   "endMs": 1070900
+  },
+  {
+   "text": "cuz they're basically sitting at their computers all day,",
+   "startMs": 1070900,
+   "endMs": 1073080
+  },
+  {
+   "text": "every day, right?",
+   "startMs": 1073080,
+   "endMs": 1074522
+  },
+  {
+   "text": "(applauds)",
+   "startMs": 1074522,
+   "endMs": 1077542
+  },
+  {
+   "text": "But like the friend who only invited you to dinner",
+   "startMs": 1077542,
+   "endMs": 1079510
+  },
+  {
+   "text": "because he wanted to show off his new car,",
+   "startMs": 1079510,
+   "endMs": 1081830
+  },
+  {
+   "text": "Intel had a bit of an agenda for inviting us here",
+   "startMs": 1081830,
+   "endMs": 1084460
+  },
+  {
+   "text": "and that is to show off the enormous investment",
+   "startMs": 1084460,
+   "endMs": 1087110
+  },
+  {
+   "text": "that they're making into fab 38.",
+   "startMs": 1087110,
+   "endMs": 1089300
+  },
+  {
+   "text": "So everything that we just saw is about to be doubled.",
+   "startMs": 1089300,
+   "endMs": 1093120
+  },
+  {
+   "text": "This roundabout,",
+   "startMs": 1093120,
+   "endMs": 1094500
+  },
+  {
+   "text": "see you later in about two weeks.",
+   "startMs": 1094500,
+   "endMs": 1096640
+  },
+  {
+   "text": "That entire construction site out there",
+   "startMs": 1096640,
+   "endMs": 1099260
+  },
+  {
+   "text": "is going to be state of the art,",
+   "startMs": 1099260,
+   "endMs": 1101030
+  },
+  {
+   "text": "new generation fabrication technology",
+   "startMs": 1101030,
+   "endMs": 1103410
+  },
+  {
+   "text": "that will actually be integrated",
+   "startMs": 1103410,
+   "endMs": 1105080
+  },
+  {
+   "text": "so tightly with the existing fab",
+   "startMs": 1105080,
+   "endMs": 1106890
+  },
+  {
+   "text": "that you could actually take a wafer from one,",
+   "startMs": 1106890,
+   "endMs": 1109950
+  },
+  {
+   "text": "utilize equipment in the other",
+   "startMs": 1109950,
+   "endMs": 1111560
+  },
+  {
+   "text": "and then send it back if you really needed to,",
+   "startMs": 1111560,
+   "endMs": 1113580
+  },
+  {
+   "text": "although that's gonna be quite a distance",
+   "startMs": 1113580,
+   "endMs": 1115550
+  },
+  {
+   "text": "for the foups to travel.",
+   "startMs": 1115550,
+   "endMs": 1116770
+  },
+  {
+   "text": "To give you some idea",
+   "startMs": 1116770,
+   "endMs": 1117690
+  },
+  {
+   "text": "of how enormous this construction project is,",
+   "startMs": 1117690,
+   "endMs": 1119700
+  },
+  {
+   "text": "Intel actually built their own concrete production",
+   "startMs": 1119700,
+   "endMs": 1122930
+  },
+  {
+   "text": "in the corner of the lot over there",
+   "startMs": 1122930,
+   "endMs": 1124970
+  },
+  {
+   "text": "which you can see at the very back.",
+   "startMs": 1124970,
+   "endMs": 1127330
+  },
+  {
+   "text": "Unreal.",
+   "startMs": 1127330,
+   "endMs": 1128163
+  },
+  {
+   "text": "One of the big reasons",
+   "startMs": 1128163,
+   "endMs": 1129010
+  },
+  {
+   "text": "Intel is building out fab capacity so aggressively right now",
+   "startMs": 1129010,
+   "endMs": 1131970
+  },
+  {
+   "text": "is a new concept called IDM 2.0",
+   "startMs": 1131970,
+   "endMs": 1134630
+  },
+  {
+   "text": "where basically instead of only building their own products,",
+   "startMs": 1134630,
+   "endMs": 1137970
+  },
+  {
+   "text": "they're going to be fabing products",
+   "startMs": 1137970,
+   "endMs": 1139480
+  },
+  {
+   "text": "for third party companies",
+   "startMs": 1139480,
+   "endMs": 1140730
+  },
+  {
+   "text": "which I personally",
+   "startMs": 1140730,
+   "endMs": 1142340
+  },
+  {
+   "text": "given that we're sitting in the middle of the",
+   "startMs": 1142340,
+   "endMs": 1143800
+  },
+  {
+   "text": "largest ever global silicon shortage,",
+   "startMs": 1143800,
+   "endMs": 1146210
+  },
+  {
+   "text": "I'm pretty excited about.",
+   "startMs": 1146210,
+   "endMs": 1147520
+  },
+  {
+   "text": "Now, unfortunately there are a couple of steps",
+   "startMs": 1147520,
+   "endMs": 1150010
+  },
+  {
+   "text": "in the die creation process",
+   "startMs": 1150010,
+   "endMs": 1151410
+  },
+  {
+   "text": "that we weren't able to see today.",
+   "startMs": 1151410,
+   "endMs": 1153370
+  },
+  {
+   "text": "The addition of the bumps",
+   "startMs": 1153370,
+   "endMs": 1154440
+  },
+  {
+   "text": "that connect the dye to the package through electro plating,",
+   "startMs": 1154440,
+   "endMs": 1157610
+  },
+  {
+   "text": "that doesn't happen here and quality control.",
+   "startMs": 1157610,
+   "endMs": 1160210
+  },
+  {
+   "text": "QC starts with an end of the line E-test,",
+   "startMs": 1160210,
+   "endMs": 1162550
+  },
+  {
+   "text": "which checks the functionality of fake debugging structures",
+   "startMs": 1162550,
+   "endMs": 1165940
+  },
+  {
+   "text": "and transistors",
+   "startMs": 1165940,
+   "endMs": 1167030
+  },
+  {
+   "text": "that are specifically meant to be there",
+   "startMs": 1167030,
+   "endMs": 1168940
+  },
+  {
+   "text": "to ensure that everything went correctly in manufacturing.",
+   "startMs": 1168940,
+   "endMs": 1171500
+  },
+  {
+   "text": "Then it proceeds to binning.",
+   "startMs": 1171500,
+   "endMs": 1172950
+  },
+  {
+   "text": "Which is the process of sorting the good dies",
+   "startMs": 1172950,
+   "endMs": 1175010
+  },
+  {
+   "text": "according to their capabilities.",
+   "startMs": 1175010,
+   "endMs": 1176760
+  },
+  {
+   "text": "Obviously the best of the best will become core I9,",
+   "startMs": 1176760,
+   "endMs": 1179650
+  },
+  {
+   "text": "the next best will be core I7 and so on and so forth.",
+   "startMs": 1179650,
+   "endMs": 1182840
+  },
+  {
+   "text": "Other than that 12th gen core or Alder Lake",
+   "startMs": 1182840,
+   "endMs": 1185720
+  },
+  {
+   "text": "is a pretty unique product for Intel",
+   "startMs": 1185720,
+   "endMs": 1187530
+  },
+  {
+   "text": "with much of the design and manufacturing",
+   "startMs": 1187530,
+   "endMs": 1189750
+  },
+  {
+   "text": "done here in Israel.",
+   "startMs": 1189750,
+   "endMs": 1191600
+  },
+  {
+   "text": "Once the wafer's done,",
+   "startMs": 1191600,
+   "endMs": 1192750
+  },
+  {
+   "text": "Intel sends it to one of their other facilities",
+   "startMs": 1192750,
+   "endMs": 1194840
+  },
+  {
+   "text": "for slicing and packaging",
+   "startMs": 1194840,
+   "endMs": 1196950
+  },
+  {
+   "text": "and a second validation step called class",
+   "startMs": 1196950,
+   "endMs": 1199730
+  },
+  {
+   "text": "where they basically burn in every single chip",
+   "startMs": 1199730,
+   "endMs": 1202570
+  },
+  {
+   "text": "to ensure that no degradation took place",
+   "startMs": 1202570,
+   "endMs": 1204880
+  },
+  {
+   "text": "and that the packaging was done properly.",
+   "startMs": 1204880,
+   "endMs": 1207030
+  },
+  {
+   "text": "This along with design phase testing",
+   "startMs": 1207030,
+   "endMs": 1209020
+  },
+  {
+   "text": "that simulates the effects of CPU aging",
+   "startMs": 1209020,
+   "endMs": 1211270
+  },
+  {
+   "text": "is where it Intel's reputation for manufacturing quality",
+   "startMs": 1211270,
+   "endMs": 1213550
+  },
+  {
+   "text": "comes from.",
+   "startMs": 1213550,
+   "endMs": 1214383
+  },
+  {
+   "text": "I mean, think about it,",
+   "startMs": 1214383,
+   "endMs": 1215490
+  },
+  {
+   "text": "when you're troubleshooting a system that won't boot",
+   "startMs": 1215490,
+   "endMs": 1217770
+  },
+  {
+   "text": "the CPU is the last thing you're gonna check",
+   "startMs": 1217770,
+   "endMs": 1220200
+  },
+  {
+   "text": "because unless you dropped it, it probably works.",
+   "startMs": 1220200,
+   "endMs": 1223470
+  },
+  {
+   "text": "Packaging by the way,",
+   "startMs": 1223470,
+   "endMs": 1224500
+  },
+  {
+   "text": "is gonna be getting a lot more complicated",
+   "startMs": 1224500,
+   "endMs": 1226330
+  },
+  {
+   "text": "over the next few years as multi-die processors",
+   "startMs": 1226330,
+   "endMs": 1228880
+  },
+  {
+   "text": "like the upcoming Sapphire Rapids start rolling out",
+   "startMs": 1228880,
+   "endMs": 1231370
+  },
+  {
+   "text": "and it's expected that the relatively basic",
+   "startMs": 1231370,
+   "endMs": 1233580
+  },
+  {
+   "text": "packaging facilities of yesteryear",
+   "startMs": 1233580,
+   "endMs": 1235430
+  },
+  {
+   "text": "are gonna be getting a lot more fab like.",
+   "startMs": 1235430,
+   "endMs": 1237900
+  },
+  {
+   "text": "I mean,",
+   "startMs": 1237900,
+   "endMs": 1238733
+  },
+  {
+   "text": "a packaging error on a $10,000 server CPU",
+   "startMs": 1238733,
+   "endMs": 1241810
+  },
+  {
+   "text": "is a pretty expensive mistake given that the whole thing",
+   "startMs": 1241810,
+   "endMs": 1245180
+  },
+  {
+   "text": "needs to be thrown away at that stage",
+   "startMs": 1245180,
+   "endMs": 1247320
+  },
+  {
+   "text": "if something goes wrong.",
+   "startMs": 1247320,
+   "endMs": 1248570
+  },
+  {
+   "text": "Maybe that should be the next tour I request.",
+   "startMs": 1248570,
+   "endMs": 1250810
+  },
+  {
+   "text": "Am I right?",
+   "startMs": 1250810,
+   "endMs": 1251643
+  },
+  {
+   "text": "Actually, I'm not gonna push my luck at the moment.",
+   "startMs": 1251643,
+   "endMs": 1253440
+  },
+  {
+   "text": "This was a once in a lifetime opportunity",
+   "startMs": 1253440,
+   "endMs": 1255420
+  },
+  {
+   "text": "and I'm extremely grateful to Dani and his team.",
+   "startMs": 1255420,
+   "endMs": 1258210
+  },
+  {
+   "text": "Shout out to Karen by the way for hosting me,",
+   "startMs": 1258210,
+   "endMs": 1260600
+  },
+  {
+   "text": "to you guys for coming and sharing it with me",
+   "startMs": 1260600,
+   "endMs": 1262780
+  },
+  {
+   "text": "and of course, to my sponsor.",
+   "startMs": 1262780,
+   "endMs": 1264670
+  },
+  {
+   "text": "Ting mobile.",
+   "startMs": 1264670,
+   "endMs": 1265510
+  },
+  {
+   "text": "Ting mobile has rates that make it easier to see",
+   "startMs": 1265510,
+   "endMs": 1267410
+  },
+  {
+   "text": "how much you can save by switching.",
+   "startMs": 1267410,
+   "endMs": 1269220
+  },
+  {
+   "text": "They have a perfect plan for everybody",
+   "startMs": 1269220,
+   "endMs": 1270780
+  },
+  {
+   "text": "no matter what your needs are.",
+   "startMs": 1270780,
+   "endMs": 1272000
+  },
+  {
+   "text": "Unlimited talk and text for 10 bucks,",
+   "startMs": 1272000,
+   "endMs": 1273970
+  },
+  {
+   "text": "data plans that start at $15,",
+   "startMs": 1273970,
+   "endMs": 1275930
+  },
+  {
+   "text": "then there's their set 12 plan with 12 gigs of data for $35",
+   "startMs": 1275930,
+   "endMs": 1279640
+  },
+  {
+   "text": "and unlimited data for $45.",
+   "startMs": 1279640,
+   "endMs": 1281720
+  },
+  {
+   "text": "If you like their previous, pay what you use plans,",
+   "startMs": 1281720,
+   "endMs": 1284040
+  },
+  {
+   "text": "Ting mobile's flexed plans charging just $5 per gigabyte",
+   "startMs": 1284040,
+   "endMs": 1286940
+  },
+  {
+   "text": "are still there.",
+   "startMs": 1286940,
+   "endMs": 1288080
+  },
+  {
+   "text": "Data can also be shared if you have a family plan",
+   "startMs": 1288080,
+   "endMs": 1290080
+  },
+  {
+   "text": "so connect more phones to save more.",
+   "startMs": 1290080,
+   "endMs": 1292540
+  },
+  {
+   "text": "You'll still get nationwide coverage",
+   "startMs": 1292540,
+   "endMs": 1294390
+  },
+  {
+   "text": "and award-winning support.",
+   "startMs": 1294390,
+   "endMs": 1295580
+  },
+  {
+   "text": "In fact, consumer reports named Ting mobile",
+   "startMs": 1295580,
+   "endMs": 1297520
+  },
+  {
+   "text": "their number one carrier in America.",
+   "startMs": 1297520,
+   "endMs": 1299260
+  },
+  {
+   "text": "Pretty much any phone will work with Ting mobile",
+   "startMs": 1299260,
+   "endMs": 1300910
+  },
+  {
+   "text": "so check them out atlinus.ting.com and receive a $25 credit.",
+   "startMs": 1300910,
+   "endMs": 1305450
+  },
+  {
+   "text": "If you guys enjoyed this video,",
+   "startMs": 1305450,
+   "endMs": 1306550
+  },
+  {
+   "text": "maybe check out one of previous tours.",
+   "startMs": 1306550,
+   "endMs": 1308510
+  },
+  {
+   "text": "It's been a little while, but they are excellent videos.",
+   "startMs": 1308510,
+   "endMs": 1311253
+  }
+ ]
+}

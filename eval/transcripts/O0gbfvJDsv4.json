@@ -1,0 +1,1223 @@
+{
+ "videoID": "O0gbfvJDsv4",
+ "title": "\"The Fastest Gaming CPU in the World\" - Ryzen 7 5800X3D",
+ "route": "captions/WEB",
+ "savedAt": "2026-09-18T02:32:25.167Z",
+ "cues": [
+  {
+   "text": "- This is the fastest gaming CPU on the planet!",
+   "startMs": 210,
+   "endMs": 4130
+  },
+  {
+   "text": "Or at least it was when AMD first announced it.",
+   "startMs": 4130,
+   "endMs": 7720
+  },
+  {
+   "text": "Intel beats them to the punch",
+   "startMs": 7720,
+   "endMs": 9140
+  },
+  {
+   "text": "with what they claim is the fastest gaming CPU:",
+   "startMs": 9140,
+   "endMs": 11880
+  },
+  {
+   "text": "The Core i9-1200KS.",
+   "startMs": 11880,
+   "endMs": 15040
+  },
+  {
+   "text": "They put that together so quickly,",
+   "startMs": 15040,
+   "endMs": 17560
+  },
+  {
+   "text": "we didn't get a chance to review it",
+   "startMs": 17560,
+   "endMs": 19240
+  },
+  {
+   "text": "before they shoved it out door.",
+   "startMs": 19240,
+   "endMs": 21800
+  },
+  {
+   "text": "What is it about this unassuming little square,",
+   "startMs": 21800,
+   "endMs": 25350
+  },
+  {
+   "text": "the Ryzen 7 5800X3D,",
+   "startMs": 25350,
+   "endMs": 28730
+  },
+  {
+   "text": "that's got Intel so scared",
+   "startMs": 28730,
+   "endMs": 30520
+  },
+  {
+   "text": "that they dropped everything to come out ahead of it?",
+   "startMs": 30520,
+   "endMs": 33910
+  },
+  {
+   "text": "I'll tell you,",
+   "startMs": 33910,
+   "endMs": 34760
+  },
+  {
+   "text": "but first I'm gonna drop this message from our sponsor.",
+   "startMs": 34760,
+   "endMs": 37470
+  },
+  {
+   "text": "- Lambda created with Razer,",
+   "startMs": 37470,
+   "endMs": 39640
+  },
+  {
+   "text": "their new Tensorbook comes with an RTX 3080",
+   "startMs": 39640,
+   "endMs": 43000
+  },
+  {
+   "text": "Linux and Lambda stack with PyTorch and Tensorflow",
+   "startMs": 43000,
+   "endMs": 46360
+  },
+  {
+   "text": "so machine learning engineers",
+   "startMs": 46360,
+   "endMs": 47610
+  },
+  {
+   "text": "can develop AI models anytime, anywhere.",
+   "startMs": 47610,
+   "endMs": 51050
+  },
+  {
+   "text": "Learn more at the link down below.",
+   "startMs": 51050,
+   "endMs": 52983
+  },
+  {
+   "text": "(electronic music)",
+   "startMs": 55865,
+   "endMs": 58865
+  },
+  {
+   "text": "- AMD's new gaming CPU",
+   "startMs": 62100,
+   "endMs": 64510
+  },
+  {
+   "text": "achieves its fastest ever gaming claims",
+   "startMs": 64510,
+   "endMs": 66730
+  },
+  {
+   "text": "by using their shiny new 3D V-Cache technology,",
+   "startMs": 66730,
+   "endMs": 70180
+  },
+  {
+   "text": "where ultra-fast cache memory",
+   "startMs": 70180,
+   "endMs": 71810
+  },
+  {
+   "text": "is stacked on top of the CPU die,",
+   "startMs": 71810,
+   "endMs": 74090
+  },
+  {
+   "text": "in addition to the cache that's already inside it.",
+   "startMs": 74090,
+   "endMs": 77030
+  },
+  {
+   "text": "But why is cache so important for gaming",
+   "startMs": 77030,
+   "endMs": 79980
+  },
+  {
+   "text": "that AMD would go out of their way",
+   "startMs": 79980,
+   "endMs": 81860
+  },
+  {
+   "text": "to literally make a cash sandwich?",
+   "startMs": 81860,
+   "endMs": 84590
+  },
+  {
+   "text": "Because it's so close to the CPU cores, it is fast!",
+   "startMs": 84590,
+   "endMs": 89590
+  },
+  {
+   "text": "You can think of it roughly",
+   "startMs": 89620,
+   "endMs": 90670
+  },
+  {
+   "text": "like the relationship between RAM and storage.",
+   "startMs": 90670,
+   "endMs": 92860
+  },
+  {
+   "text": "And there are different levels of cache",
+   "startMs": 92860,
+   "endMs": 94650
+  },
+  {
+   "text": "that get even faster the closer they get to the cores.",
+   "startMs": 94650,
+   "endMs": 98020
+  },
+  {
+   "text": "3D V-cache is L3 cache, which for the 5800X3D,",
+   "startMs": 98020,
+   "endMs": 102080
+  },
+  {
+   "text": "is a shared pool of cache memory",
+   "startMs": 102080,
+   "endMs": 103680
+  },
+  {
+   "text": "for all of its eight cores.",
+   "startMs": 103680,
+   "endMs": 105760
+  },
+  {
+   "text": "For games, this cache is used for, well, everything.",
+   "startMs": 105760,
+   "endMs": 109830
+  },
+  {
+   "text": "But especially for things like AI behavior trees,",
+   "startMs": 109830,
+   "endMs": 112670
+  },
+  {
+   "text": "physics information,",
+   "startMs": 112670,
+   "endMs": 113720
+  },
+  {
+   "text": "and other things that the CPU is constantly doing.",
+   "startMs": 113720,
+   "endMs": 116460
+  },
+  {
+   "text": "If the cache fills up",
+   "startMs": 116460,
+   "endMs": 117640
+  },
+  {
+   "text": "and this stuff has to be evicted back to RAM,",
+   "startMs": 117640,
+   "endMs": 120360
+  },
+  {
+   "text": "the CPU not only has to wait",
+   "startMs": 120360,
+   "endMs": 122000
+  },
+  {
+   "text": "for new data to arrive from RAM,",
+   "startMs": 122000,
+   "endMs": 124400
+  },
+  {
+   "text": "but it also has to wait for the old data",
+   "startMs": 124400,
+   "endMs": 126210
+  },
+  {
+   "text": "to come back when it's needed again.",
+   "startMs": 126210,
+   "endMs": 128720
+  },
+  {
+   "text": "This is what you'd call a bottleneck.",
+   "startMs": 128720,
+   "endMs": 130840
+  },
+  {
+   "text": "And this one will lower frame rates of CPU bound games,",
+   "startMs": 130840,
+   "endMs": 134750
+  },
+  {
+   "text": "or cause hitching, even when FPS is high.",
+   "startMs": 134750,
+   "endMs": 137690
+  },
+  {
+   "text": "With three times the cache of its namesake:",
+   "startMs": 137690,
+   "endMs": 140000
+  },
+  {
+   "text": "the Ryzen 58007X.",
+   "startMs": 140000,
+   "endMs": 142180
+  },
+  {
+   "text": "The 5800X3D promises to basically",
+   "startMs": 142180,
+   "endMs": 145130
+  },
+  {
+   "text": "never run out of cache on a normal circumstances,",
+   "startMs": 145130,
+   "endMs": 147610
+  },
+  {
+   "text": "which should improve gaming performance.",
+   "startMs": 147610,
+   "endMs": 150040
+  },
+  {
+   "text": "To test that, we've got a range of CPUs",
+   "startMs": 150040,
+   "endMs": 152250
+  },
+  {
+   "text": "from both team red and team blue,",
+   "startMs": 152250,
+   "endMs": 153950
+  },
+  {
+   "text": "including the brand new 12900KS.",
+   "startMs": 153950,
+   "endMs": 156650
+  },
+  {
+   "text": "And we've equipped our Intel bench",
+   "startMs": 156650,
+   "endMs": 158030
+  },
+  {
+   "text": "with the fastest memory we had available",
+   "startMs": 158030,
+   "endMs": 159780
+  },
+  {
+   "text": "to give it the best chance to rain on AMD's parade.",
+   "startMs": 159780,
+   "endMs": 162810
+  },
+  {
+   "text": "We'll have all this linked down below.",
+   "startMs": 162810,
+   "endMs": 164860
+  },
+  {
+   "text": "Right away, 3D V-cache makes itself known in F1 2021,",
+   "startMs": 164860,
+   "endMs": 168640
+  },
+  {
+   "text": "where it beats out the Core i9-1200K",
+   "startMs": 168640,
+   "endMs": 171130
+  },
+  {
+   "text": "and matches the brand new 12900KS.",
+   "startMs": 171130,
+   "endMs": 174260
+  },
+  {
+   "text": "And this continues to a lesser extent with Forza Horizon 4,",
+   "startMs": 174260,
+   "endMs": 176990
+  },
+  {
+   "text": "where the 5800X3D slips a little bit, but nothing too major.",
+   "startMs": 176990,
+   "endMs": 180990
+  },
+  {
+   "text": "Far Cry 6 brings the first maybe.",
+   "startMs": 180990,
+   "endMs": 183740
+  },
+  {
+   "text": "One percent low frame rates in averages look good,",
+   "startMs": 183740,
+   "endMs": 186250
+  },
+  {
+   "text": "but five percent lows are significantly lower",
+   "startMs": 186250,
+   "endMs": 188740
+  },
+  {
+   "text": "as they are with the standard 5800X.",
+   "startMs": 188740,
+   "endMs": 191130
+  },
+  {
+   "text": "AMD is at a disadvantage here.",
+   "startMs": 191130,
+   "endMs": 193150
+  },
+  {
+   "text": "Hitman 3 shows more of this pattern,",
+   "startMs": 193150,
+   "endMs": 195160
+  },
+  {
+   "text": "albeit with better news for AMD in general,",
+   "startMs": 195160,
+   "endMs": 197090
+  },
+  {
+   "text": "as average frame rates are higher than even the 12900KS,",
+   "startMs": 197090,
+   "endMs": 200530
+  },
+  {
+   "text": "at the cost of frame stability.",
+   "startMs": 200530,
+   "endMs": 202630
+  },
+  {
+   "text": "Microsoft Flight Simulator",
+   "startMs": 202630,
+   "endMs": 204000
+  },
+  {
+   "text": "brings the first flawless victory over the entire field,",
+   "startMs": 204000,
+   "endMs": 207000
+  },
+  {
+   "text": "where it seems the extra cache really helps",
+   "startMs": 207000,
+   "endMs": 209060
+  },
+  {
+   "text": "with maintaining not only high, but stable frame rates",
+   "startMs": 209060,
+   "endMs": 212300
+  },
+  {
+   "text": "in this very CPU bound title.",
+   "startMs": 212300,
+   "endMs": 214600
+  },
+  {
+   "text": "C-S Go, also famously CPU bound,",
+   "startMs": 214600,
+   "endMs": 217130
+  },
+  {
+   "text": "but with an older and more simplistic engine,",
+   "startMs": 217130,
+   "endMs": 219720
+  },
+  {
+   "text": "tips the scales back towards Intel",
+   "startMs": 219720,
+   "endMs": 221580
+  },
+  {
+   "text": "with the 12900KS taking a commanding,",
+   "startMs": 221580,
+   "endMs": 224030
+  },
+  {
+   "text": "almost 20% lead in average FPS.",
+   "startMs": 224030,
+   "endMs": 227200
+  },
+  {
+   "text": "Oh, and you're not getting better turn times",
+   "startMs": 227200,
+   "endMs": 228820
+  },
+  {
+   "text": "in Civilization V1, FYI.",
+   "startMs": 228820,
+   "endMs": 231040
+  },
+  {
+   "text": "But I don't think that's quite what they were talking about",
+   "startMs": 231040,
+   "endMs": 233660
+  },
+  {
+   "text": "when they called it, \"The World's Fastest Gaming CPU\".",
+   "startMs": 233660,
+   "endMs": 236800
+  },
+  {
+   "text": "You're also not getting better turn times",
+   "startMs": 236800,
+   "endMs": 238410
+  },
+  {
+   "text": "with our recently restocked Wan hoodies from LTDstore.com,",
+   "startMs": 238410,
+   "endMs": 242050
+  },
+  {
+   "text": "but at least you'll look good while you wait.",
+   "startMs": 242050,
+   "endMs": 244850
+  },
+  {
+   "text": "Tallying it all up,",
+   "startMs": 244850,
+   "endMs": 245780
+  },
+  {
+   "text": "the 5800X3D pulls about a seven percent lead",
+   "startMs": 245780,
+   "endMs": 248960
+  },
+  {
+   "text": "over the 12900K,",
+   "startMs": 248960,
+   "endMs": 250630
+  },
+  {
+   "text": "which would've made it the fastest gaming CPU,",
+   "startMs": 250630,
+   "endMs": 253620
+  },
+  {
+   "text": "if only the 12900KS didn't exist.",
+   "startMs": 253620,
+   "endMs": 256700
+  },
+  {
+   "text": "A fact certainly not lost on Intel.",
+   "startMs": 256700,
+   "endMs": 258890
+  },
+  {
+   "text": "The 12900KS is about three percent faster",
+   "startMs": 258890,
+   "endMs": 261700
+  },
+  {
+   "text": "across our benchmarks.",
+   "startMs": 261700,
+   "endMs": 263120
+  },
+  {
+   "text": "But it's worth remembering that that CPU costs $800.",
+   "startMs": 263120,
+   "endMs": 267560
+  },
+  {
+   "text": "More on that later.",
+   "startMs": 267560,
+   "endMs": 269380
+  },
+  {
+   "text": "AMD hasn't really marketed the 5800X3D for productivity",
+   "startMs": 269380,
+   "endMs": 272960
+  },
+  {
+   "text": "and the slower clock speeds",
+   "startMs": 272960,
+   "endMs": 274720
+  },
+  {
+   "text": "are probably going to hurt it more here",
+   "startMs": 274720,
+   "endMs": 276950
+  },
+  {
+   "text": "than the extra cache will help.",
+   "startMs": 276950,
+   "endMs": 279030
+  },
+  {
+   "text": "Sure enough, we see about a five percent performance drop",
+   "startMs": 279030,
+   "endMs": 281370
+  },
+  {
+   "text": "across the board in Cinebench R23 over the OG 5800X.",
+   "startMs": 281370,
+   "endMs": 285610
+  },
+  {
+   "text": "And Blender doesn't fear much better in BMW.",
+   "startMs": 285610,
+   "endMs": 289080
+  },
+  {
+   "text": "Surprisingly 3D V-cache appears to help",
+   "startMs": 289080,
+   "endMs": 291290
+  },
+  {
+   "text": "with the more complex Gooseberry render.",
+   "startMs": 291290,
+   "endMs": 293410
+  },
+  {
+   "text": "Likely thanks to being able to keep more asset data",
+   "startMs": 293410,
+   "endMs": 296030
+  },
+  {
+   "text": "close to the cores.",
+   "startMs": 296030,
+   "endMs": 297490
+  },
+  {
+   "text": "Creative Cloud shows a similar performance uplift,",
+   "startMs": 297490,
+   "endMs": 299980
+  },
+  {
+   "text": "with Premiere picking a good five percent lead",
+   "startMs": 299980,
+   "endMs": 302580
+  },
+  {
+   "text": "over the 5800X.",
+   "startMs": 302580,
+   "endMs": 304400
+  },
+  {
+   "text": "And finally, SPECviewperf",
+   "startMs": 304400,
+   "endMs": 305690
+  },
+  {
+   "text": "shows a similar give and take, depending on the tests.",
+   "startMs": 305690,
+   "endMs": 308090
+  },
+  {
+   "text": "With life sciences and general operations",
+   "startMs": 308090,
+   "endMs": 310030
+  },
+  {
+   "text": "seeing a performance boost,",
+   "startMs": 310030,
+   "endMs": 311840
+  },
+  {
+   "text": "and energy and financial services taking a hit.",
+   "startMs": 311840,
+   "endMs": 315160
+  },
+  {
+   "text": "Looking at all our tests,",
+   "startMs": 315160,
+   "endMs": 316290
+  },
+  {
+   "text": "it works out to roughly equal performance",
+   "startMs": 316290,
+   "endMs": 318120
+  },
+  {
+   "text": "to the non-58003DX at the end of the day.",
+   "startMs": 318120,
+   "endMs": 320550
+  },
+  {
+   "text": "So you'd have to pay attention to the specific benchmarks",
+   "startMs": 320550,
+   "endMs": 323720
+  },
+  {
+   "text": "to know if it's better for a given workload.",
+   "startMs": 323720,
+   "endMs": 326230
+  },
+  {
+   "text": "Intel meanwhile, is firmly on top.",
+   "startMs": 326230,
+   "endMs": 328337
+  },
+  {
+   "text": "And it's it's not even close.",
+   "startMs": 328337,
+   "endMs": 330470
+  },
+  {
+   "text": "Even the Core i7-12700K is way out ahead.",
+   "startMs": 330470,
+   "endMs": 334160
+  },
+  {
+   "text": "That means that unless you're in the market",
+   "startMs": 334160,
+   "endMs": 335790
+  },
+  {
+   "text": "for a top-end CPU, the 12700K represents",
+   "startMs": 335790,
+   "endMs": 338560
+  },
+  {
+   "text": "a better value for productivity overall",
+   "startMs": 338560,
+   "endMs": 341080
+  },
+  {
+   "text": "than either of those Ryzen 7 chips.",
+   "startMs": 341080,
+   "endMs": 344010
+  },
+  {
+   "text": "For thermal testing,",
+   "startMs": 344010,
+   "endMs": 344850
+  },
+  {
+   "text": "I decided to give these chips a workout using Prime95",
+   "startMs": 344850,
+   "endMs": 347570
+  },
+  {
+   "text": "to see just how hot they'll get.",
+   "startMs": 347570,
+   "endMs": 349330
+  },
+  {
+   "text": "And the 5800X3D pleasantly surprises in this torture test,",
+   "startMs": 349330,
+   "endMs": 352680
+  },
+  {
+   "text": "with a consistent 90 degrees using our Noctua NH-D15S.",
+   "startMs": 352680,
+   "endMs": 356217
+  },
+  {
+   "text": "And that's just a few degrees more",
+   "startMs": 356217,
+   "endMs": 357860
+  },
+  {
+   "text": "than the standard 5800X puts out,",
+   "startMs": 357860,
+   "endMs": 359970
+  },
+  {
+   "text": "and significantly lower than either Core i9.",
+   "startMs": 359970,
+   "endMs": 363160
+  },
+  {
+   "text": "What's more, it maintained 4.1 gigahertz all core,",
+   "startMs": 363160,
+   "endMs": 366210
+  },
+  {
+   "text": "throughout most of the run,",
+   "startMs": 366210,
+   "endMs": 367290
+  },
+  {
+   "text": "with power consumption below the OG5800X.",
+   "startMs": 367290,
+   "endMs": 370820
+  },
+  {
+   "text": "Even though both CPUs are rated for 105 Watt TDP,",
+   "startMs": 370820,
+   "endMs": 374400
+  },
+  {
+   "text": "precision boost doesn't seem to be pushing the X3D",
+   "startMs": 374400,
+   "endMs": 376940
+  },
+  {
+   "text": "quite as hard.",
+   "startMs": 376940,
+   "endMs": 378210
+  },
+  {
+   "text": "Why the hotter cores then?",
+   "startMs": 378210,
+   "endMs": 379970
+  },
+  {
+   "text": "Well, you've got the 3D V-cache",
+   "startMs": 379970,
+   "endMs": 381530
+  },
+  {
+   "text": "sitting between the cores and the IHS,",
+   "startMs": 381530,
+   "endMs": 383500
+  },
+  {
+   "text": "so it's less thermally efficient.",
+   "startMs": 383500,
+   "endMs": 385660
+  },
+  {
+   "text": "Which brings up the other reason",
+   "startMs": 385660,
+   "endMs": 387820
+  },
+  {
+   "text": "the Ryzen 7 5800X3D is special:",
+   "startMs": 387820,
+   "endMs": 391810
+  },
+  {
+   "text": "Overclocking.",
+   "startMs": 391810,
+   "endMs": 392940
+  },
+  {
+   "text": "Or rather, lack thereof,",
+   "startMs": 392940,
+   "endMs": 395320
+  },
+  {
+   "text": "for the first time on the Ryzen platform.",
+   "startMs": 395320,
+   "endMs": 398020
+  },
+  {
+   "text": "AMD says that this is a limitation",
+   "startMs": 398020,
+   "endMs": 400090
+  },
+  {
+   "text": "for this one specific CPU,",
+   "startMs": 400090,
+   "endMs": 402380
+  },
+  {
+   "text": "because the 3DStats cache memory",
+   "startMs": 402380,
+   "endMs": 404390
+  },
+  {
+   "text": "needs a hard capped maximum voltage for reliability.",
+   "startMs": 404390,
+   "endMs": 407990
+  },
+  {
+   "text": "Not only does that mean",
+   "startMs": 407990,
+   "endMs": 408960
+  },
+  {
+   "text": "that overclocking one of these things",
+   "startMs": 408960,
+   "endMs": 410660
+  },
+  {
+   "text": "would potentially be dangerous,",
+   "startMs": 410660,
+   "endMs": 412460
+  },
+  {
+   "text": "it also means that thanks to the extra power draw",
+   "startMs": 412460,
+   "endMs": 414750
+  },
+  {
+   "text": "required to run the 3D V-cache,",
+   "startMs": 414750,
+   "endMs": 416900
+  },
+  {
+   "text": "core clocks are lower than the vanilla 5800X, as we saw.",
+   "startMs": 416900,
+   "endMs": 421040
+  },
+  {
+   "text": "Obviously that hasn't hurt it much in practice,",
+   "startMs": 421040,
+   "endMs": 423350
+  },
+  {
+   "text": "but you can imagine how much faster things could be",
+   "startMs": 423350,
+   "endMs": 426430
+  },
+  {
+   "text": "if only that limitation weren't in place",
+   "startMs": 426430,
+   "endMs": 428800
+  },
+  {
+   "text": "and they can drive the clocks just that little bit faster.",
+   "startMs": 428800,
+   "endMs": 432320
+  },
+  {
+   "text": "Overall, it's a weird chip,",
+   "startMs": 432320,
+   "endMs": 434440
+  },
+  {
+   "text": "but (chuckles) it's not a bad one.",
+   "startMs": 434440,
+   "endMs": 436430
+  },
+  {
+   "text": "Is it the most powerful gaming see you in the world?",
+   "startMs": 436430,
+   "endMs": 439160
+  },
+  {
+   "text": "No, it's beaten out by the Core i9-1200KS.",
+   "startMs": 439160,
+   "endMs": 442830
+  },
+  {
+   "text": "But again, that CPU is a power hungry beast that costs $800.",
+   "startMs": 442830,
+   "endMs": 447830
+  },
+  {
+   "text": "The Ryzen 7 5800X3D is $450,",
+   "startMs": 447970,
+   "endMs": 452190
+  },
+  {
+   "text": "which makes it the fastest gaming CPU",
+   "startMs": 452190,
+   "endMs": 453720
+  },
+  {
+   "text": "at a price that makes any sense.",
+   "startMs": 453720,
+   "endMs": 456030
+  },
+  {
+   "text": "And that's why the Core i7-12700K at $400",
+   "startMs": 456030,
+   "endMs": 459230
+  },
+  {
+   "text": "is in our test lineup.",
+   "startMs": 459230,
+   "endMs": 460790
+  },
+  {
+   "text": "That chip still represents an extremely good value.",
+   "startMs": 460790,
+   "endMs": 463250
+  },
+  {
+   "text": "It's not far off for gaming and dominates for the price,",
+   "startMs": 463250,
+   "endMs": 466700
+  },
+  {
+   "text": "if you need productivity.",
+   "startMs": 466700,
+   "endMs": 468420
+  },
+  {
+   "text": "Plus, it's running on a brand new platform.",
+   "startMs": 468420,
+   "endMs": 470570
+  },
+  {
+   "text": "Speaking of platforms, hit Subscribe,",
+   "startMs": 470570,
+   "endMs": 472330
+  },
+  {
+   "text": "because we've got a brand new storage platform",
+   "startMs": 472330,
+   "endMs": 474790
+  },
+  {
+   "text": "with a petabyte of flash,",
+   "startMs": 474790,
+   "endMs": 475623
+  },
+  {
+   "text": "(bell dings)",
+   "startMs": 475623,
+   "endMs": 476456
+  },
+  {
+   "text": "and we are totally gonna benchmark it.",
+   "startMs": 476456,
+   "endMs": 477980
+  },
+  {
+   "text": "But the 5800X3D is a fitting sendoff",
+   "startMs": 479040,
+   "endMs": 481570
+  },
+  {
+   "text": "to a platform that's been around",
+   "startMs": 481570,
+   "endMs": 483040
+  },
+  {
+   "text": "since I started writing for Linus Tech Tips.",
+   "startMs": 483040,
+   "endMs": 485900
+  },
+  {
+   "text": "By all accounts, this is probably the last CPU",
+   "startMs": 485900,
+   "endMs": 488560
+  },
+  {
+   "text": "that AM4 is going to see.",
+   "startMs": 488560,
+   "endMs": 489973
+  },
+  {
+   "text": "I wouldn't recommend it for new builds,",
+   "startMs": 490860,
+   "endMs": 492570
+  },
+  {
+   "text": "the platform's a dead-end.",
+   "startMs": 492570,
+   "endMs": 494340
+  },
+  {
+   "text": "But if you are primarily a gamer",
+   "startMs": 494340,
+   "endMs": 496570
+  },
+  {
+   "text": "who got into AMD's ecosystem early",
+   "startMs": 496570,
+   "endMs": 499150
+  },
+  {
+   "text": "and you've been waiting for a chip to upgrade to,",
+   "startMs": 499150,
+   "endMs": 501820
+  },
+  {
+   "text": "then this is a solid choice for top-tier performance",
+   "startMs": 501820,
+   "endMs": 504270
+  },
+  {
+   "text": "that won't require you to take a second job.",
+   "startMs": 504270,
+   "endMs": 506580
+  },
+  {
+   "text": "It doesn't need fancy cooling, or a big power supply,",
+   "startMs": 506580,
+   "endMs": 509610
+  },
+  {
+   "text": "or even new RAM.",
+   "startMs": 509610,
+   "endMs": 511310
+  },
+  {
+   "text": "Could you get similar performance by overclocking",
+   "startMs": 511310,
+   "endMs": 513320
+  },
+  {
+   "text": "a plain Ryzen 7 5800X or even the new $300 5700X?",
+   "startMs": 513320,
+   "endMs": 518320
+  },
+  {
+   "text": "Probably, yeah.",
+   "startMs": 518320,
+   "endMs": 519890
+  },
+  {
+   "text": "But if you don't want to deal with that,",
+   "startMs": 519890,
+   "endMs": 521870
+  },
+  {
+   "text": "or if you are a small form factor enthusiast,",
+   "startMs": 521870,
+   "endMs": 524880
+  },
+  {
+   "text": "then for you, the 5800X3D has few downsides.",
+   "startMs": 524880,
+   "endMs": 529580
+  },
+  {
+   "text": "And neither does our sponsor.",
+   "startMs": 529580,
+   "endMs": 531190
+  },
+  {
+   "text": "- Zoho CRM!",
+   "startMs": 531190,
+   "endMs": 532540
+  },
+  {
+   "text": "Zoho CRM is a 360-degree solution",
+   "startMs": 532540,
+   "endMs": 534990
+  },
+  {
+   "text": "for managing your business sales, marketing,",
+   "startMs": 534990,
+   "endMs": 537020
+  },
+  {
+   "text": "and customer service.",
+   "startMs": 537020,
+   "endMs": 538150
+  },
+  {
+   "text": "With their intuitive UI and simple navigation,",
+   "startMs": 538150,
+   "endMs": 540400
+  },
+  {
+   "text": "you can implement their service quickly and efficiently,",
+   "startMs": 540400,
+   "endMs": 543020
+  },
+  {
+   "text": "with minimal disruption to your current processes.",
+   "startMs": 543020,
+   "endMs": 545720
+  },
+  {
+   "text": "They offer AI predictions to help you understand",
+   "startMs": 545720,
+   "endMs": 547810
+  },
+  {
+   "text": "your customer's needs,",
+   "startMs": 547810,
+   "endMs": 548643
+  },
+  {
+   "text": "so you can see trends and purchase patterns",
+   "startMs": 548643,
+   "endMs": 550670
+  },
+  {
+   "text": "by a variety of indicators.",
+   "startMs": 550670,
+   "endMs": 552180
+  },
+  {
+   "text": "Plus, their inbuilt design studio",
+   "startMs": 552180,
+   "endMs": 554280
+  },
+  {
+   "text": "helps you customize your CRM experience",
+   "startMs": 554280,
+   "endMs": 556460
+  },
+  {
+   "text": "to help you spot critical customer or account information,",
+   "startMs": 556460,
+   "endMs": 559330
+  },
+  {
+   "text": "at a glance; helping you get your work done faster.",
+   "startMs": 559330,
+   "endMs": 562250
+  },
+  {
+   "text": "Zoho offers flexible contracts, transparent pricing,",
+   "startMs": 562250,
+   "endMs": 565030
+  },
+  {
+   "text": "and an ever-evolving product that grows to meet your needs",
+   "startMs": 565030,
+   "endMs": 567580
+  },
+  {
+   "text": "without snowballing costs.",
+   "startMs": 567580,
+   "endMs": 568890
+  },
+  {
+   "text": "With over 15 years of experience in the industry,",
+   "startMs": 568890,
+   "endMs": 570890
+  },
+  {
+   "text": "and over 250,000 clients,",
+   "startMs": 570890,
+   "endMs": 572770
+  },
+  {
+   "text": "Zoho CRM is a great solution to support you",
+   "startMs": 572770,
+   "endMs": 575210
+  },
+  {
+   "text": "in your customer relationship management needs.",
+   "startMs": 575210,
+   "endMs": 576950
+  },
+  {
+   "text": "Get 50% off your annual subscription",
+   "startMs": 576950,
+   "endMs": 579360
+  },
+  {
+   "text": "when you use the code: ZCRM50",
+   "startMs": 579360,
+   "endMs": 582160
+  },
+  {
+   "text": "using the link in the video description.",
+   "startMs": 582160,
+   "endMs": 584680
+  },
+  {
+   "text": "- Thanks for watching guys.",
+   "startMs": 584680,
+   "endMs": 585720
+  },
+  {
+   "text": "Go check out our most recent sleeper",
+   "startMs": 585720,
+   "endMs": 587300
+  },
+  {
+   "text": "where we had to (chuckles) go to some extreme lengths",
+   "startMs": 587300,
+   "endMs": 591180
+  },
+  {
+   "text": "to make a Core i9-12900K work.",
+   "startMs": 591180,
+   "endMs": 594430
+  },
+  {
+   "text": "The 5800X3D here,",
+   "startMs": 594430,
+   "endMs": 596770
+  },
+  {
+   "text": "would've been a much better fit, literally.",
+   "startMs": 596770,
+   "endMs": 599523
+  }
+ ]
+}
