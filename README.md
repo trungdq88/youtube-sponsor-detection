@@ -48,10 +48,10 @@ skips them automatically.
 3. Open any YouTube video. A panel appears bottom-right with the segments,
    an auto-skip toggle, a skip button per read, and the stats.
 
-The popup holds the settings (auto-skip on/off, the confidence a read needs
-before it is skipped automatically, the model, and the price used for the cost
-estimate) and the running totals: videos analysed, Jev requests, tokens, the
-estimated cost, reads skipped and time saved. Results are cached per video, so
+The popup holds the mode, the keys, the skipping settings (auto-skip on/off,
+the confidence a read needs before it is skipped, the step for jumps by ear)
+and the running totals: time saved, skips, the estimated spend, and the
+detail behind them; model and prices are under Advanced. Results are cached per video, so
 re-watching costs nothing; **Re-analyze** in the panel forces a fresh run.
 
 ![extension](docs-extension.png)
@@ -68,6 +68,22 @@ there is no server to run. The pipeline is the same code as the web app:
 youtube.com page (Playwright routes the requests), covering injection, caption
 extraction, the panel, markers, auto-skip and the popup. It needs
 `npx playwright install chromium` once.
+
+### Smart mode
+
+Smart mode uses both signals. The transcript pass finds the reads and their
+ends as before; the audio is listened to only from about 25 seconds before
+each candidate read until shortly after it, and Jev is asked over what was
+heard whether a sponsor read is playing. When the audio agrees, the video
+jumps straight to the end the transcript found; after the jump it listens a
+few seconds more and steps ahead if the read is somehow still going. Without
+a usable transcript it listens throughout and steps like live mode; if the
+audio cannot run (no Deepgram key, connection lost) it skips from the
+transcript alone. Because audio runs only near the reads, the speech cost is
+a few cents per hour of viewing instead of about fifty.
+
+The popup is where the mode is chosen (Smart, Transcript only, Listen only),
+the two keys are saved, skipping is tuned, and the running usage is shown.
 
 ### Live audio mode
 

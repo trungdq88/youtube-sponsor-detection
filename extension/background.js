@@ -22,9 +22,11 @@ export const DEFAULT_SETTINGS = {
   // Output tokens are free. Editable in the popup.
   pricePerMillionInput: 0.042,
 
-  // Live mode: listen to the tab instead of reading the transcript.
-  // 'transcript' is the original behaviour; 'live' skips in fixed steps as
-  // soon as Jev hears a sponsor read. See lib/live.js.
+  // 'transcript' is the original behaviour: read the captions, skip whole
+  // reads. 'live' listens to the audio instead and skips in fixed steps as
+  // soon as Jev hears a sponsor read (lib/live.js). 'smart' does both: the
+  // transcript finds the reads, the audio confirms one is playing, and the
+  // video jumps straight to the read's end.
   mode: 'transcript',
   liveProvider: 'deepgram',
   deepgramKey: '',
@@ -217,7 +219,7 @@ async function liveStart(tabId, title) {
   if (!started?.ok) throw new Error(started?.error ?? 'Could not open the speech connection.');
 
   await chrome.storage.local.set({ live: { active: true, tabId, title: title ?? '', state: 'connecting', since: Date.now(), error: null } });
-  if (settings.mode !== 'live') await setSettings({ mode: 'live' });
+  if (settings.mode === 'transcript') await setSettings({ mode: 'live' });
   return { ...(await liveState(tabId)), tabId };
 }
 

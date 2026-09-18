@@ -1,6 +1,12 @@
 // Runs on youtube.com. Gets the captions for the current video, hands them to
 // the background worker for Jev, then draws the panel and does the skipping.
 //
+// Smart mode (settings.mode === 'smart') runs both: the transcript gives the
+// candidate reads with their ends, the audio confirms that a read is really
+// playing, and only then does the video jump straight to the read's end.
+// Listening is kept to the neighbourhood of the candidates to save on the
+// speech API, unless the transcript found nothing, when it listens throughout.
+//
 // In live mode (settings.mode === 'live') there is no transcript: this script
 // captures the <video> element's audio, streams it to the background worker
 // (which feeds the speech API), gets back what was heard, lets the controller
@@ -80,11 +86,33 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 
 setInterval(() => {
-  if (isLive() && state.live.thisTab) driveLive();
+  if (usesAudio() && state.live.thisTab) driveLive();
 }, 1000);
 
+function mode() {
+  return state.settings?.mode ?? 'transcript';
+}
 function isLive() {
-  return state.settings?.mode === 'live';
+  return mode() === 'live';
+}
+function isSmart() {
+  return mode() === 'smart';
+}
+/** Modes that listen to the audio. */
+function usesAudio() {
+  return isLive() || isSmart();
+}
+/** Modes that read the transcript. */
+function usesTranscript() {
+  return !isLive();
+}
+/** Audio is actually being heard in this tab right now. */
+function audioActive() {
+  return Boolean(liveCapture) && state.live.thisTab && state.live.status === 'listening';
+}
+/** Audio is on its way (socket connecting): smart mode waits for it rather than skipping blind. */
+function audioPending() {
+  return Boolean(liveCapture) && state.live.status === 'connecting';
 }
 
 function currentVideoId() {
@@ -111,23 +139,22 @@ async function onNavigate() {
   }
 
   await refreshState();
-  if (isLive()) {
+  if (usesAudio()) {
     liveController?.reset();
     await refreshLiveState();
     if (liveCapture && liveCapture.video !== findVideo()) reattachCapture();
-    render();
-    autoListen();
-    return;
   }
   render();
-  analyze(false);
+  if (usesTranscript()) analyze(false);
+  if (usesAudio()) autoListen();
 }
 
-async function onModeChange(mode) {
-  if (mode === 'live') {
+async function onModeChange(next) {
+  if (next === 'live' || next === 'smart') {
     liveController?.reset();
     await refreshLiveState();
     render();
+    if (next === 'smart' && state.videoId && !state.analysis && !state.busy) analyze(false);
     autoListen();
   } else {
     stopCapture();
@@ -487,7 +514,13 @@ function skippable(seg) {
 
 function onTimeUpdate(event) {
   const video = event.target;
-  if (!(video instanceof HTMLVideoElement) || !state.settings?.autoSkip || state.paused) return;
+  if (!(video instanceof HTMLVideoElement)) return;
+  if (isSmart()) smartTick(video);
+  if (!state.settings?.autoSkip || state.paused) return;
+  // Smart mode with the audio running waits for the audio's confirmation
+  // (see smartJumpTarget); without it, it skips from the transcript alone.
+  if (isSmart() && (audioActive() || audioPending())) return;
+  if (isLive()) return;
 
   segments().forEach((seg, index) => {
     if (state.skipped.has(index) || !skippable(seg)) return;
@@ -528,6 +561,65 @@ function liveLog(kind, text) {
   fn(`[sponsor-skip live] ${text}`);
 }
 
+// ---- smart mode -----------------------------------------------------------
+
+/** How far around a candidate read the audio is listened to, in seconds. */
+const SMART_BEFORE = 25;
+const SMART_AFTER = 15;
+/** A read is a candidate for confirmation from this confidence up (the MAYBE band). */
+const SMART_CANDIDATE = 0.35;
+
+function smartCandidates() {
+  return segments().filter((seg) => seg.end && seg.confidence >= SMART_CANDIDATE);
+}
+
+/**
+ * Should the audio be on at time t? While the transcript is still being
+ * read, or when it gave nothing, listen throughout; otherwise only near the
+ * candidates.
+ */
+function smartWantsAudio(t) {
+  if (state.busy || state.error || !state.analysis) return true;
+  const candidates = smartCandidates();
+  if (!candidates.length) return true;
+  return candidates.some((seg, i) => !state.skipped.has(segments().indexOf(seg)) && t >= seg.start.seconds - SMART_BEFORE && t < seg.end.seconds + SMART_AFTER);
+}
+
+let smartOffTimer = null;
+function smartTick(video) {
+  if (liveOptOut || video.paused) return;
+  const want = smartWantsAudio(video.currentTime);
+  if (want && !liveCapture) {
+    clearTimeout(smartOffTimer);
+    smartOffTimer = null;
+    autoListen();
+  } else if (!want && liveCapture && !smartOffTimer) {
+    smartOffTimer = setTimeout(() => {
+      smartOffTimer = null;
+      const v = findVideo();
+      if (liveCapture && v && !smartWantsAudio(v.currentTime)) {
+        liveLog('status', 'Past the candidate reads, audio off until the next one');
+        stopCapture(true);
+        state.live.status = 'stopped';
+        render();
+      }
+    }, 5000);
+  }
+}
+
+/**
+ * Where a confirmed read should jump to: the end of the transcript's read
+ * around the playhead, or null when there is none (then it steps, like live
+ * mode). Marks the read as skipped so the transcript path leaves it alone.
+ */
+function smartJumpTarget(t) {
+  const segs = segments();
+  const index = segs.findIndex((seg) => seg.end && seg.confidence >= SMART_CANDIDATE && t >= seg.start.seconds - 60 && t < seg.end.seconds - 1);
+  if (index < 0) return null;
+  state.skipped.add(index);
+  return segs[index];
+}
+
 // ---- auto start / stop ----------------------------------------------------
 //
 // Listening follows playback: it starts when the video plays and stops a
@@ -538,7 +630,8 @@ const PAUSE_GRACE_MS = 20000;
 
 function autoListen() {
   const video = findVideo();
-  if (!isLive() || liveOptOut || liveCapture || !video || video.paused || !state.videoId) return;
+  if (!usesAudio() || liveOptOut || liveCapture || !video || video.paused || !state.videoId) return;
+  if (isSmart() && !smartWantsAudio(video.currentTime)) return;
   startListening().catch((error) => {
     state.live.status = 'error';
     state.live.error = error.message;
@@ -547,7 +640,7 @@ function autoListen() {
 }
 
 function onPlay(event) {
-  if (!(event.target instanceof HTMLVideoElement) || !isLive()) return;
+  if (!(event.target instanceof HTMLVideoElement) || !usesAudio()) return;
   clearTimeout(livePauseTimer);
   livePauseTimer = null;
   if (liveCapture) {
@@ -667,6 +760,8 @@ async function reattachCapture() {
 }
 
 function stopCapture(tellWorker = true) {
+  clearTimeout(smartOffTimer);
+  smartOffTimer = null;
   const c = liveCapture;
   liveCapture = null;
   if (c) {
@@ -731,7 +826,7 @@ function onLiveStatus({ state: status, error }) {
 }
 
 async function onLiveTranscript({ text, isFinal, heardAt, heardUntil }) {
-  if (!isLive()) return;
+  if (!usesAudio()) return;
   state.live.thisTab = true;
   if (state.live.status !== 'listening') state.live.status = 'listening';
   if (!isFinal) {
@@ -750,7 +845,7 @@ async function onLiveTranscript({ text, isFinal, heardAt, heardUntil }) {
 
 /** Ask the controller what to do; run a Jev check or a jump when it says so. */
 async function driveLive() {
-  if (!isLive() || !state.live.thisTab || state.live.checking) return;
+  if (!usesAudio() || !state.live.thisTab || state.live.checking) return;
   const ctl = await liveControl();
   const request = ctl.next(Date.now());
   if (!request) return;
@@ -795,10 +890,15 @@ function liveJump(ctl, seconds) {
   const video = document.querySelector('video.html5-main-video') ?? document.querySelector('video');
   if (!video) return;
   const from = video.currentTime;
-  const to = Number.isFinite(video.duration) ? Math.min(video.duration, from + seconds) : from + seconds;
+  // Smart mode, first jump of a read: the transcript knows where it ends.
+  const target = isSmart() && ctl.phase === 'listening' ? smartJumpTarget(from) : null;
+  let to = target ? target.end.seconds : from + seconds;
+  if (Number.isFinite(video.duration)) to = Math.min(video.duration, to);
   video.currentTime = to;
   ctl.skipped(Date.now());
-  liveLog('jump', `Jumped ${stamp(from)} → ${stamp(to)} (${ctl.consecutiveSkips} in a row)`);
+  liveLog('jump', target
+    ? `Audio confirmed the read the transcript found (${stamp(target.start.seconds)} – ${stamp(target.end.seconds)}): jumped ${stamp(from)} → ${stamp(to)}`
+    : `Jumped ${stamp(from)} → ${stamp(to)} (${ctl.consecutiveSkips} in a row)`);
   state.live.jumps += 1;
   state.live.secondsSkipped += to - from;
   send({ type: 'live-skipped', seconds: to - from }).then((r) => {
@@ -808,7 +908,9 @@ function liveJump(ctl, seconds) {
     }
   });
   const n = ctl.consecutiveSkips;
-  toast(`Sponsor read heard, jumped ahead ${Math.round(seconds)}s${n > 1 ? ` (${n} in a row)` : ''}, ${stamp(from)} → ${stamp(to)}`, () => {
+  toast(target
+    ? `Sponsor read confirmed, skipped to its end, ${stamp(from)} → ${stamp(to)}`
+    : `Sponsor read heard, jumped ahead ${Math.round(seconds)}s${n > 1 ? ` (${n} in a row)` : ''}, ${stamp(from)} → ${stamp(to)}`, () => {
     video.currentTime = from;
     state.paused = true;
     ctl.reset();
@@ -855,7 +957,9 @@ function liveBody(b) {
   if (!live.thisTab) {
     b.append(el('div', 'ss-status', live.status === 'error' && live.error
       ? `Not listening: ${live.error}`
-      : liveOptOut ? 'Listening is off for this video.' : 'Listening starts when the video plays.'));
+      : liveOptOut ? 'Listening is off for this video.'
+      : isSmart() ? 'Audio is off; it comes on near each candidate read.'
+      : 'Listening starts when the video plays.'));
     const start = button('Start listening', async () => {
       start.disabled = true;
       liveOptOut = false;
@@ -942,7 +1046,7 @@ function header(collapsed) {
   h.append(el('span', 'ss-title', 'Sponsor Skip'));
   const lightState = isLive()
     ? (state.live.status === 'error' ? 'bad' : state.live.checking || state.live.status === 'connecting' ? 'busy' : state.live.thisTab ? 'found' : 'idle')
-    : (state.busy ? 'busy' : state.error ? 'bad' : segments().length ? 'found' : 'idle');
+    : (state.busy || state.live.checking ? 'busy' : state.error ? 'bad' : segments().length ? 'found' : 'idle');
   const light = el('span', `ss-light ${lightState}`);
   h.append(light);
   const toggle = button(collapsed ? '▸' : '▾', () => {
@@ -954,11 +1058,41 @@ function header(collapsed) {
   return h;
 }
 
+function transcriptBody(b, segs) {
+  if (state.busy) {
+    b.append(el('div', 'ss-status', 'Reading the transcript and asking Jev…'));
+  } else if (state.error) {
+    b.append(el('div', 'ss-status ss-error', state.error));
+    if (state.errorDetail) b.append(el('div', 'ss-error-detail', state.errorDetail));
+  } else if (!state.analysis) {
+    b.append(el('div', 'ss-status', 'Waiting for the video.'));
+  } else if (!segs.length) {
+    b.append(el('div', 'ss-status', 'No sponsor read found in this video.'));
+  } else {
+    b.append(el('div', 'ss-status', `${segs.length} sponsor read${segs.length > 1 ? 's' : ''} found${state.analysis.cached ? ' (cached)' : ''}${isSmart() ? ', skipped once the audio confirms' : ''}`));
+    segs.forEach((seg, index) => {
+      const row = el('div', 'ss-segment');
+      const range = seg.end ? `${stamp(seg.start.seconds)} – ${stamp(seg.end.seconds)}` : `${stamp(seg.start.seconds)} – ?`;
+      row.append(el('span', 'ss-range', range));
+      row.append(el('span', `ss-pill ${seg.confidence >= (state.settings?.threshold ?? 0.7) ? 'good' : 'warn'}`, `${Math.round(seg.confidence * 100)}%`));
+      const video = document.querySelector('video');
+      if (seg.end && video) {
+        row.append(button(state.skipped.has(index) ? 'Skipped' : 'Skip', () => skipTo(video, seg, index, false), 'ss-small'));
+      }
+      b.append(row);
+    });
+  }
+}
+
 function body() {
   const b = el('div', 'ss-body');
   const segs = segments();
 
   if (isLive()) {
+    liveBody(b);
+  } else if (isSmart()) {
+    transcriptBody(b, segs);
+    b.append(el('div', 'ss-subhead', audioActive() ? 'Audio: confirming with what is heard' : 'Audio'));
     liveBody(b);
   } else if (state.busy) {
     b.append(el('div', 'ss-status', 'Reading the transcript and asking Jev…'));
@@ -997,24 +1131,23 @@ function body() {
   });
   auto.append(box, document.createTextNode(state.paused ? 'Auto-skip (paused on this video)' : 'Auto-skip'));
   controls.append(auto);
-  if (isLive()) {
-    if (state.live.thisTab) controls.append(button('Stop listening', stopListening, 'ss-small'));
-  } else {
-    controls.append(button('Re-analyze', () => analyze(true), 'ss-small', state.busy));
-  }
+  if (usesAudio() && state.live.thisTab) controls.append(button('Stop listening', stopListening, 'ss-small'));
+  if (usesTranscript()) controls.append(button('Re-analyze', () => analyze(true), 'ss-small', state.busy));
   b.append(controls);
 
   // Stats
   const a = state.analysis;
   const s = state.stats;
   const stats = el('div', 'ss-stats');
-  if (isLive()) {
+  if (usesAudio()) {
     const l = state.live;
-    stats.append(statRow('This tab', `${l.checks} checks · ${money(l.cost)} · ${l.jumps} jumps · ${stamp(l.secondsSkipped)} skipped`));
+    stats.append(statRow('Audio, this tab', `${l.checks} checks · ${money(l.cost)} · ${l.jumps} jumps · ${stamp(l.secondsSkipped)} skipped`));
     if (s) {
-      stats.append(statRow('Live, all time', `${stamp(s.liveSeconds)} heard · ${money(s.estimatedSttCost)} speech · ${money(s.estimatedCost)} Jev`));
+      stats.append(statRow('Audio, all time', `${stamp(s.liveSeconds)} heard · ${money(s.estimatedSttCost)} speech · ${money(s.estimatedCost)} Jev`));
       stats.append(statRow('Jumped', `${s.liveSkips} times · ${stamp(s.liveSecondsSkipped)} saved`));
     }
+  }
+  if (isLive()) {
     b.append(stats);
     b.append(liveLogView());
     return b;
@@ -1027,6 +1160,7 @@ function body() {
     stats.append(statRow('Skipped', `${s.skips} reads · ${stamp(s.secondsSkipped)} saved`));
   }
   b.append(stats);
+  if (isSmart()) b.append(liveLogView());
   return b;
 }
 

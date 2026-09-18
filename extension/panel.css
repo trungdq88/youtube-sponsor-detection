@@ -106,6 +106,8 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
+#sponsor-skip-panel .ss-subhead { margin-top: 8px; padding-top: 8px; border-top: 1px solid #2a2f3a; color: #9aa3b2; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
+
 #sponsor-skip-panel .ss-start { margin: 8px 0 4px; }
 #sponsor-skip-panel .ss-start .ss-button { width: 100%; padding: 7px 10px; }
 

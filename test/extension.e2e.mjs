@@ -185,6 +185,38 @@ await page.waitForSelector('#sponsor-skip-panel .ss-start .ss-button', { timeout
 await page.evaluate(async () => { const v = document.querySelector('video'); v.pause(); await v.play().catch(() => {}); });
 await new Promise((r) => setTimeout(r, 1500));
 assert.match(await page.textContent('#sponsor-skip-panel .ss-status'), /Listening is off for this video/);
+// Smart mode: the transcript's cached read (1:2x – 2:5x) decides when the
+// audio runs. Early in the video it stays off; near the read it comes on.
+await popup.evaluate(
+  async ({ videoId, start, end }) => {
+    const { settings } = await chrome.storage.local.get('settings');
+    await chrome.storage.local.set({
+      settings: { ...settings, mode: 'smart' },
+      results: {
+        [videoId]: {
+          videoId, title: 'Demo video', at: Date.now(), elapsedMs: 1234, requests: 3,
+          usage: { input_tokens: 2400, output_tokens: 36 }, cost: 2400 * 0.042 / 1e6,
+          result: { status: 'found', confidence: 0.94, segments: [{ confidence: 0.94, start: { seconds: start, text: 'x', probability: 0.9 }, end: { seconds: end, text: 'y', probability: 0.9 } }] }
+        }
+      }
+    });
+  },
+  { videoId: VIDEO_ID, start: seconds(14), end: seconds(27) }
+);
+await page.goto(`https://www.youtube.com/watch?v=${VIDEO_ID}`);
+await page.waitForSelector('#sponsor-skip-panel .ss-segment', { timeout: 15000 });
+await page.evaluate(async () => { const v = document.querySelector('video'); v.muted = true; v.currentTime = 10; await v.play().catch(() => {}); });
+await new Promise((r) => setTimeout(r, 2500));
+let smartStatus = await page.textContent('#sponsor-skip-panel .ss-body');
+assert.match(smartStatus, /Audio is off; it comes on near each candidate read/, smartStatus);
+assert.doesNotMatch(smartStatus, /Stop listening/, 'audio must not run far from the read');
+await page.evaluate((t) => { document.querySelector('video').currentTime = t; }, seconds(14) - 10);
+await page.waitForFunction(() => /Capturing the video element/.test(document.querySelector('#sponsor-skip-panel .ss-log-list')?.textContent ?? ''), null, { timeout: 10000 })
+  .catch(async (e) => { console.log('smart body:', await page.textContent('#sponsor-skip-panel .ss-body')); throw e; });
+smartStatus = await page.textContent('#sponsor-skip-panel .ss-body');
+assert.match(smartStatus, /Stop listening/, smartStatus);
+console.log('smart mode: audio came on near the read');
+
 await popup.evaluate(async () => {
   const { settings } = await chrome.storage.local.get('settings');
   await chrome.storage.local.set({ settings: { ...settings, mode: 'transcript' } });
