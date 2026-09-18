@@ -493,10 +493,11 @@ function parseJson3(data) {
     if (!text) continue;
     const startMs = Number(event.tStartMs ?? 0);
     const cue = { text, startMs, endMs: startMs + Number(event.dDurationMs ?? 0) };
+    // The first word of an event carries no tOffsetMs: it starts with the event.
     const words = event.segs
-      .filter((s) => s.tOffsetMs !== undefined && (s.utf8 ?? '').trim())
-      .map((s) => ({ text: s.utf8.trim(), offsetMs: Number(s.tOffsetMs) }));
-    if (words.length > 1) cue.words = words;
+      .filter((s) => (s.utf8 ?? '').trim())
+      .map((s) => ({ text: s.utf8.trim(), offsetMs: Number(s.tOffsetMs ?? 0) }));
+    if (words.length > 1 && words.some((w) => w.offsetMs > 0)) cue.words = words;
     cues.push(cue);
   }
   return cues;
