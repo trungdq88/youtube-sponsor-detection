@@ -13,7 +13,8 @@ const state = {
   skipped: new Set(), // segment indices already skipped on this video
   paused: false, // user hit undo: no more auto-skips on this video
   busy: false,
-  error: null
+  error: null,
+  errorDetail: null // which caption routes failed and how, shown under the error
 };
 
 // ---- lifecycle ------------------------------------------------------------
@@ -45,6 +46,7 @@ async function onNavigate() {
   state.videoId = videoId;
   state.analysis = null;
   state.error = null;
+  state.errorDetail = null;
   state.skipped = new Set();
   state.paused = false;
   removeMarkers();
@@ -87,6 +89,7 @@ async function analyze(force) {
   if (!videoId || state.busy) return;
   state.busy = true;
   state.error = null;
+  state.errorDetail = null;
   render();
 
   try {
@@ -104,6 +107,7 @@ async function analyze(force) {
     drawMarkers();
   } catch (error) {
     state.error = error.message;
+    state.errorDetail = error.detail ?? null;
   } finally {
     if (videoId === state.videoId) {
       state.busy = false;
@@ -170,9 +174,15 @@ async function getCaptions(videoId) {
     failures.push(`transcript panel: ${error.message}`);
   }
 
-  console.warn('[sponsor-skip] no transcript:', failures.join(' | '));
-  if (!track) throw new Error('This video has no captions, so there is no transcript to read.');
-  throw new Error('YouTube would not hand over the transcript for this video. Try again in a moment.');
+  const detail = failures.join(' | ');
+  console.warn('[sponsor-skip] no transcript:', detail);
+  const error = new Error(
+    track
+      ? 'YouTube would not hand over the transcript for this video. Try again in a moment.'
+      : 'This video has no captions, so there is no transcript to read.'
+  );
+  error.detail = detail;
+  throw error;
 }
 
 async function fetchCaptionTrack(baseUrl) {
@@ -445,6 +455,7 @@ function body() {
     b.append(el('div', 'ss-status', 'Reading the transcript and asking Jev…'));
   } else if (state.error) {
     b.append(el('div', 'ss-status ss-error', state.error));
+    if (state.errorDetail) b.append(el('div', 'ss-error-detail', state.errorDetail));
   } else if (!state.analysis) {
     b.append(el('div', 'ss-status', 'Waiting for the video.'));
   } else if (!segs.length) {
