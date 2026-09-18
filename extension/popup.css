@@ -41,3 +41,6 @@ button.quiet { background: #1e222b; color: #e8eaf0; border: 1px solid #2a2f3a; }
 table { width: 100%; border-collapse: collapse; }
 td { padding: 4px 0; border-bottom: 1px solid #2a2f3a; }
 td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+
+select { width: 100%; font: inherit; padding: 4px 6px; border-radius: 6px; }
+#liveSettings { margin-top: 6px; }

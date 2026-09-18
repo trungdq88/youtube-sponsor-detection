@@ -33,6 +33,9 @@
 #sponsor-skip-panel .ss-error { color: #f3c2c2; }
 #sponsor-skip-panel .ss-error-detail { color: #9a9a9a; font-size: 11px; line-height: 1.4; margin-top: 4px; user-select: text; word-break: break-word; }
 
+#sponsor-skip-panel .ss-hint { color: #9aa3b2; font-size: 12px; margin-bottom: 6px; }
+#sponsor-skip-panel .ss-heard { color: #c7cdd8; font-style: italic; font-size: 12px; line-height: 1.4; margin: 4px 0 6px; max-height: 3.6em; overflow: hidden; }
+
 #sponsor-skip-panel .ss-segment {
   display: flex;
   align-items: center;

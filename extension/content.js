@@ -1,5 +1,10 @@
 // Runs on youtube.com. Gets the captions for the current video, hands them to
 // the background worker for Jev, then draws the panel and does the skipping.
+//
+// In live mode (settings.mode === 'live') there is no transcript: the
+// background worker streams what the speech API hears in this tab, the
+// controller in lib/live.js decides when Jev should be asked, and the video
+// jumps forward in fixed steps while the answer is "still a sponsor read".
 
 const PANEL_ID = 'sponsor-skip-panel';
 const MARKER_CLASS = 'sponsor-skip-marker';
@@ -14,8 +19,22 @@ const state = {
   paused: false, // user hit undo: no more auto-skips on this video
   busy: false,
   error: null,
-  errorDetail: null // which caption routes failed and how, shown under the error
+  errorDetail: null, // which caption routes failed and how, shown under the error
+  live: {
+    thisTab: false, // is this the tab being listened to
+    status: 'idle', // idle | connecting | listening | error | ended | stopped
+    error: null,
+    hearing: '', // latest interim text
+    lastHeard: '', // latest final utterance
+    checking: false,
+    checks: 0,
+    jumps: 0,
+    secondsSkipped: 0,
+    cost: 0,
+    last: null // last decision from the controller log
+  }
 };
+let liveController = null;
 
 // ---- lifecycle ------------------------------------------------------------
 
@@ -30,9 +49,26 @@ document.addEventListener('timeupdate', onTimeUpdate, true);
 
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area !== 'local' || !changes.settings) return;
+  const before = state.settings ?? {};
   state.settings = changes.settings.newValue;
+  const after = state.settings ?? {};
+  if (before.liveSkipSeconds !== after.liveSkipSeconds || before.threshold !== after.threshold) liveController = null;
+  if ((before.mode ?? 'transcript') !== (after.mode ?? 'transcript')) onModeChange(after.mode ?? 'transcript');
   render();
 });
+
+chrome.runtime.onMessage.addListener((message) => {
+  if (message?.type === 'live-transcript') onLiveTranscript(message);
+  else if (message?.type === 'live-status') onLiveStatus(message);
+});
+
+setInterval(() => {
+  if (isLive() && state.live.thisTab) driveLive();
+}, 1000);
+
+function isLive() {
+  return state.settings?.mode === 'live';
+}
 
 function currentVideoId() {
   if (location.pathname !== '/watch') return null;
@@ -57,8 +93,24 @@ async function onNavigate() {
   }
 
   await refreshState();
+  if (isLive()) {
+    liveController?.reset();
+    await refreshLiveState();
+    render();
+    return;
+  }
   render();
   analyze(false);
+}
+
+async function onModeChange(mode) {
+  if (mode === 'live') {
+    liveController?.reset();
+    await refreshLiveState();
+    render();
+  } else if (state.videoId && !state.analysis && !state.busy) {
+    analyze(false);
+  }
 }
 
 async function refreshState() {
@@ -443,6 +495,153 @@ function skipTo(video, seg, index, automatic) {
   });
 }
 
+// ---- live mode ------------------------------------------------------------
+
+async function refreshLiveState() {
+  const r = await send({ type: 'live-state' });
+  if (!r?.ok) return;
+  state.live.thisTab = Boolean(r.thisTab);
+  if (r.thisTab) {
+    state.live.status = r.live.state ?? 'connecting';
+    state.live.error = r.live.error ?? null;
+  } else if (state.live.status === 'listening' || state.live.status === 'connecting') {
+    state.live.status = 'idle';
+  }
+}
+
+async function liveControl() {
+  if (liveController) return liveController;
+  const mod = await import(chrome.runtime.getURL('lib/live.js'));
+  liveController = mod.createLiveController({
+    skipSeconds: state.settings?.liveSkipSeconds ?? 10,
+    threshold: state.settings?.threshold ?? 0.7
+  });
+  return liveController;
+}
+
+let renderTimer = null;
+function renderSoon() {
+  if (renderTimer) return;
+  renderTimer = setTimeout(() => {
+    renderTimer = null;
+    render();
+  }, 300);
+}
+
+function onLiveStatus({ state: status, error }) {
+  state.live.status = status;
+  state.live.error = error ?? null;
+  state.live.thisTab = status === 'connecting' || status === 'listening';
+  if (!state.live.thisTab) {
+    state.live.hearing = '';
+    liveController?.reset();
+  }
+  render();
+}
+
+async function onLiveTranscript({ text, isFinal, heardAt, heardUntil }) {
+  if (!isLive()) return;
+  state.live.thisTab = true;
+  if (state.live.status !== 'listening') state.live.status = 'listening';
+  if (!isFinal) {
+    state.live.hearing = text;
+    renderSoon();
+    return;
+  }
+  state.live.hearing = '';
+  state.live.lastHeard = text;
+  const ctl = await liveControl();
+  ctl.hear({ text, heardAt, heardUntil });
+  render();
+  driveLive();
+}
+
+/** Ask the controller what to do; run a Jev check or a jump when it says so. */
+async function driveLive() {
+  if (!isLive() || !state.live.thisTab || state.live.checking) return;
+  const ctl = await liveControl();
+  const request = ctl.next(Date.now());
+  if (!request) return;
+
+  state.live.checking = true;
+  render();
+  let action = null;
+  try {
+    const r = await send({ type: 'live-check', request });
+    if (!r?.ok) throw new Error(r?.error ?? 'Jev did not answer');
+    state.live.checks += 1;
+    state.live.cost += r.cost ?? 0;
+    state.live.error = null;
+    action = ctl.answer(r.result, Date.now());
+  } catch (error) {
+    ctl.answer(null, Date.now());
+    state.live.error = error.message;
+  } finally {
+    state.live.checking = false;
+    state.live.last = ctl.log.at(-1) ?? null;
+  }
+
+  if (action && state.settings?.autoSkip && !state.paused) liveJump(ctl, action.skipSeconds);
+  else if (action) ctl.reset(); // heard a sponsor but the user paused skipping on this video
+  render();
+}
+
+function liveJump(ctl, seconds) {
+  const video = document.querySelector('video.html5-main-video') ?? document.querySelector('video');
+  if (!video) return;
+  const from = video.currentTime;
+  const to = Number.isFinite(video.duration) ? Math.min(video.duration, from + seconds) : from + seconds;
+  video.currentTime = to;
+  ctl.skipped(Date.now());
+  state.live.jumps += 1;
+  state.live.secondsSkipped += to - from;
+  send({ type: 'live-skipped', seconds: to - from }).then((r) => {
+    if (r?.ok) {
+      state.stats = r.stats;
+      render();
+    }
+  });
+  const n = ctl.consecutiveSkips;
+  toast(`Sponsor read heard, jumped ahead ${Math.round(seconds)}s${n > 1 ? ` (${n} in a row)` : ''}, ${stamp(from)} → ${stamp(to)}`, () => {
+    video.currentTime = from;
+    state.paused = true;
+    ctl.reset();
+    render();
+  });
+}
+
+function liveBody(b) {
+  const live = state.live;
+  if (!live.thisTab) {
+    b.append(el('div', 'ss-status', live.status === 'error' && live.error
+      ? `Listening stopped: ${live.error}`
+      : 'Live mode is on, but this tab is not being listened to.'));
+    b.append(el('div', 'ss-hint', 'Click the extension icon and choose "Live audio" while this tab is open to start listening here.'));
+    return;
+  }
+  if (live.status === 'connecting') {
+    b.append(el('div', 'ss-status', 'Connecting to the speech API…'));
+  } else if (live.status === 'error') {
+    b.append(el('div', 'ss-status ss-error', live.error ?? 'Listening stopped.'));
+  } else {
+    const phase = liveController?.phase ?? 'listening';
+    b.append(el('div', 'ss-status', phase === 'verifying'
+      ? `Jumped ${liveController.consecutiveSkips}× · checking whether the sponsor read continues…`
+      : live.checking ? 'Asking Jev whether this is a sponsor read…' : 'Listening for a sponsor read.'));
+  }
+  if (live.error && live.status !== 'error') b.append(el('div', 'ss-error-detail', live.error));
+
+  const heard = live.hearing || live.lastHeard;
+  if (heard) b.append(el('div', 'ss-heard', `“${heard.length > 140 ? '…' + heard.slice(-140) : heard}”`));
+
+  if (live.last && (live.last.kind === 'listen' || live.last.kind === 'verify')) {
+    const row = el('div', 'ss-segment');
+    row.append(el('span', 'ss-range', live.last.sponsor ? 'Sponsor read' : 'Not a sponsor read'));
+    row.append(el('span', `ss-pill ${live.last.sponsor ? 'warn' : 'good'}`, `${Math.round(live.last.confidence * 100)}%`));
+    b.append(row);
+  }
+}
+
 // ---- progress bar markers -------------------------------------------------
 
 function drawMarkers() {
@@ -487,7 +686,10 @@ function render() {
 function header(collapsed) {
   const h = el('div', 'ss-header');
   h.append(el('span', 'ss-title', 'Sponsor Skip'));
-  const light = el('span', `ss-light ${state.busy ? 'busy' : state.error ? 'bad' : segments().length ? 'found' : 'idle'}`);
+  const lightState = isLive()
+    ? (state.live.status === 'error' ? 'bad' : state.live.checking || state.live.status === 'connecting' ? 'busy' : state.live.thisTab ? 'found' : 'idle')
+    : (state.busy ? 'busy' : state.error ? 'bad' : segments().length ? 'found' : 'idle');
+  const light = el('span', `ss-light ${lightState}`);
   h.append(light);
   const toggle = button(collapsed ? '▸' : '▾', () => {
     const panel = document.getElementById(PANEL_ID);
@@ -502,7 +704,9 @@ function body() {
   const b = el('div', 'ss-body');
   const segs = segments();
 
-  if (state.busy) {
+  if (isLive()) {
+    liveBody(b);
+  } else if (state.busy) {
     b.append(el('div', 'ss-status', 'Reading the transcript and asking Jev…'));
   } else if (state.error) {
     b.append(el('div', 'ss-status ss-error', state.error));
@@ -539,13 +743,34 @@ function body() {
   });
   auto.append(box, document.createTextNode(state.paused ? 'Auto-skip (paused on this video)' : 'Auto-skip'));
   controls.append(auto);
-  controls.append(button('Re-analyze', () => analyze(true), 'ss-small', state.busy));
+  if (isLive()) {
+    if (state.live.thisTab) {
+      controls.append(button('Stop listening', async () => {
+        await send({ type: 'live-stop' });
+        state.live.thisTab = false;
+        state.live.status = 'stopped';
+        render();
+      }, 'ss-small'));
+    }
+  } else {
+    controls.append(button('Re-analyze', () => analyze(true), 'ss-small', state.busy));
+  }
   b.append(controls);
 
   // Stats
   const a = state.analysis;
   const s = state.stats;
   const stats = el('div', 'ss-stats');
+  if (isLive()) {
+    const l = state.live;
+    stats.append(statRow('This tab', `${l.checks} checks · ${money(l.cost)} · ${l.jumps} jumps · ${stamp(l.secondsSkipped)} skipped`));
+    if (s) {
+      stats.append(statRow('Live, all time', `${stamp(s.liveSeconds)} heard · ${money(s.estimatedSttCost)} speech · ${money(s.estimatedCost)} Jev`));
+      stats.append(statRow('Jumped', `${s.liveSkips} times · ${stamp(s.liveSecondsSkipped)} saved`));
+    }
+    b.append(stats);
+    return b;
+  }
   if (a) {
     stats.append(statRow('This video', `${fmtTokens(a.usage?.input_tokens)} tokens · ${a.requests ?? '?'} calls · ${money(a.cost)}${a.cached ? ' · cached' : ` · ${(a.elapsedMs / 1000).toFixed(1)}s`}`));
   }

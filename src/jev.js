@@ -51,7 +51,7 @@ export const KEEP_CONTENT = 0.8;
  * the lead-in is spelled out because the naive reading ("the line that names
  * the sponsor") misses everything the creator says to set the pitch up.
  */
-const SPONSOR = {
+export const SPONSOR = {
   definition:
     'A sponsor segment is the part of a video that exists to promote a third party that paid ' +
     'for placement: a product, service, app or company. It is usually read by the creator.',

@@ -95,3 +95,38 @@ test('a changed price is reflected in the estimate', async () => {
   const r = await ask({ type: 'analyze', videoId: 'xyz', title: 't', cues: fixture.cues });
   assert.ok(Math.abs(r.cost - r.usage.input_tokens / 1e6) < 1e-12);
 });
+
+test('live mode: checks go to Jev and are counted, jumps and audio are tallied', async () => {
+  const noState = await ask({ type: 'live-check', request: {} });
+  assert.equal(noState.ok, false);
+
+  const before = (await ask({ type: 'get-state' })).stats;
+  const request = {
+    state: { recent_lines_heard_from_the_video: 'L001| today this video is sponsored by boot.dev' },
+    questions: { sponsor_now: { type: 'noul', instructions: { question: 'q' }, criteria: { true: 't', false: 'f' } } }
+  };
+  const checked = await ask({ type: 'live-check', request });
+  assert.equal(checked.ok, true, checked.error);
+  assert.equal(checked.result.answers.sponsor_now.type, 'noul');
+  assert.equal(typeof checked.result.answers.sponsor_now.noul, 'number');
+  assert.ok(checked.cost > 0);
+
+  const jumped = await ask({ type: 'live-skipped', seconds: 10 });
+  assert.equal(jumped.ok, true);
+  await ask({ type: 'live-audio-progress', seconds: 90 });
+
+  const after = (await ask({ type: 'get-state' })).stats;
+  assert.equal(after.liveChecks, before.liveChecks + 1);
+  assert.equal(after.requests, before.requests + 1);
+  assert.ok(after.inputTokens > before.inputTokens);
+  assert.equal(after.liveSkips, 1);
+  assert.equal(after.liveSecondsSkipped, 10);
+  assert.equal(after.liveSeconds, 90);
+  assert.ok(Math.abs(after.estimatedSttCost - 1.5 * 0.0077) < 1e-9);
+  assert.equal(after.skips, before.skips, 'transcript-mode counters are untouched');
+
+  const idle = await ask({ type: 'live-state' });
+  assert.equal(idle.ok, true);
+  assert.equal(idle.live.active, false);
+  assert.equal(idle.thisTab, false);
+});

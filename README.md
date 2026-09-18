@@ -69,6 +69,34 @@ youtube.com page (Playwright routes the requests), covering injection, caption
 extraction, the panel, markers, auto-skip and the popup. It needs
 `npx playwright install chromium` once.
 
+### Live audio mode
+
+The transcript route only works where YouTube hands the captions over. Live
+mode does without: the extension captures the tab's audio, streams it to a
+low-latency speech API (Deepgram, over a WebSocket), and asks Jev over the
+last minute of what was heard whether the speaker is *inside a sponsor read
+right now*. When the answer is yes the video jumps ahead by a fixed step
+(10 seconds by default). After the jump it listens for a few seconds and asks
+again, showing Jev the lines from before and after the jump side by side; if
+the read is still going it jumps again, otherwise it goes back to listening.
+
+Everything Jev sees has already played, so a jump can never land before the
+read starts. The trade is that the first seconds of every read are heard, and
+the last jump can overshoot into content by up to one step. Nothing in the
+transcript mode changes; the two are separate settings.
+
+To use it: paste a Deepgram key in the popup, open the YouTube video, then
+pick **Live audio** in the popup while that tab is active (Chrome only lets an
+extension capture a tab from a click on the extension). The panel shows what
+is being heard, Jev's last verdict, the jumps, and the speech and Jev cost;
+**Stop listening** ends the capture. Capturing needs the video unmuted, and it
+listens to one tab at a time.
+
+The pieces: `offscreen.js` holds the audio stream and the speech socket (a
+service worker cannot), `src/live.js` is the decision loop (pure, tested in
+`test/live.test.js`), and the content script does the jumping. Other speech
+APIs slot in next to Deepgram in `offscreen.js`.
+
 ## How the Jev call works
 
 Jev answers typed questions (yes/no probabilities, choices with a probability

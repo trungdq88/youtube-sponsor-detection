@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node --env-file-if-exists=.env server.js",
     "test": "node --test test/*.test.js",
-    "build:ext": "cp src/transcript.js src/jev.js extension/lib/",
+    "build:ext": "cp src/transcript.js src/jev.js src/live.js extension/lib/",
     "test:ext": "node test/extension.e2e.mjs",
     "analyze": "node --env-file-if-exists=.env scripts/analyze.js",
     "eval": "node --env-file-if-exists=.env scripts/eval.js",

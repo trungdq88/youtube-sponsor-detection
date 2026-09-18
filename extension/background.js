@@ -1,5 +1,9 @@
-// Service worker: holds the API key, talks to TypeSafe, caches results per
-// video and keeps the running stats. The content script never sees the key.
+// Service worker: holds the API keys, talks to TypeSafe, caches results per
+// video and keeps the running stats. The content script never sees a key.
+//
+// Live mode adds an offscreen document (offscreen.js) that captures the tab's
+// audio and streams it to a speech API; this worker relays its transcripts to
+// the tab and answers the tab's "is this a sponsor read?" checks with Jev.
 
 import { buildLines } from './lib/transcript.js';
 import { findSponsorSegment } from './lib/jev.js';
@@ -14,7 +18,19 @@ export const DEFAULT_SETTINGS = {
   apiBase: 'https://api.typesafe.ai',
   // USD per million input tokens, from docs.typesafe.ai/models (Sept 2026).
   // Output tokens are free. Editable in the popup.
-  pricePerMillionInput: 0.042
+  pricePerMillionInput: 0.042,
+
+  // Live mode: listen to the tab instead of reading the transcript.
+  // 'transcript' is the original behaviour; 'live' skips in fixed steps as
+  // soon as Jev hears a sponsor read. See lib/live.js.
+  mode: 'transcript',
+  liveProvider: 'deepgram',
+  deepgramKey: '',
+  liveModel: 'nova-3',
+  liveLanguage: 'en',
+  liveSkipSeconds: 10,
+  // USD per minute of streamed audio (Deepgram Nova-3 pay-as-you-go, Sept 2026). Editable in the popup.
+  sttPricePerMinute: 0.0077
 };
 
 const EMPTY_STATS = {
@@ -24,17 +40,25 @@ const EMPTY_STATS = {
   outputTokens: 0,
   sponsorsFound: 0,
   skips: 0,
-  secondsSkipped: 0
+  secondsSkipped: 0,
+  // Live mode
+  liveSeconds: 0,
+  liveChecks: 0,
+  liveSkips: 0,
+  liveSecondsSkipped: 0
 };
 
-chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
-  handle(message)
+const OFFSCREEN_URL = 'offscreen.html';
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message?.target === 'offscreen') return false; // for offscreen.js, not us
+  handle(message, sender)
     .then((data) => sendResponse({ ok: true, ...data }))
     .catch((error) => sendResponse({ ok: false, error: error?.message ?? String(error) }));
   return true; // async response
 });
 
-async function handle(message) {
+async function handle(message, sender) {
   switch (message?.type) {
     case 'analyze':
       return analyze(message);
@@ -50,6 +74,26 @@ async function handle(message) {
     case 'clear-cache':
       await chrome.storage.local.set({ results: {} });
       return getState();
+
+    // Live mode: popup / panel
+    case 'live-start':
+      return liveStart(message);
+    case 'live-stop':
+      return liveStop();
+    case 'live-state':
+      return liveState(sender?.tab?.id);
+    // Live mode: content script
+    case 'live-check':
+      return liveCheck(message.request);
+    case 'live-skipped':
+      return recordLiveSkip(message.seconds);
+    // Live mode: offscreen document
+    case 'live-transcript':
+      return relay(message);
+    case 'live-status':
+      return liveStatus(message);
+    case 'live-audio-progress':
+      return recordAudio(message.seconds);
     default:
       throw new Error(`unknown message ${message?.type}`);
   }
@@ -61,7 +105,11 @@ async function getState() {
   const s = { ...EMPTY_STATS, ...(stats ?? {}) };
   return {
     settings: merged,
-    stats: { ...s, estimatedCost: cost(s.inputTokens, merged.pricePerMillionInput) },
+    stats: {
+      ...s,
+      estimatedCost: cost(s.inputTokens, merged.pricePerMillionInput),
+      estimatedSttCost: (s.liveSeconds / 60) * (Number(merged.sttPricePerMinute) || 0)
+    },
     cachedVideos: Object.keys(results ?? {}).length
   };
 }
@@ -126,6 +174,121 @@ async function recordSkip(seconds) {
   next.secondsSkipped += Math.max(0, Number(seconds) || 0);
   await chrome.storage.local.set({ stats: next });
   return getState();
+}
+
+// ---- live mode ------------------------------------------------------------
+
+/**
+ * Start listening to a tab. The popup gets the stream id (that needs the
+ * user's click) and hands it here; the offscreen document consumes it.
+ */
+async function liveStart({ tabId, streamId, title }) {
+  const { settings } = await getState();
+  if (!settings.apiKey) throw new Error('No TypeSafe API key. Add one first.');
+  if (settings.liveProvider === 'deepgram' && !settings.deepgramKey) throw new Error('No Deepgram API key. Add one first.');
+
+  await ensureOffscreen();
+  const started = await sendToOffscreen({
+    type: 'live-capture-start',
+    tabId,
+    streamId,
+    provider: settings.liveProvider,
+    key: settings.deepgramKey,
+    model: settings.liveModel,
+    language: settings.liveLanguage
+  });
+  if (!started?.ok) throw new Error(started?.error ?? 'Could not start capturing the tab.');
+
+  await chrome.storage.local.set({ live: { active: true, tabId, title: title ?? '', state: 'connecting', since: Date.now(), error: null } });
+  await setSettings({ mode: 'live' });
+  return liveState();
+}
+
+async function liveStop() {
+  if (await hasOffscreen()) {
+    await sendToOffscreen({ type: 'live-capture-stop' }).catch(() => {});
+    await chrome.offscreen.closeDocument().catch(() => {});
+  }
+  const { live } = await chrome.storage.local.get('live');
+  const next = { ...(live ?? {}), active: false, state: 'stopped', error: null };
+  await chrome.storage.local.set({ live: next });
+  if (live?.tabId) chrome.tabs.sendMessage(live.tabId, { type: 'live-status', state: 'stopped' }).catch(() => {});
+  return liveState();
+}
+
+/** Current capture; `thisTab` tells a content script whether it is the tab being heard. */
+async function liveState(askingTabId) {
+  const { live } = await chrome.storage.local.get('live');
+  const current = live ?? { active: false, tabId: null, state: 'idle' };
+  return { live: current, thisTab: askingTabId !== undefined && current.active && current.tabId === askingTabId };
+}
+
+/** A status change from the offscreen document: connected, error, ended. */
+async function liveStatus({ tabId, state, error }) {
+  const { live } = await chrome.storage.local.get('live');
+  const next = { ...(live ?? {}), tabId, state, error: error ?? null, active: state !== 'ended' && state !== 'error' && state !== 'stopped' };
+  await chrome.storage.local.set({ live: next });
+  if (state === 'ended' || state === 'error') chrome.offscreen?.closeDocument?.().catch(() => {});
+  chrome.tabs.sendMessage(tabId, { type: 'live-status', state, error: error ?? null }).catch(() => {});
+  return {};
+}
+
+function relay(message) {
+  chrome.tabs.sendMessage(message.tabId, message).catch(() => {});
+  return {};
+}
+
+/** One "is the speaker in a sponsor read?" question from the tab, answered by Jev. */
+async function liveCheck(request) {
+  const { settings } = await getState();
+  if (!settings.apiKey) throw new Error('No TypeSafe API key. Click the extension icon to add one.');
+  if (!request?.state || !request?.questions) throw new Error('live-check needs a state and questions');
+
+  const result = await callTypeSafe(settings, request);
+  const usage = result.usage ?? { input_tokens: 0, output_tokens: 0 };
+  const { stats = EMPTY_STATS } = await chrome.storage.local.get('stats');
+  const next = { ...EMPTY_STATS, ...stats };
+  next.requests += 1;
+  next.liveChecks += 1;
+  next.inputTokens += usage.input_tokens ?? 0;
+  next.outputTokens += usage.output_tokens ?? 0;
+  await chrome.storage.local.set({ stats: next });
+  return { result, cost: cost(usage.input_tokens, settings.pricePerMillionInput) };
+}
+
+async function recordLiveSkip(seconds) {
+  const { stats = EMPTY_STATS } = await chrome.storage.local.get('stats');
+  const next = { ...EMPTY_STATS, ...stats };
+  next.liveSkips += 1;
+  next.liveSecondsSkipped += Math.max(0, Number(seconds) || 0);
+  await chrome.storage.local.set({ stats: next });
+  return getState();
+}
+
+async function recordAudio(seconds) {
+  const { stats = EMPTY_STATS } = await chrome.storage.local.get('stats');
+  const next = { ...EMPTY_STATS, ...stats };
+  next.liveSeconds += Math.max(0, Number(seconds) || 0);
+  await chrome.storage.local.set({ stats: next });
+  return {};
+}
+
+async function hasOffscreen() {
+  const contexts = await chrome.runtime.getContexts({ contextTypes: ['OFFSCREEN_DOCUMENT'] });
+  return contexts.length > 0;
+}
+
+async function ensureOffscreen() {
+  if (await hasOffscreen()) return;
+  await chrome.offscreen.createDocument({
+    url: OFFSCREEN_URL,
+    reasons: ['USER_MEDIA'],
+    justification: 'Listen to the tab audio so sponsor reads can be recognised as they play.'
+  });
+}
+
+function sendToOffscreen(message) {
+  return chrome.runtime.sendMessage({ target: 'offscreen', ...message });
 }
 
 /** Keep only what the page needs; the full context slice is big. */
