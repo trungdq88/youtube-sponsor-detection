@@ -60,22 +60,22 @@ test('analyze needs a key, then finds the segment and records stats', async () =
   assert.equal(first.result.status, 'found');
   assert.equal(first.result.segments.length, 1);
   assert.ok(first.result.segments[0].end.seconds > first.result.segments[0].start.seconds);
-  assert.equal(first.requests, 4);
-  assert.equal(fetchCalls, 4);
+  assert.equal(first.requests, 6);
+  assert.equal(fetchCalls, 6);
   assert.ok(first.usage.input_tokens > 0);
   assert.ok(Math.abs(first.cost - first.usage.input_tokens * 0.042 / 1e6) < 1e-12);
 
   const again = await ask({ type: 'analyze', videoId: 'abc', title: 't', cues: fixture.cues });
   assert.equal(again.cached, true);
-  assert.equal(fetchCalls, 4, 'a cached video costs nothing');
+  assert.equal(fetchCalls, 6, 'a cached video costs nothing');
 
   const forced = await ask({ type: 'analyze', videoId: 'abc', title: 't', cues: fixture.cues, force: true });
   assert.equal(forced.cached, false);
-  assert.equal(fetchCalls, 8);
+  assert.equal(fetchCalls, 12);
 
   const state = await ask({ type: 'get-state' });
   assert.equal(state.stats.videosAnalyzed, 2);
-  assert.equal(state.stats.requests, 8);
+  assert.equal(state.stats.requests, 12);
   assert.equal(state.stats.sponsorsFound, 2);
   assert.equal(state.cachedVideos, 1);
   assert.ok(state.stats.estimatedCost > 0);

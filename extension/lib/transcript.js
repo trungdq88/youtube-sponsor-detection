@@ -13,9 +13,15 @@ export const WINDOW_LINES = 80;
  *  a boundary is still fully visible inside one of them. */
 export const WINDOW_OVERLAP = 6;
 
+/** Words per phrase when a line is split for the boundary pass: about a second of speech. */
+export const PHRASE_WORDS = 3;
+
 /**
- * @typedef {{ text: string, startMs: number, endMs: number }} Cue
- * @typedef {{ id: string, text: string, start: number, end: number }} Line
+ * @typedef {{ text: string, offsetMs: number }} CueWord  offset from the cue's start
+ * @typedef {{ text: string, startMs: number, endMs: number, words?: CueWord[] }} Cue
+ * @typedef {{ text: string, start: number, end: number }} Word
+ * @typedef {{ id: string, text: string, start: number, end: number, words: Word[] }} Line
+ * @typedef {{ id: string, lineId: string, text: string, start: number, end: number }} Phrase
  */
 
 /**
@@ -42,21 +48,78 @@ export function buildLines(cues) {
       buf = null;
     }
 
-    buf ??= { start: cue.startMs / 1000, end: cue.endMs / 1000, parts: [] };
+    buf ??= { start: cue.startMs / 1000, end: cue.endMs / 1000, parts: [], words: [] };
     buf.parts.push(text);
+    buf.words.push(...cueWords(cue, text));
     buf.end = cue.endMs / 1000;
   }
   if (buf) lines.push(finish(buf, lines.length));
   return lines;
 }
 
+/**
+ * The words of a cue with a time each. Auto-generated tracks say when every
+ * word is spoken; for the rest the cue's span is shared out by character
+ * count, which is within a second on cues of normal length.
+ * @returns {Word[]}
+ */
+function cueWords(cue, text) {
+  const start = cue.startMs / 1000;
+  const end = Math.max(start, cue.endMs / 1000);
+  if (cue.words?.length > 1) {
+    const words = cue.words.map((w) => ({ text: w.text, start: start + w.offsetMs / 1000 }));
+    return words.map((w, i) => ({ ...w, start: round(w.start), end: round(words[i + 1]?.start ?? Math.max(end, w.start)) }));
+  }
+  const tokens = text.split(' ');
+  const chars = text.length + 1;
+  let at = 0;
+  return tokens.map((t) => {
+    const from = start + ((end - start) * at) / chars;
+    at += t.length + 1;
+    const to = start + ((end - start) * at) / chars;
+    return { text: t, start: round(from), end: round(Math.min(end, to)) };
+  });
+}
+
+const round = (n) => Number(n.toFixed(2));
+
 function finish(buf, index) {
   return {
     id: `L${String(index + 1).padStart(3, '0')}`,
     text: buf.parts.join(' ').replace(/\s+/g, ' ').trim(),
-    start: Number(buf.start.toFixed(2)),
-    end: Number(buf.end.toFixed(2))
+    start: round(buf.start),
+    end: round(buf.end),
+    words: buf.words
   };
+}
+
+/**
+ * Split lines into short labelled phrases, P01, P02, ..., for choosing a
+ * boundary inside a line. Phrases never cross a line, so each one keeps the
+ * line it came from.
+ * @param {Line[]} lines
+ * @returns {Phrase[]}
+ */
+export function buildPhrases(lines) {
+  /** @type {Phrase[]} */
+  const phrases = [];
+  for (const line of lines) {
+    const words = line.words?.length ? line.words : [{ text: line.text, start: line.start, end: line.end }];
+    for (let i = 0; i < words.length; i += PHRASE_WORDS) {
+      // A leftover word or two joins the previous phrase rather than standing alone.
+      const last = i + PHRASE_WORDS >= words.length - 1;
+      const chunk = last ? words.slice(i) : words.slice(i, i + PHRASE_WORDS);
+      phrases.push({
+        id: `P${String(phrases.length + 1).padStart(2, '0')}`,
+        lineId: line.id,
+        text: chunk.map((w) => w.text).join(' '),
+        start: chunk[0].start,
+        end: chunk[chunk.length - 1].end
+      });
+      if (last) break;
+    }
+  }
+  return phrases;
 }
 
 /**

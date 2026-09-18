@@ -73,7 +73,7 @@ test('finds the sponsor read in the demo transcript', async () => {
   assert.ok(result.end && result.end.seconds > result.start.seconds, 'the end comes after the start');
   assert.ok(result.confidence > 0.7);
   assert.equal(result.segments.length, 1);
-  assert.equal(client.requests.length, 4, 'scan, anchor, trace back, then a clean rescan of the window');
+  assert.equal(client.requests.length, 6, 'scan, anchor, trace back, two cuts, then a clean rescan of the window');
 });
 
 test('a long video is scanned window by window, then refined once', async () => {
@@ -90,7 +90,7 @@ test('a long video is scanned window by window, then refined once', async () => 
 
   const scans = windowLines(lines).length;
   assert.ok(scans > 1, 'this transcript really is multi-window');
-  assert.equal(client.requests.length, scans + 3, 'scans, anchor, trace back, one clean rescan');
+  assert.equal(client.requests.length, scans + 5, 'scans, anchor, trace back, two cuts, one clean rescan');
   assert.equal(result.status, 'found');
   assert.ok(result.start.seconds > offset / 1000, 'the sponsor read is found in the tail, not the filler');
   assert.ok(result.windows.every((w) => w.estimatedStateTokens < 25_000), 'each excerpt stays well inside the 32k state limit');
@@ -133,8 +133,8 @@ test('two sponsor reads in one window are both found, in order', async () => {
   assert.ok(second.start.seconds > 250 && second.start.seconds < 300, `second at ${second.start.seconds}s`);
   assert.ok(first.end.seconds < second.start.seconds, 'segments do not overlap');
   assert.ok(second.end, 'the second read has an end too');
-  // scan, (anchor, trace, rescan) x2, the last rescan clean
-  assert.equal(client.requests.length, 7);
+  // scan, (anchor, trace, two cuts, rescan) x2, the last rescan clean
+  assert.equal(client.requests.length, 11);
   assert.equal(result.start.seconds, first.start.seconds, 'top-level start is the earliest segment');
 });
 

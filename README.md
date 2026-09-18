@@ -134,7 +134,9 @@ submissions, and prefers videos of 4–45 minutes with the best-agreed labels.
 
 `eval` prints, per video, the labelled and predicted segments side by side,
 then recall (labelled segments found, i.e. start within 15 s or IoU ≥ 0.5),
-precision, median start and end error in seconds, and the token cost. Jev
+precision, median start and end error in seconds, how many boundaries cut
+into content (a start more than 1 s early or an end more than 1 s late), and
+the token cost. Jev
 results are cached in `eval/cache/`; pass `--fresh` after changing the
 questions, `--limit N` to score a few, `--tolerance S` to change the window.
 `eval/videos.seed.json` holds hand-picked videos and is always included.
@@ -181,5 +183,8 @@ test/                node --test suite, a stub client, and the mock API server
 - Transcript fetching uses `youtubei.js`, which talks to YouTube's private
   InnerTube API. It works without any YouTube key but can break when YouTube
   changes things; the paste box is the fallback.
-- Boundaries are line-granular (lines are about 7 seconds), so a skip lands
-  within a few seconds of the real cut.
+- A skip is cut at a phrase of a few words inside the boundary line, and only
+  a phrase Jev is at least 80% sure is sponsor gets skipped, so when in doubt
+  you watch a second of the read rather than lose a second of the video.
+  Auto-generated captions time every word; on human-made captions the words
+  inside a cue are timed by their position, which is within about a second.

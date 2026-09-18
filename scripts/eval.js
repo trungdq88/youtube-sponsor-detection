@@ -26,6 +26,8 @@ const limit = Number(opt('--limit', Infinity));
 /** A prediction counts as a hit when it overlaps the label this much, or starts this close. */
 const IOU_HIT = 0.5;
 const START_TOLERANCE = Number(opt('--tolerance', 15));
+/** Labels are placed by hand, so a boundary this close to one is not counted as cutting content. */
+const CONTENT_SLACK = 1;
 
 if (!process.env.TYPESAFE_API_KEY) {
   console.error('Set TYPESAFE_API_KEY first (or put it in .env).');
@@ -154,6 +156,12 @@ function report(rows) {
   if (endErrs.length) {
     console.log(`end error    median ${signed(median(endErrs.map(Math.abs)))}s abs, mean ${signed(mean(endErrs))}s signed`);
   }
+  // Content lost: a start before the label's start, or an end after the label's end.
+  const early = startErrs.filter((e) => e < -CONTENT_SLACK);
+  const late = endErrs.filter((e) => e > CONTENT_SLACK);
+  console.log(`content cut  ${early.length}/${startErrs.length} starts more than ${CONTENT_SLACK}s early` +
+    `${early.length ? ` (worst ${signed(Math.min(...early))}s)` : ''}, ${late.length}/${endErrs.length} ends more than ${CONTENT_SLACK}s late` +
+    `${late.length ? ` (worst ${signed(Math.max(...late))}s)` : ''}`);
   console.log(`tokens     ${tokens.toLocaleString()} input (≈ $${(tokens * 0.042 / 1e6).toFixed(4)} at $0.042/M)`);
 }
 

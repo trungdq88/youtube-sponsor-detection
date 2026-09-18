@@ -9,14 +9,18 @@
 //                    and a choice (which line begins it?) over the same state.
 //   Stage 2 (refine) one request over the lines around the winning line, to
 //                    pin down the first line exactly and find the last one.
+//   Stage 3 (cut)    the first and last lines split into phrases of a few
+//                    words, and Jev picks the phrase where the segment begins
+//                    and the one where it ends, so the skip lands on a word
+//                    rather than on a line that started seconds earlier.
 //
-// Nothing here asks Jev for a number: it names a line ID and code reads the
-// timestamp off that line.
+// Nothing here asks Jev for a number: it names a line or phrase ID and code
+// reads the timestamp off it.
 //
 // This file has no dependencies beyond ./transcript.js so the Chrome extension
 // can run the same pipeline: pass any `client` with a `systemOne(request)`.
 
-import { renderLines, windowLines, estimateTokens } from './transcript.js';
+import { renderLines, windowLines, estimateTokens, buildPhrases } from './transcript.js';
 
 /** Confidence bands, following the cookbook's 0.7 / 0.35 split. Tune on real data. */
 export const FOUND = 0.7;
@@ -30,6 +34,17 @@ const REFINE_AFTER = 40;
 
 const NO_START = 'none';
 const RUNS_PAST_EXCERPT = 'continues_past_excerpt';
+
+/** Lines of context on each side of a boundary line in the cut pass. */
+const CUT_CONTEXT_LINES = 3;
+
+/**
+ * How sure the pipeline wants to be that a skip never eats content: a phrase
+ * is only skipped when it is sponsor with at least this probability. Sitting
+ * through a second of a sponsor read is the price of never cutting a second
+ * of the video.
+ */
+export const KEEP_CONTENT = 0.8;
 
 /**
  * What counts as a sponsor segment. Written for a model that reads literally:
@@ -172,6 +187,34 @@ export function startQuestions(lines) {
       criteria: options
     }
   };
+}
+
+/**
+ * Cut pass: the lines at a boundary split into phrases of a few words, and
+ * one noul per phrase: is this phrase part of the sponsor segment? Asking per
+ * phrase rather than "which phrase is first" keeps each judgment narrow, and
+ * the answers read as a profile that code cuts at (see cutPoint).
+ * @param {import('./transcript.js').Phrase[]} phrases
+ */
+export function cutQuestions(phrases) {
+  const questions = {};
+  for (const phrase of phrases) {
+    questions[phrase.id] = {
+      type: 'noul',
+      instructions: {
+        question:
+          `Does phrase ${phrase.id} in \`phrases\` belong to the sponsor segment rather than to the video's own content? ` +
+          'The phrases are consecutive pieces of the transcript, a few words each; `before` and `after` are the ' +
+          'surrounding transcript, and the sponsor is named at `sponsor_named_at_text`.',
+        ...SPONSOR
+      },
+      criteria: {
+        true: `Phrase ${phrase.id} is part of the sponsor segment: its lead-in, its pitch or its offer.`,
+        false: `Phrase ${phrase.id} is the video's own content: on the subject of the video (\`video_title\`), a hand-back like "now back to the video", a sign-off, or a call to like, comment or subscribe.`
+      }
+    };
+  }
+  return questions;
 }
 
 function bestLabel(probabilities, allowed) {
@@ -368,18 +411,104 @@ async function refine(winner, lines, taken, ask, report, title) {
   const endIndex = endOk ? slice.indexOf(endLine) : Math.min(slice.length - 1, anchorIndex + BLIND_MASK_LINES);
   const lineIds = slice.slice(startIndex, endIndex + 1).map((l) => l.id);
 
+  // Third request(s): where inside the first and last lines the segment
+  // really begins and ends. Both edges are independent, so they run together.
+  report({ stage: 'cut' });
+  const [startCut, endCut] = await Promise.all([
+    cut(lines, startLine, 'start', ask, title, anchorLine),
+    endOk ? cut(lines, endLine, 'end', ask, title, anchorLine) : null
+  ]);
+
   return {
     confidence: Math.min(winner.presence, presence),
     scanPresence: winner.presence,
     refinePresence: presence,
-    start: { lineId: startLine.id, seconds: startLine.start, text: startLine.text, probability: startProbability },
+    start: {
+      lineId: startLine.id,
+      seconds: startCut?.seconds ?? startLine.start,
+      lineSeconds: startLine.start,
+      text: startLine.text,
+      probability: startProbability,
+      phrase: startCut?.phrase ?? null
+    },
     anchor: { lineId: anchorLine.id, seconds: anchorLine.start, text: anchorLine.text, probability: anchorPick.probability },
     end: endOk
-      ? { lineId: endLine.id, seconds: endLine.end, text: endLine.text, probability: endPick.probability, runsPastExcerpt: endRunsOn }
+      ? {
+          lineId: endLine.id,
+          seconds: endCut?.seconds ?? endLine.end,
+          lineSeconds: endLine.end,
+          text: endLine.text,
+          probability: endPick.probability,
+          runsPastExcerpt: endRunsOn,
+          phrase: endCut?.phrase ?? null
+        }
       : null,
     lineIds,
     context: slice
   };
+}
+
+/**
+ * The cut pass for one edge: split the boundary line and its neighbours into
+ * phrases, ask which phrases are sponsor, and cut where the answers say the
+ * segment begins or ends. Returns null when the answers give no cut, in which
+ * case the line-level boundary stands.
+ */
+async function cut(lines, line, edge, ask, title, anchorLine) {
+  const at = lines.indexOf(line);
+  if (at < 0) return null;
+  const phrases = buildPhrases(lines.slice(Math.max(0, at - 1), at + 2));
+  if (phrases.length < 2) return null;
+  const before = lines.slice(Math.max(0, at - 1 - CUT_CONTEXT_LINES), Math.max(0, at - 1));
+  const after = lines.slice(at + 2, at + 2 + CUT_CONTEXT_LINES);
+
+  const result = await ask(
+    {
+      video_title: title,
+      before: before.map((l) => l.text).join(' ') || '(start of the video)',
+      phrases: phrases.map((p) => `${p.id}| ${p.text}`).join('\n'),
+      after: after.map((l) => l.text).join(' ') || '(end of the video)',
+      sponsor_named_at_text: anchorLine.text
+    },
+    cutQuestions(phrases)
+  );
+  const inSponsor = phrases.map((p) => result.answers[p.id]?.noul ?? 0);
+  const index = cutPoint(inSponsor, edge);
+  if (index < 0) return null;
+  const phrase = phrases[index];
+  return {
+    seconds: edge === 'start' ? phrase.start : phrase.end,
+    phrase: { id: phrase.id, text: phrase.text, start: phrase.start, end: phrase.end, probability: inSponsor[index] }
+  };
+}
+
+/** A phrase this likely to be sponsor still counts as part of a run that a surer phrase started. */
+const IN_RUN = 0.5;
+
+/**
+ * Where to cut, given how likely each consecutive phrase is to be sponsor.
+ *
+ * Only a phrase that is sponsor with at least KEEP_CONTENT probability gets
+ * skipped, so doubt always falls on the side of watching a little of the read
+ * rather than losing content. The start is the first such phrase whose
+ * neighbour after it is at least plausibly sponsor too (one phrase alone does
+ * not start a segment); the end is the last such phrase whose neighbour before
+ * it is. Returns the phrase index, or -1 when no phrase qualifies.
+ * @param {number[]} inSponsor  one probability per phrase, in transcript order
+ * @param {'start'|'end'} edge
+ */
+export function cutPoint(inSponsor, edge) {
+  const n = inSponsor.length;
+  if (edge === 'start') {
+    for (let i = 0; i < n; i++) {
+      if (inSponsor[i] >= KEEP_CONTENT && (i === n - 1 || inSponsor[i + 1] >= IN_RUN)) return i;
+    }
+    return -1;
+  }
+  for (let i = n - 1; i >= 0; i--) {
+    if (inSponsor[i] >= KEEP_CONTENT && (i === 0 || inSponsor[i - 1] >= IN_RUN)) return i;
+  }
+  return -1;
 }
 
 function summarise(scan) {
