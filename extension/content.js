@@ -40,7 +40,7 @@ const state = {
     cost: 0,
     last: null, // last decision from the controller log
     log: [], // { at, kind, text } newest last; kind: status | heard | check | jump | error
-    showLog: true
+    showLog: false
   }
 };
 let liveController = null;
@@ -920,87 +920,6 @@ function liveJump(ctl, seconds) {
   });
 }
 
-function liveLogView() {
-  const wrap = el('div', 'ss-log');
-  const head = el('div', 'ss-log-head');
-  head.append(el('span', 'ss-log-title', `Log (${state.live.log.length})`));
-  head.append(button(state.live.showLog ? 'Hide' : 'Show', () => {
-    state.live.showLog = !state.live.showLog;
-    render();
-  }, 'ss-small ss-quiet'));
-  if (state.live.log.length) {
-    head.append(button('Copy', () => {
-      const text = state.live.log.map((e) => `${new Date(e.at).toISOString()} [${e.kind}] ${e.text}`).join('\n');
-      navigator.clipboard?.writeText(text);
-    }, 'ss-small ss-quiet'));
-  }
-  wrap.append(head);
-  if (!state.live.showLog) return wrap;
-  const list = el('div', 'ss-log-list');
-  if (!state.live.log.length) list.append(el('div', 'ss-log-line status', 'Nothing yet.'));
-  for (const e of state.live.log.slice(-40)) {
-    const line = el('div', `ss-log-line ${e.kind}`);
-    line.append(el('span', 'ss-log-time', clock(e.at)), el('span', 'ss-log-text', e.text));
-    list.append(line);
-  }
-  wrap.append(list);
-  requestAnimationFrame(() => { list.scrollTop = list.scrollHeight; });
-  return wrap;
-}
-
-function clock(ms) {
-  const d = new Date(ms);
-  return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}`;
-}
-
-function liveBody(b) {
-  const live = state.live;
-  if (!live.thisTab) {
-    b.append(el('div', 'ss-status', live.status === 'error' && live.error
-      ? `Not listening: ${live.error}`
-      : liveOptOut ? 'Listening is off for this video.'
-      : isSmart() ? 'Audio is off; it comes on near each candidate read.'
-      : 'Listening starts when the video plays.'));
-    const start = button('Start listening', async () => {
-      start.disabled = true;
-      liveOptOut = false;
-      try {
-        await startListening();
-      } catch (error) {
-        state.live.status = 'error';
-        state.live.error = error.message;
-        render();
-      }
-    }, '');
-    const row = el('div', 'ss-start');
-    row.append(start);
-    b.append(row);
-    if (state.live.log.length) b.append(liveLogView());
-    return;
-  }
-  if (live.status === 'connecting') {
-    b.append(el('div', 'ss-status', 'Connecting to the speech API…'));
-  } else if (live.status === 'error') {
-    b.append(el('div', 'ss-status ss-error', live.error ?? 'Listening stopped.'));
-  } else {
-    const phase = liveController?.phase ?? 'listening';
-    b.append(el('div', 'ss-status', phase === 'verifying'
-      ? `Jumped ${liveController.consecutiveSkips}× · checking whether the sponsor read continues…`
-      : live.checking ? 'Asking Jev whether this is a sponsor read…' : 'Listening for a sponsor read.'));
-  }
-  if (live.error && live.status !== 'error') b.append(el('div', 'ss-error-detail', live.error));
-
-  const heard = live.hearing || live.lastHeard;
-  if (heard) b.append(el('div', 'ss-heard', `“${heard.length > 140 ? '…' + heard.slice(-140) : heard}”`));
-
-  if (live.last && (live.last.kind === 'listen' || live.last.kind === 'verify')) {
-    const row = el('div', 'ss-segment');
-    row.append(el('span', 'ss-range', live.last.sponsor ? 'Sponsor read' : 'Not a sponsor read'));
-    row.append(el('span', `ss-pill ${live.last.sponsor ? 'warn' : 'good'}`, `${Math.round(live.last.confidence * 100)}%`));
-    b.append(row);
-  }
-}
-
 // ---- progress bar markers -------------------------------------------------
 
 function drawMarkers() {
@@ -1028,6 +947,10 @@ function removeMarkers() {
 }
 
 // ---- panel ----------------------------------------------------------------
+//
+// The panel is a fixed set of slots so nothing moves while it works: a
+// status line, the reads (transcript modes), one audio line (audio modes),
+// the controls, one line of usage, and a log that opens to a fixed height.
 
 function render() {
   if (!state.videoId) return;
@@ -1045,82 +968,86 @@ function render() {
 function header(collapsed) {
   const h = el('div', 'ss-header');
   h.append(el('span', 'ss-title', 'Sponsor Skip'));
-  const lightState = isLive()
-    ? (state.live.status === 'error' ? 'bad' : state.live.checking || state.live.status === 'connecting' ? 'busy' : state.live.thisTab ? 'found' : 'idle')
-    : (state.busy || state.live.checking ? 'busy' : state.error ? 'bad' : segments().length ? 'found' : 'idle');
-  const light = el('span', `ss-light ${lightState}`);
-  h.append(light);
-  const toggle = button(collapsed ? '▸' : '▾', () => {
+  h.append(el('span', 'ss-mode', { smart: 'Smart', live: 'Listen', transcript: 'Transcript' }[mode()] ?? mode()));
+  const working = state.busy || state.live.checking || state.live.status === 'connecting';
+  const bad = state.error && !usesAudio() ? true : state.live.status === 'error' && usesAudio() && !segments().length;
+  h.append(el('span', `ss-light ${working ? 'busy' : bad ? 'bad' : segments().length || audioActive() ? 'found' : 'idle'}`));
+  h.append(button(collapsed ? '▸' : '▾', () => {
     const panel = document.getElementById(PANEL_ID);
     panel.dataset.collapsed = collapsed ? 'false' : 'true';
     render();
-  }, 'ss-icon');
-  h.append(toggle);
+  }, 'ss-icon'));
   return h;
 }
 
-function transcriptBody(b, segs) {
-  if (state.busy) {
-    b.append(el('div', 'ss-status', 'Reading the transcript and asking Jev…'));
-  } else if (state.error) {
-    b.append(el('div', 'ss-status ss-error', state.error));
-    if (state.errorDetail) b.append(el('div', 'ss-error-detail', state.errorDetail));
-  } else if (!state.analysis) {
-    b.append(el('div', 'ss-status', 'Waiting for the video.'));
-  } else if (!segs.length) {
-    b.append(el('div', 'ss-status', 'No sponsor read found in this video.'));
-  } else {
-    b.append(el('div', 'ss-status', `${segs.length} sponsor read${segs.length > 1 ? 's' : ''} found${state.analysis.cached ? ' (cached)' : ''}${isSmart() ? ', skipped once the audio confirms' : ''}`));
-    segs.forEach((seg, index) => {
-      const row = el('div', 'ss-segment');
-      const range = seg.end ? `${stamp(seg.start.seconds)} – ${stamp(seg.end.seconds)}` : `${stamp(seg.start.seconds)} – ?`;
-      row.append(el('span', 'ss-range', range));
-      row.append(el('span', `ss-pill ${seg.confidence >= (state.settings?.threshold ?? 0.7) ? 'good' : 'warn'}`, `${Math.round(seg.confidence * 100)}%`));
-      const video = document.querySelector('video');
-      if (seg.end && video) {
-        row.append(button(state.skipped.has(index) ? 'Skipped' : 'Skip', () => skipTo(video, seg, index, false), 'ss-small'));
-      }
-      b.append(row);
-    });
+/** The one-line summary at the top of the body. */
+function statusText() {
+  const segs = segments();
+  if (isLive()) {
+    const live = state.live;
+    if (live.status === 'error' && live.error) return { text: live.error, bad: true };
+    if (liveController?.phase === 'verifying') return { text: `Jumped ${liveController.consecutiveSkips}×, checking whether the read goes on` };
+    if (live.checking) return { text: 'Asking Jev whether this is a sponsor read' };
+    if (audioActive()) return { text: 'Listening for a sponsor read' };
+    return { text: liveOptOut ? 'Off for this video' : 'Starts with playback' };
   }
+  if (state.busy) return { text: 'Reading the transcript and asking Jev' };
+  if (state.error) return { text: state.error, bad: true, detail: state.errorDetail };
+  if (!state.analysis) return { text: 'Waiting for the video' };
+  if (!segs.length) return { text: isSmart() && audioActive() ? 'No read in the transcript, listening instead' : 'No sponsor read found' };
+  const n = `${segs.length} sponsor read${segs.length > 1 ? 's' : ''}`;
+  if (isSmart()) return { text: `${n}, skipped when the audio agrees` };
+  return { text: `${n}${state.analysis.cached ? ' (cached)' : ''}` };
 }
 
-function body() {
-  const b = el('div', 'ss-body');
-  const segs = segments();
+function readsList() {
+  const list = el('div', 'ss-reads');
+  const video = document.querySelector('video');
+  segments().forEach((seg, index) => {
+    const row = el('div', 'ss-segment');
+    row.append(el('span', 'ss-range', seg.end ? `${stamp(seg.start.seconds)} – ${stamp(seg.end.seconds)}` : `${stamp(seg.start.seconds)} – ?`));
+    row.append(el('span', `ss-pill ${seg.confidence >= (state.settings?.threshold ?? 0.7) ? 'good' : 'warn'}`, `${Math.round(seg.confidence * 100)}%`));
+    const skip = button(state.skipped.has(index) ? 'Skipped' : 'Skip', () => skipTo(video, seg, index, false), 'ss-small', !(seg.end && video) || state.skipped.has(index));
+    row.append(skip);
+    list.append(row);
+  });
+  return list;
+}
 
-  if (isLive()) {
-    liveBody(b);
-  } else if (isSmart()) {
-    transcriptBody(b, segs);
-    b.append(el('div', 'ss-subhead', audioActive() ? 'Audio: confirming with what is heard' : 'Audio'));
-    liveBody(b);
-  } else if (state.busy) {
-    b.append(el('div', 'ss-status', 'Reading the transcript and asking Jev…'));
-  } else if (state.error) {
-    b.append(el('div', 'ss-status ss-error', state.error));
-    if (state.errorDetail) b.append(el('div', 'ss-error-detail', state.errorDetail));
-  } else if (!state.analysis) {
-    b.append(el('div', 'ss-status', 'Waiting for the video.'));
-  } else if (!segs.length) {
-    b.append(el('div', 'ss-status', 'No sponsor read found in this video.'));
-  } else {
-    b.append(el('div', 'ss-status', `${segs.length} sponsor read${segs.length > 1 ? 's' : ''} found${state.analysis.cached ? ' (cached)' : ''}`));
-    segs.forEach((seg, index) => {
-      const row = el('div', 'ss-segment');
-      const range = seg.end ? `${stamp(seg.start.seconds)} – ${stamp(seg.end.seconds)}` : `${stamp(seg.start.seconds)} – ?`;
-      row.append(el('span', 'ss-range', range));
-      row.append(el('span', `ss-pill ${seg.confidence >= (state.settings?.threshold ?? 0.7) ? 'good' : 'warn'}`, `${Math.round(seg.confidence * 100)}%`));
-      const video = document.querySelector('video');
-      if (seg.end && video) {
-        row.append(button(state.skipped.has(index) ? 'Skipped' : 'Skip', () => skipTo(video, seg, index, false), 'ss-small'));
-      }
-      b.append(row);
-    });
-  }
+/** One fixed-height line: audio state, what is being heard, Jev's last verdict. */
+function audioLine() {
+  const live = state.live;
+  const row = el('div', 'ss-audio');
+  const on = audioActive();
+  const dotState = live.status === 'error' ? 'bad' : live.status === 'connecting' ? 'busy' : on ? 'on' : 'off';
+  row.append(el('span', `ss-audio-dot ${dotState}`));
 
-  // Controls
-  const controls = el('div', 'ss-controls');
+  const main = el('div', 'ss-audio-main');
+  let label;
+  if (live.status === 'error' && live.error) label = live.error;
+  else if (live.status === 'connecting') label = 'Connecting to speech service';
+  else if (on) label = live.checking ? 'Listening, asking Jev' : liveController?.phase === 'verifying' ? 'Listening after the jump' : 'Listening';
+  else if (liveOptOut) label = 'Audio off for this video';
+  else if (isSmart()) label = 'Audio off until near a read';
+  else label = 'Audio starts with playback';
+  const labelNode = el('div', 'ss-audio-label', label);
+  labelNode.title = label;
+  main.append(labelNode);
+  const heard = on ? (live.hearing || live.lastHeard) : '';
+  const heardNode = el('div', 'ss-audio-heard', heard ? `“${heard}”` : ' ');
+  heardNode.title = heard;
+  main.append(heardNode);
+  row.append(main);
+
+  const last = live.last && (live.last.kind === 'listen' || live.last.kind === 'verify') ? live.last : null;
+  const verdict = el('span', `ss-verdict ${last ? (last.sponsor ? 'warn' : 'good') : ''}`, last ? `${last.sponsor ? 'sponsor' : 'content'} ${Math.round(last.confidence * 100)}%` : '–');
+  verdict.title = last ? `Jev's last answer: ${last.sponsor ? 'a sponsor read is playing' : 'not a sponsor read'} (${Math.round(last.confidence * 100)}%)` : 'No Jev answer on the audio yet';
+  row.append(verdict);
+  return row;
+}
+
+function controls() {
+  const row = el('div', 'ss-controls');
   const auto = el('label', 'ss-toggle');
   const box = document.createElement('input');
   box.type = 'checkbox';
@@ -1130,45 +1057,109 @@ function body() {
     if (r?.ok) state.settings = r.settings;
     render();
   });
-  auto.append(box, document.createTextNode(state.paused ? 'Auto-skip (paused on this video)' : 'Auto-skip'));
-  controls.append(auto);
-  if (usesAudio() && state.live.thisTab) controls.append(button('Stop listening', stopListening, 'ss-small'));
-  if (usesTranscript()) controls.append(button('Re-analyze', () => analyze(true), 'ss-small', state.busy));
-  b.append(controls);
+  auto.append(box, document.createTextNode(state.paused ? 'Auto-skip (paused here)' : 'Auto-skip'));
+  auto.title = state.paused ? 'You undid a skip, so nothing more is skipped on this video' : 'Skip sponsor reads without asking';
+  row.append(auto);
 
-  // Stats
-  const a = state.analysis;
-  const s = state.stats;
-  const stats = el('div', 'ss-stats');
+  const actions = el('div', 'ss-actions');
   if (usesAudio()) {
-    const l = state.live;
-    stats.append(statRow('Audio, this tab', `${l.checks} checks · ${money(l.cost)} · ${l.jumps} jumps · ${stamp(l.secondsSkipped)} skipped`));
-    if (s) {
-      stats.append(statRow('Audio, all time', `${stamp(s.liveSeconds)} heard · ${money(s.estimatedSttCost)} speech · ${money(s.estimatedCost)} Jev`));
-      stats.append(statRow('Jumped', `${s.liveSkips} times · ${stamp(s.liveSecondsSkipped)} saved`));
+    if (state.live.thisTab) {
+      actions.append(button('Stop', stopListening, 'ss-small ss-quiet', false));
+    } else if (liveOptOut || state.live.status === 'error') {
+      const listen = button('Listen', async () => {
+        listen.disabled = true;
+        liveOptOut = false;
+        try {
+          await startListening();
+        } catch (error) {
+          state.live.status = 'error';
+          state.live.error = error.message;
+          render();
+        }
+      }, 'ss-small ss-listen');
+      actions.append(listen);
+    } else {
+      actions.append(button(' ', () => {}, 'ss-small ss-ghost', true)); // keeps the slot's width
     }
   }
-  if (isLive()) {
-    b.append(stats);
-    b.append(liveLogView());
-    return b;
+  if (usesTranscript()) actions.append(button('Re-analyze', () => analyze(true), 'ss-small ss-quiet', state.busy));
+  row.append(actions);
+  return row;
+}
+
+/** One or two compact lines of usage. */
+function usageLines() {
+  const a = state.analysis;
+  const s = state.stats;
+  const l = state.live;
+  const wrap = el('div', 'ss-stats');
+  if (usesTranscript() && a) {
+    wrap.append(statRow(a.cached ? 'Cached' : 'This video', `${fmtTokens(a.usage?.input_tokens)} tokens · ${a.requests ?? '?'} calls · ${money(a.cost)}`));
   }
-  if (a) {
-    stats.append(statRow('This video', `${fmtTokens(a.usage?.input_tokens)} tokens · ${a.requests ?? '?'} calls · ${money(a.cost)}${a.cached ? ' · cached' : ` · ${(a.elapsedMs / 1000).toFixed(1)}s`}`));
+  if (usesAudio()) {
+    wrap.append(statRow('Audio', `${l.checks} checks · ${l.jumps} jumps · ${stamp(l.secondsSkipped)} skipped · ${money(l.cost)}`));
   }
   if (s) {
-    stats.append(statRow('All time', `${s.videosAnalyzed} videos · ${fmtTokens(s.inputTokens)} tokens · ${money(s.estimatedCost)}`));
-    stats.append(statRow('Skipped', `${s.skips} reads · ${stamp(s.secondsSkipped)} saved`));
+    const skips = usesAudio() ? s.skips + s.liveSkips : s.skips;
+    const saved = usesAudio() ? s.secondsSkipped + s.liveSecondsSkipped : s.secondsSkipped;
+    const spend = money(s.estimatedCost + (usesAudio() ? s.estimatedSttCost : 0));
+    wrap.append(statRow('All time', `${skips} reads · ${stamp(saved)} saved · ${spend}`));
   }
-  b.append(stats);
-  if (isSmart()) b.append(liveLogView());
+  return wrap;
+}
+
+function logSection() {
+  const wrap = el('div', 'ss-log');
+  const head = el('div', 'ss-log-head');
+  const toggle = button(`${state.live.showLog ? 'Hide log' : 'Log'} (${state.live.log.length})`, () => {
+    state.live.showLog = !state.live.showLog;
+    render();
+  }, 'ss-link ss-log-toggle');
+  head.append(toggle);
+  if (state.live.showLog && state.live.log.length) {
+    head.append(button('Copy', () => {
+      const text = state.live.log.map((e) => `${new Date(e.at).toISOString()} [${e.kind}] ${e.text}`).join('\n');
+      navigator.clipboard?.writeText(text);
+    }, 'ss-link'));
+  }
+  wrap.append(head);
+  if (!state.live.showLog) return wrap;
+  const list = el('div', 'ss-log-list');
+  if (!state.live.log.length) list.append(el('div', 'ss-log-line status', 'Nothing yet.'));
+  for (const e of state.live.log.slice(-60)) {
+    const line = el('div', `ss-log-line ${e.kind}`);
+    line.append(el('span', 'ss-log-time', clock(e.at)), el('span', 'ss-log-text', e.text));
+    list.append(line);
+  }
+  wrap.append(list);
+  requestAnimationFrame(() => { list.scrollTop = list.scrollHeight; });
+  return wrap;
+}
+
+function body() {
+  const b = el('div', 'ss-body');
+  const status = statusText();
+  const line = el('div', `ss-status${status.bad ? ' ss-error' : ''}`, status.text);
+  line.title = status.detail ?? status.text;
+  b.append(line);
+  if (usesTranscript() && segments().length) b.append(readsList());
+  if (usesAudio()) b.append(audioLine());
+  b.append(controls());
+  b.append(usageLines());
+  if (usesAudio()) b.append(logSection());
   return b;
 }
 
 function statRow(label, value) {
   const row = el('div', 'ss-stat');
   row.append(el('span', 'ss-stat-label', label), el('span', 'ss-stat-value', value));
+  row.title = `${label}: ${value}`;
   return row;
+}
+
+function clock(ms) {
+  const d = new Date(ms);
+  return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}`;
 }
 
 function toast(text, onUndo) {
