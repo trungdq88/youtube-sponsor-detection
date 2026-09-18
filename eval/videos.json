@@ -1,0 +1,420 @@
+{
+  "source": "https://sb.ltn.fi/database/sponsorTimes.csv",
+  "sampledAt": "2026-09-18T00:40:07.471Z",
+  "videos": [
+    {
+      "videoID": "QoC8R3KHk8E",
+      "duration": 1063.541,
+      "segments": [
+        {
+          "start": 56.278,
+          "end": 75.716,
+          "votes": 39,
+          "locked": true
+        },
+        {
+          "start": 177.588,
+          "end": 196.82,
+          "votes": 20,
+          "locked": true
+        },
+        {
+          "start": 404.026,
+          "end": 414.59,
+          "votes": 12,
+          "locked": true
+        },
+        {
+          "start": 447.259,
+          "end": 471.67,
+          "votes": 12,
+          "locked": true
+        },
+        {
+          "start": 983.31,
+          "end": 1038.544,
+          "votes": 19,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "O0gbfvJDsv4",
+      "duration": 599.941,
+      "segments": [
+        {
+          "start": 33.112,
+          "end": 52.981,
+          "votes": 30,
+          "locked": true
+        },
+        {
+          "start": 162.367,
+          "end": 164.56,
+          "votes": 11,
+          "locked": true
+        },
+        {
+          "start": 529.236,
+          "end": 584.616,
+          "votes": 12,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "6NxW3xSAqUg",
+      "duration": 1320.021,
+      "segments": [
+        {
+          "start": 14.287,
+          "end": 18.709,
+          "votes": 4,
+          "locked": true
+        },
+        {
+          "start": 126.841,
+          "end": 217.361,
+          "votes": 13,
+          "locked": true
+        },
+        {
+          "start": 1310.768,
+          "end": 1317.326,
+          "votes": 2,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "Q2pejyn3-p8",
+      "duration": 1584.261,
+      "segments": [
+        {
+          "start": 106.517,
+          "end": 128.095,
+          "votes": 0,
+          "locked": true
+        },
+        {
+          "start": 387.977,
+          "end": 406.7,
+          "votes": 0,
+          "locked": true
+        },
+        {
+          "start": 419.115,
+          "end": 424.959,
+          "votes": 0,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "JXQE_wjCQGE",
+      "duration": 343.701,
+      "segments": [
+        {
+          "start": 102.379,
+          "end": 123.943,
+          "votes": 0,
+          "locked": true
+        },
+        {
+          "start": 206.322,
+          "end": 232.554,
+          "votes": 0,
+          "locked": true
+        },
+        {
+          "start": 310.34,
+          "end": 339.648,
+          "votes": 0,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "8RTmvUZlSSk",
+      "duration": 819.161,
+      "segments": [
+        {
+          "start": 375.511,
+          "end": 456.042,
+          "votes": 0,
+          "locked": true
+        },
+        {
+          "start": 700.86,
+          "end": 714.37,
+          "votes": 0,
+          "locked": true
+        },
+        {
+          "start": 799.696,
+          "end": 817.117,
+          "votes": 0,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "j_OwK2OzO8E",
+      "duration": 2072.761,
+      "segments": [
+        {
+          "start": 94.738,
+          "end": 172.533,
+          "votes": 39,
+          "locked": true
+        },
+        {
+          "start": 2055.453,
+          "end": 2058.382,
+          "votes": 9,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "2ehSCWoaOqQ",
+      "duration": 1310.841,
+      "segments": [
+        {
+          "start": 26.027,
+          "end": 42.46,
+          "votes": 39,
+          "locked": true
+        },
+        {
+          "start": 1260.313,
+          "end": 1305.209,
+          "votes": 10,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "qgK38sg1ws4",
+      "duration": 916.221,
+      "segments": [
+        {
+          "start": 80.289,
+          "end": 98.332,
+          "votes": 19,
+          "locked": true
+        },
+        {
+          "start": 848.791,
+          "end": 904.518,
+          "votes": 12,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "uO6DMWHK_HA",
+      "duration": 1996.381,
+      "segments": [
+        {
+          "start": 53.486,
+          "end": 68.779,
+          "votes": 19,
+          "locked": true
+        },
+        {
+          "start": 1942.489,
+          "end": 1987.449,
+          "votes": 7,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "QAkXf7O46w0",
+      "duration": 1477.1375,
+      "segments": [
+        {
+          "start": 99.687,
+          "end": 180.422,
+          "votes": 19,
+          "locked": true
+        },
+        {
+          "start": 1362.19,
+          "end": 1388.98,
+          "votes": 2,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "DMqL73IGO5U",
+      "duration": 263.541,
+      "segments": [
+        {
+          "start": 0,
+          "end": 3.68,
+          "votes": 8,
+          "locked": true
+        },
+        {
+          "start": 172.484,
+          "end": 256.583,
+          "votes": 6,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "le_ORQZzkmE",
+      "duration": 1002.861,
+      "segments": [
+        {
+          "start": 0,
+          "end": 3.204,
+          "votes": 9,
+          "locked": true
+        },
+        {
+          "start": 918.238,
+          "end": 974.186,
+          "votes": 3,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "SwIPOf2YAgI",
+      "duration": 1070.941,
+      "segments": [
+        {
+          "start": 0,
+          "end": 2.65,
+          "votes": 2,
+          "locked": true
+        },
+        {
+          "start": 346.2,
+          "end": 396.5,
+          "votes": 7,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "Gav25xB0LtE",
+      "duration": 370.321,
+      "segments": [
+        {
+          "start": 278.75,
+          "end": 335.61,
+          "votes": 7,
+          "locked": true
+        },
+        {
+          "start": 345.326,
+          "end": 348.476,
+          "votes": 2,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "c3CN8elYKrY",
+      "duration": 1009.881,
+      "segments": [
+        {
+          "start": 33.326,
+          "end": 105.892,
+          "votes": 4,
+          "locked": true
+        },
+        {
+          "start": 910.083,
+          "end": 943.343,
+          "votes": 6,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "r_e21HhG5Ko",
+      "duration": 1138.901,
+      "segments": [
+        {
+          "start": 16.84,
+          "end": 34.1,
+          "votes": 8,
+          "locked": true
+        },
+        {
+          "start": 1082.1,
+          "end": 1130.51,
+          "votes": 1,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "pmDePx56S6Q",
+      "duration": 679.70886,
+      "segments": [
+        {
+          "start": 190.736,
+          "end": 279.61,
+          "votes": 4,
+          "locked": true
+        },
+        {
+          "start": 660.726,
+          "end": 674.95,
+          "votes": 3,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "BUUF84Wfx6U",
+      "duration": 756.021,
+      "segments": [
+        {
+          "start": 22.499,
+          "end": 25.183,
+          "votes": 2,
+          "locked": false
+        },
+        {
+          "start": 302.764,
+          "end": 373.148,
+          "votes": 4,
+          "locked": true
+        },
+        {
+          "start": 746.118,
+          "end": 749.291,
+          "votes": 0,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "videoID": "51hiAU01A1E",
+      "duration": 490.841,
+      "segments": [
+        {
+          "start": 0,
+          "end": 16.37,
+          "votes": 6,
+          "locked": true
+        },
+        {
+          "start": 448.375,
+          "end": 480.832,
+          "votes": 0,
+          "locked": true
+        }
+      ]
+    }
+  ]
+}

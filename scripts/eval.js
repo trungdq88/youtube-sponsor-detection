@@ -51,12 +51,13 @@ for (const video of videos.slice(0, limit)) {
   } else {
     process.stdout.write(`${video.videoID} … `);
     try {
-      const { title, cues } = await fetchTranscript(video.videoID);
+      const { title, cues, route } = await fetchTranscript(video.videoID);
       const lines = buildLines(cues);
       const started = Date.now();
       const result = await findSponsorSegment(lines, { client, title });
       run = {
         title,
+        route,
         lines: lines.length,
         elapsedMs: Date.now() - started,
         usage: result.usage,
@@ -64,8 +65,8 @@ for (const video of videos.slice(0, limit)) {
       };
       console.log(`${result.segments.length} segment(s), ${result.usage.input_tokens.toLocaleString()} tokens`);
     } catch (error) {
-      run = { error: error.message };
-      console.log(`skipped: ${error.message}`);
+      run = { error: error.message, cause: error.cause ? String(error.cause) : undefined };
+      console.log(`skipped: ${error.message}${error.cause ? ` (${error.cause})` : ''}`);
     }
     await writeFile(cacheFile, JSON.stringify(run, null, 2));
   }

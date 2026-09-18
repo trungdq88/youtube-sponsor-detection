@@ -20,16 +20,19 @@ const mirror = opt('--mirror', 'https://sb.ltn.fi/database/').replace(/\/?$/, '/
 const out = opt('--out', 'eval/videos.json');
 const url = `${mirror}sponsorTimes.csv`;
 
-const head = await fetch(url, { method: 'HEAD' });
-if (!head.ok) throw new Error(`${url} responded ${head.status}`);
-const total = Number(head.headers.get('content-length'));
-if (!total || head.headers.get('accept-ranges') !== 'bytes') {
-  throw new Error(`${url} does not advertise byte ranges (accept-ranges=${head.headers.get('accept-ranges')})`);
+// Probe with a one-byte range rather than HEAD: with gzip negotiated the mirror
+// answers HEAD chunked, without content-length or accept-ranges, but a range
+// request still comes back 206 with the full size in content-range.
+const probe = await fetch(url, { headers: { range: 'bytes=0-0', 'accept-encoding': 'identity' } });
+await probe.arrayBuffer();
+const total = Number(/\/(\d+)$/.exec(probe.headers.get('content-range') ?? '')?.[1]);
+if (probe.status !== 206 || !total) {
+  throw new Error(`${url} does not serve byte ranges (status ${probe.status}, content-range=${probe.headers.get('content-range')})`);
 }
 console.log(`${url}: ${(total / 1e9).toFixed(2)} GB`);
 
 async function range(from, to) {
-  const res = await fetch(url, { headers: { range: `bytes=${from}-${to}` } });
+  const res = await fetch(url, { headers: { range: `bytes=${from}-${to}`, 'accept-encoding': 'identity' } });
   if (res.status !== 206) throw new Error(`range request responded ${res.status}`);
   return res.text();
 }

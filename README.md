@@ -139,6 +139,13 @@ results are cached in `eval/cache/`; pass `--fresh` after changing the
 questions, `--limit N` to score a few, `--tolerance S` to change the window.
 `eval/videos.seed.json` holds hand-picked videos and is always included.
 
+`eval` needs a network address YouTube trusts: from a cloud or datacenter IP
+the player answers "sign in to confirm you're not a bot" and hides the caption
+tracks (the public Invidious and Piped mirrors are blocked the same way). Run
+it from a normal home connection. The transcript fetcher falls back to an
+Invidious instance when YouTube refuses; `INVIDIOUS_INSTANCES=a,b` overrides
+which ones it tries.
+
 ## Layout
 
 ```

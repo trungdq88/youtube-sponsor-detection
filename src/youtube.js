@@ -48,7 +48,7 @@ let innertube;
  *  2. the transcript panel behind YouTube's own "Show transcript" button.
  *
  * @param {string} videoId
- * @returns {Promise<{ title: string, cues: Cue[] }>}
+ * @returns {Promise<{ title: string, cues: Cue[], route: string }>}
  */
 export async function fetchTranscript(videoId) {
   innertube ??= await Innertube.create({ generate_session_locally: true });
@@ -63,7 +63,7 @@ export async function fetchTranscript(videoId) {
       const track = pickCaptionTrack(source.captions?.caption_tracks ?? []);
       if (!track) throw new Error(`no caption tracks in the ${client} player response`);
       const cues = await fetchCaptionTrack(track.base_url);
-      if (cues.length) return { title, cues };
+      if (cues.length) return { title, cues, route: `captions/${client}` };
       throw new Error(`caption track "${track.language_code}" came back empty`);
     } catch (error) {
       failures.push(`captions via ${client}: ${error.message}`);
@@ -81,16 +81,106 @@ export async function fetchTranscript(videoId) {
         endMs: Number(s.end_ms ?? s.start_ms)
       }))
       .filter((c) => c.text.trim() && Number.isFinite(c.startMs));
-    if (cues.length) return { title, cues };
+    if (cues.length) return { title, cues, route: 'transcript-panel' };
     failures.push('transcript panel: no segments');
   } catch (error) {
     failures.push(`transcript panel: ${error.message}`);
+  }
+
+  // Cloud and datacenter addresses get "sign in to confirm you're not a bot"
+  // from the player endpoint, which hides the caption tracks. An Invidious
+  // instance serves the same tracks as WebVTT, so try one before giving up.
+  try {
+    const cues = await fetchViaInvidious(videoId);
+    if (cues.length) return { title: title === videoId ? await fetchTitle(videoId) : title, cues, route: 'invidious' };
+    failures.push('invidious: no cues');
+  } catch (error) {
+    failures.push(`invidious: ${error.message}`);
   }
 
   throw new TranscriptUnavailable(
     'YouTube returned no transcript for this video. It may have captions turned off.',
     { cause: failures.join(' | ') }
   );
+}
+
+/** Invidious instances to try, in order. Override with INVIDIOUS_INSTANCES=a,b,c */
+const INVIDIOUS_INSTANCES = (process.env.INVIDIOUS_INSTANCES ?? 'https://inv.nadeko.net')
+  .split(',')
+  .map((s) => s.trim().replace(/\/$/, ''))
+  .filter(Boolean);
+
+async function fetchViaInvidious(videoId) {
+  const errors = [];
+  for (const base of INVIDIOUS_INSTANCES) {
+    try {
+      const body = await fetchTextWithRetry(`${base}/api/v1/captions/${videoId}`, (t) => t.trimStart().startsWith('{'));
+      const tracks = (JSON.parse(body).captions ?? []).map((t) => ({
+        language_code: t.languageCode ?? t.language_code,
+        kind: /auto-generated/i.test(t.label ?? '') ? 'asr' : undefined,
+        base_url: `${base}${t.url}`
+      }));
+      const track = pickCaptionTrack(tracks);
+      if (!track) throw new Error('no caption tracks');
+      const vtt = await fetchTextWithRetry(track.base_url, (t) => t.startsWith('WEBVTT'));
+      return parseVtt(vtt);
+    } catch (error) {
+      errors.push(`${base}: ${error.message}`);
+    }
+  }
+  throw new Error(errors.join('; '));
+}
+
+/** Public instances answer 502 or an empty body now and then; try a few times. */
+async function fetchTextWithRetry(url, looksRight, attempts = 4) {
+  let last = '';
+  for (let i = 0; i < attempts; i++) {
+    if (i) await new Promise((r) => setTimeout(r, 3000 * i));
+    try {
+      const res = await fetch(url, { signal: AbortSignal.timeout(60_000) });
+      const text = await res.text();
+      if (res.ok && looksRight(text)) return text;
+      last = `${res.status} ${text.slice(0, 40).replace(/\s+/g, ' ')}`;
+    } catch (error) {
+      last = error.message;
+    }
+  }
+  throw new Error(`${url.split('?')[0]} kept failing (${last})`);
+}
+
+/**
+ * Parse WebVTT into cues. Only the cue timing line and its text matter.
+ * @param {string} vtt
+ * @returns {Cue[]}
+ */
+export function parseVtt(vtt) {
+  const cues = [];
+  const blocks = vtt.replace(/\r/g, '').split(/\n\n+/);
+  for (const block of blocks) {
+    const lines = block.split('\n');
+    const at = lines.findIndex((l) => l.includes('-->'));
+    if (at < 0) continue;
+    const [from, to] = lines[at].split('-->').map((s) => vttSeconds(s.trim().split(' ')[0]));
+    const text = lines.slice(at + 1).join(' ').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    if (!text || !Number.isFinite(from)) continue;
+    cues.push({ text, startMs: Math.round(from * 1000), endMs: Math.round((Number.isFinite(to) ? to : from) * 1000) });
+  }
+  return cues;
+}
+
+function vttSeconds(stamp) {
+  const parts = stamp.split(':').map(Number);
+  if (parts.some((n) => !Number.isFinite(n))) return NaN;
+  return parts.length === 3 ? parts[0] * 3600 + parts[1] * 60 + parts[2] : parts[0] * 60 + parts[1];
+}
+
+/** The title through oEmbed, which is not behind the bot check. */
+async function fetchTitle(videoId) {
+  try {
+    const res = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`, { signal: AbortSignal.timeout(15_000) });
+    if (res.ok) return (await res.json()).title ?? videoId;
+  } catch {}
+  return videoId;
 }
 
 /** Prefer a human-made English track, then auto-generated English, then whatever is first. */
