@@ -110,9 +110,10 @@ function usesTranscript() {
 function audioActive() {
   return Boolean(liveCapture) && state.live.thisTab && state.live.status === 'listening';
 }
-/** Audio is on its way (socket connecting): smart mode waits for it rather than skipping blind. */
+/** Audio is on its way (socket connecting): smart mode waits for it a little rather than skipping blind. */
+const CONNECT_PATIENCE_MS = 15000;
 function audioPending() {
-  return Boolean(liveCapture) && state.live.status === 'connecting';
+  return Boolean(liveCapture) && state.live.status === 'connecting' && Date.now() - (state.live.connectingSince ?? 0) < CONNECT_PATIENCE_MS;
 }
 
 function currentVideoId() {
@@ -518,17 +519,22 @@ function onTimeUpdate(event) {
   if (!(video instanceof HTMLVideoElement)) return;
   if (isSmart()) smartTick(video);
   if (!state.settings?.autoSkip || state.paused) return;
-  // Smart mode with the audio running waits for the audio's confirmation
-  // (see smartJumpTarget); without it, it skips from the transcript alone.
-  if (isSmart() && (audioActive() || audioPending())) return;
   if (isLive()) return;
+  // Smart mode with the audio running waits for the audio's confirmation
+  // (see smartJumpTarget), but only for so long: past a read's start by
+  // SMART_AUDIO_GRACE seconds it skips from the transcript alone, so a
+  // silent or slow audio path can never leave a read playing.
+  const waitForAudio = isSmart() && (audioActive() || audioPending());
 
   segments().forEach((seg, index) => {
     if (state.skipped.has(index) || !skippable(seg)) return;
     const t = video.currentTime;
-    if (t >= seg.start.seconds && t < seg.end.seconds - 0.5) {
-      skipTo(video, seg, index, true);
+    if (t < seg.start.seconds || t >= seg.end.seconds - 0.5) return;
+    if (waitForAudio) {
+      if (t < seg.start.seconds + SMART_AUDIO_GRACE) return;
+      liveLog('status', `${SMART_AUDIO_GRACE}s into the read and the audio has not confirmed it; skipping from the transcript`);
     }
+    skipTo(video, seg, index, true);
   });
 }
 
@@ -569,6 +575,8 @@ const SMART_BEFORE = 25;
 const SMART_AFTER = 15;
 /** A read is a candidate for confirmation from this confidence up (the MAYBE band). */
 const SMART_CANDIDATE = 0.35;
+/** Seconds past a read's start after which the transcript skips without waiting for the audio. */
+const SMART_AUDIO_GRACE = 12;
 
 function smartCandidates() {
   return segments().filter((seg) => seg.end && seg.confidence >= SMART_CANDIDATE);
@@ -692,6 +700,7 @@ async function startListening() {
   if (!r?.ok) throw new Error(r?.error ?? 'Could not start listening.');
   state.live.thisTab = true;
   state.live.status = 'connecting';
+  state.live.connectingSince = Date.now();
   state.live.error = null;
   liveLog('status', 'Starting to listen in this tab');
   try {
@@ -861,7 +870,10 @@ async function driveLive() {
   const started = Date.now();
   let action = null;
   try {
-    const r = await send({ type: 'live-check', request });
+    const r = await Promise.race([
+      send({ type: 'live-check', request }),
+      new Promise((resolve) => setTimeout(() => resolve({ ok: false, error: 'Jev took more than 20s to answer' }), 20000))
+    ]);
     if (!r?.ok) throw new Error(r?.error ?? 'Jev did not answer');
     state.live.checks += 1;
     state.live.cost += r.cost ?? 0;

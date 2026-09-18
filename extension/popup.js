@@ -5,9 +5,9 @@ function send(message) {
 }
 
 const MODE_HINTS = {
-  smart: 'Needs both keys. A read is skipped to its end once the audio agrees with the transcript, so nothing real is cut. Without a transcript it falls back to listening; without audio it skips from the transcript alone.',
-  transcript: 'Needs only the TypeSafe key. Reads are skipped from the transcript, cut at the phrase Jev is sure of.',
-  live: 'Needs both keys. The first ten seconds or so of every read are heard before the first jump, and listening costs speech minutes for the whole video.'
+  smart: 'Needs both keys. Skips a sponsor read to its end once the audio confirms what the captions found, so nothing else is cut. With no captions it listens instead. With no audio it skips from the captions alone.',
+  transcript: 'Needs only the TypeSafe key. Skips each sponsor read found in the captions, ending at the last phrase Jev is sure about.',
+  live: 'Needs both keys. About the first 10 seconds of each sponsor read play before the first jump. Listening costs speech minutes for the whole video.'
 };
 
 async function load() {
@@ -42,7 +42,7 @@ async function load() {
   tiles([
     [stamp(saved), 'time saved'],
     [String((stats.skips ?? 0) + (stats.liveSkips ?? 0)), 'skips'],
-    [`$${totalCost.toFixed(totalCost < 0.01 ? 4 : 2)}`, 'spent, est.']
+    [`$${totalCost.toFixed(totalCost < 0.01 ? 4 : 2)}`, 'estimated spend']
   ]);
   const rows = [
     ['Videos analysed', stats.videosAnalyzed],
@@ -50,12 +50,12 @@ async function load() {
     ['Jev requests', stats.requests],
     ['Input tokens', stats.inputTokens.toLocaleString()],
     ['Output tokens (free)', stats.outputTokens.toLocaleString()],
-    ['Estimated Jev cost', `$${stats.estimatedCost.toFixed(5)}`],
+    ['Jev cost (estimated)', `$${stats.estimatedCost.toFixed(5)}`],
     ['Reads skipped', stats.skips],
     ['Time saved', stamp(stats.secondsSkipped)],
     ['Cached videos', cachedVideos],
-    ['Audio streamed', stamp(stats.liveSeconds)],
-    ['Speech cost', `$${(stats.estimatedSttCost ?? 0).toFixed(4)}`],
+    ['Audio listened to', stamp(stats.liveSeconds)],
+    ['Speech cost (estimated)', `$${(stats.estimatedSttCost ?? 0).toFixed(4)}`],
     ['Audio checks with Jev', stats.liveChecks],
     ['Jumps by ear', stats.liveSkips],
     ['Time saved by ear', stamp(stats.liveSecondsSkipped)]
@@ -76,9 +76,9 @@ async function load() {
 }
 
 function keyState(node, key, name) {
-  node.textContent = key ? `saved …${key.slice(-4)}` : 'missing';
+  node.textContent = key ? `saved …${key.slice(-4)}` : 'not set';
   node.className = `key-state ${key ? 'ok' : 'missing'}`;
-  node.title = key ? `${name} key saved in this browser` : `Paste a ${name} key below`;
+  node.title = key ? `${name} key saved in this browser` : `Paste your ${name} key below`;
 }
 
 function tiles(items) {
@@ -114,7 +114,7 @@ async function showStatus(settings, note) {
     pill.textContent = live.state === 'listening' ? 'listening' : 'connecting…';
     pill.className = `pill ${live.state === 'listening' ? 'on' : 'busy'}`;
   } else if (live.state === 'error' && live.error) {
-    pill.textContent = 'audio stopped';
+    pill.textContent = 'listening stopped';
     pill.className = 'pill bad';
     pill.title = live.error;
   } else {
@@ -129,8 +129,8 @@ async function showStatus(settings, note) {
   if (note) out.textContent = note;
   else if (mode === 'transcript') out.textContent = '';
   else if (live.active) out.textContent = `Listening in "${live.title || 'the video tab'}".`;
-  else if (live.state === 'error' && live.error) out.textContent = `Audio stopped: ${live.error}`;
-  else out.textContent = 'Audio starts by itself when a video plays. This button starts it now.';
+  else if (live.state === 'error' && live.error) out.textContent = `Listening stopped: ${live.error}`;
+  else out.textContent = 'Listening starts on its own when a video plays. Use this button to start it now.';
 }
 
 // ---- events ---------------------------------------------------------------
@@ -188,10 +188,10 @@ $('liveToggle').addEventListener('click', async () => {
     return;
   }
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  const started = tab ? await send({ type: 'live-start', tabId: tab.id }) : { ok: false, error: 'No active tab.' };
+  const started = tab ? await send({ type: 'live-start', tabId: tab.id }) : { ok: false, error: 'No open tab.' };
   const state = await send({ type: 'get-state' });
   if (started?.ok) load();
-  else await showStatus(state.settings, `Could not start: ${started?.error ?? 'unknown error'}`);
+  else await showStatus(state.settings, `Could not start listening: ${started?.error ?? 'unknown error'}`);
 });
 
 function stamp(seconds) {

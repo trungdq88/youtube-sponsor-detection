@@ -9,33 +9,33 @@
 <header class="top">
   <div>
     <h1>Sponsor Skip</h1>
-    <p class="sub">Finds sponsor reads with Jev and skips them on YouTube.</p>
+    <p class="sub">Skips sponsor reads on YouTube. Jev decides what counts as a sponsor read.</p>
   </div>
   <span id="statusPill" class="pill">…</span>
 </header>
 
 <section>
-  <h2>How to skip</h2>
+  <h2>Skip mode</h2>
   <div class="modes" id="modes">
-    <label class="mode">
-      <input type="radio" name="mode" value="smart" />
-      <span class="mode-body">
-        <span class="mode-name">Smart <em>recommended</em></span>
-        <span class="mode-desc">Reads the transcript to find each read, listens to confirm it is really playing, then jumps to its end. Audio only runs near the reads.</span>
-      </span>
-    </label>
     <label class="mode">
       <input type="radio" name="mode" value="transcript" />
       <span class="mode-body">
-        <span class="mode-name">Transcript only</span>
-        <span class="mode-desc">Skips whole reads from the captions. Cheapest; needs YouTube to hand over the transcript.</span>
+        <span class="mode-name">Transcript only <em>default</em></span>
+        <span class="mode-desc">Skips whole sponsor reads found in the captions. Cheapest, but the video must have captions.</span>
+      </span>
+    </label>
+    <label class="mode">
+      <input type="radio" name="mode" value="smart" />
+      <span class="mode-body">
+        <span class="mode-name">Smart</span>
+        <span class="mode-desc">Finds sponsor reads in the captions, listens to confirm one is playing, then jumps to its end. Listens only near the reads.</span>
       </span>
     </label>
     <label class="mode">
       <input type="radio" name="mode" value="live" />
       <span class="mode-body">
         <span class="mode-name">Listen only</span>
-        <span class="mode-desc">No transcript. Listens as it plays and jumps ahead in steps while a read is heard.</span>
+        <span class="mode-desc">No captions needed. Listens as the video plays and jumps ahead in short steps while a sponsor read is heard.</span>
       </span>
     </label>
   </div>
@@ -45,14 +45,14 @@
 <section>
   <h2>Keys</h2>
   <div class="key">
-    <div class="key-head"><span>TypeSafe (Jev)</span><span class="key-state" id="keyState"></span></div>
+    <div class="key-head"><span>TypeSafe key (required)</span><span class="key-state" id="keyState"></span></div>
     <div class="row"><input id="apiKey" type="password" placeholder="Paste your TypeSafe key" autocomplete="off" /><button id="saveKey" type="button">Save</button></div>
   </div>
   <div class="key">
-    <div class="key-head"><span>Deepgram (speech, for Smart and Listen)</span><span class="key-state" id="deepgramKeyState"></span></div>
+    <div class="key-head"><span>Deepgram key (for Smart and Listen only)</span><span class="key-state" id="deepgramKeyState"></span></div>
     <div class="row"><input id="deepgramKey" type="password" placeholder="Paste your Deepgram key" autocomplete="off" /><button id="saveDeepgramKey" type="button">Save</button></div>
   </div>
-  <p class="hint">Keys stay in this browser and never reach the page. Get them at <a href="https://typesafe.ai" target="_blank">typesafe.ai</a> and <a href="https://console.deepgram.com" target="_blank">console.deepgram.com</a>.</p>
+  <p class="hint">Keys stay in this browser. Get them at <a href="https://typesafe.ai" target="_blank">typesafe.ai</a> and <a href="https://console.deepgram.com" target="_blank">console.deepgram.com</a>.</p>
 </section>
 
 <section>
@@ -63,7 +63,7 @@
     <input id="threshold" type="range" min="0.35" max="0.95" step="0.05" />
   </label>
   <label class="field inline" id="stepField">
-    <span>Step when jumping ahead by ear</span>
+    <span>Jump ahead by ear in steps of</span>
     <span class="unit"><input id="liveSkipSeconds" type="number" min="5" max="60" step="1" /> s</span>
   </label>
 </section>
@@ -77,9 +77,9 @@
 <details>
   <summary>Advanced</summary>
   <label class="field inline"><span>Jev model</span><input id="model" type="text" /></label>
-  <label class="field inline"><span>Jev price, $ per 1M input tokens</span><input id="price" type="number" step="0.001" min="0" /></label>
-  <label class="field inline"><span>Speech price, $ per minute</span><input id="sttPrice" type="number" step="0.0001" min="0" /></label>
-  <p class="hint">Prices only drive the cost estimates. Defaults are the list prices at <a href="https://docs.typesafe.ai/models" target="_blank">docs.typesafe.ai/models</a> and deepgram.com/pricing.</p>
+  <label class="field inline"><span>Jev price ($ per 1M input tokens)</span><input id="price" type="number" step="0.001" min="0" /></label>
+  <label class="field inline"><span>Speech price ($ per minute)</span><input id="sttPrice" type="number" step="0.0001" min="0" /></label>
+  <p class="hint">Prices are only used for the cost estimates. Defaults are the list prices at <a href="https://docs.typesafe.ai/models" target="_blank">docs.typesafe.ai/models</a> and deepgram.com/pricing.</p>
   <div class="row buttons">
     <button id="clearCache" type="button" class="quiet small">Clear cached results</button>
     <button id="liveToggle" type="button" class="quiet small">Start listening in this tab</button>
