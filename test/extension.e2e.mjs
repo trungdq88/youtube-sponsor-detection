@@ -112,7 +112,7 @@ await page.waitForSelector('#sponsor-skip-panel .ss-segment', { timeout: 15000 }
 const range = await page.textContent('#sponsor-skip-panel .ss-range');
 assert.match(range, /^1:2\d – 2:5\d$/, `range ${range}`);
 const status = await page.textContent('#sponsor-skip-panel .ss-status');
-assert.match(status, /1 sponsor read found \(cached\)/, status);
+assert.match(status, /1 sponsor read \(cached\)/, status);
 const thisVideo = await page.textContent('#sponsor-skip-panel .ss-stat-value');
 assert.match(thisVideo, /2,400 tokens · 3 calls · \$0\.0001/, thisVideo);
 
@@ -167,9 +167,10 @@ await page.goto(`https://www.youtube.com/watch?v=${VIDEO_ID}`);
 await page.waitForSelector('#sponsor-skip-panel .ss-body', { timeout: 15000 });
 // Listening starts on its own once the video plays.
 await page.evaluate(async () => { const v = document.querySelector('video'); v.muted = true; await v.play().catch(() => {}); });
+await page.click('#sponsor-skip-panel .ss-log-toggle');
 await page.waitForFunction(() => /Capturing the video element/.test(document.querySelector('#sponsor-skip-panel .ss-log-list')?.textContent ?? ''), null, { timeout: 15000 })
   .catch(async (e) => { console.log('live log:', await page.textContent('#sponsor-skip-panel .ss-body')); throw e; });
-await page.waitForFunction(() => document.querySelector('#sponsor-skip-panel .ss-controls')?.textContent.includes('Stop listening'), null, { timeout: 5000 });
+await page.waitForFunction(() => document.querySelector('#sponsor-skip-panel .ss-controls')?.textContent.includes('Stop'), null, { timeout: 5000 });
 const liveLog = await page.textContent('#sponsor-skip-panel .ss-log-list');
 console.log('live log:', liveLog.replace(/\s+/g, ' ').slice(0, 300));
 const heardSeconds = await popup.evaluate(async () => {
@@ -180,11 +181,11 @@ const heardSeconds = await popup.evaluate(async () => {
 console.log('audio relayed to the worker (s):', heardSeconds);
 assert.ok(heardSeconds > 5, `expected ~10 s of audio to reach the offscreen document, got ${heardSeconds}`);
 // Stop is an opt-out for this video: the button comes back and play does not restart it.
-await page.click('#sponsor-skip-panel .ss-controls .ss-button');
-await page.waitForSelector('#sponsor-skip-panel .ss-start .ss-button', { timeout: 5000 });
+await page.click('#sponsor-skip-panel .ss-actions .ss-quiet');
+await page.waitForSelector('#sponsor-skip-panel .ss-listen', { timeout: 5000 });
 await page.evaluate(async () => { const v = document.querySelector('video'); v.pause(); await v.play().catch(() => {}); });
 await new Promise((r) => setTimeout(r, 1500));
-assert.match(await page.textContent('#sponsor-skip-panel .ss-status'), /Listening is off for this video/);
+assert.match(await page.textContent('#sponsor-skip-panel .ss-audio-label'), /Audio off for this video/);
 // Smart mode: the transcript's cached read (1:2x – 2:5x) decides when the
 // audio runs. Early in the video it stays off; near the read it comes on.
 await popup.evaluate(
@@ -208,13 +209,25 @@ await page.waitForSelector('#sponsor-skip-panel .ss-segment', { timeout: 15000 }
 await page.evaluate(async () => { const v = document.querySelector('video'); v.muted = true; v.currentTime = 10; await v.play().catch(() => {}); });
 await new Promise((r) => setTimeout(r, 2500));
 let smartStatus = await page.textContent('#sponsor-skip-panel .ss-body');
-assert.match(smartStatus, /Audio is off; it comes on near each candidate read/, smartStatus);
-assert.doesNotMatch(smartStatus, /Stop listening/, 'audio must not run far from the read');
+assert.match(smartStatus, /Audio off until near a read/, smartStatus);
+assert.doesNotMatch(await page.textContent('#sponsor-skip-panel .ss-actions'), /Stop/, 'audio must not run far from the read');
+await page.click('#sponsor-skip-panel .ss-log-toggle');
 await page.evaluate((t) => { document.querySelector('video').currentTime = t; }, seconds(14) - 10);
 await page.waitForFunction(() => /Capturing the video element/.test(document.querySelector('#sponsor-skip-panel .ss-log-list')?.textContent ?? ''), null, { timeout: 10000 })
   .catch(async (e) => { console.log('smart body:', await page.textContent('#sponsor-skip-panel .ss-body')); throw e; });
-smartStatus = await page.textContent('#sponsor-skip-panel .ss-body');
-assert.match(smartStatus, /Stop listening/, smartStatus);
+smartStatus = await page.textContent('#sponsor-skip-panel .ss-actions');
+assert.match(smartStatus, /Stop/, smartStatus);
+// Layout: the panel keeps its height while the audio state changes.
+const heights = await page.evaluate(() => {
+  const panel = document.querySelector('#sponsor-skip-panel');
+  return { body: panel.getBoundingClientRect().height, audio: panel.querySelector('.ss-audio').getBoundingClientRect().height };
+});
+console.log('panel heights:', heights);
+if (process.env.SHOT_SMART) {
+  const box = await (await page.$('#sponsor-skip-panel')).boundingBox();
+  await page.screenshot({ path: process.env.SHOT_SMART, clip: { x: box.x - 8, y: box.y - 8, width: box.width + 16, height: box.height + 16 } });
+}
+assert.equal(Math.round(heights.audio), 44);
 console.log('smart mode: audio came on near the read');
 
 await popup.evaluate(async () => {
