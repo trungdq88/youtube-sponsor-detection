@@ -112,13 +112,24 @@ async function analyze(force) {
   }
 }
 
-/** Caption tracks from the live player first, then from the watch page HTML. */
+/**
+ * Captions for the video, from whichever route YouTube still serves:
+ *  1. the caption track from the live player (or the watch page HTML), fetched as json3;
+ *  2. the transcript panel behind YouTube's own "Show transcript" button.
+ *
+ * Route 1 is the same file the player uses for subtitles, but YouTube now
+ * answers those URLs with an empty 200 unless the request carries a
+ * proof-of-origin token the player generates internally. When that happens we
+ * fall through to route 2, which is the request the page itself makes.
+ */
 async function getCaptions(videoId) {
   let tracks = null;
   let title = null;
+  let innertube = null;
 
   for (let attempt = 0; attempt < 6 && !tracks; attempt++) {
     const answer = await askPage();
+    innertube ??= answer?.innertube ?? null;
     if (answer?.videoId === videoId && answer.tracks?.length) {
       tracks = answer.tracks;
       title = answer.title;
@@ -132,21 +143,136 @@ async function getCaptions(videoId) {
     const player = extractPlayerResponse(html);
     tracks = player?.captions?.playerCaptionsTracklistRenderer?.captionTracks ?? null;
     title = player?.videoDetails?.title ?? title;
+    innertube ??= extractInnertubeConfig(html);
   }
 
-  const track = pickCaptionTrack(tracks ?? []);
-  if (!track) throw new Error('This video has no captions, so there is no transcript to read.');
+  title ??= document.title.replace(/ - YouTube$/, '');
+  const failures = [];
 
-  const url = new URL(track.baseUrl);
+  const track = pickCaptionTrack(tracks ?? []);
+  if (track) {
+    try {
+      const cues = await fetchCaptionTrack(track.baseUrl);
+      if (cues.length) return { cues, title };
+      failures.push('caption file had no text');
+    } catch (error) {
+      failures.push(`caption file: ${error.message}`);
+    }
+  } else {
+    failures.push('no caption tracks in the player response');
+  }
+
+  try {
+    const cues = await fetchTranscriptPanel(videoId, innertube);
+    if (cues.length) return { cues, title };
+    failures.push('transcript panel had no segments');
+  } catch (error) {
+    failures.push(`transcript panel: ${error.message}`);
+  }
+
+  console.warn('[sponsor-skip] no transcript:', failures.join(' | '));
+  if (!track) throw new Error('This video has no captions, so there is no transcript to read.');
+  throw new Error('YouTube would not hand over the transcript for this video. Try again in a moment.');
+}
+
+async function fetchCaptionTrack(baseUrl) {
+  const url = new URL(baseUrl);
   url.searchParams.set('fmt', 'json3');
   const response = await fetch(url, { credentials: 'include' });
   if (!response.ok) throw new Error(`YouTube captions responded ${response.status}.`);
   const text = await response.text();
   if (!text.trim()) throw new Error('YouTube returned an empty caption file.');
+  return parseJson3(JSON.parse(text));
+}
 
-  const cues = parseJson3(JSON.parse(text));
-  if (!cues.length) throw new Error('The caption file had no text in it.');
-  return { cues, title: title ?? document.title.replace(/ - YouTube$/, '') };
+// ---- transcript panel -----------------------------------------------------
+
+const INNERTUBE_FALLBACK = {
+  apiKey: null,
+  context: { client: { clientName: 'WEB', clientVersion: '2.20250101.00.00', hl: 'en', gl: 'US' } }
+};
+
+/**
+ * The transcript panel is two InnerTube calls: `next` gives the panel's
+ * `getTranscriptEndpoint.params` for this video, `get_transcript` returns the
+ * segments. Cookies are left out on purpose: with them, YouTube demands the
+ * signed Authorization header the page adds, and answers 401 without it.
+ */
+async function fetchTranscriptPanel(videoId, innertube) {
+  const config = innertube?.context ? innertube : INNERTUBE_FALLBACK;
+  const next = await innertubeCall('next', { videoId }, config);
+  const params = findTranscriptParams(next);
+  if (!params) throw new Error('no transcript panel for this video');
+
+  const data = await innertubeCall('get_transcript', { params }, config);
+  const segments = findKey(data, 'transcriptSegmentListRenderer')?.initialSegments ?? [];
+  const cues = [];
+  for (const item of segments) {
+    const seg = item.transcriptSegmentRenderer;
+    if (!seg?.snippet) continue;
+    const text = (seg.snippet.runs ?? [])
+      .map((r) => r.text ?? '')
+      .join('')
+      .replace(/\s+/g, ' ')
+      .trim();
+    const startMs = Number(seg.startMs);
+    if (!text || !Number.isFinite(startMs)) continue;
+    cues.push({ text, startMs, endMs: Number(seg.endMs ?? seg.startMs) });
+  }
+  return cues;
+}
+
+async function innertubeCall(endpoint, body, config) {
+  const url = new URL(`https://www.youtube.com/youtubei/v1/${endpoint}`);
+  url.searchParams.set('prettyPrint', 'false');
+  if (config.apiKey) url.searchParams.set('key', config.apiKey);
+  const client = config.context.client ?? {};
+  const response = await fetch(url, {
+    method: 'POST',
+    credentials: 'omit',
+    headers: {
+      'content-type': 'application/json',
+      'x-youtube-client-name': '1',
+      'x-youtube-client-version': client.clientVersion ?? INNERTUBE_FALLBACK.context.client.clientVersion
+    },
+    body: JSON.stringify({ context: config.context, ...body })
+  });
+  if (!response.ok) throw new Error(`${endpoint} responded ${response.status}`);
+  return response.json();
+}
+
+function findTranscriptParams(next) {
+  for (const panel of next?.engagementPanels ?? []) {
+    const endpoint = findKey(panel, 'getTranscriptEndpoint');
+    if (endpoint?.params) return endpoint.params;
+  }
+  return findKey(next, 'getTranscriptEndpoint')?.params ?? null;
+}
+
+/** Depth-first search for the first object stored under `key`. */
+function findKey(node, key, depth = 0) {
+  if (!node || typeof node !== 'object' || depth > 40) return null;
+  if (Array.isArray(node)) {
+    for (const item of node) {
+      const found = findKey(item, key, depth + 1);
+      if (found) return found;
+    }
+    return null;
+  }
+  if (node[key] && typeof node[key] === 'object') return node[key];
+  for (const value of Object.values(node)) {
+    const found = findKey(value, key, depth + 1);
+    if (found) return found;
+  }
+  return null;
+}
+
+function extractInnertubeConfig(html) {
+  const key = html.match(/"INNERTUBE_API_KEY":"([^"]+)"/)?.[1] ?? null;
+  const at = html.indexOf('"INNERTUBE_CONTEXT":');
+  if (at < 0) return null;
+  const context = extractJsonObject(html, html.indexOf('{', at));
+  return context ? { apiKey: key, context } : null;
 }
 
 function askPage() {
@@ -168,10 +294,14 @@ function askPage() {
 }
 
 function extractPlayerResponse(html) {
-  const key = 'ytInitialPlayerResponse';
-  const at = html.indexOf(key);
+  const at = html.indexOf('ytInitialPlayerResponse');
   if (at < 0) return null;
-  const open = html.indexOf('{', at);
+  return extractJsonObject(html, html.indexOf('{', at));
+}
+
+/** Parse the JSON object that opens at `open`, tracking braces through strings. */
+function extractJsonObject(html, open) {
+  if (open < 0) return null;
   let depth = 0;
   let inString = false;
   for (let i = open; i < html.length; i++) {
