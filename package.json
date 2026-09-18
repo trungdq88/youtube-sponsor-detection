@@ -12,7 +12,8 @@
     "analyze": "node --env-file-if-exists=.env scripts/analyze.js",
     "eval": "node --env-file-if-exists=.env scripts/eval.js",
     "sample": "node scripts/sponsorblock-sample.js",
-    "transcripts": "node scripts/save-transcripts.js"
+    "transcripts": "node scripts/save-transcripts.js",
+    "screenshots": "node scripts/screenshots.mjs"
   },
   "engines": {
     "node": ">=20"
