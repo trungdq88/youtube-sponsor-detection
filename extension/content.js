@@ -1,10 +1,11 @@
 // Runs on youtube.com. Gets the captions for the current video, hands them to
 // the background worker for Jev, then draws the panel and does the skipping.
 //
-// In live mode (settings.mode === 'live') there is no transcript: the
-// background worker streams what the speech API hears in this tab, the
-// controller in lib/live.js decides when Jev should be asked, and the video
-// jumps forward in fixed steps while the answer is "still a sponsor read".
+// In live mode (settings.mode === 'live') there is no transcript: this script
+// captures the <video> element's audio, streams it to the background worker
+// (which feeds the speech API), gets back what was heard, lets the controller
+// in lib/live.js decide when Jev should be asked, and jumps the video forward
+// in fixed steps while the answer is "still a sponsor read".
 
 const PANEL_ID = 'sponsor-skip-panel';
 const MARKER_CLASS = 'sponsor-skip-marker';
@@ -37,6 +38,7 @@ const state = {
   }
 };
 let liveController = null;
+let liveCapture = null; // { video, context, node, port, source }
 
 // ---- lifecycle ------------------------------------------------------------
 
@@ -59,10 +61,17 @@ chrome.storage.onChanged.addListener((changes, area) => {
   render();
 });
 
-chrome.runtime.onMessage.addListener((message) => {
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message?.type === 'live-transcript') onLiveTranscript(message);
   else if (message?.type === 'live-status') onLiveStatus(message);
   else if (message?.type === 'live-log') liveLog('status', message.text);
+  else if (message?.type === 'live-begin') {
+    // The popup's Start button: same thing as the panel's.
+    startListening()
+      .then(() => sendResponse({ ok: true }))
+      .catch((error) => sendResponse({ ok: false, error: error.message }));
+    return true;
+  }
 });
 
 setInterval(() => {
@@ -99,6 +108,7 @@ async function onNavigate() {
   if (isLive()) {
     liveController?.reset();
     await refreshLiveState();
+    if (liveCapture && liveCapture.video !== findVideo()) reattachCapture();
     render();
     return;
   }
@@ -111,8 +121,9 @@ async function onModeChange(mode) {
     liveController?.reset();
     await refreshLiveState();
     render();
-  } else if (state.videoId && !state.analysis && !state.busy) {
-    analyze(false);
+  } else {
+    stopCapture();
+    if (state.videoId && !state.analysis && !state.busy) analyze(false);
   }
 }
 
@@ -509,6 +520,116 @@ function liveLog(kind, text) {
   fn(`[sponsor-skip live] ${text}`);
 }
 
+// ---- audio capture --------------------------------------------------------
+//
+// The audio comes from the <video> element itself (captureStream), not from
+// Chrome's tab capture, which only works from a click on the extension icon.
+// The element's own playback is untouched. Chunks of 16 kHz PCM go to the
+// background worker over a port, base64 because ports carry JSON.
+
+function findVideo() {
+  return document.querySelector('video.html5-main-video') ?? document.querySelector('video');
+}
+
+/** Start listening in this tab: open the speech socket, then start streaming audio. */
+async function startListening() {
+  if (liveCapture) return;
+  const video = findVideo();
+  if (!video) throw new Error('No video on this page yet.');
+  const title = document.title.replace(/ - YouTube$/, '');
+  const r = await send({ type: 'live-start-here', title });
+  if (!r?.ok) throw new Error(r?.error ?? 'Could not start listening.');
+  state.live.thisTab = true;
+  state.live.status = 'connecting';
+  state.live.error = null;
+  liveLog('status', 'Starting to listen in this tab');
+  try {
+    await attachCapture(video);
+  } catch (error) {
+    await send({ type: 'live-stop' });
+    liveLog('error', `Could not capture the video audio: ${error.message}`);
+    throw error;
+  }
+  render();
+}
+
+async function attachCapture(video) {
+  const context = new AudioContext();
+  await context.audioWorklet.addModule(chrome.runtime.getURL('pcm-worklet.js'));
+  const node = new AudioWorkletNode(context, 'pcm-capture');
+
+  let source;
+  const stream = typeof video.captureStream === 'function' ? video.captureStream() : null;
+  const tracks = stream?.getAudioTracks() ?? [];
+  if (tracks.length) {
+    source = context.createMediaStreamSource(new MediaStream(tracks));
+    liveLog('status', 'Capturing the video element\'s audio stream');
+  } else {
+    // Older path: route the element through the graph and back out to the speakers.
+    source = context.createMediaElementSource(video);
+    source.connect(context.destination);
+    liveLog('status', 'Capturing the video element through an audio graph');
+  }
+  source.connect(node);
+  // The worklet needs a sink to run; a silent gain keeps the captured audio out of the speakers.
+  const sink = context.createGain();
+  sink.gain.value = 0;
+  node.connect(sink).connect(context.destination);
+  if (context.state === 'suspended') await context.resume();
+
+  const port = chrome.runtime.connect({ name: 'sponsor-skip-live' });
+  port.onDisconnect.addListener(() => {
+    if (liveCapture?.port === port) {
+      stopCapture(false);
+      liveLog('error', 'Lost the connection to the extension; press Start listening again.');
+      render();
+    }
+  });
+  node.port.onmessage = ({ data }) => {
+    if (liveCapture?.port !== port) return;
+    const bytes = new Uint8Array(data);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i += 0x2000) binary += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x2000));
+    port.postMessage({ type: 'audio', pcm: btoa(binary) });
+  };
+  liveCapture = { video, context, node, port, source, stream };
+}
+
+/** YouTube swapped the <video> element (rare); move the capture to the new one. */
+async function reattachCapture() {
+  const video = findVideo();
+  if (!video) return;
+  stopCapture(false);
+  try {
+    await attachCapture(video);
+    liveLog('status', 'Re-attached to the new video element');
+  } catch (error) {
+    liveLog('error', `Could not re-attach: ${error.message}`);
+  }
+}
+
+function stopCapture(tellWorker = true) {
+  const c = liveCapture;
+  liveCapture = null;
+  if (c) {
+    try { c.node.port.onmessage = null; c.port.disconnect(); } catch {}
+    try { c.source.disconnect(); c.node.disconnect(); } catch {}
+    if (c.stream) c.stream.getTracks().forEach((t) => t.stop());
+    c.context.close().catch(() => {});
+  }
+  if (tellWorker) send({ type: 'live-stop' });
+  state.live.thisTab = false;
+  state.live.hearing = '';
+  liveController?.reset();
+}
+
+async function stopListening() {
+  liveLog('status', 'Stopped listening');
+  stopCapture(true);
+  state.live.status = 'stopped';
+  render();
+}
+
 async function refreshLiveState() {
   const r = await send({ type: 'live-state' });
   if (!r?.ok) return;
@@ -545,10 +666,7 @@ function onLiveStatus({ state: status, error }) {
   state.live.status = status;
   state.live.error = error ?? null;
   state.live.thisTab = status === 'connecting' || status === 'listening';
-  if (!state.live.thisTab) {
-    state.live.hearing = '';
-    liveController?.reset();
-  }
+  if (!state.live.thisTab) stopCapture(false);
   render();
 }
 
@@ -677,8 +795,21 @@ function liveBody(b) {
   if (!live.thisTab) {
     b.append(el('div', 'ss-status', live.status === 'error' && live.error
       ? `Not listening: ${live.error}`
-      : 'Live mode is on, but this tab is not being listened to yet.'));
-    b.append(el('div', 'ss-hint', 'Click the extension icon and press "Start listening in this tab". Chrome only lets the extension capture a tab from that click.'));
+      : 'Live mode: the video is heard as it plays and sponsor reads are skipped in steps.'));
+    const start = button('Start listening', async () => {
+      start.disabled = true;
+      try {
+        await startListening();
+      } catch (error) {
+        state.live.status = 'error';
+        state.live.error = error.message;
+        render();
+      }
+    }, '');
+    const row = el('div', 'ss-start');
+    row.append(start);
+    b.append(row);
+    if (state.live.log.length) b.append(liveLogView());
     return;
   }
   if (live.status === 'connecting') {
@@ -806,14 +937,7 @@ function body() {
   auto.append(box, document.createTextNode(state.paused ? 'Auto-skip (paused on this video)' : 'Auto-skip'));
   controls.append(auto);
   if (isLive()) {
-    if (state.live.thisTab) {
-      controls.append(button('Stop listening', async () => {
-        await send({ type: 'live-stop' });
-        state.live.thisTab = false;
-        state.live.status = 'stopped';
-        render();
-      }, 'ss-small'));
-    }
+    if (state.live.thisTab) controls.append(button('Stop listening', stopListening, 'ss-small'));
   } else {
     controls.append(button('Re-analyze', () => analyze(true), 'ss-small', state.busy));
   }

@@ -155,6 +155,37 @@ await page.waitForFunction(() => !/asking Jev/.test(document.querySelector('#spo
 const outcome = await page.textContent('#sponsor-skip-panel .ss-status');
 console.log('uncached outcome:', outcome);
 
+// Live mode: the panel's Start button captures the element's audio and the
+// worker gets chunks. The speech socket itself cannot be reached from here;
+// what is checked is that the capture attaches without page errors and that
+// audio flows to the worker.
+await popup.evaluate(async () => {
+  const { settings } = await chrome.storage.local.get('settings');
+  await chrome.storage.local.set({ settings: { ...settings, mode: 'live', deepgramKey: 'dg_test' } });
+});
+await page.goto(`https://www.youtube.com/watch?v=${VIDEO_ID}`);
+await page.waitForSelector('#sponsor-skip-panel .ss-start .ss-button', { timeout: 15000 });
+await page.evaluate(async () => { const v = document.querySelector('video'); v.muted = true; await v.play().catch(() => {}); });
+await page.click('#sponsor-skip-panel .ss-start .ss-button');
+await page.waitForFunction(() => /Capturing the video element/.test(document.querySelector('#sponsor-skip-panel .ss-log-list')?.textContent ?? ''), null, { timeout: 15000 })
+  .catch(async (e) => { console.log('live log:', await page.textContent('#sponsor-skip-panel .ss-body')); throw e; });
+await page.waitForFunction(() => document.querySelector('#sponsor-skip-panel .ss-controls')?.textContent.includes('Stop listening'), null, { timeout: 5000 });
+const liveLog = await page.textContent('#sponsor-skip-panel .ss-log-list');
+console.log('live log:', liveLog.replace(/\s+/g, ' ').slice(0, 300));
+const heardSeconds = await popup.evaluate(async () => {
+  await new Promise((r) => setTimeout(r, 11000));
+  const { stats } = await chrome.storage.local.get('stats');
+  return stats?.liveSeconds ?? 0;
+});
+console.log('audio relayed to the worker (s):', heardSeconds);
+assert.ok(heardSeconds > 5, `expected ~10 s of audio to reach the offscreen document, got ${heardSeconds}`);
+await page.click('#sponsor-skip-panel .ss-controls .ss-button');
+await page.waitForSelector('#sponsor-skip-panel .ss-start .ss-button', { timeout: 5000 });
+await popup.evaluate(async () => {
+  const { settings } = await chrome.storage.local.get('settings');
+  await chrome.storage.local.set({ settings: { ...settings, mode: 'transcript' } });
+});
+
 // Popup renders stats.
 await popup.reload();
 await popup.waitForSelector('#stats tr');

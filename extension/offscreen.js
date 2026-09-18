@@ -1,10 +1,10 @@
-// Offscreen document for live mode. Manifest V3 service workers cannot hold
-// a media stream, so this page does: it takes the tab's audio, plays it back
-// so the viewer still hears the video, feeds 16 kHz PCM to the speech API's
-// socket, and forwards each transcript to the background worker with the
+// Offscreen document for live mode. It holds the speech API's socket, which
+// a service worker cannot keep open. The audio itself is captured on the
+// page (content.js, from the <video> element), relayed here in 100 ms chunks
+// by the background worker, and each transcript goes back with the
 // wall-clock time that audio played at.
 
-let capture = null; // { tabId, stream, contexts, provider, timers }
+let session = null; // { tabId, socket, base, sentSamples, reportedSeconds, timer }
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message?.target !== 'offscreen') return false;
@@ -19,10 +19,12 @@ async function run(message) {
     case 'live-capture-start':
       await stop();
       return start(message);
+    case 'live-audio':
+      return feed(message);
     case 'live-capture-stop':
       return stop();
     case 'live-capture-state':
-      return { active: Boolean(capture), tabId: capture?.tabId ?? null };
+      return { active: Boolean(session), tabId: session?.tabId ?? null };
     default:
       throw new Error(`unknown offscreen message ${message.type}`);
   }
@@ -32,82 +34,60 @@ function report(message) {
   chrome.runtime.sendMessage(message).catch?.(() => {});
 }
 
-async function start({ tabId, streamId, provider, key, model, language }) {
-  const stream = await navigator.mediaDevices.getUserMedia({
-    audio: { mandatory: { chromeMediaSource: 'tab', chromeMediaSourceId: streamId } },
-    video: false
-  });
-
-  // Capturing a tab silences it for the viewer; play the stream back so it stays audible.
-  const playback = new AudioContext();
-  playback.createMediaStreamSource(stream).connect(playback.destination);
-
-  // A second context at 16 kHz does the resampling for the speech API.
-  const analysis = new AudioContext({ sampleRate: 16000 });
-  await analysis.audioWorklet.addModule('pcm-worklet.js');
-  const worklet = new AudioWorkletNode(analysis, 'pcm-capture');
-  analysis.createMediaStreamSource(stream).connect(worklet);
-
+async function start({ tabId, provider, key, model, language }) {
   const status = (state, extra = {}) => report({ type: 'live-status', tabId, state, ...extra });
   const log = (text) => report({ type: 'live-log', tabId, text });
-  const session = PROVIDERS[provider ?? 'deepgram'];
-  if (!session) throw new Error(`unknown speech provider ${provider}`);
+  const impl = PROVIDERS[provider ?? 'deepgram'];
+  if (!impl) throw new Error(`unknown speech provider ${provider}`);
 
-  let base = 0; // epoch ms when the first audio sample went out: stream second 0
-  let sentSamples = 0;
-  let reportedSeconds = 0;
-  const socket = session.open({
+  const s = { tabId, base: 0, sentSamples: 0, reportedSeconds: 0, socket: null, timer: null };
+  s.socket = impl.open({
     key,
     model,
     language,
     onOpen: () => status('listening'),
     onLog: log,
     onTranscript: ({ text, isFinal, start, duration }) => {
-      if (!base) return;
+      if (!s.base) return;
       report({
         type: 'live-transcript',
         tabId,
         text,
         isFinal,
-        heardAt: base + start * 1000,
-        heardUntil: base + (start + duration) * 1000
+        heardAt: s.base + start * 1000,
+        heardUntil: s.base + (start + duration) * 1000
       });
     },
     onError: (error) => status('error', { error })
   });
-
-  worklet.port.onmessage = ({ data }) => {
-    if (!base) base = Date.now();
-    sentSamples += data.byteLength / 2;
-    socket.send(data);
-  };
-
-  const progress = setInterval(() => {
-    const seconds = sentSamples / 16000;
-    const delta = seconds - reportedSeconds;
-    reportedSeconds = seconds;
+  s.timer = setInterval(() => {
+    const seconds = s.sentSamples / 16000;
+    const delta = seconds - s.reportedSeconds;
+    s.reportedSeconds = seconds;
     if (delta > 0) report({ type: 'live-audio-progress', tabId, seconds: delta });
   }, 10000);
-
-  const [track] = stream.getAudioTracks();
-  track.addEventListener('ended', () => {
-    stop().then(() => status('ended'));
-  });
-
-  capture = { tabId, stream, contexts: [playback, analysis], socket, timers: [progress], track };
+  session = s;
   status('connecting');
-  log(`Capturing tab audio (${stream.getAudioTracks()[0]?.label || 'tab'}), connecting to ${provider ?? 'deepgram'} ${model || ''}`.trim());
+  log(`Connecting to ${provider ?? 'deepgram'} ${model || ''}`.trim());
   return { tabId };
 }
 
+/** One chunk of 16 kHz PCM from the page, base64 because ports carry JSON. */
+function feed({ tabId, pcm }) {
+  if (!session || session.tabId !== tabId) return {};
+  const bytes = Uint8Array.from(atob(pcm), (c) => c.charCodeAt(0));
+  if (!session.base) session.base = Date.now();
+  session.sentSamples += bytes.length / 2;
+  session.socket.send(bytes.buffer);
+  return {};
+}
+
 async function stop() {
-  if (!capture) return { active: false };
-  const c = capture;
-  capture = null;
-  c.timers.forEach(clearInterval);
-  try { c.socket.close(); } catch {}
-  c.stream.getTracks().forEach((t) => t.stop());
-  await Promise.all(c.contexts.map((ctx) => ctx.close().catch(() => {})));
+  if (!session) return { active: false };
+  const s = session;
+  session = null;
+  clearInterval(s.timer);
+  try { s.socket.close(); } catch {}
   return { active: false };
 }
 

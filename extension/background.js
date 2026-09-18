@@ -1,9 +1,11 @@
 // Service worker: holds the API keys, talks to TypeSafe, caches results per
 // video and keeps the running stats. The content script never sees a key.
 //
-// Live mode adds an offscreen document (offscreen.js) that captures the tab's
-// audio and streams it to a speech API; this worker relays its transcripts to
-// the tab and answers the tab's "is this a sponsor read?" checks with Jev.
+// Live mode adds an offscreen document (offscreen.js) that holds the speech
+// API's socket. The tab captures its own <video> audio and streams it here
+// over a port; this worker relays the audio to the offscreen document, the
+// transcripts back to the tab, and answers the tab's "is this a sponsor
+// read?" checks with Jev.
 
 import { buildLines } from './lib/transcript.js';
 import { findSponsorSegment } from './lib/jev.js';
@@ -77,7 +79,9 @@ async function handle(message, sender) {
 
     // Live mode: popup / panel
     case 'live-start':
-      return liveStart(message);
+      return liveStartFromPopup(message);
+    case 'live-start-here':
+      return liveStart(sender?.tab?.id, message.title);
     case 'live-stop':
       return liveStop();
     case 'live-state':
@@ -182,31 +186,53 @@ async function recordSkip(seconds) {
 
 // ---- live mode ------------------------------------------------------------
 
+/** The popup's button: ask the page in that tab to start capturing. */
+async function liveStartFromPopup({ tabId }) {
+  const answer = await chrome.tabs.sendMessage(tabId, { type: 'live-begin' }).catch(() => null);
+  if (!answer) throw new Error('Open a YouTube video in this tab first, then try again.');
+  if (!answer.ok) throw new Error(answer.error ?? 'The page could not start listening.');
+  return liveState();
+}
+
 /**
- * Start listening to a tab. The popup gets the stream id (that needs the
- * user's click) and hands it here; the offscreen document consumes it.
+ * Start listening to a tab: open the speech socket in the offscreen document
+ * and remember which tab is being heard. The tab then streams its audio in
+ * over a port (see the onConnect listener below).
  */
-async function liveStart({ tabId, streamId, title }) {
+async function liveStart(tabId, title) {
+  if (tabId === undefined) throw new Error('live-start-here must come from a tab');
   const { settings } = await getState();
-  if (!settings.apiKey) throw new Error('No TypeSafe API key. Add one first.');
-  if (settings.liveProvider === 'deepgram' && !settings.deepgramKey) throw new Error('No Deepgram API key. Add one first.');
+  if (!settings.apiKey) throw new Error('No TypeSafe API key. Click the extension icon to add one.');
+  if (settings.liveProvider === 'deepgram' && !settings.deepgramKey) throw new Error('No Deepgram API key. Click the extension icon to add one.');
 
   await ensureOffscreen();
   const started = await sendToOffscreen({
     type: 'live-capture-start',
     tabId,
-    streamId,
     provider: settings.liveProvider,
     key: settings.deepgramKey,
     model: settings.liveModel,
     language: settings.liveLanguage
   });
-  if (!started?.ok) throw new Error(started?.error ?? 'Could not start capturing the tab.');
+  if (!started?.ok) throw new Error(started?.error ?? 'Could not open the speech connection.');
 
   await chrome.storage.local.set({ live: { active: true, tabId, title: title ?? '', state: 'connecting', since: Date.now(), error: null } });
-  await setSettings({ mode: 'live' });
-  return liveState();
+  if (settings.mode !== 'live') await setSettings({ mode: 'live' });
+  return { ...(await liveState(tabId)), tabId };
 }
+
+// Audio from the page arrives on a long-lived port and is passed straight on.
+chrome.runtime.onConnect?.addListener((port) => {
+  if (port.name !== 'sponsor-skip-live') return;
+  const tabId = port.sender?.tab?.id;
+  port.onMessage.addListener((message) => {
+    if (message?.type === 'audio') sendToOffscreen({ type: 'live-audio', tabId, pcm: message.pcm }).catch(() => {});
+  });
+  port.onDisconnect.addListener(async () => {
+    const { live } = await chrome.storage.local.get('live');
+    if (live?.active && live.tabId === tabId) await liveStatus({ tabId, state: 'ended' });
+  });
+});
 
 async function liveStop() {
   if (await hasOffscreen()) {

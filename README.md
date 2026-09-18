@@ -72,10 +72,10 @@ extraction, the panel, markers, auto-skip and the popup. It needs
 ### Live audio mode
 
 The transcript route only works where YouTube hands the captions over. Live
-mode does without: the extension captures the tab's audio, streams it to a
-low-latency speech API (Deepgram, over a WebSocket), and asks Jev over the
-last minute of what was heard whether the speaker is *inside a sponsor read
-right now*. When the answer is yes the video jumps ahead by a fixed step
+mode does without: the extension captures the audio of the `<video>` element
+as it plays, streams it to a low-latency speech API (Deepgram, over a
+WebSocket), and asks Jev over the last minute of what was heard whether the
+speaker is *inside a sponsor read right now*. When the answer is yes the video jumps ahead by a fixed step
 (10 seconds by default). After the jump it listens for a few seconds and asks
 again, showing Jev the lines from before and after the jump side by side; if
 the read is still going it jumps again, otherwise it goes back to listening.
@@ -85,17 +85,19 @@ read starts. The trade is that the first seconds of every read are heard, and
 the last jump can overshoot into content by up to one step. Nothing in the
 transcript mode changes; the two are separate settings.
 
-To use it: paste a Deepgram key in the popup, open the YouTube video, pick
-**Live audio** in the popup and press **Start listening in this tab** (Chrome
-only lets an extension capture a tab from a click on the extension). The panel
-shows what is being heard, Jev's last verdict, the jumps, the speech and Jev
-cost, and a log of every utterance, check and jump (also in the page console
-under `[sponsor-skip live]`); **Stop listening** ends the capture. Capturing needs the video unmuted, and it
+To use it: paste a Deepgram key in the popup and pick **Live audio**. The
+panel on the video page then shows a **Start listening** button (the popup
+has the same button). The panel shows what is being heard, Jev's last
+verdict, the jumps, the speech and Jev cost, and a log of every utterance,
+check and jump (also in the page console under `[sponsor-skip live]`);
+**Stop listening** ends the capture. Capturing needs the video unmuted, and it
 listens to one tab at a time.
 
-The pieces: `offscreen.js` holds the audio stream and the speech socket (a
-service worker cannot), `src/live.js` is the decision loop (pure, tested in
-`test/live.test.js`), and the content script does the jumping. Other speech
+The pieces: the content script captures the element's audio and resamples it
+to 16 kHz with `pcm-worklet.js`, `offscreen.js` holds the speech socket (a
+service worker cannot) and gets the audio relayed through the worker,
+`src/live.js` is the decision loop (pure, tested in `test/live.test.js`), and
+the content script does the jumping. Other speech
 APIs slot in next to Deepgram in `offscreen.js`.
 
 ## How the Jev call works

@@ -91,28 +91,15 @@ async function showLiveState(note) {
   } else if (live.state === 'error' && live.error) {
     out.textContent = `Stopped: ${live.error}`;
   } else {
-    out.textContent = 'Not listening. Open the YouTube video in this tab, then press Start.';
+    out.textContent = 'Not listening. Press Start here or in the panel on the video page.';
   }
 }
 
-/**
- * Starting a capture needs the user's click, so it happens here: the popup
- * asks Chrome for a stream id for the active tab and hands it to the worker.
- */
+/** Same as the panel's button: the page in the active tab does the capturing. */
 async function startLiveOnActiveTab() {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab) throw new Error('No active tab.');
-  // tab.url is only visible with activeTab; when it is, insist on YouTube.
-  if (tab.url && !/^https:\/\/www\.youtube\.com\//.test(tab.url)) {
-    throw new Error('Open a YouTube video in this tab first.');
-  }
-  const streamId = await new Promise((resolve, reject) => {
-    chrome.tabCapture.getMediaStreamId({ targetTabId: tab.id }, (id) => {
-      if (chrome.runtime.lastError) reject(new Error(chrome.runtime.lastError.message));
-      else resolve(id);
-    });
-  });
-  const r = await send({ type: 'live-start', tabId: tab.id, streamId, title: tab.title ?? '' });
+  const r = await send({ type: 'live-start', tabId: tab.id });
   if (!r?.ok) throw new Error(r?.error ?? 'Could not start.');
 }
 
