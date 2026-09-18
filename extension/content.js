@@ -119,12 +119,15 @@ async function analyze(force) {
 /**
  * Captions for the video, from whichever route YouTube still serves:
  *  1. the caption track from the live player (or the watch page HTML), fetched as json3;
- *  2. the transcript panel behind YouTube's own "Show transcript" button.
+ *  2. the caption track the ANDROID client is given, which needs no token;
+ *  3. the transcript panel behind YouTube's own "Show transcript" button,
+ *     requested from the page itself with the page's cookies and signature;
+ *  4. the same panel, requested anonymously from this content script.
  *
  * Route 1 is the same file the player uses for subtitles, but YouTube now
  * answers those URLs with an empty 200 unless the request carries a
- * proof-of-origin token the player generates internally. When that happens we
- * fall through to route 2, which is the request the page itself makes.
+ * proof-of-origin token the player generates internally. The others are the
+ * routes transcript tools fell back to when that started.
  */
 async function getCaptions(videoId) {
   let tracks = null;
@@ -154,24 +157,20 @@ async function getCaptions(videoId) {
   const failures = [];
 
   const track = pickCaptionTrack(tracks ?? []);
-  if (track) {
+  const routes = [
+    ['caption file', () => (track ? fetchCaptionTrack(track.baseUrl) : Promise.reject(new Error('no caption tracks in the player response')))],
+    ['android captions', () => fetchAndroidCaptions(videoId)],
+    ['transcript panel (page)', () => fetchTranscriptPanelViaPage(videoId)],
+    ['transcript panel', () => fetchTranscriptPanel(videoId, innertube)]
+  ];
+  for (const [name, run] of routes) {
     try {
-      const cues = await fetchCaptionTrack(track.baseUrl);
+      const cues = await run();
       if (cues.length) return { cues, title };
-      failures.push('caption file had no text');
+      failures.push(`${name}: no text`);
     } catch (error) {
-      failures.push(`caption file: ${error.message}`);
+      failures.push(`${name}: ${error.message}`);
     }
-  } else {
-    failures.push('no caption tracks in the player response');
-  }
-
-  try {
-    const cues = await fetchTranscriptPanel(videoId, innertube);
-    if (cues.length) return { cues, title };
-    failures.push('transcript panel had no segments');
-  } catch (error) {
-    failures.push(`transcript panel: ${error.message}`);
   }
 
   const detail = failures.join(' | ');
@@ -195,6 +194,22 @@ async function fetchCaptionTrack(baseUrl) {
   return parseJson3(JSON.parse(text));
 }
 
+// ---- android captions -----------------------------------------------------
+
+/**
+ * The ANDROID client's player response carries caption URLs that YouTube still
+ * serves without a proof-of-origin token (the route youtube-transcript-api uses).
+ */
+async function fetchAndroidCaptions(videoId) {
+  const context = { client: { clientName: 'ANDROID', clientVersion: '20.10.38', hl: 'en' } };
+  const player = await innertubeCall('player', { videoId }, { apiKey: null, context }, { clientName: '3' });
+  const status = player?.playabilityStatus;
+  const tracks = player?.captions?.playerCaptionsTracklistRenderer?.captionTracks ?? [];
+  const track = pickCaptionTrack(tracks);
+  if (!track) throw new Error(status?.reason ?? status?.status ?? 'no caption tracks');
+  return fetchCaptionTrack(track.baseUrl);
+}
+
 // ---- transcript panel -----------------------------------------------------
 
 const INNERTUBE_FALLBACK = {
@@ -215,7 +230,18 @@ async function fetchTranscriptPanel(videoId, innertube) {
   if (!params) throw new Error('no transcript panel for this video');
 
   const data = await innertubeCall('get_transcript', { params }, config);
-  const segments = findKey(data, 'transcriptSegmentListRenderer')?.initialSegments ?? [];
+  return cuesFromTranscriptSegments(findKey(data, 'transcriptSegmentListRenderer')?.initialSegments ?? []);
+}
+
+/** The same two calls, made by the page bridge as the page itself would make them. */
+async function fetchTranscriptPanelViaPage(videoId) {
+  const answer = await askPageTranscript(videoId);
+  if (!answer) throw new Error('page did not answer');
+  if (answer.error) throw new Error(answer.error);
+  return cuesFromTranscriptSegments(answer.segments ?? []);
+}
+
+function cuesFromTranscriptSegments(segments) {
   const cues = [];
   for (const item of segments) {
     const seg = item.transcriptSegmentRenderer;
@@ -232,7 +258,7 @@ async function fetchTranscriptPanel(videoId, innertube) {
   return cues;
 }
 
-async function innertubeCall(endpoint, body, config) {
+async function innertubeCall(endpoint, body, config, headers = {}) {
   const url = new URL(`https://www.youtube.com/youtubei/v1/${endpoint}`);
   url.searchParams.set('prettyPrint', 'false');
   if (config.apiKey) url.searchParams.set('key', config.apiKey);
@@ -242,7 +268,7 @@ async function innertubeCall(endpoint, body, config) {
     credentials: 'omit',
     headers: {
       'content-type': 'application/json',
-      'x-youtube-client-name': '1',
+      'x-youtube-client-name': headers.clientName ?? '1',
       'x-youtube-client-version': client.clientVersion ?? INNERTUBE_FALLBACK.context.client.clientVersion
     },
     body: JSON.stringify({ context: config.context, ...body })
@@ -283,6 +309,24 @@ function extractInnertubeConfig(html) {
   if (at < 0) return null;
   const context = extractJsonObject(html, html.indexOf('{', at));
   return context ? { apiKey: key, context } : null;
+}
+
+function askPageTranscript(videoId) {
+  return new Promise((resolve) => {
+    const requestId = Math.random().toString(36).slice(2);
+    const timer = setTimeout(() => {
+      window.removeEventListener('message', onMessage);
+      resolve(null);
+    }, 15000);
+    function onMessage(event) {
+      if (event.source !== window || event.data?.type !== 'sponsor-skip:transcript' || event.data.requestId !== requestId) return;
+      clearTimeout(timer);
+      window.removeEventListener('message', onMessage);
+      resolve(event.data);
+    }
+    window.addEventListener('message', onMessage);
+    window.postMessage({ type: 'sponsor-skip:get-transcript', requestId, videoId }, '*');
+  });
 }
 
 function askPage() {
