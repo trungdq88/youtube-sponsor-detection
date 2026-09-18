@@ -93,7 +93,7 @@ async function analyze({ videoId, title, cues, force }) {
   };
 
   const started = Date.now();
-  const result = await findSponsorSegment(lines, { client, model: settings.model });
+  const result = await findSponsorSegment(lines, { client, model: settings.model, title });
   const usage = result.usage ?? { input_tokens: 0, output_tokens: 0 };
   const entry = {
     videoId,

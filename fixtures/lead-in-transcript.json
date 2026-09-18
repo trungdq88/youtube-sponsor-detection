@@ -1,0 +1,118 @@
+{
+ "title": "Things We Have That Future Generations Won't (demo outro)",
+ "note": "Synthetic outro modelled on a real video: the sponsor segment starts with the Open Sauce anecdote, minutes before Boot.dev is named.",
+ "leadInStartsAtSeconds": 1406.296,
+ "sponsorNamedAtSeconds": 1460.37,
+ "cues": [
+  {
+   "text": "and that is really the thing about zinc it is everywhere and nobody thinks about it until it is gone",
+   "startMs": 1360000,
+   "endMs": 1367407
+  },
+  {
+   "text": "so in general we are looking at a world that is a lot more regional and a lot less global",
+   "startMs": 1367407,
+   "endMs": 1374814
+  },
+  {
+   "text": "a lot more communal and less consumerist which honestly does not sound that bad",
+   "startMs": 1374814,
+   "endMs": 1380000
+  },
+  {
+   "text": "am I an optimist not really because I do think all of that follows a pretty massive collapse",
+   "startMs": 1380000,
+   "endMs": 1386666
+  },
+  {
+   "text": "the future is of course unwritten but whatever direction it goes it will be weirder than we expect",
+   "startMs": 1386666,
+   "endMs": 1393333
+  },
+  {
+   "text": "so chime in below how bad do you think it gets before we stabilize ourselves",
+   "startMs": 1393333,
+   "endMs": 1398888
+  },
+  {
+   "text": "which resources that I did not mention do you want to bring up this should be a fun comment section",
+   "startMs": 1398888,
+   "endMs": 1406296
+  },
+  {
+   "text": "so a couple months back I went to Open Sauce in San Francisco",
+   "startMs": 1406296,
+   "endMs": 1411111
+  },
+  {
+   "text": "if you are not familiar with it it is kind of like a creator convention but it focuses on makers and builders",
+   "startMs": 1411111,
+   "endMs": 1419259
+  },
+  {
+   "text": "people making robots cool new tech big nerd stuff",
+   "startMs": 1419259,
+   "endMs": 1422592
+  },
+  {
+   "text": "and probably no surprise but I met a lot of viewers of the channel there because you all are nerdy",
+   "startMs": 1422592,
+   "endMs": 1430000
+  },
+  {
+   "text": "like here is how nerdy this convention is I saw three separate people wearing shirts with regular expressions on them",
+   "startMs": 1430000,
+   "endMs": 1437407
+  },
+  {
+   "text": "and a bunch of you told me the same thing that you always wanted to learn to code and never got around to it",
+   "startMs": 1437407,
+   "endMs": 1446296
+  },
+  {
+   "text": "and I get that because every course starts with hello world and then dumps a textbook on you",
+   "startMs": 1446296,
+   "endMs": 1452962
+  },
+  {
+   "text": "which is why I was glad to finally try the sponsor of this outro because it does not do that",
+   "startMs": 1452962,
+   "endMs": 1460370
+  },
+  {
+   "text": "thanks to boot.dev for supporting this video boot.dev is a platform that teaches back end development by making you build things",
+   "startMs": 1460370,
+   "endMs": 1468148
+  },
+  {
+   "text": "you learn Python and Go by writing actual projects with a story running through it and it is honestly kind of addictive",
+   "startMs": 1468148,
+   "endMs": 1476296
+  },
+  {
+   "text": "they are offering you nerds twenty five percent off your entire first year on an annual plan",
+   "startMs": 1476296,
+   "endMs": 1482592
+  },
+  {
+   "text": "if you click the link down below or just scan the QR code here on screen",
+   "startMs": 1482592,
+   "endMs": 1488518
+  },
+  {
+   "text": "actually I bet you could learn how to program QR codes through this",
+   "startMs": 1488518,
+   "endMs": 1493333
+  },
+  {
+   "text": "thank you guys so much for watching now you go out there and have an eye opening rest of the week",
+   "startMs": 1493333,
+   "endMs": 1501111
+  },
+  {
+   "text": "stay safe and I will see you next Monday love you guys take care",
+   "startMs": 1501111,
+   "endMs": 1506296
+  }
+ ]
+}

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 import { buildLines, windowLines, estimateTokens, formatTimestamp, WINDOW_LINES } from '../src/transcript.js';
-import { findSponsorSegment, scanQuestions, refineQuestions } from '../src/jev.js';
+import { findSponsorSegment, scanQuestions, anchorQuestions, startQuestions } from '../src/jev.js';
 import { parseVideoId, parsePastedTranscript } from '../src/youtube.js';
 import { createStubClient } from './stub-client.js';
 
@@ -47,14 +47,15 @@ test('windows overlap and cover every line', () => {
 
 test('questions are well formed and always offer a no-match answer', () => {
   const lines = buildLines(fixture.cues).slice(0, 20);
-  for (const questions of [scanQuestions(lines), refineQuestions(lines)]) {
+  for (const questions of [scanQuestions(lines), anchorQuestions(lines), startQuestions(lines)]) {
     for (const [name, q] of Object.entries(questions)) {
-      assert.ok(typeof q.instructions === 'string' && q.instructions.length > 20, `${name} has instructions`);
+      assert.ok(typeof q.instructions?.question === 'string' && q.instructions.question.length > 20, `${name} asks a question`);
+      assert.ok(q.instructions.definition && q.instructions.shape, `${name} carries the sponsor definition`);
       if (q.type === 'choice') {
         const labels = Object.keys(q.criteria);
-        assert.ok(labels.length >= lines.length + 1, `${name} offers every line plus an escape hatch`);
-        assert.ok(labels.includes('none'), `${name} has a no-match option`);
         for (const line of lines) assert.ok(labels.includes(line.id), `${name} offers ${line.id}`);
+        // start_line reads back from a known naming line, so every option is a real line.
+        if (name !== 'start_line') assert.ok(labels.includes('none'), `${name} has a no-match option`);
       } else {
         assert.ok(q.criteria.true && q.criteria.false, `${name} describes both outcomes`);
       }
@@ -72,7 +73,7 @@ test('finds the sponsor read in the demo transcript', async () => {
   assert.ok(result.end && result.end.seconds > result.start.seconds, 'the end comes after the start');
   assert.ok(result.confidence > 0.7);
   assert.equal(result.segments.length, 1);
-  assert.equal(client.requests.length, 3, 'scan, refine, then a clean rescan of the window');
+  assert.equal(client.requests.length, 4, 'scan, anchor, trace back, then a clean rescan of the window');
 });
 
 test('a long video is scanned window by window, then refined once', async () => {
@@ -89,7 +90,7 @@ test('a long video is scanned window by window, then refined once', async () => 
 
   const scans = windowLines(lines).length;
   assert.ok(scans > 1, 'this transcript really is multi-window');
-  assert.equal(client.requests.length, scans + 2, 'scans, one refine, one clean rescan');
+  assert.equal(client.requests.length, scans + 3, 'scans, anchor, trace back, one clean rescan');
   assert.equal(result.status, 'found');
   assert.ok(result.start.seconds > offset / 1000, 'the sponsor read is found in the tail, not the filler');
   assert.ok(result.windows.every((w) => w.estimatedStateTokens < 25_000), 'each excerpt stays well inside the 32k state limit');
@@ -132,8 +133,8 @@ test('two sponsor reads in one window are both found, in order', async () => {
   assert.ok(second.start.seconds > 250 && second.start.seconds < 300, `second at ${second.start.seconds}s`);
   assert.ok(first.end.seconds < second.start.seconds, 'segments do not overlap');
   assert.ok(second.end, 'the second read has an end too');
-  // scan, refine, rescan, refine, rescan (clean)
-  assert.equal(client.requests.length, 5);
+  // scan, (anchor, trace, rescan) x2, the last rescan clean
+  assert.equal(client.requests.length, 7);
   assert.equal(result.start.seconds, first.start.seconds, 'top-level start is the earliest segment');
 });
 
@@ -153,6 +154,27 @@ test('two sponsor reads in different windows are both found', async () => {
   for (let i = 1; i < result.segments.length; i++) {
     assert.ok(result.segments[i].start.seconds > result.segments[i - 1].end.seconds, 'sorted and disjoint');
   }
+});
+
+test('a lead-in anecdote is part of the segment, from its first line', async () => {
+  const leadIn = JSON.parse(await readFile(new URL('../fixtures/lead-in-transcript.json', import.meta.url), 'utf8'));
+  const client = createStubClient();
+  const result = await findSponsorSegment(buildLines(leadIn.cues), { client, title: leadIn.title });
+
+  assert.equal(result.segments.length, 1);
+  const [seg] = result.segments;
+  assert.ok(Math.abs(seg.start.seconds - leadIn.leadInStartsAtSeconds) < 8, `starts at ${seg.start.seconds}, lead-in at ${leadIn.leadInStartsAtSeconds}`);
+  assert.ok(Math.abs(seg.anchor.seconds - leadIn.sponsorNamedAtSeconds) < 8, `named at ${seg.anchor.seconds}`);
+  assert.ok(seg.anchor.seconds - seg.start.seconds > 30, 'the lead-in runs well before the sponsor is named');
+  assert.ok(seg.end && seg.end.seconds > seg.anchor.seconds, 'ends after the offer');
+  assert.ok(seg.end.seconds < buildLines(leadIn.cues).at(-1).start, 'the sign-off is not part of the segment');
+
+  // The trace-back request carries the naming line in its state and offers only lines up to it.
+  const trace = client.requests.find((r) => r.questions.start_line);
+  assert.equal(trace.state.sponsor_named_at, seg.anchor.lineId);
+  assert.equal(trace.state.video_title, leadIn.title);
+  const offered = Object.keys(trace.questions.start_line.criteria);
+  assert.equal(offered.at(-1), seg.anchor.lineId, 'options end at the naming line');
 });
 
 test('no sponsor read means no timestamp', async () => {

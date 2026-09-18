@@ -8,7 +8,8 @@
     "start": "node --env-file-if-exists=.env server.js",
     "test": "node --test test/*.test.js",
     "build:ext": "cp src/transcript.js src/jev.js extension/lib/",
-    "test:ext": "node test/extension.e2e.mjs"
+    "test:ext": "node test/extension.e2e.mjs",
+    "analyze": "node --env-file-if-exists=.env scripts/analyze.js"
   },
   "engines": {
     "node": ">=20"

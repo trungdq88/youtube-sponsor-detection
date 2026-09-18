@@ -83,21 +83,35 @@ docs shaped the design:
   irrelevant material in the state. So long transcripts are scanned in windows
   of 80 lines (roughly ten minutes each) rather than in one go.
 
-The pipeline is in `src/jev.js` and runs in two stages:
+The pipeline is in `src/jev.js`. Every question carries the same definition
+of a sponsor segment, written for a model that reads literally: a **lead-in**
+(a story, an anecdote, a problem, a "quick break" that exists only to arrive
+at the sponsor, and can run for minutes before the sponsor is named), then the
+**pitch**, then the **offer**. The segment starts at the lead-in. Merch,
+memberships, "like and subscribe" and thanks are spelled out as not sponsor
+segments. The video title goes into the state so "leaving the subject of the
+video" means something.
 
-1. **Scan.** One request per window, all in parallel. Each asks two independent
-   questions over the same excerpt: a *noul* (“does a paid sponsor read begin in
-   this excerpt?”) and a *choice* over that window's line IDs plus a `none`
-   option (“which line is the first line of the sponsor read?”). The window with
-   the highest noul wins; below 0.35 the answer is “no sponsor read”.
-2. **Refine.** One request over the ~40 lines around the winning line, asking
-   for the exact first line, the last line (with a “continues past this
-   excerpt” option), and a confirming noul. The refine pass sees the whole
-   segment, so its presence probability caps the reported confidence.
-3. **Repeat.** Videos often carry more than one read, sometimes two in the
-   same window. The confirmed segment's lines are removed from its window,
-   that window is scanned again, and the loop continues until no window looks
-   like it still has a read starting in it (capped at six segments).
+1. **Scan.** One request per window, all in parallel: a *noul* ("does a
+   sponsor segment begin in this excerpt?") and a *choice* over the window's
+   line IDs plus `none` for the line that first **names** the sponsor. The
+   naming line is the easy, reliable anchor; the start is found from it.
+2. **Anchor.** One request over the ~85 lines around the winner (45 before,
+   40 after): a confirming *noul*, the naming line again, and the last line
+   of the segment (with a "continues past this excerpt" option).
+3. **Trace back.** One request over the lines up to and including the naming
+   line, with that line written into the state (`sponsor_named_at`), asking
+   for the first line of the segment: the moment the creator leaves the video's
+   subject to begin the lead-in. Jev does not do multi-hop reasoning well, so
+   the anchor is given rather than left for it to find.
+4. **Repeat.** The confirmed segment's lines are removed from its window, the
+   window is scanned again, and the loop continues until no window looks like
+   it still has a segment starting in it (capped at six).
+
+To check the questions against a real video, run
+`npm run analyze -- https://www.youtube.com/watch?v=…` with the key in `.env`.
+It prints each segment with its start, naming and end lines and the transcript
+around them (`--verbose` adds every scan window, `--json` dumps everything).
 
 Confidence bands follow the cookbook (0.7 = found, 0.35 = maybe); tune them on
 real videos. The UI shows every window's probability under *What Jev returned*.
@@ -111,7 +125,8 @@ src/youtube.js       link parsing, transcript fetch (youtubei.js), pasted-transc
 src/transcript.js    cues -> labelled lines, windowing, timestamp formatting
 src/jev.js           the questions and the two-stage pipeline
 public/              the page
-fixtures/            a synthetic transcript with a sponsor read at 1:27
+fixtures/            synthetic transcripts: a plain read at 1:27, and an outro with a long lead-in
+scripts/analyze.js   run the pipeline on a real video and print the boundaries
 test/                node --test suite, a stub client, and the mock API server
 ```
 

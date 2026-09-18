@@ -22,21 +22,40 @@ import { renderLines, windowLines, estimateTokens } from './transcript.js';
 export const FOUND = 0.7;
 export const MAYBE = 0.35;
 
-/** Lines of context kept around the candidate in the refine pass. */
-const REFINE_BEFORE = 6;
-const REFINE_AFTER = 34;
+/** Lines of context kept around the anchor in the refine pass. A lead-in
+ *  story can run three or four minutes before the sponsor is even named, so
+ *  the reach backwards is generous. */
+const REFINE_BEFORE = 45;
+const REFINE_AFTER = 40;
 
 const NO_START = 'none';
 const RUNS_PAST_EXCERPT = 'continues_past_excerpt';
 
-const SPONSOR = [
-  'A paid sponsor read is a promotional message for a product or service that',
-  'paid for placement in this video. It is usually read by the creator, sits',
-  'apart from the video\'s own subject, and typically names the sponsor and',
-  'points at a link, a discount code or a trial.',
-  'A creator promoting their own merchandise, channel membership, newsletter or',
-  'other videos is not a paid sponsor read.'
-].join(' ');
+/**
+ * What counts as a sponsor segment. Written for a model that reads literally:
+ * the lead-in is spelled out because the naive reading ("the line that names
+ * the sponsor") misses everything the creator says to set the pitch up.
+ */
+const SPONSOR = {
+  definition:
+    'A sponsor segment is the part of a video that exists to promote a third party that paid ' +
+    'for placement: a product, service, app or company. It is usually read by the creator.',
+  shape: [
+    'A sponsor segment normally has three parts, and it begins with the first one:',
+    '1. a lead-in, where the creator leaves the subject of the video and starts a story, an anecdote, ' +
+      'a problem, a question, a joke or a "quick break" whose only purpose is to arrive at the sponsor;',
+    '2. the pitch, where the sponsor or its product is named and described;',
+    '3. the offer, with a link, discount code, free trial, QR code or "link in the description".',
+    'The lead-in can last several minutes and can sound like normal content until the sponsor is named. ' +
+      'It still belongs to the sponsor segment from its first line.'
+  ].join(' '),
+  not_a_sponsor_segment: [
+    'The creator promoting their own merchandise, membership, Patreon, newsletter, courses or other videos.',
+    'Asking viewers to like, comment, subscribe or share.',
+    'Thanking viewers, patrons or the crew.',
+    'Content that stays on the subject of the video.'
+  ]
+};
 
 /**
  * @typedef {import('./transcript.js').Line} Line
@@ -44,74 +63,113 @@ const SPONSOR = [
  *             pNone: number, windowIndex: number }} Candidate
  */
 
-/** One scan request: "does a sponsor read start here, and on which line?" */
+/** One scan request: "is a sponsor segment in here, and where is the sponsor named?" */
 export function scanQuestions(lines) {
   /** @type {Record<string, null|string>} */
   const options = {};
   for (const line of lines) options[line.id] = null;
-  options[NO_START] = 'No line in this excerpt is the first line of a paid sponsor read.';
+  options[NO_START] = 'No line in this excerpt names a sponsor, its product or its offer.';
 
   return {
     sponsor_starts_here: {
       type: 'noul',
-      instructions:
-        `This is an excerpt of a YouTube video transcript. ${SPONSOR} ` +
-        'Does a paid sponsor read begin somewhere in this excerpt?',
+      instructions: {
+        question: 'Does a sponsor segment begin somewhere in this excerpt of the video transcript?',
+        ...SPONSOR
+      },
       criteria: {
-        true: 'The excerpt contains the moment the creator turns from the video\'s own content into a paid sponsor read.',
-        false:
-          'The excerpt contains no such moment. Either it is all regular content, or a sponsor read that began before this excerpt is still running through it.'
+        true: 'Somewhere in this excerpt the creator leaves the subject of the video and starts a sponsor segment: a lead-in, a pitch or an offer for a paying third party.',
+        false: 'No sponsor segment begins in this excerpt. Either it is all regular content, or a sponsor segment that started before this excerpt is still running through it.'
       }
     },
-    start_line: {
+    anchor_line: {
       type: 'choice',
-      instructions:
-        `${SPONSOR} Which labelled line is the FIRST line of the paid sponsor read? ` +
-        'Choose the line where the turn towards the sponsor begins, including a lead-in such as ' +
-        '"but first, a word from our sponsor" or "today\'s video is brought to you by", not the line ' +
-        'where the product is first named if the turn happened earlier.',
+      instructions: {
+        question:
+          'Which labelled line is the first line that names the sponsor, its product, or its offer? ' +
+          'For example "thanks to X for sponsoring", "X is an app that", "today\'s video is brought to you by X", ' +
+          'or a discount code or link for X. Choose the first such line, not the lead-in before it.',
+        ...SPONSOR
+      },
       criteria: options
     }
   };
 }
 
-/** One refine request over the lines around the candidate: exact first and last line. */
-export function refineQuestions(lines) {
+/**
+ * Refine, request one: confirm the segment, pin the line that names the
+ * sponsor, and find the last line.
+ */
+export function anchorQuestions(lines) {
   /** @type {Record<string, null|string>} */
-  const startOptions = {};
-  for (const line of lines) startOptions[line.id] = null;
-  startOptions[NO_START] = 'No line in this excerpt is the first line of a paid sponsor read.';
+  const anchorOptions = {};
+  for (const line of lines) anchorOptions[line.id] = null;
+  anchorOptions[NO_START] = 'No line in this excerpt names a sponsor, its product or its offer.';
 
   /** @type {Record<string, null|string>} */
   const endOptions = {};
   for (const line of lines) endOptions[line.id] = null;
-  endOptions[RUNS_PAST_EXCERPT] = 'The sponsor read is still running at the end of this excerpt.';
-  endOptions[NO_START] = 'This excerpt contains no paid sponsor read.';
+  endOptions[RUNS_PAST_EXCERPT] = 'The sponsor segment is still running at the end of this excerpt.';
+  endOptions[NO_START] = 'This excerpt contains no sponsor segment.';
 
   return {
     has_sponsor: {
       type: 'noul',
-      instructions:
-        `This is an excerpt of a YouTube video transcript. ${SPONSOR} ` +
-        'Does this excerpt contain a paid sponsor read?',
+      instructions: { question: 'Does this excerpt of the video transcript contain a sponsor segment?', ...SPONSOR },
       criteria: {
-        true: 'A paid sponsor read is read out somewhere in this excerpt.',
-        false: 'This excerpt is regular video content with no paid sponsor read in it.'
+        true: 'A sponsor segment for a paying third party is in this excerpt: its lead-in, its pitch, its offer, or all three.',
+        false: 'This excerpt is the video\'s own content with no sponsor segment in it.'
       }
     },
-    start_line: {
+    anchor_line: {
       type: 'choice',
-      instructions:
-        `${SPONSOR} Which labelled line is the FIRST line of the paid sponsor read — ` +
-        'the line where the turn towards the sponsor begins, lead-in included?',
-      criteria: startOptions
+      instructions: {
+        question:
+          'Which labelled line is the first line that names the sponsor, its product, or its offer? ' +
+          'Choose the first such line, not the lead-in before it.',
+        ...SPONSOR
+      },
+      criteria: anchorOptions
     },
     end_line: {
       type: 'choice',
-      instructions:
-        `${SPONSOR} Which labelled line is the LAST line of the paid sponsor read? ` +
-        'Choose the final line of the promotion, the one after which the video returns to its own content.',
+      instructions: {
+        question:
+          'Which labelled line is the LAST line of the sponsor segment: the final line of the pitch or the offer, ' +
+          'after which the creator returns to the video\'s own content, signs off, or the video ends?',
+        ...SPONSOR
+      },
       criteria: endOptions
+    }
+  };
+}
+
+/**
+ * Refine, request two: with the naming line known and in the state, read
+ * backwards for the first line of the lead-in.
+ */
+export function startQuestions(lines) {
+  /** @type {Record<string, null|string>} */
+  const options = {};
+  for (const line of lines) options[line.id] = null;
+
+  return {
+    start_line: {
+      type: 'choice',
+      instructions: {
+        question:
+          'The sponsor is named on the line given in `sponsor_named_at`. Reading backwards from that line, ' +
+          'which labelled line is the FIRST line of the sponsor segment: the moment the creator leaves the ' +
+          'subject of the video (`video_title`) and begins the lead-in that ends at the sponsor?',
+        rules: [
+          'The lead-in belongs to the sponsor segment from its first line, even when it sounds like a personal story, an anecdote, a problem or a question and the sponsor is only named minutes later.',
+          'Lines that are still about the subject of the video are not part of the sponsor segment, even the ones immediately before it.',
+          'A closing call for comments, likes or subscriptions belongs to the video, not to the sponsor segment.',
+          'If there is no lead-in and the segment opens by naming the sponsor, choose the line given in `sponsor_named_at`.'
+        ],
+        ...SPONSOR
+      },
+      criteria: options
     }
   };
 }
@@ -144,12 +202,13 @@ const BLIND_MASK_LINES = 12;
  *
  * @param {Line[]} lines
  * @param {{ client: { systemOne: (request: any) => Promise<any> }, model?: string,
- *           onProgress?: (e: any) => void }} opts
+ *           title?: string, onProgress?: (e: any) => void }} opts
  */
 export async function findSponsorSegment(lines, opts) {
   const client = opts?.client;
   if (!client) throw new Error('findSponsorSegment needs a client with systemOne()');
   const model = opts.model;
+  const title = opts.title ?? 'unknown';
   const report = opts.onProgress ?? (() => {});
 
   if (!lines.length) {
@@ -172,12 +231,13 @@ export async function findSponsorSegment(lines, opts) {
 
   const scan = async (windowLines_, index, total) => {
     const state = {
+      video_title: title,
       video_transcript_excerpt: renderLines(windowLines_),
       excerpt_position: `part ${index + 1} of ${total} of the video`
     };
     const result = await ask(state, scanQuestions(windowLines_));
     const presence = result.answers.sponsor_starts_here.noul;
-    const pick = bestLabel(result.answers.start_line.probabilities, new Set(windowLines_.map((l) => l.id)));
+    const pick = bestLabel(result.answers.anchor_line.probabilities, new Set(windowLines_.map((l) => l.id)));
     report({ stage: 'scan', window: index, presence });
     return {
       index,
@@ -185,7 +245,7 @@ export async function findSponsorSegment(lines, opts) {
       from: windowLines_[0].start,
       to: windowLines_[windowLines_.length - 1].end,
       presence,
-      pNone: result.answers.start_line.probabilities[NO_START] ?? 0,
+      pNone: result.answers.anchor_line.probabilities[NO_START] ?? 0,
       startLineId: pick.id,
       startLineProbability: pick.probability,
       estimatedStateTokens: estimateTokens(state.video_transcript_excerpt)
@@ -208,7 +268,7 @@ export async function findSponsorSegment(lines, opts) {
     if (!candidates.length) break;
     const winner = candidates.reduce((a, b) => (b.presence > a.presence ? b : a));
 
-    const segment = await refine(winner, lines, taken, ask, report);
+    const segment = await refine(winner, lines, taken, ask, report, title);
     if (segment) {
       segments.push(segment);
       for (const id of segment.lineIds) taken.add(id);
@@ -247,8 +307,13 @@ export async function findSponsorSegment(lines, opts) {
   };
 }
 
-/** Pin down one candidate's first and last line. Returns null when the refine pass rejects it. */
-async function refine(winner, lines, taken, ask, report) {
+/**
+ * Pin down one candidate. Two requests: the first confirms the segment and
+ * finds the line naming the sponsor and the last line; the second, with that
+ * naming line written into the state, reads backwards for the first line of
+ * the lead-in. Returns null when the refine pass rejects the candidate.
+ */
+async function refine(winner, lines, taken, ask, report, title) {
   const centre = lines.findIndex((l) => l.id === winner.startLineId);
   const from = Math.max(0, centre - REFINE_BEFORE);
   const slice = lines.slice(from, Math.min(lines.length, centre + REFINE_AFTER)).filter((l) => !taken.has(l.id));
@@ -256,35 +321,59 @@ async function refine(winner, lines, taken, ask, report) {
   report({ stage: 'refine', lines: slice.length });
 
   const allowed = new Set(slice.map((l) => l.id));
-  const refined = await ask(
-    {
-      video_transcript_excerpt: renderLines(slice),
-      excerpt_position: `an excerpt from the middle of the video, around ${Math.round(slice[0].start)} seconds in`
-    },
-    refineQuestions(slice)
+  const byId = new Map(slice.map((l) => [l.id, l]));
+  const position = `an excerpt from the video, starting around ${Math.round(slice[0].start)} seconds in`;
+
+  const anchored = await ask(
+    { video_title: title, video_transcript_excerpt: renderLines(slice), excerpt_position: position },
+    anchorQuestions(slice)
   );
 
-  const presence = refined.answers.has_sponsor.noul;
+  const presence = anchored.answers.has_sponsor.noul;
   if (presence < MAYBE) return null;
 
-  const startPick = bestLabel(refined.answers.start_line.probabilities, allowed);
-  const endPick = bestLabel(refined.answers.end_line.probabilities, allowed);
-  const endRunsOn = refined.answers.end_line.probabilities[RUNS_PAST_EXCERPT] ?? 0;
+  const anchorPick = bestLabel(anchored.answers.anchor_line.probabilities, allowed);
+  const endPick = bestLabel(anchored.answers.end_line.probabilities, allowed);
+  const endRunsOn = anchored.answers.end_line.probabilities[RUNS_PAST_EXCERPT] ?? 0;
+  const anchorLine = byId.get(anchorPick.id) ?? byId.get(winner.startLineId) ?? slice[0];
+  const anchorIndex = slice.indexOf(anchorLine);
 
-  const byId = new Map(slice.map((l) => [l.id, l]));
-  const startLine = byId.get(startPick.id) ?? byId.get(winner.startLineId) ?? slice[0];
+  // Second request: the lines up to and including the naming line, with the
+  // naming line spelled out in the state so the model reads backwards from it.
+  const before = slice.slice(0, anchorIndex + 1);
+  let startLine = anchorLine;
+  let startProbability = anchorPick.probability;
+  if (before.length > 1) {
+    const traced = await ask(
+      {
+        video_title: title,
+        video_transcript_excerpt: renderLines(before),
+        sponsor_named_at: anchorLine.id,
+        sponsor_named_at_text: anchorLine.text,
+        excerpt_position: position
+      },
+      startQuestions(before)
+    );
+    const startPick = bestLabel(traced.answers.start_line.probabilities, new Set(before.map((l) => l.id)));
+    if (startPick.id) {
+      startLine = byId.get(startPick.id);
+      startProbability = startPick.probability;
+    }
+  }
+
   const endLine = byId.get(endPick.id);
   const endOk = endLine && endRunsOn < endPick.probability && endLine.end > startLine.start;
 
   const startIndex = slice.indexOf(startLine);
-  const endIndex = endOk ? slice.indexOf(endLine) : Math.min(slice.length - 1, startIndex + BLIND_MASK_LINES);
+  const endIndex = endOk ? slice.indexOf(endLine) : Math.min(slice.length - 1, anchorIndex + BLIND_MASK_LINES);
   const lineIds = slice.slice(startIndex, endIndex + 1).map((l) => l.id);
 
   return {
     confidence: Math.min(winner.presence, presence),
     scanPresence: winner.presence,
     refinePresence: presence,
-    start: { lineId: startLine.id, seconds: startLine.start, text: startLine.text, probability: startPick.probability },
+    start: { lineId: startLine.id, seconds: startLine.start, text: startLine.text, probability: startProbability },
+    anchor: { lineId: anchorLine.id, seconds: anchorLine.start, text: anchorLine.text, probability: anchorPick.probability },
     end: endOk
       ? { lineId: endLine.id, seconds: endLine.end, text: endLine.text, probability: endPick.probability, runsPastExcerpt: endRunsOn }
       : null,

@@ -39,7 +39,7 @@ app.post('/api/analyze', async (req, res) => {
     if (!lines.length) return res.status(422).json({ error: 'That transcript came back empty.' });
 
     const started = Date.now();
-    const result = await findSponsorSegment(lines, { client });
+    const result = await findSponsorSegment(lines, { client, title: source.title });
 
     res.json({
       video: { id: source.videoId, title: source.title, source: source.kind },
