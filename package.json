@@ -6,12 +6,19 @@
   "description": "Paste a YouTube link, get the timestamp where the sponsor segment starts, found with Jev (TypeSafe System One).",
   "scripts": {
     "start": "node --env-file-if-exists=.env server.js",
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "build:ext": "cp src/transcript.js src/jev.js extension/lib/",
+    "test:ext": "node test/extension.e2e.mjs"
   },
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@typesafe-ai/sdk": "^0.6.0",
     "express": "^5.1.0",
     "youtubei.js": "^18.0.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
   }
 }

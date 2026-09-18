@@ -17,8 +17,10 @@ export function createStubClient() {
         return { id, text: rest.join('| ').toLowerCase() };
       });
 
-      const startRow = rows.find((r) => SPONSOR_MARKERS.some((m) => r.text.includes(m)));
-      const endRow = [...rows].reverse().find((r) => END_MARKERS.some((m) => r.text.includes(m)));
+      const startAt = rows.findIndex((r) => SPONSOR_MARKERS.some((m) => r.text.includes(m)));
+      const startRow = startAt >= 0 ? rows[startAt] : undefined;
+      // The end of *this* read: the first hand-back after its start.
+      const endRow = startRow ? rows.slice(startAt).find((r) => END_MARKERS.some((m) => r.text.includes(m))) : undefined;
       const answers = {};
 
       for (const [name, question] of Object.entries(request.questions)) {

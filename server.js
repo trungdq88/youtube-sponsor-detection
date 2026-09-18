@@ -83,6 +83,10 @@ async function loadTranscript({ url, transcript }) {
 function decorate(result) {
   if (result.start) result.start.timestamp = formatTimestamp(result.start.seconds);
   if (result.end) result.end.timestamp = formatTimestamp(result.end.seconds);
+  for (const seg of result.segments ?? []) {
+    seg.start.timestamp = formatTimestamp(seg.start.seconds);
+    if (seg.end) seg.end.timestamp = formatTimestamp(seg.end.seconds);
+  }
   for (const w of result.windows ?? []) {
     w.fromTimestamp = formatTimestamp(w.from);
     w.toTimestamp = formatTimestamp(w.to);

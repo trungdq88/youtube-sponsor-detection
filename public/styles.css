@@ -140,3 +140,16 @@ td.num { font-variant-numeric: tabular-nums; }
 .bar span { background: var(--accent); display: block; height: 100%; }
 
 footer.meta { color: var(--muted); font-size: 13px; margin-top: 18px; }
+
+.segment {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.actions.inline { margin: 0; margin-left: auto; }
+.actions.inline a { padding: 6px 10px; }
+.stamp { font-size: 34px; }

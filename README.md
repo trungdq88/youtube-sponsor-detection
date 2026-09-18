@@ -1,6 +1,7 @@
 # Sponsor Skip
 
-Paste a YouTube link, get the timestamp where the sponsor read starts.
+Paste a YouTube link, get the timestamps of the sponsor reads. Or install the
+Chrome extension and have them skipped while you watch.
 
 The transcript is fetched from YouTube, split into short labelled lines, and
 **Jev** (TypeSafe's System One model) picks the line where the sponsor read
@@ -35,6 +36,39 @@ TYPESAFE_API_KEY=local TYPESAFE_BASE_URL=http://127.0.0.1:4010 npm start
 
 Then click **Try it on the demo transcript**.
 
+## Chrome extension
+
+The `extension/` folder is a Manifest V3 extension that runs on YouTube watch
+pages, finds the sponsor reads with Jev, marks them on the progress bar and
+skips them automatically.
+
+1. Open `chrome://extensions`, turn on **Developer mode**, click **Load
+   unpacked**, and pick the `extension/` folder.
+2. Click the extension's icon and paste your TypeSafe API key.
+3. Open any YouTube video. A panel appears bottom-right with the segments,
+   an auto-skip toggle, a skip button per read, and the stats.
+
+The popup holds the settings (auto-skip on/off, the confidence a read needs
+before it is skipped automatically, the model, and the price used for the cost
+estimate) and the running totals: videos analysed, Jev requests, tokens, the
+estimated cost, reads skipped and time saved. Results are cached per video, so
+re-watching costs nothing; **Re-analyze** in the panel forces a fresh run.
+
+![extension](docs-extension.png)
+
+The extension talks to TypeSafe directly from its background worker; the key
+lives in `chrome.storage.local` on your machine and never reaches the page.
+Captions come from YouTube's player data for the current video (with a
+fallback to the watch page HTML), fetched as `json3` from within the page, so
+there is no server to run. The pipeline is the same code as the web app:
+`extension/lib/` is a copy of `src/`, refreshed with `npm run build:ext`
+(`npm test` fails if the copy drifts).
+
+`npm run test:ext` runs the extension in headless Chromium against a stand-in
+youtube.com page (Playwright routes the requests), covering injection, caption
+extraction, the panel, markers, auto-skip and the popup. It needs
+`npx playwright install chromium` once.
+
 ## How the Jev call works
 
 Jev answers typed questions (yes/no probabilities, choices with a probability
@@ -60,6 +94,10 @@ The pipeline is in `src/jev.js` and runs in two stages:
    for the exact first line, the last line (with a “continues past this
    excerpt” option), and a confirming noul. The refine pass sees the whole
    segment, so its presence probability caps the reported confidence.
+3. **Repeat.** Videos often carry more than one read, sometimes two in the
+   same window. The confirmed segment's lines are removed from its window,
+   that window is scanned again, and the loop continues until no window looks
+   like it still has a read starting in it (capped at six segments).
 
 Confidence bands follow the cookbook (0.7 = found, 0.35 = maybe); tune them on
 real videos. The UI shows every window's probability under *What Jev returned*.
@@ -67,6 +105,7 @@ real videos. The UI shows every window's probability under *What Jev returned*.
 ## Layout
 
 ```
+extension/           Chrome extension (MV3); lib/ is a copy of src/
 server.js            Express server; keeps the API key server-side
 src/youtube.js       link parsing, transcript fetch (youtubei.js), pasted-transcript parser
 src/transcript.js    cues -> labelled lines, windowing, timestamp formatting
@@ -83,7 +122,5 @@ test/                node --test suite, a stub client, and the mock API server
 - Transcript fetching uses `youtubei.js`, which talks to YouTube's private
   InnerTube API. It works without any YouTube key but can break when YouTube
   changes things; the paste box is the fallback.
-- Videos with more than one sponsor read: only the strongest window is refined.
-  Refining every window above the threshold is a small change in `findSponsorSegment`.
 - Boundaries are line-granular (lines are about 7 seconds), so a skip lands
   within a few seconds of the real cut.

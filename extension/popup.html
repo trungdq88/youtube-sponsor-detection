@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Sponsor Skip</title>
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+<h1>Sponsor Skip</h1>
+<p class="sub">Finds sponsor reads with Jev and skips them on YouTube.</p>
+
+<section>
+  <h2>TypeSafe API key</h2>
+  <div class="row">
+    <input id="apiKey" type="password" placeholder="apikey_…" autocomplete="off" />
+    <button id="saveKey" type="button">Save</button>
+  </div>
+  <p class="hint" id="keyState"></p>
+</section>
+
+<section>
+  <h2>Controls</h2>
+  <label class="row"><input id="autoSkip" type="checkbox" /> Auto-skip sponsor reads</label>
+  <label class="row">Skip only when confidence is at least <output id="thresholdOut">70%</output>
+    <input id="threshold" type="range" min="0.35" max="0.95" step="0.05" />
+  </label>
+  <label class="row">Model <input id="model" type="text" /></label>
+  <label class="row">Price per 1M input tokens ($) <input id="price" type="number" step="0.001" min="0" /></label>
+  <p class="hint">Default price is from <a href="https://docs.typesafe.ai/models" target="_blank">docs.typesafe.ai/models</a>; output tokens are free.</p>
+</section>
+
+<section>
+  <h2>Stats</h2>
+  <table id="stats"></table>
+  <div class="row buttons">
+    <button id="resetStats" type="button" class="quiet">Reset stats</button>
+    <button id="clearCache" type="button" class="quiet">Clear cached results</button>
+  </div>
+</section>
+<script src="popup.js"></script>
+</body>
+</html>

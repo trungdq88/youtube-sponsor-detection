@@ -1,0 +1,21 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Demo video - YouTube</title>
+<script>
+// What youtube.com puts on its watch page, reduced to the parts the extension reads.
+var ytInitialPlayerResponse = __PLAYER_RESPONSE__;
+</script>
+<style>
+  #movie_player { position: relative; width: 640px; height: 360px; background: #000; }
+  .ytp-progress-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: #444; }
+</style>
+</head>
+<body>
+<div id="movie_player">
+  <video class="html5-main-video" src="/media/silence.wav" preload="auto"></video>
+  <div class="ytp-progress-bar"></div>
+</div>
+<script>
+  // The real player exposes the player response through this method.
+  document.getElementById('movie_player').getPlayerResponse = function () { return ytInitialPlayerResponse; };
+</script>
+</body></html>

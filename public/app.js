@@ -89,45 +89,48 @@ function render(data) {
     return;
   }
 
-  const confident = result.status === 'found';
+  const segments = result.segments ?? [];
+  const plural = segments.length > 1;
   card.append(
     el('div', 'verdict', [
-      el('div', 'stamp', result.start.timestamp),
-      el('div', 'verdict-label', 'is where the sponsor read starts'),
-      el('span', `pill ${confident ? 'good' : 'warn'}`, `${(result.confidence * 100).toFixed(0)}% confident`)
+      el('div', 'stamp', segments.map((s) => s.start.timestamp).join('  ·  ')),
+      el('div', 'verdict-label', plural ? `${segments.length} sponsor reads found` : 'is where the sponsor read starts')
     ])
   );
 
-  if (result.end) {
-    card.append(el('p', 'hint', `It looks like it runs until ${result.end.timestamp}, about ${Math.round(result.end.seconds - result.start.seconds)} seconds long.`));
-  } else {
-    card.append(el('p', 'hint', 'Jev was not able to pin down where the sponsor read ends.'));
+  for (const seg of segments) {
+    const confident = seg.confidence >= 0.7;
+    const line = el('div', 'segment');
+    const range = seg.end
+      ? `${seg.start.timestamp} – ${seg.end.timestamp}, about ${Math.round(seg.end.seconds - seg.start.seconds)} seconds`
+      : `${seg.start.timestamp}, end not pinned down`;
+    line.append(el('span', '', range), el('span', `pill ${confident ? 'good' : 'warn'}`, `${(seg.confidence * 100).toFixed(0)}% confident`));
+    if (video.id) {
+      const actions = el('span', 'actions inline');
+      actions.append(link(`https://www.youtube.com/watch?v=${video.id}&t=${Math.floor(seg.start.seconds)}s`, 'Open here'));
+      if (seg.end) actions.append(link(`https://www.youtube.com/watch?v=${video.id}&t=${Math.ceil(seg.end.seconds)}s`, 'Skip past it'));
+      line.append(actions);
+    }
+    card.append(line);
   }
 
   if (video.id) {
-    const actions = el('div', 'actions');
-    actions.append(link(`https://www.youtube.com/watch?v=${video.id}&t=${Math.floor(result.start.seconds)}s`, `Open at the sponsor (${result.start.timestamp})`));
-    if (result.end) {
-      actions.append(link(`https://www.youtube.com/watch?v=${video.id}&t=${Math.ceil(result.end.seconds)}s`, `Skip past it (${result.end.timestamp})`));
-    }
-    card.append(actions);
-
     const frame = document.createElement('iframe');
     frame.className = 'frame';
     frame.allow = 'accelerometer; encrypted-media; picture-in-picture';
-    frame.src = `https://www.youtube-nocookie.com/embed/${video.id}?start=${Math.floor(result.start.seconds)}`;
+    frame.src = `https://www.youtube-nocookie.com/embed/${video.id}?start=${Math.floor(segments[0].start.seconds)}`;
     card.append(frame);
   }
 
   resultEl.append(card);
-  resultEl.append(contextPanel(result));
+  for (const seg of segments) resultEl.append(contextPanel(seg, plural));
   resultEl.append(windowsPanel(result));
   resultEl.append(metaLine(video, transcript, result, elapsedMs));
 }
 
-function contextPanel(result) {
+function contextPanel(result, plural) {
   const wrap = document.createElement('div');
-  wrap.append(el('h2', '', 'Around the boundary'));
+  wrap.append(el('h2', '', plural ? `Around the read at ${result.start.timestamp}` : 'Around the boundary'));
   const box = el('div', 'lines');
 
   const from = result.start.seconds - 45;

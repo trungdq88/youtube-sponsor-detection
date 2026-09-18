@@ -71,7 +71,8 @@ test('finds the sponsor read in the demo transcript', async () => {
   assert.ok(Math.abs(result.start.seconds - SPONSOR_STARTS_NEAR) < 20, `start ${result.start.seconds}s near ${SPONSOR_STARTS_NEAR}s`);
   assert.ok(result.end && result.end.seconds > result.start.seconds, 'the end comes after the start');
   assert.ok(result.confidence > 0.7);
-  assert.equal(client.requests.length, 2, 'one scan request plus one refine request');
+  assert.equal(result.segments.length, 1);
+  assert.equal(client.requests.length, 3, 'scan, refine, then a clean rescan of the window');
 });
 
 test('a long video is scanned window by window, then refined once', async () => {
@@ -88,10 +89,70 @@ test('a long video is scanned window by window, then refined once', async () => 
 
   const scans = windowLines(lines).length;
   assert.ok(scans > 1, 'this transcript really is multi-window');
-  assert.equal(client.requests.length, scans + 1);
+  assert.equal(client.requests.length, scans + 2, 'scans, one refine, one clean rescan');
   assert.equal(result.status, 'found');
   assert.ok(result.start.seconds > offset / 1000, 'the sponsor read is found in the tail, not the filler');
   assert.ok(result.windows.every((w) => w.estimatedStateTokens < 25_000), 'each excerpt stays well inside the 32k state limit');
+});
+
+const SECOND_READ = [
+  'okay quick pause because this part of the video is brought to you by Nimbus',
+  'Nimbus is a cloud notebook that syncs your notes across every device you own',
+  'I have been using it to keep all the test notes for this series in one place',
+  'go to nimbus dot app slash laptops for twenty percent off your first year',
+  'alright now back to the video and the fourth laptop'
+];
+
+function withSecondRead(cues, afterSeconds) {
+  const out = [];
+  let inserted = false;
+  for (const cue of cues) {
+    if (!inserted && cue.startMs / 1000 >= afterSeconds) {
+      let t = cue.startMs;
+      for (const text of SECOND_READ) {
+        out.push({ text, startMs: t, endMs: t + 6000 });
+        t += 6000;
+      }
+      inserted = true;
+    }
+    out.push(inserted ? { ...cue, startMs: cue.startMs + SECOND_READ.length * 6000, endMs: cue.endMs + SECOND_READ.length * 6000 } : cue);
+  }
+  return out;
+}
+
+test('two sponsor reads in one window are both found, in order', async () => {
+  const cues = withSecondRead(fixture.cues, 260);
+  const client = createStubClient();
+  const result = await findSponsorSegment(buildLines(cues), { client });
+
+  assert.equal(result.status, 'found');
+  assert.equal(result.segments.length, 2);
+  const [first, second] = result.segments;
+  assert.ok(Math.abs(first.start.seconds - SPONSOR_STARTS_NEAR) < 20, `first at ${first.start.seconds}s`);
+  assert.ok(second.start.seconds > 250 && second.start.seconds < 300, `second at ${second.start.seconds}s`);
+  assert.ok(first.end.seconds < second.start.seconds, 'segments do not overlap');
+  assert.ok(second.end, 'the second read has an end too');
+  // scan, refine, rescan, refine, rescan (clean)
+  assert.equal(client.requests.length, 5);
+  assert.equal(result.start.seconds, first.start.seconds, 'top-level start is the earliest segment');
+});
+
+test('two sponsor reads in different windows are both found', async () => {
+  const filler = [];
+  for (let i = 0; i < 400; i++) {
+    filler.push({ text: `and then we tried yet another configuration number ${i} to see what happened`, startMs: i * 5000, endMs: (i + 1) * 5000 });
+  }
+  const offset = filler.length * 5000;
+  const tail = withSecondRead(fixture.cues, 260).map((c) => ({ ...c, startMs: c.startMs + offset, endMs: c.endMs + offset }));
+  const early = fixture.cues.slice(12, 28).map((c) => ({ ...c, startMs: c.startMs - 60_000, endMs: c.endMs - 60_000 }));
+  const lines = buildLines([...early, ...filler, ...tail]);
+
+  const client = createStubClient();
+  const result = await findSponsorSegment(lines, { client });
+  assert.equal(result.segments.length, 3, `found ${result.segments.map((s) => s.start.seconds).join(', ')}`);
+  for (let i = 1; i < result.segments.length; i++) {
+    assert.ok(result.segments[i].start.seconds > result.segments[i - 1].end.seconds, 'sorted and disjoint');
+  }
 });
 
 test('no sponsor read means no timestamp', async () => {
